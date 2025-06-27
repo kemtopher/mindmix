@@ -18,6 +18,17 @@ module.exports = {
         mint: '#7FFFD4',       // Lemon Mint flavor
         blue: '#009BFF',       // Blue Surge flavor
       },
+      container: {
+        center: true,
+        padding: {
+          DEFAULT: '1rem',  // Applies to all breakpoints
+          sm: '2rem',
+          md: '3rem',
+          lg: '4rem',
+          xl: '5rem',
+          '2xl': '6rem'
+        }
+      },
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
