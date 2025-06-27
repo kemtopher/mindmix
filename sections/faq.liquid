@@ -1,3 +1,75 @@
+<section class='section-padding bg-darker relative'>
+  <div class='absolute inset-0 bg-neuron-pattern opacity-5'></div>
+  <div class='container-custom relative z-10 max-w-4xl mx-auto'>
+    <div class='text-center max-w-3xl mx-auto mb-16 fade-in'>
+      <h2 class='text-white mb-4'>
+        {{ section.settings.heading | escape }}
+        <span class='text-primary'>QUESTIONS</span>
+      </h2>
+    </div>
+
+    <div class='space-y-4 mb-12 fade-in' id='faq-container'>
+      {% for block in section.blocks %}
+        {% if block.type == 'faq_item' %}
+          <div class='faq-item bg-dark rounded-lg overflow-hidden border border-gray-800 hover:border-primary/30 transition-colors'>
+            <button
+              class='faq-question w-full text-left p-5 flex items-center justify-between focus:outline-none'
+              type='button'
+              aria-expanded='false'
+            >
+              <h4 class='text-white font-medium'>{{ block.settings.question }}</h4>
+              <svg
+                class='chevron-icon h-5 w-5 text-primary flex-shrink-0'
+                fill='none'
+                stroke='currentColor'
+                viewBox='0 0 24 24'
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class='faq-answer px-5 max-h-0 overflow-hidden transition-all duration-300'>
+              <p class='text-light pb-5'>{{ block.settings.answer }}</p>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class='text-center fade-in'>
+      <p class='text-light mb-6'>{{ section.settings.contact_text }}</p>
+      <a href='{{ section.settings.contact_link }}' class='btn btn-secondary'>Contact Our Team</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach((item) => {
+      const button = item.querySelector('.faq-question');
+      const answer = item.querySelector('.faq-answer');
+      const icon = item.querySelector('.chevron-icon');
+
+      button.addEventListener('click', () => {
+        const isOpen = button.getAttribute('aria-expanded') === 'true';
+
+        faqItems.forEach((el) => {
+          el.querySelector('.faq-answer').style.maxHeight = null;
+          el.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+          el.querySelector('.chevron-icon').style.transform = '';
+        });
+
+        if (!isOpen) {
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+          button.setAttribute('aria-expanded', 'true');
+          icon.style.transform = 'rotate(180deg)';
+        }
+      });
+    });
+  });
+</script>
+
 {% schema %}
 {
   "name": "FAQ Section",
@@ -89,84 +161,3 @@
   ]
 }
 {% endschema %}
-
-<section class="section-padding bg-darker relative">
-  <div class="absolute inset-0 bg-neuron-pattern opacity-5"></div>
-  
-  <div class="container-custom relative z-10 max-w-4xl mx-auto">
-    <div class="text-center max-w-3xl mx-auto mb-16 fade-in">
-      <h2 class="text-white mb-4">FREQUENTLY ASKED <span class="text-primary">QUESTIONS</span></h2>
-    </div>
-    
-    <div class="space-y-4 mb-12 fade-in">
-      {% for block in section.blocks %}
-        {% if block.type == 'faq_item' %}
-          <div class="bg-dark rounded-lg overflow-hidden border border-gray-800 hover:border-primary/30 transition-colors" data-faq-container>
-            <button
-              class="w-full text-left p-5 flex items-center justify-between focus:outline-none"
-              data-faq-toggle
-              aria-expanded="false"
-            >
-              <h4 class="text-white font-medium">{{ block.settings.question }}</h4>
-              <svg 
-                class="h-5 w-5 text-primary flex-shrink-0 transition-transform duration-300"
-                xmlns="http://www.w3.org/2000/svg" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                stroke-width="2" 
-                stroke-linecap="round" 
-                stroke-linejoin="round"
-              >
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
-            
-            <div class="px-5 overflow-hidden transition-all duration-300 max-h-0" data-faq-content>
-              <p class="text-light pb-5">{{ block.settings.answer }}</p>
-            </div>
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-    
-    <div class="text-center fade-in">
-      <p class="text-light mb-6">{{ section.settings.contact_text }}</p>
-      <a href="{{ section.settings.contact_link }}" class="btn btn-secondary">Contact Our Team</a>
-    </div>
-  </div>
-</section>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const faqContainers = document.querySelectorAll('[data-faq-container]');
-    
-    faqContainers.forEach(container => {
-      const toggle = container.querySelector('[data-faq-toggle]');
-      const content = container.querySelector('[data-faq-content]');
-      const icon = toggle.querySelector('svg');
-      
-      toggle.addEventListener('click', () => {
-        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-        
-        // Close all other FAQs
-        faqContainers.forEach(otherContainer => {
-          if (otherContainer !== container) {
-            const otherToggle = otherContainer.querySelector('[data-faq-toggle]');
-            const otherContent = otherContainer.querySelector('[data-faq-content]');
-            const otherIcon = otherToggle.querySelector('svg');
-            
-            otherToggle.setAttribute('aria-expanded', 'false');
-            otherContent.style.maxHeight = '0';
-            otherIcon.style.transform = 'rotate(0deg)';
-          }
-        });
-        
-        // Toggle current FAQ
-        toggle.setAttribute('aria-expanded', !isExpanded);
-        content.style.maxHeight = !isExpanded ? `${content.scrollHeight}px` : '0';
-        icon.style.transform = !isExpanded ? 'rotate(180deg)' : 'rotate(0deg)';
-      });
-    });
-  });
-</script>
