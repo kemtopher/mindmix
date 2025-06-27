@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: ["./**/*.liquid"],
+module.exports = {
+  content: [
+    './**/*.liquid',
+    './**/*.json',
+    './**/*.css'
+  ],
   theme: {
     extend: {
       colors: {
@@ -50,4 +54,5 @@ export default {
     },
   },
   plugins: [],
-};
+}
+

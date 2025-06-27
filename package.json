@@ -1,19 +1,14 @@
 {
-  "devDependencies": {
-    "concurrently": "^9.2.0",
-    "tailwindcss": "^4.1.11"
-  },
   "name": "mindmix-theme",
   "version": "1.0.0",
-  "main": "tailwind.config.js",
   "scripts": {
-    "start": "shopify theme dev",
-    "tailwind": "npx tailwindcss -i ./style.css -o ./assets/style.css --watch",
-    "dev": "concurrently  -c \"auto\" \"npm:dev:*\"",
-    "dev:tailwind": "npx tailwindcss -i ./style.css -o ./assets/style.css --watch",
-    "dev:shopify": "shopify theme dev"
+    "watch:tailwind": "tailwindcss -i ./assets/style.css -o ./assets/style.css --watch",
+    "dev": "npm run watch:tailwind & shopify theme dev"
   },
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  "devDependencies": {
+    "@shopify/prettier-plugin-liquid": "^1.9.3",
+    "concurrently": "^8.2.0",
+    "prettier": "^3.6.2",
+    "tailwindcss": "^3.4.1"
+  }
 }
