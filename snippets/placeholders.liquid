@@ -1,0 +1,25 @@
+{% comment %}Loading placeholders{% endcomment %}
+
+<style>
+  .placeholder {
+    @apply bg-darker animate-pulse rounded;
+  }
+
+  .placeholder-text {
+    @apply h-4 bg-darker animate-pulse rounded;
+  }
+
+  .placeholder-image {
+    @apply bg-darker animate-pulse rounded-lg;
+  }
+
+  .placeholder-circle {
+    @apply rounded-full bg-darker animate-pulse;
+  }
+</style>
+
+{% if loading %}
+  <div class="placeholder {{ class }}"></div>
+{% else %}
+  {{ content }}
+{% endif %}

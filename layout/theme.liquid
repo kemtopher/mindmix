@@ -1,0 +1,92 @@
+{% comment %}
+  MindMix Theme Layout
+  - Handles base HTML structure
+  - Includes necessary meta tags and SEO
+  - Manages loading states and animations
+{% endcomment %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page_title | escape }}</title>
+  <meta name="description" content="{{ page_description | escape }}">
+  
+  <!-- Preconnect to required origins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Theme styles -->
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  <!-- Tailwind styles -->
+  {{ 'style.css' | asset_url | stylesheet_tag }}
+  
+  <!-- Shopify required -->
+  {{ content_for_header }}
+</head>
+<body class="bg-dark text-light">
+  <!-- Loading Screen -->
+  <div id="loading-screen" class="fixed inset-0 bg-dark flex items-center justify-center z-50">
+    <div class="relative w-32 h-32">
+      <div class="absolute inset-0 flex items-center justify-center">
+        {% render 'icon-brain', class: 'w-24 h-24 text-primary/20' %}
+      </div>
+      
+      <div class="absolute inset-0 flex items-center justify-center overflow-hidden">
+        {% render 'icon-brain', class: 'w-24 h-24 text-primary animate-brain-fill' %}
+      </div>
+
+      <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap">
+        <span class="text-primary text-sm font-medium">Enhancing</span>
+        <span class="animate-pulse">...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  {% section 'header' %}
+
+  <!-- Main Content -->
+  <main role="main" id="main-content" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  <!-- Footer -->
+  {% section 'footer' %}
+
+  <!-- Theme Scripts -->
+  {{ 'theme.js' | asset_url | script_tag }}
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const loadingScreen = document.getElementById('loading-screen');
+      
+      // Hide loading screen after content loads
+      setTimeout(() => {
+        loadingScreen.style.opacity = '0';
+        loadingScreen.style.transition = 'opacity 0.5s ease-out';
+        
+        setTimeout(() => {
+          loadingScreen.style.display = 'none';
+        }, 500);
+      }, 1000);
+
+      // Initialize animations
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+    });
+  </script>
+</body>
+</html>

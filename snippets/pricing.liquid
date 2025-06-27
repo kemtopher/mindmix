@@ -1,0 +1,65 @@
+<section id="pricing" class="section-padding bg-dark relative">
+  <div class="absolute inset-0 bg-neuron-pattern opacity-5"></div>
+  
+  <div class="container-custom relative z-10">
+    <div class="text-center max-w-3xl mx-auto mb-16 fade-in">
+      <h2 class="text-white mb-4">CHOOSE YOUR <span class="text-primary">MENTAL ADVANTAGE</span></h2>
+      <p class="text-light">Risk-free trial or select the plan that fits your performance goals</p>
+    </div>
+    
+    <div class="grid md:grid-cols-3 gap-8">
+      {% for plan in section.blocks %}
+        {% if plan.type == 'pricing_plan' %}
+          <div class="card fade-in h-full flex flex-col {% if plan.settings.is_popular %}border-2 border-primary relative transform hover:-translate-y-2{% else %}border border-gray-800 hover:border-primary/30 transform hover:-translate-y-1{% endif %} transition-all duration-300"
+               style="transition-delay: {{ forloop.index | times: 0.2 }}s">
+            {% if plan.settings.badge != blank %}
+              <div class="absolute -top-4 left-0 right-0 flex justify-center">
+                <span class="bg-primary text-dark text-xs font-bold px-4 py-1 rounded-full">
+                  {{ plan.settings.badge }}
+                </span>
+              </div>
+            {% endif %}
+            
+            <div class="p-6 flex flex-col flex-grow">
+              <h3 class="text-white text-xl font-bold mb-1">{{ plan.settings.title }}</h3>
+              {% if plan.settings.subtitle != blank %}
+                <p class="text-primary text-sm mb-4">{{ plan.settings.subtitle }}</p>
+              {% endif %}
+              
+              <div class="mt-4 mb-6">
+                <span class="text-white text-3xl font-bold">{{ plan.settings.price }}</span>
+                <span class="text-light text-sm ml-2">({{ plan.settings.description }})</span>
+              </div>
+              
+              <ul class="space-y-3 flex-grow">
+                {% for feature in plan.settings.features %}
+                  <li class="flex items-start">
+                    {% render 'icon-check-circle', class: 'h-5 w-5 text-primary flex-shrink-0 mt-0.5 mr-2' %}
+                    <span class="text-light text-sm">{{ feature }}</span>
+                  </li>
+                {% endfor %}
+              </ul>
+              
+              <div class="mt-8">
+                <a href="{{ plan.settings.button_url }}" class="btn btn-{{ plan.settings.button_variant }} w-full">
+                  {{ plan.settings.button_text }}
+                </a>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    
+    <div class="mt-16 grid md:grid-cols-4 gap-6 fade-in">
+      {% for stat in section.blocks %}
+        {% if stat.type == 'trust_stat' %}
+          <div class="flex items-center">
+            {% render stat.settings.icon, class: 'h-6 w-6 text-primary mr-2 flex-shrink-0' %}
+            <p class="text-light text-sm">{{ stat.settings.text }}</p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

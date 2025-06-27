@@ -1,0 +1,15 @@
+{% comment %}Collection template{% endcomment %}
+
+<div class="container-custom py-24">
+  <h1 class="text-4xl font-bold mb-8">{{ collection.title }}</h1>
+  
+  {% if collection.description != blank %}
+    <div class="mb-12">{{ collection.description }}</div>
+  {% endif %}
+  
+  <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    {% for product in collection.products %}
+      {% render 'product-card', product: product %}
+    {% endfor %}
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<section class="py-16 md:py-24 relative overflow-hidden">
+  <div class="absolute inset-0">
+    <img 
+      src="https://images.pexels.com/photos/1379636/pexels-photo-1379636.jpeg"
+      alt="Rhodiola flowers" 
+      class="w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-dark/90 backdrop-blur-sm"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent opacity-40"></div>
+  </div>
+  
+  <div class="container-custom relative z-10">
+    <div class="text-center max-w-3xl mx-auto fade-in">
+      <h2 class="text-white text-3xl md:text-5xl lg:text-6xl font-bold mb-4">
+        POWERED BY <span class="text-primary">RHODIOLA</span>
+      </h2>
+      <p class="text-light text-base md:text-xl px-4">
+        The adaptogenic powerhouse behind peak mental performance
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="why-it-works" class="section-padding bg-dark relative">
+  <div class="absolute inset-0 bg-neuron-pattern opacity-5"></div>
+  
+  <div class="container-custom relative z-10">
+    <div class="text-center max-w-3xl mx-auto mb-8 md:mb-16 fade-in px-4">
+      <h2 class="text-white text-2xl md:text-4xl mb-4">
+        NEURAL PATHWAYS <span class="text-primary">ACTIVATED</span>
+      </h2>
+      <p class="text-light text-sm md:text-base">
+        Science-backed formula designed for cognitive enhancement
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 px-4">
+      {% for ingredient in section.blocks %}
+        {% if ingredient.type == 'ingredient' %}
+          <div class="feature-card group hover:shadow-glow fade-in" style="transition-delay: {{ forloop.index | times: 0.1 }}s">
+            <div class="mb-4 text-primary">
+              {% render ingredient.settings.icon %}
+            </div>
+            <h4 class="text-white text-lg font-semibold mb-2 group-hover:text-primary transition-colors">{{ ingredient.settings.title }}</h4>
+            <p class="text-light">{{ ingredient.settings.description }}</p>
+            <p class="mt-4 text-sm text-primary">Works in {{ ingredient.settings.time_to_work }}</p>
+            
+            <div class="mt-4 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500"></div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

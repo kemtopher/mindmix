@@ -1,0 +1,69 @@
+<section class="section-padding bg-darker relative">
+  <div class="absolute inset-0 bg-neuron-pattern opacity-5"></div>
+  
+  <div class="container-custom relative z-10 max-w-4xl mx-auto">
+    <div class="text-center max-w-3xl mx-auto mb-16 fade-in">
+      <h2 class="text-white mb-4">FREQUENTLY ASKED <span class="text-primary">QUESTIONS</span></h2>
+    </div>
+    
+    <div class="space-y-4 mb-12 fade-in">
+      {% for faq in section.blocks %}
+        {% if faq.type == 'faq_item' %}
+          <div class="bg-dark rounded-lg overflow-hidden border border-gray-800 hover:border-primary/30 transition-colors" data-faq-container>
+            <button
+              class="w-full text-left p-5 flex items-center justify-between focus:outline-none"
+              data-faq-toggle
+              aria-expanded="false"
+            >
+              <h4 class="text-white font-medium">{{ faq.settings.question }}</h4>
+              {% render 'icon-chevron-down', class: 'h-5 w-5 text-primary flex-shrink-0 transition-transform duration-300' %}
+            </button>
+            
+            <div class="px-5 overflow-hidden transition-all duration-300 max-h-0" data-faq-content>
+              <p class="text-light pb-5">{{ faq.settings.answer }}</p>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    
+    <div class="text-center fade-in">
+      <p class="text-light mb-6">Still have questions? We're here to help!</p>
+      <a href="#contact" class="btn btn-secondary">Contact Our Team</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const faqContainers = document.querySelectorAll('[data-faq-container]');
+    
+    faqContainers.forEach(container => {
+      const toggle = container.querySelector('[data-faq-toggle]');
+      const content = container.querySelector('[data-faq-content]');
+      const icon = toggle.querySelector('svg');
+      
+      toggle.addEventListener('click', () => {
+        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+        
+        // Close all other FAQs
+        faqContainers.forEach(otherContainer => {
+          if (otherContainer !== container) {
+            const otherToggle = otherContainer.querySelector('[data-faq-toggle]');
+            const otherContent = otherContainer.querySelector('[data-faq-content]');
+            const otherIcon = otherToggle.querySelector('svg');
+            
+            otherToggle.setAttribute('aria-expanded', 'false');
+            otherContent.style.maxHeight = '0';
+            otherIcon.style.transform = 'rotate(0deg)';
+          }
+        });
+        
+        // Toggle current FAQ
+        toggle.setAttribute('aria-expanded', !isExpanded);
+        content.style.maxHeight = !isExpanded ? `${content.scrollHeight}px` : '0';
+        icon.style.transform = !isExpanded ? 'rotate(180deg)' : 'rotate(0deg)';
+      });
+    });
+  });
+</script>

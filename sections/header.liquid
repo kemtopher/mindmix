@@ -1,0 +1,72 @@
+{% comment %}Header section{% endcomment %}
+
+<header class="mt-[500px] fixed top-0 left-0 right-0 z-50 bg-dark/90 backdrop-blur-md shadow-lg">
+  <div class="container-custom flex items-center justify-between h-14">
+    <a href="/" class="group">
+      <span class="text-xl font-bold text-white group-hover:text-primary transition-colors duration-300">
+        {{ shop.name }}
+      </span>
+    </a>
+
+    <nav class="hidden md:flex items-center space-x-6">
+      <a href="#why-it-works" class="text-light hover:text-primary transition-colors">Why It Works</a>
+      <a href="#flavors" class="text-light hover:text-primary transition-colors">Flavors</a>
+      <a href="#benefits" class="text-light hover:text-primary transition-colors">Benefits</a>
+      <a href="#science" class="text-light hover:text-primary transition-colors">Science</a>
+      <a href="#pricing" class="text-light hover:text-primary transition-colors">Pricing</a>
+    </nav>
+
+    <div class="hidden md:block relative group">
+      <a href="#pricing" class="btn btn-primary relative overflow-hidden group-hover:scale-105 transform transition-all duration-500 py-1.5 px-3">
+        <span class="relative z-10 text-center">
+          <span class="text-sm font-bold block">Try It Free</span>
+          <span class="block text-xs font-normal opacity-90">Just Cover Shipping</span>
+        </span>
+        <div class="absolute inset-0 bg-gradient-to-r from-cta via-primary via-blue to-cta bg-[length:300%_100%] animate-shimmer opacity-90"></div>
+      </a>
+      <div class="absolute -inset-[2px] bg-gradient-to-r from-cta via-primary via-blue to-cta opacity-0 blur-md group-hover:opacity-75 transition-opacity duration-700 -z-10"></div>
+    </div>
+
+    <button 
+      class="md:hidden text-light hover:text-primary"
+      onclick="document.getElementById('mobile-menu').classList.toggle('hidden')"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden bg-darker py-4 px-4 shadow-lg hidden">
+    <nav class="flex flex-col space-y-4">
+      <a href="#why-it-works" class="text-light hover:text-primary transition-colors py-2">Why It Works</a>
+      <a href="#flavors" class="text-light hover:text-primary transition-colors py-2">Flavors</a>
+      <a href="#benefits" class="text-light hover:text-primary transition-colors py-2">Benefits</a>
+      <a href="#science" class="text-light hover:text-primary transition-colors py-2">Science</a>
+      <a href="#pricing" class="text-light hover:text-primary transition-colors py-2">Pricing</a>
+      
+      <a href="#pricing" class="btn btn-primary w-full relative overflow-hidden">
+        <span class="relative z-10 text-center">
+          <span class="text-sm font-bold block">Try It Free</span>
+          <span class="block text-xs font-normal opacity-90">Just Cover Shipping</span>
+        </span>
+        <div class="absolute inset-0 bg-gradient-to-r from-cta via-primary via-blue to-cta bg-[length:300%_100%] animate-shimmer opacity-90"></div>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = mobileMenu.getElementsByTagName('a');
+
+    // Close mobile menu when clicking a link
+    for (let link of mobileLinks) {
+      link.addEventListener('click', function() {
+        mobileMenu.classList.add('hidden');
+      });
+    }
+  });
+</script>

@@ -1,0 +1,72 @@
+<section class="section-padding bg-dark relative">
+  <div class="absolute inset-0 bg-neuron-pattern opacity-5"></div>
+  
+  <div class="container-custom relative z-10">
+    <div class="text-center max-w-3xl mx-auto mb-16 fade-in">
+      <h2 class="text-white mb-4">WHY MINDMIX <span class="text-primary">DOMINATES</span></h2>
+      <p class="text-light">100% Natural Ingredients, Proudly Made in USA</p>
+    </div>
+    
+    <div class="overflow-x-auto fade-in">
+      <table class="w-full min-w-[600px]">
+        <thead>
+          <tr class="border-b border-gray-800">
+            <th class="text-left py-4 px-4 text-light"></th>
+            <th class="text-center py-4 px-4 text-primary font-bold">MindMix</th>
+            <th class="text-center py-4 px-4 text-light">Coffee</th>
+            <th class="text-center py-4 px-4 text-light">Energy Drinks</th>
+            <th class="text-center py-4 px-4 text-light">Prescription</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for comparison in section.blocks %}
+            <tr class="border-b border-gray-800">
+              <td class="text-left py-4 px-4 text-light">{{ comparison.settings.feature }}</td>
+              <td class="text-center py-4 px-4">
+                {% if comparison.settings.mindmix %}
+                  {% render 'icon-check-circle', class: 'h-6 w-6 text-primary mx-auto' %}
+                {% else %}
+                  {% render 'icon-x', class: 'h-6 w-6 text-red-500 mx-auto' %}
+                {% endif %}
+              </td>
+              <td class="text-center py-4 px-4">
+                {% if comparison.settings.coffee %}
+                  {% render 'icon-check-circle', class: 'h-6 w-6 text-light/50 mx-auto' %}
+                {% else %}
+                  {% render 'icon-x', class: 'h-6 w-6 text-red-500 mx-auto' %}
+                {% endif %}
+              </td>
+              <td class="text-center py-4 px-4">
+                {% if comparison.settings.energy_drinks %}
+                  {% render 'icon-check-circle', class: 'h-6 w-6 text-light/50 mx-auto' %}
+                {% else %}
+                  {% render 'icon-x', class: 'h-6 w-6 text-red-500 mx-auto' %}
+                {% endif %}
+              </td>
+              <td class="text-center py-4 px-4">
+                {% if comparison.settings.prescription %}
+                  {% render 'icon-check-circle', class: 'h-6 w-6 text-light/50 mx-auto' %}
+                {% else %}
+                  {% render 'icon-x', class: 'h-6 w-6 text-red-500 mx-auto' %}
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="mt-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 fade-in">
+      {% for certification in section.blocks %}
+        {% if certification.type == 'certification' %}
+          <div class="p-4 bg-darker rounded-lg border border-gray-800 flex flex-col items-center justify-center text-center">
+            <div class="h-12 w-12 mb-2 rounded-full bg-primary/10 flex items-center justify-center">
+              <img src="{{ certification.settings.icon | img_url: '96x96' }}" alt="{{ certification.settings.title }}" class="h-6 w-6" />
+            </div>
+            <p class="text-light text-xs">{{ certification.settings.title }}</p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

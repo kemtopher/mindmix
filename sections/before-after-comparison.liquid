@@ -1,0 +1,97 @@
+{% schema %}
+{
+  "name": "Before/After Comparison",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "BEFORE VS AFTER"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "See the difference MindMix makes"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "metric",
+      "name": "Metric",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Metric Name"
+        },
+        {
+          "type": "range",
+          "id": "before_value",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "label": "Before Value",
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "after_value",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "label": "After Value",
+          "default": 80
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<section class="section-padding bg-darker relative">
+  <div class="absolute inset-0 bg-neuron-pattern opacity-5"></div>
+  
+  <div class="container-custom relative z-10">
+    <div class="text-center max-w-3xl mx-auto mb-16 fade-in">
+      <h2 class="text-white mb-4">{{ section.settings.heading }}</h2>
+      <p class="text-light">{{ section.settings.subheading }}</p>
+    </div>
+    
+    <div class="bg-darker rounded-xl overflow-hidden">
+      <div class="grid grid-cols-1 md:grid-cols-2">
+        <div class="p-4 md:p-8 bg-darkest">
+          <h4 class="text-white mb-4 text-lg md:text-xl">BEFORE MINDMIX</h4>
+          <div class="space-y-4 md:space-y-6">
+            {% for block in section.blocks %}
+              {% if block.type == 'metric' %}
+                <div class="flex items-center justify-between gap-4">
+                  <span class="text-light text-sm md:text-base whitespace-nowrap">{{ block.settings.name }}</span>
+                  <div class="w-24 md:w-32 h-3 md:h-4 bg-dark rounded-full overflow-hidden">
+                    <div class="w-{{ block.settings.before_value }}/100 h-full bg-primary/30"></div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        
+        <div class="p-4 md:p-8">
+          <h4 class="text-primary mb-4 text-lg md:text-xl">AFTER MINDMIX</h4>
+          <div class="space-y-4 md:space-y-6">
+            {% for block in section.blocks %}
+              {% if block.type == 'metric' %}
+                <div class="flex items-center justify-between gap-4">
+                  <span class="text-light text-sm md:text-base whitespace-nowrap">{{ block.settings.name }}</span>
+                  <div class="w-24 md:w-32 h-3 md:h-4 bg-dark rounded-full overflow-hidden">
+                    <div class="w-{{ block.settings.after_value }}/100 h-full bg-primary animate-pulse-slow"></div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

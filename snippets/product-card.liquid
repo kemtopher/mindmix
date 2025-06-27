@@ -1,0 +1,39 @@
+{% comment %}Product card component{% endcomment %}
+
+<div class="card group relative overflow-hidden hover:transform hover:-translate-y-1 transition-all duration-300">
+  <div class="aspect-w-1 aspect-h-1 relative">
+    {{ product.featured_image | image_url: width: 500 | image_tag: 
+      class: "w-full h-full object-cover",
+      loading: "lazy",
+      alt: product.title
+    }}
+    
+    {% if product.compare_at_price > product.price %}
+      <div class="absolute top-4 right-4 bg-primary text-dark px-3 py-1 rounded-full text-sm font-medium">
+        Save {{ product.compare_at_price | minus: product.price | money }}
+      </div>
+    {% endif %}
+  </div>
+  
+  <div class="p-6">
+    <h3 class="text-white text-xl font-bold mb-2">{{ product.title }}</h3>
+    <p class="text-light/70 text-sm mb-4">{{ product.description | strip_html | truncatewords: 20 }}</p>
+    
+    <div class="flex items-center justify-between">
+      <div class="text-white">
+        {% if product.compare_at_price > product.price %}
+          <span class="text-light/50 line-through mr-2">{{ product.compare_at_price | money }}</span>
+        {% endif %}
+        <span class="text-xl font-bold">{{ product.price | money }}</span>
+      </div>
+      
+      <button 
+        type="button"
+        class="btn btn-primary"
+        onclick="Shopify.addItem({{ product.variant.id }}, 1)"
+      >
+        Add to Cart
+      </button>
+    </div>
+  </div>
+</div>
