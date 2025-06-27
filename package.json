@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "watch:tailwind": "tailwindcss -i ./assets/style.css -o ./assets/style.css --watch",
+    "shopify": "shopify theme dev",
     "dev": "npm run watch:tailwind & shopify theme dev"
   },
   "devDependencies": {
