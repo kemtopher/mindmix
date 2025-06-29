@@ -1,35 +1,35 @@
-<section class='min-h-screen pt-24 pb-16 relative overflow-hidden neural-bg'>
-  <div class='absolute inset-0 bg-neuron-pattern opacity-5'></div>
-
+<section class='min-h-screen pt-24 pb-16 relative overflow-hidden neural-bg flex items-center'>
   <div class='container-custom relative z-10'>
     <div class='grid lg:grid-cols-2 gap-12 items-center'>
       <div class='fade-in'>
-        <p class='text-primary font-semibold mb-2'>{{ section.settings.tagline }}</p>
+        <p class='text-primary font-semibold mb-12'>{{ section.settings.tagline }}</p>
         <h1 class='text-white mb-4'>
           {% assign words = section.settings.heading | split: ' ' %}
           {% for word in words %}
-            <br>
-            <span class='text-primary'>{{ word }}</span>
+            <!-- <br> -->
+            <span class='text-primary mb-4'>{{ word }}</span>
           {% endfor %}
         </h1>
         <h3 class='text-white mb-4'>{{ section.settings.subheading }}</h3>
         <p class='text-primary text-3xl font-bold mb-6 tracking-wide'>{{ section.settings.benefits }}</p>
         <p class='text-light mb-8 max-w-md'>{{ section.settings.description }}</p>
 
-        <div class='flex flex-wrap gap-4 mb-12'>
-          <a
-            href='#pricing'
-            class='btn btn-cta  px-8 py-4 text-lg font-bold hover:transform hover:scale-105 transition-transform shadow-lg hover:shadow-glow'
-          >
-            {{ section.settings.cta_text }}
-          </a>
-          <a
-            href='#pricing'
-            class='btn btn-mint px-8 py-4 text-lg font-bold hover:transform hover:scale-105 transition-transform'
-          >
-            {{ section.settings.secondary_cta_text }}
-          </a>
-        </div>
+        <!--
+          <div class='flex flex-wrap gap-4 mb-12'>
+            <a
+              href='#pricing'
+              class='btn btn-cta  px-8 py-4 text-lg font-bold hover:transform hover:scale-105 transition-transform shadow-lg hover:shadow-glow'
+            >
+              {{ section.settings.cta_text }}
+            </a>
+            <a
+              href='#pricing'
+              class='btn btn-mint px-8 py-4 text-lg font-bold hover:transform hover:scale-105 transition-transform'
+            >
+              {{ section.settings.secondary_cta_text }}
+            </a>
+          </div>
+        -->
 
         <div class='grid grid-cols-1 sm:grid-cols-3 gap-6'>
           {% for block in section.blocks %}
@@ -65,12 +65,16 @@
           -->
         </div>
 
-        <div class='text-center mt-8'>
-          <p class='text-light/80'>Scroll to explore your mental upgrade</p>
-          <div class='mt-2 mx-auto h-10 w-5 border-2 border-light/20 rounded-full flex justify-center'>
-            <div class='w-1 h-2 bg-primary rounded-full animate-bounce mt-1'></div>
+        <!--
+          <div class='text-center mt-8'>
+            <a
+              href='#pricing'
+              class='text-primary text-3xl font-bold mb-6 tracking-wide'
+            >
+              {{ section.settings.secondary_cta_text }}
+            </a>
           </div>
-        </div>
+        -->
       </div>
     </div>
   </div>
