@@ -1,3 +1,83 @@
+<section class='min-h-screen pt-24 pb-16 relative overflow-hidden neural-bg'>
+  <div class='absolute inset-0 bg-neuron-pattern opacity-5'></div>
+
+  <div class='container-custom relative z-10'>
+    <div class='grid lg:grid-cols-2 gap-12 items-center'>
+      <div class='fade-in'>
+        <p class='text-primary font-semibold mb-2'>{{ section.settings.tagline }}</p>
+        <h1 class='text-white mb-4'>
+          {% assign words = section.settings.heading | split: ' ' %}
+          {% for word in words %}
+            <br>
+            <span class='text-primary'>{{ word }}</span>
+          {% endfor %}
+        </h1>
+        <h3 class='text-white mb-4'>{{ section.settings.subheading }}</h3>
+        <p class='text-primary text-3xl font-bold mb-6 tracking-wide'>{{ section.settings.benefits }}</p>
+        <p class='text-light mb-8 max-w-md'>{{ section.settings.description }}</p>
+
+        <div class='flex flex-wrap gap-4 mb-12'>
+          <a
+            href='#pricing'
+            class='btn btn-cta  px-8 py-4 text-lg font-bold hover:transform hover:scale-105 transition-transform shadow-lg hover:shadow-glow'
+          >
+            {{ section.settings.cta_text }}
+          </a>
+          <a
+            href='#pricing'
+            class='btn btn-mint px-8 py-4 text-lg font-bold hover:transform hover:scale-105 transition-transform'
+          >
+            {{ section.settings.secondary_cta_text }}
+          </a>
+        </div>
+
+        <div class='grid grid-cols-1 sm:grid-cols-3 gap-6'>
+          {% for block in section.blocks %}
+            {% if block.type == 'stat' %}
+              <div class='fade-in flex items-center' style='transition-delay: {{ forloop.index | times: 0.2 }}'>
+                {% case forloop.index %}
+                  {% when 1 %}
+                    {% render 'icon-clock' %}
+                  {% when 2 %}
+                    {% render 'icon-users' %}
+                  {% when 3 %}
+                    {% render 'icon-shield' %}
+                {% endcase %}
+                <p class='text-white'>
+                  {% if block.settings.highlight != blank %}
+                    {{ block.settings.text }}:
+                    <span class='text-primary font-semibold'>{{ block.settings.highlight }}</span>
+                  {% else %}
+                    {{ block.settings.text }}
+                  {% endif %}
+                </p>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class='fade-in relative' style='transition-delay: 0.3s'>
+        <div class='relative flex justify-center items-center h-[500px]'>
+          <img class='h-full' alt='Photo of MindMix Guava Passion package' src='{{ "guava-passion.jpeg" | asset_url }}'>
+          <!--
+            <img class='h-full' alt='Photo of MindMix Guava Passion package' src='{{ "product-line.png" | asset_url }}'>
+          -->
+        </div>
+
+        <div class='text-center mt-8'>
+          <p class='text-light/80'>Scroll to explore your mental upgrade</p>
+          <div class='mt-2 mx-auto h-10 w-5 border-2 border-light/20 rounded-full flex justify-center'>
+            <div class='w-1 h-2 bg-primary rounded-full animate-bounce mt-1'></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% render 'animations' %}
+
 {% schema %}
 {
   "name": "Hero Section",
@@ -94,76 +174,3 @@
   ]
 }
 {% endschema %}
-
-<section class="min-h-screen pt-24 pb-16 relative overflow-hidden neural-bg">
-  <div class="absolute inset-0 bg-neuron-pattern opacity-5"></div>
-  
-  <div class="container-custom relative z-10">
-    <div class="grid lg:grid-cols-2 gap-12 items-center">
-      <div class="fade-in">
-        <p class="text-primary font-semibold mb-2">{{ section.settings.tagline }}</p>
-        <h1 class="text-white mb-4">{{ section.settings.heading | split: ' ' | join: ' <br><span class="text-primary">' }}</span></h1>
-        <h3 class="text-white mb-4">{{ section.settings.subheading }}</h3>
-        <p class="text-primary text-3xl font-bold mb-6 tracking-wide">{{ section.settings.benefits }}</p>
-        <p class="text-light mb-8 max-w-md">{{ section.settings.description }}</p>
-        
-        <div class="flex flex-wrap gap-4 mb-12">
-          <a href="#pricing" class="btn btn-cta px-8 py-4 text-lg font-bold hover:transform hover:scale-105 transition-transform">
-            {{ section.settings.cta_text }}
-          </a>
-          <a href="#pricing" class="btn btn-mint px-8 py-4 text-lg font-bold hover:transform hover:scale-105 transition-transform">
-            {{ section.settings.secondary_cta_text }}
-          </a>
-        </div>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {% for block in section.blocks %}
-            {% if block.type == 'stat' %}
-              <div class="fade-in flex items-center" style="transition-delay: {{ forloop.index | times: 0.2 }}s">
-                {% case forloop.index %}
-                  {% when 1 %}
-                    {% render 'icon-clock' %}
-                  {% when 2 %}
-                    {% render 'icon-users' %}
-                  {% when 3 %}
-                    {% render 'icon-shield' %}
-                {% endcase %}
-                <p class="text-white">
-                  {% if block.settings.highlight != blank %}
-                    {{ block.settings.text }}: <span class="text-primary font-semibold">{{ block.settings.highlight }}</span>
-                  {% else %}
-                    {{ block.settings.text }}
-                  {% endif %}
-                </p>
-              </div>
-            {% endif %}
-          {% endfor %}
-        </div>
-      </div>
-
-      <div class="fade-in relative" style="transition-delay: 0.3s">
-        <div class="relative flex justify-center items-center h-[500px]">
-          <div class="absolute right-0 top-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-radial from-primary/[0.01] to-transparent opacity-30 blur-3xl"></div>
-          
-          {% for flavor in section.settings.flavors %}
-            <div class="transform {% if forloop.first %}-rotate-12 translate-x-12{% elsif forloop.last %}rotate-12 -translate-x-12{% endif %} animate-float shadow-2xl" style="animation-delay: {{ forloop.index | times: 0.2 }}s;">
-              <div class="h-96 w-20 bg-darker rounded-2xl border border-primary/20 flex items-end justify-center pb-4 overflow-hidden relative {% if forloop.index == 2 %}z-30{% else %}z-20{% endif %}">
-                <div class="absolute inset-0 bg-gradient-to-t from-{{ flavor.color }}/10 via-transparent to-transparent"></div>
-                <div class="w-full h-1/2 bg-gradient-to-t from-{{ flavor.color }}/20 to-transparent"></div>
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-        
-        <div class="text-center mt-8">
-          <p class="text-light/80">Scroll to explore your mental upgrade</p>
-          <div class="mt-2 mx-auto h-10 w-5 border-2 border-light/20 rounded-full flex justify-center">
-            <div class="w-1 h-2 bg-primary rounded-full animate-bounce mt-1"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-{% render 'animations' %}
