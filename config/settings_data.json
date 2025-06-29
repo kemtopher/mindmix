@@ -1,0 +1,154 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {}
+      },
+      "hero": {
+        "type": "hero",
+        "settings": {
+          "tagline": "DAILY NOOTROPIC DRINK MIX",
+          "heading": "UNLOCK YOUR MENTAL EDGE",
+          "subheading": "ENGINEERED FOR PEAK PERFORMANCE",
+          "benefits": "Clarity. Energy. Focus.",
+          "description": "Experience cognitive enhancement with our scientifically formulated nootropic drink mix. Optimize your mind.",
+          "cta_text": "Shop Now",
+          "secondary_cta_text": "Try Free Sample"
+        }
+      },
+      "neural-performance": {
+        "type": "neural-performance",
+        "settings": {}
+      },
+      "flavor-experience": {
+        "type": "flavor-experience",
+        "settings": {}
+      },
+      "lifestyle-performance": {
+        "type": "lifestyle-performance",
+        "settings": {}
+      },
+      "cognitive-benefits": {
+        "type": "cognitive-benefits",
+        "settings": {}
+      },
+      "scientific-credibility": {
+        "type": "scientific-credibility",
+        "settings": {
+          "heading": "BACKED BY NEUROSCIENCE",
+          "subheading": "Every ingredient chosen for maximum cognitive impact"
+        }
+      },
+      "pricing": {
+        "type": "pricing",
+        "settings": {}
+      },
+      "testimonials": {
+        "type": "testimonials",
+        "settings": {
+          "heading": "PEAK PERFORMERS CHOOSE MINDMIX",
+          "subheading": "See how top students and professionals unlock their mental edge"
+        }
+      },
+      "comparison": {
+        "type": "comparison",
+        "settings": {
+          "heading": "WHY MINDMIX DOMINATES",
+          "subheading": "100% Natural Ingredients, Proudly Made in USA"
+        }
+      },
+      "faq": {
+        "type": "faq",
+        "blocks": {
+          "faq_item_mfqabW": {
+            "type": "faq_item",
+            "settings": {
+              "question": "Is it safe to take daily?",
+              "answer": "Yes, MindMix is formulated with natural ingredients that are safe for daily consumption. The adaptogenic herbs and nootropic compounds are specifically selected to support long-term brain health and function without dependency or tolerance buildup."
+            }
+          },
+          "faq_item_nqWdkj": {
+            "type": "faq_item",
+            "settings": {
+              "question": "How quickly does MindMix work?",
+              "answer": "Most users feel the cognitive benefits within 30-45 minutes after consumption. The formula is designed to provide a steady, sustained boost to mental performance without the crash associated with caffeine or other stimulants."
+            }
+          },
+          "faq_item_i7g48Q": {
+            "type": "faq_item",
+            "settings": {
+              "question": "Will I crash later?",
+              "answer": "No, MindMix is specifically designed to avoid the crash associated with caffeine and energy drinks. The formula works by optimizing your brain's natural processes rather than artificially stimulating them, resulting in a smooth, gradual decline in effects rather than a sudden crash."
+            }
+          },
+          "faq_item_3kVN9E": {
+            "type": "faq_item",
+            "settings": {
+              "question": "Can I mix with coffee?",
+              "answer": "Yes, but we recommend starting with half doses of each. MindMix complements coffee well, with L-theanine helping to smooth out caffeine's potential jitters while enhancing focus. Many users find they need less coffee when using MindMix."
+            }
+          },
+          "faq_item_8ezVkG": {
+            "type": "faq_item",
+            "settings": {
+              "question": "What if I don't like it?",
+              "answer": "We offer a 30-day money-back guarantee. If you're not completely satisfied with MindMix for any reason, simply contact our customer service team for a full refund. We stand behind our product's effectiveness."
+            }
+          },
+          "faq_item_fnJefP": {
+            "type": "faq_item",
+            "settings": {
+              "question": "",
+              "answer": ""
+            }
+          },
+          "faq_item_64jrGy": {
+            "type": "faq_item",
+            "settings": {
+              "question": "Is there caffeine?",
+              "answer": "MindMix contains a minimal amount of natural caffeine from green tea extract, equivalent to approximately 1/4 cup of coffee per serving. This is enough to provide synergistic benefits with other ingredients without causing jitters or sleep disruption."
+            }
+          }
+        },
+        "block_order": [
+          "faq_item_mfqabW",
+          "faq_item_nqWdkj",
+          "faq_item_i7g48Q",
+          "faq_item_3kVN9E",
+          "faq_item_8ezVkG",
+          "faq_item_fnJefP",
+          "faq_item_64jrGy"
+        ],
+        "settings": {
+          "heading": "FREQUENTLY ASKED QUESTIONS",
+          "contact_text": "Still have questions? We're here to help!",
+          "contact_link": ""
+        }
+      },
+      "newsletter": {
+        "type": "newsletter",
+        "settings": {}
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "facebook_url": "",
+          "twitter_url": "",
+          "instagram_url": "",
+          "youtube_url": ""
+        }
+      }
+    },
+    "content_for_index": []
+  }
+}
