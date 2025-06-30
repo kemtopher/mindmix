@@ -1,9 +1,9 @@
 {% comment %}Header section{% endcomment %}
 
-<header class='fixed top-0 left-0 right-0 z-50 bg-dark/90 backdrop-blur-md shadow-lg'>
-  <div class='container-custom flex items-center justify-between h-14'>
+<header class='fixed top-0 left-0 right-0 z-50 bg-dark/90 backdrop-blur-md shadow-lg h-20'>
+  <div class='container-custom flex items-center justify-between h-full'>
     <a href='/' class='group'>
-      <span class='text-xl font-bold text-white group-hover:text-primary transition-colors duration-300'>
+      <span class='text-3xl font-bold text-primary transition-colors duration-300'>
         {{ shop.name }}
       </span>
     </a>
@@ -16,23 +16,25 @@
       <a href='#pricing' class='text-light hover:text-primary transition-colors'>Pricing</a>
     </nav>
 
-    <div class='hidden md:block relative group'>
-      <a
-        href='#pricing'
-        class='btn btn-primary relative overflow-hidden group-hover:scale-105 transform transition-all duration-500 py-1.5 px-3'
-      >
-        <span class='relative z-10 text-center'>
-          <span class='text-sm font-bold block'>Try It Free</span>
-          <span class='block text-xs font-normal opacity-90'>Just Cover Shipping</span>
-        </span>
+    <!--
+      <div class='hidden md:block relative group'>
+        <a
+          href='#pricing'
+          class='btn btn-primary relative overflow-hidden group-hover:scale-105 transform transition-all duration-500 py-1.5 px-3'
+        >
+          <span class='relative z-10 text-center'>
+            <span class='text-sm font-bold block'>Try It Free</span>
+            <span class='block text-xs font-normal opacity-90'>Just Cover Shipping</span>
+          </span>
+          <div
+            class='absolute inset-0 bg-gradient-to-r from-cta via-primary via-blue to-cta bg-[length:300%_100%] animate-shimmer opacity-90'
+          ></div>
+        </a>
         <div
-          class='absolute inset-0 bg-gradient-to-r from-cta via-primary via-blue to-cta bg-[length:300%_100%] animate-shimmer opacity-90'
+          class='absolute -inset-[2px] bg-gradient-to-r from-cta via-primary via-blue to-cta opacity-0 blur-md group-hover:opacity-75 transition-opacity duration-700 -z-10'
         ></div>
-      </a>
-      <div
-        class='absolute -inset-[2px] bg-gradient-to-r from-cta via-primary via-blue to-cta opacity-0 blur-md group-hover:opacity-75 transition-opacity duration-700 -z-10'
-      ></div>
-    </div>
+      </div>
+    -->
 
     <button
       class='md:hidden text-light hover:text-primary'
