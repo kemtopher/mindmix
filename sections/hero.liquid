@@ -34,7 +34,7 @@
         <div class='grid grid-cols-1 sm:grid-cols-3 gap-6'>
           {% for block in section.blocks %}
             {% if block.type == 'stat' %}
-              <div class='fade-in flex items-center' style='transition-delay: {{ forloop.index | times: 0.2 }}'>
+              <div class='fade-in flex items-center transition delay-200'>
                 {% case forloop.index %}
                   {% when 1 %}
                     {% render 'icon-clock' %}
