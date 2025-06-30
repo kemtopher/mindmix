@@ -1,0 +1,61 @@
+<!-- Product Collapse -->
+<section id='shopify-section-product-collapse' class='py-16'>
+  <div class='container mx-auto max-w-2xl'>
+    <h2 class='text-3xl font-bold mb-8 text-center'>{{ section.settings.heading }}</h2>
+    <div class='space-y-4'>
+      {% for block in section.blocks %}
+        <details class='border rounded-lg p-4'>
+          <summary class='font-semibold cursor-pointer'>{{ block.settings.heading }}</summary>
+          <div class='mt-2 text-gray-700'>{{ block.settings.text }}</div>
+        </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Product Collapse",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Frequently Asked Questions"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Answer"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "FAQ Section",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "faq",
+          "settings": {
+            "heading": "What is this product?",
+            "text": "It's a supplement that supports digestion and reduces bloating."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

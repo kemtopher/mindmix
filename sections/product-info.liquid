@@ -1,0 +1,38 @@
+<!-- Product Info -->
+<section id='shopify-section-product-info' class='bg-light py-16'>
+  <div class='container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center'>
+    <img
+      src='{{ section.settings.image | img_url: "800x" }}'
+      alt='{{ section.settings.image.alt }}'
+      class='rounded shadow-lg'
+    >
+    <div>
+      <h2 class='text-2xl font-semibold mb-4'>{{ section.settings.heading }}</h2>
+      <div class='prose max-w-lg'>{{ section.settings.text }}</div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Product Info",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Why Customers Love This Product"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    }
+  ]
+}
+{% endschema %}

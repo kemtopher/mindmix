@@ -1,0 +1,32 @@
+<!-- Product Section -->
+<section id='shopify-section-main-product'>
+  <div class='container mx-auto py-12 grid grid-cols-1 lg:grid-cols-2 gap-8'>
+    <div class='product-gallery'>
+      <img src='{{ product.featured_image | img_url: "master" }}' alt='{{ product.title }}' class='w-full rounded'>
+    </div>
+    <div class='product-details'>
+      <h1 class='text-4xl font-bold mb-4'>{{ product.title }}</h1>
+      <p class='text-xl text-gray-600 mb-6'>{{ product.description }}</p>
+      {% form 'product', product %}
+        <select name='id' class='mb-4'>
+          {% for variant in product.variants %}
+            <option value='{{ variant.id }}'>{{ variant.title }} - {{ variant.price | money }}</option>
+          {% endfor %}
+        </select>
+        <button type='submit' class='btn btn-primary w-full'>Add to Cart</button>
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main Product",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Main Product"
+    }
+  ]
+}
+{% endschema %}
