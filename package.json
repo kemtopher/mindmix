@@ -2,7 +2,7 @@
   "name": "mindmix-theme",
   "version": "1.0.0",
   "scripts": {
-    "watch:tailwind": "tailwindcss -i ./assets/style.css -o ./assets/style.css --watch",
+    "watch:tailwind": "tailwindcss -i ./style.css -o ./assets/style.css --watch",
     "shopify": "shopify theme dev",
     "settings": "shopify theme pull --theme dev-kemeza --path=config/settings_data.json --force",
     "dev": "npm run watch:tailwind & shopify theme dev"
