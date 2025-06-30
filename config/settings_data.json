@@ -62,6 +62,124 @@
       },
       "comparison": {
         "type": "comparison",
+        "blocks": {
+          "certification_ENt4yC": {
+            "type": "certification",
+            "settings": {
+              "title": "FDA Registered Facility",
+              "icon": "shopify://shop_images/certificate.png"
+            }
+          },
+          "certification_KYqEYy": {
+            "type": "certification",
+            "settings": {
+              "title": "Third-Party Tested",
+              "icon": "shopify://shop_images/test-tube.png"
+            }
+          },
+          "certification_hBh4n8": {
+            "type": "certification",
+            "settings": {
+              "title": "GMP Certified",
+              "icon": "shopify://shop_images/certificate.png"
+            }
+          },
+          "certification_QPMDJE": {
+            "type": "certification",
+            "settings": {
+              "title": "30-Day Guarantee",
+              "icon": "shopify://shop_images/guarantee.png"
+            }
+          },
+          "certification_aRekkY": {
+            "type": "certification",
+            "settings": {
+              "title": "Secure Checkout",
+              "icon": "shopify://shop_images/lock-2.png"
+            }
+          },
+          "certification_C8Jmyx": {
+            "type": "certification",
+            "settings": {
+              "title": "Free Shipping",
+              "icon": "shopify://shop_images/truck.png"
+            }
+          },
+          "comparison_row_zFzrCg": {
+            "type": "comparison_row",
+            "settings": {
+              "feature": "100% Natural",
+              "mindmix": true,
+              "coffee": true,
+              "energy_drinks": false,
+              "prescription": false
+            }
+          },
+          "comparison_row_VMqtgL": {
+            "type": "comparison_row",
+            "settings": {
+              "feature": "Made in USA",
+              "mindmix": true,
+              "coffee": true,
+              "energy_drinks": true,
+              "prescription": true
+            }
+          },
+          "comparison_row_qCtN3d": {
+            "type": "comparison_row",
+            "settings": {
+              "feature": "No Crash",
+              "mindmix": true,
+              "coffee": false,
+              "energy_drinks": false,
+              "prescription": false
+            }
+          },
+          "comparison_row_ri4CMf": {
+            "type": "comparison_row",
+            "settings": {
+              "feature": "4+ Hour Focus",
+              "mindmix": true,
+              "coffee": false,
+              "energy_drinks": false,
+              "prescription": true
+            }
+          },
+          "comparison_row_W4NNek": {
+            "type": "comparison_row",
+            "settings": {
+              "feature": "Zero Artificial Ingredients",
+              "mindmix": true,
+              "coffee": true,
+              "energy_drinks": false,
+              "prescription": false
+            }
+          },
+          "comparison_row_xtYhiw": {
+            "type": "comparison_row",
+            "settings": {
+              "feature": "Brain Health Support",
+              "mindmix": true,
+              "coffee": false,
+              "energy_drinks": false,
+              "prescription": false
+            }
+          }
+        },
+        "block_order": [
+          "certification_ENt4yC",
+          "certification_KYqEYy",
+          "certification_hBh4n8",
+          "certification_QPMDJE",
+          "certification_aRekkY",
+          "certification_C8Jmyx",
+          "comparison_row_zFzrCg",
+          "comparison_row_VMqtgL",
+          "comparison_row_qCtN3d",
+          "comparison_row_ri4CMf",
+          "comparison_row_W4NNek",
+          "comparison_row_xtYhiw"
+        ],
         "settings": {
           "heading": "WHY MINDMIX DOMINATES",
           "subheading": "100% Natural Ingredients, Proudly Made in USA"
@@ -105,13 +223,6 @@
               "answer": "We offer a 30-day money-back guarantee. If you're not completely satisfied with MindMix for any reason, simply contact our customer service team for a full refund. We stand behind our product's effectiveness."
             }
           },
-          "faq_item_fnJefP": {
-            "type": "faq_item",
-            "settings": {
-              "question": "",
-              "answer": ""
-            }
-          },
           "faq_item_64jrGy": {
             "type": "faq_item",
             "settings": {
@@ -126,7 +237,6 @@
           "faq_item_i7g48Q",
           "faq_item_3kVN9E",
           "faq_item_8ezVkG",
-          "faq_item_fnJefP",
           "faq_item_64jrGy"
         ],
         "settings": {
@@ -146,6 +256,34 @@
           "twitter_url": "",
           "instagram_url": "",
           "youtube_url": ""
+        }
+      },
+      "main-product": {
+        "type": "main-product",
+        "settings": {}
+      },
+      "product-info": {
+        "type": "product-info",
+        "settings": {
+          "image": "shopify://shop_images/Base-poudre-rhodiola.png",
+          "heading": "POWERED BY; RHODIOLA",
+          "subheading": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "content": "Used by Soviet scientists to enhance physical and mental endurance, Rhodiola rosea was their secret weapon long before modern performance enhancers.\n\n— National Geographic"
+        }
+      },
+      "product-collapse": {
+        "type": "product-collapse",
+        "settings": {
+          "heading": "Frequently Asked Questions"
+        }
+      },
+      "product-compare": {
+        "type": "product-compare",
+        "settings": {
+          "heading": "Feel Your Best Every Day",
+          "subheading": "A gentle formula that helps reduce bloating fast.",
+          "cta_text": "Shop Now",
+          "cta_link": "shopify://collections/all"
         }
       }
     },
