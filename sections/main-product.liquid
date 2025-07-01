@@ -5,19 +5,87 @@
       <img src='{{ product.featured_image | img_url: "master" }}' alt='{{ product.title }}' class='w-full rounded'>
     </div>
     <div class='product-details'>
-      <h1 class='text-4xl font-bold mb-4'>{{ product.title }}</h1>
+      <h1 class='text-6xl font-bold text-primary mb-4'>{{ product.title | upcase }}</h1>
       <p class='text-xl text-gray-600 mb-6'>{{ product.description }}</p>
-      {% form 'product', product %}
-        <select name='id' class='mb-4'>
+      <!--
+        {% form 'product', product %}
+          <select name='id' class='mb-4'>
+            {% for variant in product.variants %}
+              <option value='{{ variant.id }}'>{{ variant.title }} - {{ variant.price | money }}</option>
+            {% endfor %}
+          </select>
+          <button type='submit' class='btn btn-primary w-full'>Add to Cart</button>
+        {% endform %}
+      -->
+
+      <div class=''>
+        <h2 class='text-2xl font-bold mb-6'>Choose Your Pack</h2>
+        <div id='variant-accordion' class='space-y-4'>
           {% for variant in product.variants %}
-            <option value='{{ variant.id }}'>{{ variant.title }} - {{ variant.price | money }}</option>
+            <div
+              class='variant-wrapper border-2 border-[#00E5A0]'
+              onclick='handleVariantClick(event, "{{ variant.id }}")'
+              data-variant-id='{{ variant.id }}'
+            >
+              <div class='flex items-start cursor-pointer p-4 select-none'>
+                <input
+                  type='radio'
+                  name='variant'
+                  id='variant-{{ variant.id }}'
+                  value='{{ variant.id }}'
+                  class='hidden'
+                >
+                <span
+                  class='mt-1 mr-4 h-5 w-5 inline-block border-2 rounded-full border-white bg-white transition-colors'
+                  data-variant-radio
+                ></span>
+                <h3 class='text-lg font-semibold break-words'>{{ variant.title }}</h3>
+              </div>
+
+              <div class='variant-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-4 py-4 text-sm text-gray-700'>
+                {{ variant.metafields.custom.variant_description | metafield_tag | default: 'No additional info.' }}
+                <p class='mt-2 font-medium'>Price: {{ variant.price | money }}</p>
+              </div>
+            </div>
           {% endfor %}
-        </select>
-        <button type='submit' class='btn btn-primary w-full'>Add to Cart</button>
-      {% endform %}
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<script>
+  function handleVariantClick(event, variantId) {
+    const wrapper = event.currentTarget;
+    const radio = wrapper.querySelector(`input[type="radio"]`);
+    const content = wrapper.querySelector('.variant-content');
+    const indicator = wrapper.querySelector('[data-variant-radio]');
+    const isActive = radio.checked;
+
+    const allWrappers = document.querySelectorAll('.variant-wrapper');
+
+    allWrappers.forEach((w) => {
+      w.querySelector('input[type="radio"]').checked = false;
+      w.querySelector('.variant-content').style.maxHeight = null;
+      const ind = w.querySelector('[data-variant-radio]');
+      ind.classList.remove('bg-[#00E5A0]', 'border-[#00E5A0]');
+      ind.classList.add('bg-white', 'border-white');
+    });
+
+    if (!isActive) {
+      radio.checked = true;
+      content.style.maxHeight = content.scrollHeight + 'px';
+      indicator.classList.remove('bg-white', 'border-white');
+      indicator.classList.add('bg-[#00E5A0]', 'border-[#00E5A0]');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.variant-content').forEach((content) => {
+      content.style.maxHeight = null;
+    });
+  });
+</script>
 
 {% schema %}
 {
