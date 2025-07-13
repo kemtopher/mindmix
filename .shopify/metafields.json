@@ -10,6 +10,17 @@
   "order": [],
   "page": [],
   "product": [],
-  "variant": [],
+  "variant": [
+    {
+      "key": "variant_description",
+      "namespace": "custom",
+      "name": "Variant Description",
+      "description": "Description of variant",
+      "type": {
+        "name": "rich_text_field",
+        "category": "TEXT"
+      }
+    }
+  ],
   "shop": []
 }

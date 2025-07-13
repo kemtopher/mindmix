@@ -779,10 +779,6 @@ video {
   margin-top: 0.75rem;
 }
 
-.mt-36 {
-  margin-top: 9rem;
-}
-
 .mt-4 {
   margin-top: 1rem;
 }
@@ -797,14 +793,6 @@ video {
 
 .mt-auto {
   margin-top: auto;
-}
-
-.mt-28 {
-  margin-top: 7rem;
-}
-
-.mt-40 {
-  margin-top: 10rem;
 }
 
 .block {
@@ -905,15 +893,6 @@ video {
 
 .h-full {
   height: 100%;
-}
-
-.h-auto {
-  height: auto;
-}
-
-.h-fit {
-  height: -moz-fit-content;
-  height: fit-content;
 }
 
 .h-max {
@@ -1306,10 +1285,6 @@ video {
   margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
 }
 
-.justify-self-end {
-  justify-self: end;
-}
-
 .overflow-hidden {
   overflow: hidden;
 }
@@ -1366,6 +1341,11 @@ video {
   border-top-width: 1px;
 }
 
+.border-\[\#00E5A0\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 229 160 / var(--tw-border-opacity, 1));
+}
+
 .border-blue {
   --tw-border-opacity: 1;
   border-color: rgb(0 155 255 / var(--tw-border-opacity, 1));
@@ -1407,11 +1387,6 @@ video {
   border-color: rgb(0 229 160 / 0.3);
 }
 
-.border-\[\#00E5A0\] {
-  --tw-border-opacity: 1;
-  border-color: rgb(0 229 160 / var(--tw-border-opacity, 1));
-}
-
 .border-white {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity, 1));
@@ -1423,6 +1398,11 @@ video {
 
 .border-opacity-50 {
   --tw-border-opacity: 0.5;
+}
+
+.bg-\[\#00E5A0\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 229 160 / var(--tw-bg-opacity, 1));
 }
 
 .bg-black\/80 {
@@ -1493,11 +1473,6 @@ video {
 
 .bg-white\/50 {
   background-color: rgb(255 255 255 / 0.5);
-}
-
-.bg-\[\#00E5A0\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 229 160 / var(--tw-bg-opacity, 1));
 }
 
 .bg-gradient-radial {
@@ -1754,16 +1729,12 @@ video {
   padding-top: 6rem;
 }
 
-.pt-8 {
-  padding-top: 2rem;
-}
-
-.pt-36 {
-  padding-top: 9rem;
-}
-
 .pt-40 {
   padding-top: 10rem;
+}
+
+.pt-8 {
+  padding-top: 2rem;
 }
 
 .text-left {
@@ -2159,16 +2130,6 @@ video {
 
 .group:hover .group-hover\:opacity-75 {
   opacity: 0.75;
-}
-
-.peer:checked ~ .peer-checked\:border-\[\#00E5A0\] {
-  --tw-border-opacity: 1;
-  border-color: rgb(0 229 160 / var(--tw-border-opacity, 1));
-}
-
-.peer:checked ~ .peer-checked\:bg-\[\#00E5A0\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 229 160 / var(--tw-bg-opacity, 1));
 }
 
 @media (min-width: 640px) {
