@@ -3,8 +3,18 @@
   <div class='container-custom relative z-10 max-w-4xl mx-auto'>
     <div class='text-center max-w-3xl mx-auto mb-16 fade-in'>
       <h2 class='text-white mb-4'>
-        {{ section.settings.heading | escape }}
-        <span class='text-primary'>QUESTIONS</span>
+        {% assign heading_string = section.settings.heading | escape %}
+        {% assign string_words = heading_string | split: ' ' %}
+        {% assign word_count = string_words | size %}
+        {% assign slice_length = word_count | minus: 1 %}
+        {% assign heading_words = string_words | slice: 0, slice_length %}
+        {% assign truncated_string = heading_words | join: ' ' %}
+
+        {% assign clean_string = heading_string | replace: '.', '' %}
+        {% assign words = clean_string | split: ' ' %}
+        {% assign last_word = words | last %}
+        {{ truncated_string }}
+        <span class='text-primary'>{{ last_word }}</span>
       </h2>
     </div>
 
