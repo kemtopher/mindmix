@@ -24,7 +24,7 @@
                     name='variant'
                     id='variant-{{ variant.id }}'
                     value='{{ variant.id }}'
-                    class='hidden'
+                    hidden
                   >
                   <span
                     class='mt-1 mr-4 h-5 w-5 inline-block border-2 rounded-full border-white bg-white transition-colors'
@@ -45,46 +45,73 @@
           {% endfor %}
         </div>
       </div>
+      <div class='add-to-cart'>
+        <form method='post' action='/cart/add' id='add-to-cart-form' class='mt-8'>
+          <input type='hidden' name='id' id='selected-variant-id'>
+
+          <button
+            type='submit'
+            id='add-to-cart-btn'
+            class='bg-primary text-white font-semibold py-4 px-8 rounded text-xl transition hover:bg-opacity-90 disabled:hover:bg-primary disabled:opacity-50 disabled:cursor-not-allowed'
+            disabled
+          >
+            Add To Cart
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </section>
 
 <script>
+  // Set all inputs to initial state
+  function setInitialState() {
+    const allWrappers = document.querySelectorAll('.variant-wrapper');
+
+    allWrappers.forEach((variant) => {
+      const r = variant.querySelector('input[type="radio"]');
+      const c = variant.querySelector('.variant-content');
+      const i = variant.querySelector('[data-variant-radio]');
+      r.checked = false;
+      c.style.maxHeight = null;
+      c.style.display = 'none';
+      i.classList.remove('bg-[#00E5A0]', 'border-[#00E5A0]');
+      i.classList.add('bg-white', 'border-white');
+    });
+  }
+  setInitialState();
+
   function handleVariantClick(event, variantId) {
-    console.log('ID: ' + variantId);
     const wrapper = event.currentTarget;
-    const radio = wrapper.querySelector(`input[type="radio"]`);
+    const radio = wrapper.querySelector('input[type="radio"]');
     const content = wrapper.querySelector('.variant-content');
     const indicator = wrapper.querySelector('[data-variant-radio]');
-    const isActive = radio.checked;
+    const hiddenInput = document.getElementById('selected-variant-id');
+    const addToCartBtn = document.getElementById('add-to-cart-btn');
+
+    const isAlreadySelected = radio.checked;
 
     const allWrappers = document.querySelectorAll('.variant-wrapper');
 
-    allWrappers.forEach((section) => {
-      section.querySelector('input[type="radio"]').checked = false;
-      section.querySelector('.variant-content').style.maxHeight = null;
-      section.querySelector('.variant-content').style.display = 'none';
-      const ind = section.querySelector('[data-variant-radio]');
-      ind.classList.remove('bg-[#00E5A0]', 'border-[#00E5A0]');
-      ind.classList.add('bg-white', 'border-white');
-    });
+    // Reset all
+    setInitialState();
 
-    if (!isActive) {
+    if (!isAlreadySelected) {
+      // Select current
       radio.checked = true;
       content.style.display = 'block';
       content.style.maxHeight = content.scrollHeight + 'px';
       indicator.classList.remove('bg-white', 'border-white');
       indicator.classList.add('bg-[#00E5A0]', 'border-[#00E5A0]');
+
+      if (hiddenInput) hiddenInput.value = variantId;
+      if (addToCartBtn) addToCartBtn.disabled = false;
+    } else {
+      // Deselect
+      if (hiddenInput) hiddenInput.value = '';
+      if (addToCartBtn) addToCartBtn.disabled = true;
     }
   }
-
-  // initial state
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.variant-content').forEach((content) => {
-      content.style.maxHeight = null;
-      content.style.display = 'none';
-    });
-  });
 </script>
 
 {% schema %}
