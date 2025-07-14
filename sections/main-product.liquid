@@ -45,11 +45,39 @@
           {% endfor %}
         </div>
       </div>
+      <div class='add-to-cart'>
+        <form method='post' action='/cart/add' id='add-to-cart-form' class='mt-8'>
+          <input type='hidden' name='id' id='selected-variant-id'>
+
+          <button
+            type='submit'
+            id='add-to-cart-btn'
+            class='bg-primary text-white font-semibold py-4 px-8 rounded text-xl transition hover:bg-opacity-90 disabled:hover:bg-primary disabled:opacity-50 disabled:cursor-not-allowed'
+            disabled
+          >
+            Add To Cart
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </section>
 
 <script>
+  const cartItemCount = fetch('/cart.js')
+    .then((res) => res.json())
+    .then((cart) => {
+      const cartItems = cart.item_count;
+      console.log('Cart items:', cartItems);
+      return cartItems;
+    });
+
+  function button(variantPresent) {
+    const addToCartBtn = document.getElementById('add-to-cart-btn');
+    if (addToCartBtn && variantPresent === false) addToCartBtn.disabled = false;
+    if (!addToCartBtn || variantPresent === true) addToCartBtn.disabled = true;
+  }
+
   function handleVariantClick(event, variantId) {
     console.log('ID: ' + variantId);
     const wrapper = event.currentTarget;
@@ -76,6 +104,13 @@
       indicator.classList.remove('bg-white', 'border-white');
       indicator.classList.add('bg-[#00E5A0]', 'border-[#00E5A0]');
     }
+
+    if (isActive) console.log('unchecked');
+
+    const hiddenInput = document.getElementById('selected-variant-id');
+    if (hiddenInput) hiddenInput.value = variantId;
+
+    button(isActive);
   }
 
   // initial state
