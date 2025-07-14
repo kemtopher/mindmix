@@ -28,22 +28,24 @@
   </head>
   <body class='bg-dark text-light'>
     <!-- Loading Screen -->
-    <div id='loading-screen' class='fixed inset-0 bg-dark flex items-center justify-center z-50'>
-      <div class='relative w-32 h-32'>
-        <div class='absolute inset-0 flex items-center justify-center'>
-          {% render 'icon-brain', class: 'w-24 h-24 text-primary/20' %}
-        </div>
+    <!--
+      <div id='loading-screen' class='fixed inset-0 bg-dark flex items-center justify-center z-50'>
+        <div class='relative w-32 h-32'>
+          <div class='absolute inset-0 flex items-center justify-center'>
+            {% render 'icon-brain', class: 'w-24 h-24 text-primary/20' %}
+          </div>
 
-        <div class='absolute inset-0 flex items-center justify-center overflow-hidden'>
-          {% render 'icon-brain', class: 'w-24 h-24 text-primary animate-brain-fill' %}
-        </div>
+          <div class='absolute inset-0 flex items-center justify-center overflow-hidden'>
+            {% render 'icon-brain', class: 'w-24 h-24 text-primary animate-brain-fill' %}
+          </div>
 
-        <div class='absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap'>
-          <span class='text-primary text-sm font-medium'>Enhancing</span>
-          <span class='animate-pulse'>...</span>
+          <div class='absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap'>
+            <span class='text-primary text-sm font-medium'>Enhancing</span>
+            <span class='animate-pulse'>...</span>
+          </div>
         </div>
       </div>
-    </div>
+    -->
 
     <!-- Header -->
     {% section 'header' %}
@@ -61,17 +63,17 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-        const loadingScreen = document.getElementById('loading-screen');
+        // const loadingScreen = document.getElementById('loading-screen');
 
         // Hide loading screen after content loads
-        setTimeout(() => {
-          loadingScreen.style.opacity = '0';
-          loadingScreen.style.transition = 'opacity 0.5s ease-out';
+        // setTimeout(() => {
+        // loadingScreen.style.opacity = '0';
+        // loadingScreen.style.transition = 'opacity 0.5s ease-out';
 
-          setTimeout(() => {
-            loadingScreen.style.display = 'none';
-          }, 500);
-        }, 1000);
+        // setTimeout(() => {
+        // loadingScreen.style.display = 'none';
+        // }, 500);
+        // }, 1000);
 
         // Initialize animations
         const observer = new IntersectionObserver(

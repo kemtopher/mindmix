@@ -15,27 +15,11 @@
       <a href='#science' class='text-light hover:text-primary transition-colors'>Science</a>
       <a href='#pricing' class='text-light hover:text-primary transition-colors'>Pricing</a>
       <a href='#try-it-free' class='text-primary hover:text-primary transition-colors'>Try It Free</a>
+      <a href='/cart' class='cart-icon text-primary hover:text-primary transition-colors'>
+        {% render 'icon-cart' %}
+        <p class='item-count'>{{ cart.item_count }}</p>
+      </a>
     </nav>
-
-    <!--
-      <div class='hidden md:block relative group'>
-        <a
-          href='#pricing'
-          class='btn btn-primary relative overflow-hidden group-hover:scale-105 transform transition-all duration-500 py-1.5 px-3'
-        >
-          <span class='relative z-10 text-center'>
-            <span class='text-sm font-bold block'>Try It Free</span>
-            <span class='block text-xs font-normal opacity-90'>Just Cover Shipping</span>
-          </span>
-          <div
-            class='absolute inset-0 bg-gradient-to-r from-cta via-primary via-blue to-cta bg-[length:300%_100%] animate-shimmer opacity-90'
-          ></div>
-        </a>
-        <div
-          class='absolute -inset-[2px] bg-gradient-to-r from-cta via-primary via-blue to-cta opacity-0 blur-md group-hover:opacity-75 transition-opacity duration-700 -z-10'
-        ></div>
-      </div>
-    -->
 
     <button
       class='md:hidden text-light hover:text-primary'

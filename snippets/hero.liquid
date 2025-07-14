@@ -1,60 +1,78 @@
-{% assign hero_image = "https://images.pexels.com/photos/1379636/pexels-photo-1379636.jpeg" %}
+{% assign hero_image = 'https://images.pexels.com/photos/1379636/pexels-photo-1379636.jpeg' %}
 
-<section class="min-h-screen pt-24 pb-16 relative overflow-hidden neural-bg">
-  <div class="absolute inset-0 bg-neuron-pattern opacity-5"></div>
-  
-  <div class="container-custom relative z-10">
-    <div class="grid lg:grid-cols-2 gap-12 items-center">
-      <div class="fade-in">
-        <p class="text-primary font-semibold mb-2">DAILY NOOTROPIC DRINK MIX</p>
-        <h1 class="text-white mb-4">UNLOCK YOUR <br /><span class="text-primary">MENTAL EDGE</span></h1>
-        <h3 class="text-white mb-4">ENGINEERED FOR PEAK PERFORMANCE</h3>
-        <p class="text-primary text-3xl font-bold mb-6 tracking-wide">Clarity. Energy. Focus.</p>
-        <p class="text-light mb-8 max-w-md">Experience cognitive enhancement with our scientifically formulated nootropic drink mix. Optimize your mind.</p>
-        
-        <div class="flex flex-wrap gap-4 mb-12">
-          <a href="/products" class="btn btn-cta px-8 py-4 text-lg font-bold hover:transform hover:scale-105 transition-transform">
+<section class='min-h-screen pt-24 pb-16 relative overflow-hidden neural-bg'>
+  <div class='absolute inset-0 bg-neuron-pattern opacity-5'></div>
+
+  <div class='container-custom relative z-10'>
+    <div class='grid lg:grid-cols-2 gap-12 items-center'>
+      <div class='fade-in'>
+        <p class='text-primary font-semibold mb-2'>DAILY NOOTROPIC DRINK MIX</p>
+        <h1 class='text-white mb-4'>
+          UNLOCK YOUR <br>
+          <span class='text-primary'>MENTAL EDGE</span>
+        </h1>
+        <h3 class='text-white mb-4'>ENGINEERED FOR PEAK PERFORMANCE</h3>
+        <p class='text-primary text-3xl font-bold mb-6 tracking-wide'>Clarity. Energy. Focus.</p>
+        <p class='text-light mb-8 max-w-md'>
+          Experience cognitive enhancement with our scientifically formulated nootropic drink mix. Optimize your mind.
+        </p>
+
+        <div class='flex flex-wrap gap-4 mb-12'>
+          <a
+            href='/products'
+            class='btn btn-cta px-8 py-4 text-lg font-bold hover:transform hover:scale-105 transition-transform'
+          >
             Shop Now
           </a>
-          <a href="/products/trial" class="btn btn-mint px-8 py-4 text-lg font-bold hover:transform hover:scale-105 transition-transform">
+          <a
+            href='/products/trial'
+            class='btn btn-mint px-8 py-4 text-lg font-bold hover:transform hover:scale-105 transition-transform'
+          >
             Try Free Sample
           </a>
         </div>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div class="fade-in flex items-center">
+
+        <div class='grid grid-cols-1 sm:grid-cols-3 gap-6'>
+          <div class='fade-in flex items-center'>
             {% render 'icon-clock', class: 'h-6 w-6 text-primary mr-2' %}
-            <p class="text-white">Focus kicks in: <span class="text-primary font-semibold">30 minutes</span></p>
+            <p class='text-white'>Focus kicks in: <span class='text-primary font-semibold'>30 minutes</span></p>
           </div>
-          <div class="fade-in flex items-center" style="transition-delay: 0.2s;">
+          <div class='fade-in flex items-center' style='transition-delay: 0.2s;'>
             {% render 'icon-users', class: 'h-6 w-6 text-primary mr-2' %}
-            <p class="text-white">10,000+ students trust MindMix</p>
+            <p class='text-white'>10,000+ students trust MindMix</p>
           </div>
-          <div class="fade-in flex items-center" style="transition-delay: 0.4s;">
+          <div class='fade-in flex items-center' style='transition-delay: 0.4s;'>
             {% render 'icon-shield', class: 'h-6 w-6 text-primary mr-2' %}
-            <p class="text-white">Zero crash guarantee</p>
+            <p class='text-white'>Zero crash guarantee</p>
           </div>
         </div>
       </div>
 
-      <div class="fade-in relative" style="transition-delay: 0.3s;">
-        <div class="relative flex justify-center items-center h-[500px]">
-          <div class="absolute right-0 top-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-radial from-primary/[0.01] to-transparent opacity-30 blur-3xl"></div>
-          
+      <div class='fade-in relative' style='transition-delay: 0.3s;'>
+        <div class='relative flex justify-center items-center h-[500px]'>
+          <div
+            class='absolute right-0 top-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-radial from-primary/[0.01] to-transparent opacity-30 blur-3xl'
+          ></div>
+
           {% for flavor in section.settings.flavors %}
-            <div class="transform {% if forloop.first %}-rotate-12 translate-x-12{% elsif forloop.last %}rotate-12 -translate-x-12{% endif %} animate-float shadow-2xl" style="animation-delay: {{ forloop.index | times: 0.2 }}s;">
-              <div class="h-96 w-20 bg-darker rounded-2xl border border-primary/20 flex items-end justify-center pb-4 overflow-hidden relative {% if forloop.index == 2 %}z-30{% else %}z-20{% endif %}">
-                <div class="absolute inset-0 bg-gradient-to-t from-{{ flavor.color }}/10 via-transparent to-transparent"></div>
-                <div class="w-full h-1/2 bg-gradient-to-t from-{{ flavor.color }}/20 to-transparent"></div>
+            <div
+              class='transform {% if forloop.first %}-rotate-12 translate-x-12{% elsif forloop.last %}rotate-12 -translate-x-12{% endif %} animate-float shadow-2xl'
+              style='animation-delay: {{ forloop.index | times: 0.2 }}s;'
+            >
+              <div class='h-96 w-20 bg-darker rounded-2xl border border-primary/20 flex items-end justify-center pb-4 overflow-hidden relative {% if forloop.index == 2 %}z-30{% else %}z-20{% endif %}'>
+                <div
+                  class='absolute inset-0 bg-gradient-to-t from-{{ flavor.color }}/10 via-transparent to-transparent'
+                ></div>
+                <div class='w-full h-1/2 bg-gradient-to-t from-{{ flavor.color }}/20 to-transparent'></div>
               </div>
             </div>
           {% endfor %}
         </div>
-        
-        <div class="text-center mt-8">
-          <p class="text-light/80">Scroll to explore your mental upgrade</p>
-          <div class="mt-2 mx-auto h-10 w-5 border-2 border-light/20 rounded-full flex justify-center">
-            <div class="w-1 h-2 bg-primary rounded-full animate-bounce mt-1"></div>
+
+        <div class='text-center mt-8'>
+          <p class='text-light/80'>Scroll to explore your mental upgrade</p>
+          <div class='mt-2 mx-auto h-10 w-5 border-2 border-light/20 rounded-full flex justify-center'>
+            <div class='w-1 h-2 bg-primary rounded-full animate-bounce mt-1'></div>
           </div>
         </div>
       </div>
