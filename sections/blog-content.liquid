@@ -1,0 +1,23 @@
+<div
+  class='blog-content'
+  style='
+    width:70vw;
+    margin:0 auto;
+    font-size:1rem;
+    line-height:1.6;
+  '
+>
+  {{ article.content }}
+</div>
+
+{% schema %}
+{
+  "name": "Blog Content",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Blog Content"
+    }
+  ]
+}
+{% endschema %}

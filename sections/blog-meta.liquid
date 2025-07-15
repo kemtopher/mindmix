@@ -1,0 +1,68 @@
+<div
+  class='blog-meta'
+  style='
+    padding:36px 0;
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-family:Inter, sans-serif;
+    font-size:1rem;
+  '
+>
+  <div class='meta-left' style='display:flex; flex-wrap:wrap; gap:0.5rem;'>
+    {% if article.author != blank %}
+      <span>By {{ article.author }}</span>
+    {% endif %}
+    {% if article.published_at %}
+      <span>{{ article.published_at | date: '%B %d, %Y' }}</span>
+    {% endif %}
+    {% if article.tags.size > 0 %}
+      <span>
+        {% for tag in article.tags %}
+          {{ tag -}}
+          {%- unless forloop.last %}, {% endunless %}
+        {% endfor %}
+      </span>
+    {% endif %}
+  </div>
+  <div class='meta-right' style='display:flex; gap:1rem;'>
+    <!-- Placeholder SVGs for social icons -->
+    <svg
+      width='24'
+      height='24'
+      viewBox='0 0 24 24'
+      fill='none'
+      stroke='currentColor'
+      style='border:1px solid #ccc; border-radius:50%; padding:4px;'
+    ></svg>
+    <svg
+      width='24'
+      height='24'
+      viewBox='0 0 24 24'
+      fill='none'
+      stroke='currentColor'
+      style='border:1px solid #ccc; border-radius:50%; padding:4px;'
+    ></svg>
+    <svg
+      width='24'
+      height='24'
+      viewBox='0 0 24 24'
+      fill='none'
+      stroke='currentColor'
+      style='border:1px solid #ccc; border-radius:50%; padding:4px;'
+    ></svg>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Blog Meta",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Blog Meta"
+    }
+  ]
+}
+{% endschema %}
