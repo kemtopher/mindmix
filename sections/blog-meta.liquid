@@ -15,7 +15,7 @@
         {{- article.published_at | date: '%B %d, %Y' -}}
         {% if article.tags.size > 0 %}
           <span class='px-[1rem] hidden lg:inline-block'>|</span>
-        {%- endif -%}
+        {% endif %}
       </span>
     {% endif %}
     {% if article.tags.size > 0 %}
