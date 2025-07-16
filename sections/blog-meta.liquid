@@ -1,21 +1,22 @@
 <div
-  class='blog-meta'
-  style='
-    padding:36px 0;
-    width:100%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    font-family:Inter, sans-serif;
-    font-size:1rem;
-  '
+  class='blog-meta w-full flex flex-col lg:flex-row justify-between items-start lg:items-center gap-[1rem] font-inter text-base'
 >
-  <div class='meta-left' style='display:flex; flex-wrap:wrap; gap:0.5rem;'>
+  <div class='meta-left flex flex-col lg:flex-row'>
     {% if article.author != blank %}
-      <span>By {{ article.author }}</span>
+      <span class='flex'>
+        {{- article.author -}}
+        {% if article.published_at or article.tags.size > 0 %}
+          <span class='px-[1rem] hidden lg:inline-block'>|</span>
+        {%- endif -%}
+      </span>
     {% endif %}
     {% if article.published_at %}
-      <span>{{ article.published_at | date: '%B %d, %Y' }}</span>
+      <span class='flex'>
+        {{- article.published_at | date: '%B %d, %Y' -}}
+        {% if article.tags.size > 0 %}
+          <span class='px-[1rem] hidden lg:inline-block'>|</span>
+        {%- endif -%}
+      </span>
     {% endif %}
     {% if article.tags.size > 0 %}
       <span>
@@ -26,7 +27,7 @@
       </span>
     {% endif %}
   </div>
-  <div class='meta-right' style='display:flex; gap:1rem;'>
+  <div class='meta-right flex gap-[1rem]'>
     <!-- Placeholder SVGs for social icons -->
     <svg
       width='24'
