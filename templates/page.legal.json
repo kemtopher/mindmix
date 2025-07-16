@@ -1,0 +1,15 @@
+{
+  "name": "Legal Page",
+  "sections": {
+    "main": {
+      "type": "legal-content"
+    },
+    "hero": {
+      "type": "legal-hero"
+    }
+  },
+  "order": [
+    "hero",
+    "main"
+  ]
+}
