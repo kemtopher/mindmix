@@ -1,4 +1,6 @@
-@import 'tailwindcss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 .neural-bg {
   background-image:
@@ -136,4 +138,18 @@
 .article__content p:last-child,
 .blog-content p:last-child {
   padding: 0; /* Adjust the padding values as needed */
+}
+
+.hero-bg {
+  position: relative;
+}
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.36);
+  z-index: 10; /* optional, but ensures it's above background image */
 }
