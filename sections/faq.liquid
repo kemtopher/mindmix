@@ -1,8 +1,8 @@
 <section class='section-padding bg-darker relative'>
   <div class='absolute inset-0 bg-neuron-pattern opacity-5'></div>
   <div class='container-custom relative z-10 max-w-4xl mx-auto'>
-    <div class='text-center max-w-3xl mx-auto mb-16 fade-in'>
-      <h2 class='text-white mb-4'>
+    <div class='text-center max-w-3xl mx-auto mb-16 fade-in is-visible'>
+      <h2 class='text-white mb-6 text-5xl md:text-6xl font-bold tracking-tight'>
         {% assign heading_string = section.settings.heading | escape %}
         {% assign string_words = heading_string | split: ' ' %}
         {% assign word_count = string_words | size %}
@@ -14,7 +14,7 @@
         {% assign words = clean_string | split: ' ' %}
         {% assign last_word = words | last %}
         {{ truncated_string }}
-        <span class='text-primary'>{{ last_word }}</span>
+        <span class='block text-5xl md:text-6xl font-bold tracking-tight mt-2 text-primary'>{{ last_word }}</span>
       </h2>
     </div>
 
@@ -46,7 +46,7 @@
     </div>
 
     <div class='text-center fade-in'>
-      <p class='text-light mb-6'>{{ section.settings.contact_text }}</p>
+      <p class='text-light text-xl'>{{ section.settings.contact_text }}</p>
       <a href='{{ section.settings.contact_link }}' class='btn btn-secondary'>Contact Our Team</a>
     </div>
   </div>

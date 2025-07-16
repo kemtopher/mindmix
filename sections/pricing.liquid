@@ -21,178 +21,250 @@
 }
 {% endschema %}
 
-<section id="pricing" class="section-padding bg-dark relative">
-  <div class="absolute inset-0 bg-neuron-pattern opacity-5"></div>
-  
-  <div class="container-custom relative z-10">
-    <div class="text-center max-w-3xl mx-auto mb-16 fade-in">
-      <h2 class="text-white mb-4">CHOOSE YOUR <span class="text-primary">MENTAL ADVANTAGE</span></h2>
-      <p class="text-light">Risk-free trial or select the plan that fits your performance goals</p>
+<section id='pricing' class='section-padding bg-dark relative'>
+  <div class='absolute inset-0 bg-neuron-pattern opacity-5'></div>
+
+  <div class='container-custom relative z-10'>
+    <div class='text-center max-w-3xl mx-auto mb-16 fade-in is-visible'>
+      <h2 class='text-white mb-6 text-5xl md:text-6xl font-bold tracking-tight'>
+        CHOOSE YOUR
+        <span class='block text-5xl md:text-6xl font-bold tracking-tight mt-2 text-primary'>MENTAL ADVANTAGE</span>
+      </h2>
+      <p class='text-light text-xl'>Risk-free trial or select the plan that fits your performance goals</p>
     </div>
-    
-    <div class="grid md:grid-cols-3 gap-8">
+
+    <div class='grid md:grid-cols-3 gap-8'>
       <!-- Trial Pack -->
-      <div class="card fade-in relative border-2 border-primary transform hover:-translate-y-2 transition-all duration-300">
-        <div class="absolute -top-4 left-0 right-0 flex justify-center">
-          <span class="bg-primary text-dark text-xs font-bold px-4 py-1 rounded-full">MOST POPULAR</span>
+      <div class='card fade-in relative border-2 border-primary transform hover:-translate-y-2 transition-all duration-300'>
+        <div class='absolute -top-4 left-0 right-0 flex justify-center'>
+          <span class='bg-primary text-dark text-xs font-bold px-4 py-1 rounded-full'>MOST POPULAR</span>
         </div>
-        
+
         {% if section.settings.trial_image != blank %}
-          <div class="aspect-w-1 aspect-h-1 relative">
-            {{ section.settings.trial_image | image_url: width: 800 | image_tag: 
-              class: "w-full h-64 object-cover",
-              alt: "Trial Pack"
+          <div class='aspect-w-1 aspect-h-1 relative'>
+            {{
+              section.settings.trial_image
+              | image_url: width: 800
+              | image_tag: class: 'w-full h-64 object-cover', alt: 'Trial Pack'
             }}
-            <div class="absolute inset-0 bg-gradient-to-t from-darker to-transparent opacity-70"></div>
+            <div class='absolute inset-0 bg-gradient-to-t from-darker to-transparent opacity-70'></div>
           </div>
         {% else %}
-          <div class="h-64 bg-darker flex items-center justify-center">
-            <p class="text-light/50">Add trial pack image</p>
+          <div class='h-64 bg-darker flex items-center justify-center'>
+            <p class='text-light/50'>Add trial pack image</p>
           </div>
         {% endif %}
-        
-        <div class="p-6">
-          <h3 class="text-white text-xl font-bold mb-4">COGNITIVE TRIAL PACK</h3>
-          <div class="mb-6">
-            <span class="text-white text-3xl font-bold">$5.95</span>
-            <span class="text-light text-sm ml-2">(Just Cover Shipping)</span>
+
+        <div class='p-6'>
+          <h3 class='text-white text-xl font-bold mb-4'>COGNITIVE TRIAL PACK</h3>
+          <div class='mb-6'>
+            <span class='text-white text-3xl font-bold'>$5.95</span>
+            <span class='text-light text-sm ml-2'>(Just Cover Shipping)</span>
           </div>
-          
-          <ul class="space-y-3 mb-8">
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-primary flex-shrink-0 mt-0.5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+          <ul class='space-y-3 mb-8'>
+            <li class='flex items-start'>
+              <svg
+                class='h-5 w-5 text-primary flex-shrink-0 mt-0.5 mr-2'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                stroke-width='2'
+                stroke-linecap='round'
+                stroke-linejoin='round'
+              >
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
                 <polyline points="22 4 12 14.01 9 11.01"/>
               </svg>
-              <span class="text-light text-sm">3 premium stick packs (one of each flavor)</span>
+              <span class='text-light text-sm'>3 premium stick packs (one of each flavor)</span>
             </li>
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-primary flex-shrink-0 mt-0.5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <li class='flex items-start'>
+              <svg
+                class='h-5 w-5 text-primary flex-shrink-0 mt-0.5 mr-2'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                stroke-width='2'
+                stroke-linecap='round'
+                stroke-linejoin='round'
+              >
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
                 <polyline points="22 4 12 14.01 9 11.01"/>
               </svg>
-              <span class="text-light text-sm">Complete ingredient profile guide</span>
+              <span class='text-light text-sm'>Complete ingredient profile guide</span>
             </li>
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-primary flex-shrink-0 mt-0.5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <li class='flex items-start'>
+              <svg
+                class='h-5 w-5 text-primary flex-shrink-0 mt-0.5 mr-2'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                stroke-width='2'
+                stroke-linecap='round'
+                stroke-linejoin='round'
+              >
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
                 <polyline points="22 4 12 14.01 9 11.01"/>
               </svg>
-              <span class="text-light text-sm">30-day money-back guarantee</span>
+              <span class='text-light text-sm'>30-day money-back guarantee</span>
             </li>
           </ul>
-          
-          <a href="/products/trial" class="btn btn-mint w-full">
-            Unlock Your Edge - Try Free Today
-          </a>
+
+          <a href='/products/trial' class='btn btn-mint w-full'> Unlock Your Edge - Try Free Today </a>
         </div>
       </div>
 
       <!-- Starter Pack -->
-      <div class="card fade-in border border-gray-800 hover:border-primary/30 transform hover:-translate-y-1 transition-all duration-300">
+      <div class='card fade-in border border-gray-800 hover:border-primary/30 transform hover:-translate-y-1 transition-all duration-300'>
         {% if section.settings.starter_image != blank %}
-          <div class="aspect-w-1 aspect-h-1 relative">
-            {{ section.settings.starter_image | image_url: width: 800 | image_tag: 
-              class: "w-full h-64 object-cover",
-              alt: "Starter Pack"
+          <div class='aspect-w-1 aspect-h-1 relative'>
+            {{
+              section.settings.starter_image
+              | image_url: width: 800
+              | image_tag: class: 'w-full h-64 object-cover', alt: 'Starter Pack'
             }}
-            <div class="absolute inset-0 bg-gradient-to-t from-darker to-transparent opacity-70"></div>
+            <div class='absolute inset-0 bg-gradient-to-t from-darker to-transparent opacity-70'></div>
           </div>
         {% else %}
-          <div class="h-64 bg-darker flex items-center justify-center">
-            <p class="text-light/50">Add starter pack image</p>
+          <div class='h-64 bg-darker flex items-center justify-center'>
+            <p class='text-light/50'>Add starter pack image</p>
           </div>
         {% endif %}
-        
-        <div class="p-6">
-          <h3 class="text-white text-xl font-bold mb-1">FOCUS STARTER</h3>
-          <p class="text-primary text-sm mb-4">10-Pack</p>
-          <div class="mb-6">
-            <span class="text-white text-3xl font-bold">$29.95</span>
-            <span class="text-light text-sm ml-2">(Save 25%)</span>
+
+        <div class='p-6'>
+          <h3 class='text-white text-xl font-bold mb-1'>FOCUS STARTER</h3>
+          <p class='text-primary text-sm mb-4'>10-Pack</p>
+          <div class='mb-6'>
+            <span class='text-white text-3xl font-bold'>$29.95</span>
+            <span class='text-light text-sm ml-2'>(Save 25%)</span>
           </div>
-          
-          <ul class="space-y-3 mb-8">
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-primary flex-shrink-0 mt-0.5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+          <ul class='space-y-3 mb-8'>
+            <li class='flex items-start'>
+              <svg
+                class='h-5 w-5 text-primary flex-shrink-0 mt-0.5 mr-2'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                stroke-width='2'
+                stroke-linecap='round'
+                stroke-linejoin='round'
+              >
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
                 <polyline points="22 4 12 14.01 9 11.01"/>
               </svg>
-              <span class="text-light text-sm">Mix & match all flavors</span>
+              <span class='text-light text-sm'>Mix & match all flavors</span>
             </li>
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-primary flex-shrink-0 mt-0.5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <li class='flex items-start'>
+              <svg
+                class='h-5 w-5 text-primary flex-shrink-0 mt-0.5 mr-2'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                stroke-width='2'
+                stroke-linecap='round'
+                stroke-linejoin='round'
+              >
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
                 <polyline points="22 4 12 14.01 9 11.01"/>
               </svg>
-              <span class="text-light text-sm">Free shipping nationwide</span>
+              <span class='text-light text-sm'>Free shipping nationwide</span>
             </li>
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-primary flex-shrink-0 mt-0.5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <li class='flex items-start'>
+              <svg
+                class='h-5 w-5 text-primary flex-shrink-0 mt-0.5 mr-2'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                stroke-width='2'
+                stroke-linecap='round'
+                stroke-linejoin='round'
+              >
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
                 <polyline points="22 4 12 14.01 9 11.01"/>
               </svg>
-              <span class="text-light text-sm">Subscribe & save 15% option</span>
+              <span class='text-light text-sm'>Subscribe & save 15% option</span>
             </li>
           </ul>
-          
-          <a href="/products/starter" class="btn btn-primary w-full">
-            Start Performing
-          </a>
+
+          <a href='/products/starter' class='btn btn-primary w-full'> Start Performing </a>
         </div>
       </div>
 
       <!-- Pro Pack -->
-      <div class="card fade-in border border-gray-800 hover:border-primary/30 transform hover:-translate-y-1 transition-all duration-300">
+      <div class='card fade-in border border-gray-800 hover:border-primary/30 transform hover:-translate-y-1 transition-all duration-300'>
         {% if section.settings.pro_image != blank %}
-          <div class="aspect-w-1 aspect-h-1 relative">
-            {{ section.settings.pro_image | image_url: width: 800 | image_tag: 
-              class: "w-full h-64 object-cover",
-              alt: "Pro Pack"
+          <div class='aspect-w-1 aspect-h-1 relative'>
+            {{
+              section.settings.pro_image
+              | image_url: width: 800
+              | image_tag: class: 'w-full h-64 object-cover', alt: 'Pro Pack'
             }}
-            <div class="absolute inset-0 bg-gradient-to-t from-darker to-transparent opacity-70"></div>
+            <div class='absolute inset-0 bg-gradient-to-t from-darker to-transparent opacity-70'></div>
           </div>
         {% else %}
-          <div class="h-64 bg-darker flex items-center justify-center">
-            <p class="text-light/50">Add pro pack image</p>
+          <div class='h-64 bg-darker flex items-center justify-center'>
+            <p class='text-light/50'>Add pro pack image</p>
           </div>
         {% endif %}
-        
-        <div class="p-6">
-          <h3 class="text-white text-xl font-bold mb-1">PEAK PERFORMER</h3>
-          <p class="text-primary text-sm mb-4">30-Pack</p>
-          <div class="mb-6">
-            <span class="text-white text-3xl font-bold">$79.95</span>
-            <span class="text-light text-sm ml-2">(Save 35%)</span>
+
+        <div class='p-6'>
+          <h3 class='text-white text-xl font-bold mb-1'>PEAK PERFORMER</h3>
+          <p class='text-primary text-sm mb-4'>30-Pack</p>
+          <div class='mb-6'>
+            <span class='text-white text-3xl font-bold'>$79.95</span>
+            <span class='text-light text-sm ml-2'>(Save 35%)</span>
           </div>
-          
-          <ul class="space-y-3 mb-8">
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-primary flex-shrink-0 mt-0.5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+          <ul class='space-y-3 mb-8'>
+            <li class='flex items-start'>
+              <svg
+                class='h-5 w-5 text-primary flex-shrink-0 mt-0.5 mr-2'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                stroke-width='2'
+                stroke-linecap='round'
+                stroke-linejoin='round'
+              >
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
                 <polyline points="22 4 12 14.01 9 11.01"/>
               </svg>
-              <span class="text-light text-sm">Complete monthly supply</span>
+              <span class='text-light text-sm'>Complete monthly supply</span>
             </li>
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-primary flex-shrink-0 mt-0.5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <li class='flex items-start'>
+              <svg
+                class='h-5 w-5 text-primary flex-shrink-0 mt-0.5 mr-2'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                stroke-width='2'
+                stroke-linecap='round'
+                stroke-linejoin='round'
+              >
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
                 <polyline points="22 4 12 14.01 9 11.01"/>
               </svg>
-              <span class="text-light text-sm">Priority customer support</span>
+              <span class='text-light text-sm'>Priority customer support</span>
             </li>
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-primary flex-shrink-0 mt-0.5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <li class='flex items-start'>
+              <svg
+                class='h-5 w-5 text-primary flex-shrink-0 mt-0.5 mr-2'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                stroke-width='2'
+                stroke-linecap='round'
+                stroke-linejoin='round'
+              >
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
                 <polyline points="22 4 12 14.01 9 11.01"/>
               </svg>
-              <span class="text-light text-sm">Subscribe & save 20% option</span>
+              <span class='text-light text-sm'>Subscribe & save 20% option</span>
             </li>
           </ul>
-          
-          <a href="/products/pro" class="btn btn-primary w-full">
-            Go Pro
-          </a>
+
+          <a href='/products/pro' class='btn btn-primary w-full'> Go Pro </a>
         </div>
       </div>
     </div>

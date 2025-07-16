@@ -7,11 +7,13 @@
           {% assign words = section.settings.heading | split: ' ' %}
           {% for word in words %}
             <!-- <br> -->
-            <span class='text-primary mb-4'>{{ word }}</span>
+            <span class='text-primary mb-4 text-5xl md:text-6xl font-bold tracking-tight'>{{ word }}</span>
           {% endfor %}
         </h1>
-        <h3 class='text-white mb-4'>{{ section.settings.subheading }}</h3>
-        <p class='text-primary text-3xl font-bold mb-6 tracking-wide'>{{ section.settings.benefits }}</p>
+        <h3 class='text-white mb-4 text-xl md:text-2xl font-bold tracking-tight'>{{ section.settings.subheading }}</h3>
+        <p class='text-primary  text-3xl md:text-4xl font-bold tracking-tight font-bold mb-6'>
+          {{ section.settings.benefits }}
+        </p>
         <p class='text-light mb-8 max-w-md'>{{ section.settings.description }}</p>
 
         <div class='flex flex-wrap gap-4'>
