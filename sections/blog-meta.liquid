@@ -7,7 +7,7 @@
         {{- article.author -}}
         {% if article.published_at or article.tags.size > 0 %}
           <span class='px-[1rem] hidden lg:inline-block'>|</span>
-        {%- endif -%}
+        {% endif %}
       </span>
     {% endif %}
     {% if article.published_at %}
