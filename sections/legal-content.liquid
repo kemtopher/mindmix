@@ -1,0 +1,22 @@
+<div class='blog-content py-[36px] w-full font-inter text-base'>
+  {{ section.settings.legal_content }}
+</div>
+
+{% schema %}
+{
+  "name": "Legal Content",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "legal_content",
+      "label": "Legal Content",
+      "default": "Legal Content Here"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Legal Content"
+    }
+  ]
+}
+{% endschema %}
