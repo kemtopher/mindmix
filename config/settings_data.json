@@ -372,10 +372,18 @@
               "link_label": "All Products",
               "link_url": "shopify://collections"
             }
+          },
+          "link_item_dWTeVB": {
+            "type": "link_item",
+            "settings": {
+              "link_label": "Try It Free",
+              "link_url": "shopify://products/mindmix"
+            }
           }
         },
         "block_order": [
-          "link_item_rKa3Wg"
+          "link_item_rKa3Wg",
+          "link_item_dWTeVB"
         ],
         "settings": {
           "heading": "Store"
