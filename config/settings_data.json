@@ -289,9 +289,64 @@
       "legal-hero": {
         "type": "legal-hero",
         "settings": {
-          "legal_title": "Legal Page",
           "image": "shopify://shop_images/ChatGPT_Image_May_20_2025_07_49_03_PM.png"
         }
+      },
+      "partial-faq": {
+        "type": "partial-faq",
+        "blocks": {
+          "faq_item_tFLwmn": {
+            "type": "faq_item",
+            "settings": {
+              "question": "How quickly does MindMix work?",
+              "answer": "Most users feel the cognitive benefits within 30-45 minutes after consumption. The formula is designed to provide a steady, sustained boost to mental performance without the crash associated with caffeine or other stimulants."
+            }
+          },
+          "faq_item_dXr7WP": {
+            "type": "faq_item",
+            "settings": {
+              "question": "Is it safe to take daily?",
+              "answer": "Yes, MindMix is formulated with natural ingredients that are safe for daily consumption. The adaptogenic herbs and nootropic compounds are specifically selected to support long-term brain health and function without dependency or tolerance buildup."
+            }
+          },
+          "faq_item_8pUwNz": {
+            "type": "faq_item",
+            "settings": {
+              "question": "Will I crash later?",
+              "answer": "No, MindMix is specifically designed to avoid the crash associated with caffeine and energy drinks. The formula works by optimizing your brain's natural processes rather than artificially stimulating them, resulting in a smooth, gradual decline in effects rather than a sudden crash."
+            }
+          },
+          "faq_item_m8gH63": {
+            "type": "faq_item",
+            "settings": {
+              "question": "Can I mix with coffee?",
+              "answer": "Yes, but we recommend starting with half doses of each. MindMix complements coffee well, with L-theanine helping to smooth out caffeine's potential jitters while enhancing focus. Many users find they need less coffee when using MindMix."
+            }
+          },
+          "faq_item_GdfyKU": {
+            "type": "faq_item",
+            "settings": {
+              "question": "What if I don't like it?",
+              "answer": "We offer a 30-day money-back guarantee. If you're not completely satisfied with MindMix for any reason, simply contact our customer service team for a full refund. We stand behind our product's effectiveness."
+            }
+          },
+          "faq_item_79MWgC": {
+            "type": "faq_item",
+            "settings": {
+              "question": "Is there caffeine?",
+              "answer": "MindMix contains a minimal amount of natural caffeine from green tea extract, equivalent to approximately 1/4 cup of coffee per serving. This is enough to provide synergistic benefits with other ingredients without causing jitters or sleep disruption."
+            }
+          }
+        },
+        "block_order": [
+          "faq_item_tFLwmn",
+          "faq_item_dXr7WP",
+          "faq_item_8pUwNz",
+          "faq_item_m8gH63",
+          "faq_item_GdfyKU",
+          "faq_item_79MWgC"
+        ],
+        "settings": {}
       }
     },
     "content_for_index": [],
