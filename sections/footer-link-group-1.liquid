@@ -1,16 +1,18 @@
 {% if section.settings.heading != blank %}
-  <div class='footer-link-group'>
-    <h5 class='text-white font-semibold mb-4'>{{ section.settings.heading }}</h5>
+  <div class='justify-self-end md:max-w-[150px] w-full pt-5 md:pt-0 pb-2 md:pb-0 md:w-1/5 border-t md:border-none'>
+    <div class='footer-link-group'>
+      <h5 class='text-white font-semibold mb-4'>{{ section.settings.heading }}</h5>
 
-    <ul class='space-y-2'>
-      {% for block in section.blocks %}
-        <li>
-          <a href='{{ block.settings.link_url }}' class='text-light hover:text-primary transition-colors'>
-            {{ block.settings.link_label }}
-          </a>
-        </li>
-      {% endfor %}
-    </ul>
+      <ul class='space-y-2'>
+        {% for block in section.blocks %}
+          <li>
+            <a href='{{ block.settings.link_url }}' class='text-light hover:text-primary transition-colors'>
+              {{ block.settings.link_label }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
 {% endif %}
 
