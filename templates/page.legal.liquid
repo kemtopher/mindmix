@@ -4,6 +4,9 @@
     <div class='blog-content py-[36px] w-full font-inter text-base'>
       {{ page.content }}
     </div>
-    <p class='mt-[2rem]'>Last Updated: {{ page.published_at }}</p>
+    <p class='mt-[2rem]'>
+      Last Updated:
+      {{- article.published_at | date: '%B %d, %Y' -}}
+    </p>
   </main>
 </div>
