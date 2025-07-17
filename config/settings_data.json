@@ -289,7 +289,8 @@
       "legal-hero": {
         "type": "legal-hero",
         "settings": {
-          "legal_title": "Legal Page"
+          "legal_title": "Legal Page",
+          "image": "shopify://shop_images/ChatGPT_Image_May_20_2025_07_49_03_PM.png"
         }
       }
     },
