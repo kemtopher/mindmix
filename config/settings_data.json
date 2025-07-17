@@ -371,6 +371,18 @@
       },
       "footer-link-group-3": {
         "type": "footer-link-group-3",
+        "blocks": {
+          "link_item_NtPUrm": {
+            "type": "link_item",
+            "settings": {
+              "link_label": "FAQ",
+              "link_url": "shopify://pages/faq"
+            }
+          }
+        },
+        "block_order": [
+          "link_item_NtPUrm"
+        ],
         "settings": {
           "heading": "Support"
         }
