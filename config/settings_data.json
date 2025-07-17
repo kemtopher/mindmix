@@ -378,10 +378,18 @@
               "link_label": "FAQ",
               "link_url": "shopify://pages/faq"
             }
+          },
+          "link_item_mqwrFi": {
+            "type": "link_item",
+            "settings": {
+              "link_label": "Contact",
+              "link_url": "shopify://pages/contact"
+            }
           }
         },
         "block_order": [
-          "link_item_NtPUrm"
+          "link_item_NtPUrm",
+          "link_item_mqwrFi"
         ],
         "settings": {
           "heading": "Support"
