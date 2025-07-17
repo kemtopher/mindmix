@@ -1037,6 +1037,10 @@ video {
   min-width: 600px;
 }
 
+.min-w-full {
+  min-width: 100%;
+}
+
 .max-w-2xl {
   max-width: 42rem;
 }
@@ -2488,6 +2492,14 @@ video {
 
   .md\:w-\[60vw\] {
     width: 60vw;
+  }
+
+  .md\:w-\[20vw\] {
+    width: 20vw;
+  }
+
+  .md\:min-w-\[150px\] {
+    min-width: 150px;
   }
 
   .md\:max-w-\[400px\] {
