@@ -1,18 +1,15 @@
 <div class='blog-hero h-[40vh]'>
   <div
     class='hero-bg w-full h-full bg-cover bg-center'
+    style="background-image: url('{{ section.settings.legal_image | image_url: 'master' }}');"
   >
-    <div
-      class='hero-inner flex items-center justify-center h-full'
-    >
+    <div class='hero-inner flex items-center justify-center h-full'>
       <h1 class='relative z-50 text-primary text-6xl font-bold'>
         {{ section.settings.legal_title }}
       </h1>
     </div>
   </div>
 </div>
-
-<!-- style="background-image: url('{{ section.settings.legal_image | image_url: width:2000 }}');" -->
 
 {% schema %}
 {
@@ -27,7 +24,7 @@
     {
       "type": "image_picker",
       "id": "legal_image",
-      "label": "Legal Page Background Image"
+      "label": "Background Image"
     }
   ],
   "presets": [
