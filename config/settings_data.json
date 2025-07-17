@@ -347,6 +347,33 @@
           "faq_item_79MWgC"
         ],
         "settings": {}
+      },
+      "social-links": {
+        "type": "social-links",
+        "settings": {
+          "facebook_url": "",
+          "twitter_url": "",
+          "instagram_url": "",
+          "youtube_url": ""
+        }
+      },
+      "footer-link-group-1": {
+        "type": "footer-link-group-1",
+        "settings": {
+          "heading": "Support"
+        }
+      },
+      "footer-link-group-2": {
+        "type": "footer-link-group-2",
+        "settings": {
+          "heading": ""
+        }
+      },
+      "footer-link-group-3": {
+        "type": "footer-link-group-3",
+        "settings": {
+          "heading": ""
+        }
       }
     },
     "content_for_index": [],
