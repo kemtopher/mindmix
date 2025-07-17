@@ -804,6 +804,10 @@ video {
   margin-top: auto;
 }
 
+.mt-\[2rem\] {
+  margin-top: 2rem;
+}
+
 .block {
   display: block;
 }
