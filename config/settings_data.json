@@ -360,7 +360,7 @@
       "footer-link-group-1": {
         "type": "footer-link-group-1",
         "settings": {
-          "heading": "Support"
+          "heading": ""
         }
       },
       "footer-link-group-2": {
@@ -372,7 +372,7 @@
       "footer-link-group-3": {
         "type": "footer-link-group-3",
         "settings": {
-          "heading": ""
+          "heading": "Support"
         }
       }
     },
