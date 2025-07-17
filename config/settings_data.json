@@ -289,17 +289,17 @@
       "legal-hero": {
         "type": "legal-hero",
         "settings": {
-          "legal_title": "Legal Page",
-          "legal_image": "shopify://shop_images/ChatGPT_Image_May_20_2025_07_49_03_PM.png"
-        }
-      },
-      "legal-content": {
-        "type": "legal-content",
-        "settings": {
-          "legal_content": "<p>Legal Content HereTerms & Conditions</p><p><em>Last updated: [Insert Date]</em></p><p>Welcome to [Your Store Name]! These Terms and Conditions (“Terms”) govern your use of our website, products, and services. By accessing or purchasing from our site, you agree to be bound by these Terms. Please read them carefully.</p><h2>1. General</h2><p>This website is operated by [Your Store Name]. Throughout the site, the terms “we,” “us,” and “our” refer to [Your Store Name].</p><p>By visiting our site or purchasing something from us, you engage in our “Service” and agree to be bound by these Terms.</p><h2>2. Eligibility</h2><ul><li>You must be at least 18 years old (or the age of majority in your jurisdiction) to make a purchase.</li><li>You agree to provide current, complete, and accurate purchase and account information.</li></ul><h2>3. Products and Pricing</h2><ul><li>We strive to display product colors, images, and descriptions as accurately as possible, but we cannot guarantee your screen’s display of colors will be exact.</li><li>Prices are subject to change without notice. We reserve the right to modify or discontinue products at any time.</li></ul><h2>4. Orders and Payment</h2><ul><li>When you place an order, you agree that all information you provide is true and complete.</li><li>We accept major credit cards and other payment methods listed at checkout.</li><li>We reserve the right to refuse any order you place with us.</li></ul><h2>5. Shipping and Delivery</h2><ul><li>Shipping times are estimates and not guaranteed. Delays may occur due to factors beyond our control.</li><li>You are responsible for ensuring accurate shipping information.</li></ul><h2>6. Returns and Refunds</h2><ul><li>We accept returns and exchanges within [X] days of delivery. Items must be unused and in original packaging.</li><li>Some items (e.g., final sale, personalized products) may not be eligible for return.</li><li>For details, please see our Return Policy.</li></ul><h2>7. Intellectual Property</h2><p>All content on this site (including text, graphics, logos, and images) is the property of [Your Store Name] and protected by intellectual property laws. You may not use our content without prior written permission.</p><h2>8. Limitation of Liability</h2><p>To the maximum extent permitted by law, we shall not be liable for any indirect, incidental, or consequential damages resulting from the use of our site or products.</p><h2>9. Governing Law</h2><p>These Terms are governed by and construed in accordance with the laws of [Your State/Country], without regard to conflict of law principles.</p><h2>10. Changes to Terms</h2><p>We reserve the right to update or change these Terms at any time. Changes will be posted on this page with an updated “Last Updated” date.</p><h2>11. Contact Us</h2><p>If you have any questions about these Terms, please contact us at:</p><p><strong>Email:</strong> [yourstore@example.com]<br/><br/><strong>Phone:</strong> [your phone number]</p>"
+          "legal_title": "Legal Page"
         }
       }
     },
-    "content_for_index": []
+    "content_for_index": [],
+    "blocks": {
+      "11667715999621601152": {
+        "type": "shopify://apps/tiktok-ads-tiktok-pixels/blocks/turbo-tiktok/0f61e244-e2c9-43da-9523-9762c9f7e6bf",
+        "disabled": false,
+        "settings": {}
+      }
+    }
   }
 }
