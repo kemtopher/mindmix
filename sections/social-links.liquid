@@ -1,0 +1,51 @@
+{% if section.settings.facebook_url != blank %}
+  <a href='{{ section.settings.facebook_url }}' class='text-light hover:text-primary transition-colors'>
+    {% render 'icon-facebook' %}
+  </a>
+{% endif %}
+
+{% if section.settings.twitter_url != blank %}
+  <a href='{{ section.settings.twitter_url }}' class='text-light hover:text-primary transition-colors'>
+    {% render 'icon-twitter' %}
+  </a>
+{% endif %}
+
+{% if section.settings.instagram_url != blank %}
+  <a href='{{ section.settings.instagram_url }}' class='text-light hover:text-primary transition-colors'>
+    {% render 'icon-instagram' %}
+  </a>
+{% endif %}
+
+{% if section.settings.youtube_url != blank %}
+  <a href='{{ section.settings.youtube_url }}' class='text-light hover:text-primary transition-colors'>
+    {% render 'icon-youtube' %}
+  </a>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Social Links",
+  "settings": [
+    {
+      "type": "text",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "text",
+      "id": "twitter_url",
+      "label": "Twitter URL"
+    },
+    {
+      "type": "text",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "text",
+      "id": "youtube_url",
+      "label": "YouTube URL"
+    }
+  ]
+}
+{% endschema %}
