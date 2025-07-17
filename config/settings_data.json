@@ -365,6 +365,18 @@
       },
       "footer-link-group-2": {
         "type": "footer-link-group-2",
+        "blocks": {
+          "link_item_rKa3Wg": {
+            "type": "link_item",
+            "settings": {
+              "link_label": "All Products",
+              "link_url": "shopify://collections"
+            }
+          }
+        },
+        "block_order": [
+          "link_item_rKa3Wg"
+        ],
         "settings": {
           "heading": "Store"
         }
