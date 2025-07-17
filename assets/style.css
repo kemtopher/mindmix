@@ -1021,6 +1021,18 @@ video {
   width: 100%;
 }
 
+.w-1\/5 {
+  width: 20%;
+}
+
+.w-\[40vw\] {
+  width: 40vw;
+}
+
+.w-\[60vw\] {
+  width: 60vw;
+}
+
 .min-w-\[600px\] {
   min-width: 600px;
 }
@@ -1049,12 +1061,32 @@ video {
   max-width: 36rem;
 }
 
+.max-w-\[150px\] {
+  max-width: 150px;
+}
+
+.max-w-\[400px\] {
+  max-width: 400px;
+}
+
+.max-w-full {
+  max-width: 100%;
+}
+
 .flex-shrink-0 {
   flex-shrink: 0;
 }
 
 .flex-grow {
   flex-grow: 1;
+}
+
+.basis-2 {
+  flex-basis: 0.5rem;
+}
+
+.basis-1 {
+  flex-basis: 0.25rem;
 }
 
 .-translate-x-1\/2 {
@@ -1230,6 +1262,10 @@ video {
   justify-content: flex-start;
 }
 
+.justify-end {
+  justify-content: flex-end;
+}
+
 .justify-center {
   justify-content: center;
 }
@@ -1256,6 +1292,10 @@ video {
 
 .gap-\[1rem\] {
   gap: 1rem;
+}
+
+.gap-10 {
+  gap: 2.5rem;
 }
 
 .space-x-2 > :not([hidden]) ~ :not([hidden]) {
@@ -1304,6 +1344,14 @@ video {
   --tw-space-y-reverse: 0;
   margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
+}
+
+.justify-self-start {
+  justify-self: start;
+}
+
+.justify-self-end {
+  justify-self: end;
 }
 
 .overflow-hidden {
@@ -1777,6 +1825,14 @@ video {
 
 .pt-\[36px\] {
   padding-top: 36px;
+}
+
+.pt-5 {
+  padding-top: 1.25rem;
+}
+
+.pb-2 {
+  padding-bottom: 0.5rem;
 }
 
 .text-left {
@@ -2426,6 +2482,22 @@ video {
     width: 1.5rem;
   }
 
+  .md\:w-1\/5 {
+    width: 20%;
+  }
+
+  .md\:w-\[60vw\] {
+    width: 60vw;
+  }
+
+  .md\:max-w-\[400px\] {
+    max-width: 400px;
+  }
+
+  .md\:max-w-\[150px\] {
+    max-width: 150px;
+  }
+
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -2452,6 +2524,10 @@ video {
     margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
   }
 
+  .md\:border-none {
+    border-style: none;
+  }
+
   .md\:p-12 {
     padding: 3rem;
   }
@@ -2463,6 +2539,18 @@ video {
   .md\:py-24 {
     padding-top: 6rem;
     padding-bottom: 6rem;
+  }
+
+  .md\:pb-0 {
+    padding-bottom: 0px;
+  }
+
+  .md\:pt-0 {
+    padding-top: 0px;
+  }
+
+  .md\:text-left {
+    text-align: left;
   }
 
   .md\:text-4xl {
@@ -2506,6 +2594,10 @@ video {
     display: inline-block;
   }
 
+  .lg\:w-\[40vw\] {
+    width: 40vw;
+  }
+
   .lg\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -2532,6 +2624,10 @@ video {
 
   .lg\:items-center {
     align-items: center;
+  }
+
+  .lg\:text-left {
+    text-align: left;
   }
 
   .lg\:text-6xl {
