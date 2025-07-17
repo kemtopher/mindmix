@@ -14,7 +14,6 @@
     <span class='block text-5xl md:text-6xl font-bold tracking-tight mt-2 text-primary'>{{ last_word }}</span>
   </h2>
 </div>
-
 <div class='space-y-4 mb-12 fade-in' id='faq-container'>
   {% for block in section.blocks %}
     {% if block.type == 'faq_item' %}
@@ -41,13 +40,6 @@
     {% endif %}
   {% endfor %}
 </div>
-
-<!--
-  <div class='text-center fade-in'>
-    <p class='text-light text-xl'>{{ section.settings.contact_text }}</p>
-    <a href='{{ section.settings.contact_link }}' class='btn btn-secondary'>Contact Our Team</a>
-  </div>
--->
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
