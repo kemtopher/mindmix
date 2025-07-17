@@ -1,7 +1,7 @@
 <div class='blog-hero h-[40vh]'>
   <div
     class='hero-bg w-full h-full bg-cover bg-center'
-    style="background-image: url('{{ section.settings.legal_image | image_url: width: 1500 }}');"
+    style="background-image: url('{{ section.settings.image | image_url: width:2000 }}');"
   >
     <div class='hero-inner flex items-center justify-center h-full'>
       <h1 class='relative z-50 text-primary text-6xl font-bold'>
@@ -23,7 +23,7 @@
     },
     {
       "type": "image_picker",
-      "id": "legal_image",
+      "id": "image",
       "label": "Background Image"
     }
   ],
