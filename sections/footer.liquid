@@ -8,13 +8,13 @@
       "label": "Facebook URL"
     },
     {
-      "type": "text", 
+      "type": "text",
       "id": "twitter_url",
       "label": "Twitter URL"
     },
     {
       "type": "text",
-      "id": "instagram_url", 
+      "id": "instagram_url",
       "label": "Instagram URL"
     },
     {
@@ -26,89 +26,114 @@
 }
 {% endschema %}
 
-<footer class="bg-darker pt-16 pb-8">
-  <div class="container-custom">
-    <div class="grid md:grid-cols-5 gap-8 mb-12">
-      <div class="md:col-span-2">
-        <a href="/" class="group mb-4 inline-block">
-          <span class="text-3xl font-bold text-white group-hover:text-primary transition-colors duration-300">
+<footer class='bg-darker pt-16 pb-8'>
+  <div class='container-custom'>
+    <div class='grid md:grid-cols-5 gap-8 mb-12'>
+      <div class='md:col-span-2'>
+        <a href='/' class='group mb-4 inline-block'>
+          <span class='text-3xl font-bold text-white group-hover:text-primary transition-colors duration-300'>
             {{ shop.name }}
           </span>
         </a>
-        <p class="text-light mb-6 max-w-md">Unlock Your Mental Edge with our scientifically formulated nootropic drink mix designed for peak cognitive performance.</p>
-        
-        <div class="flex space-x-4">
+        <p class='text-light mb-6 max-w-md'>
+          Unlock Your Mental Edge with our scientifically formulated nootropic drink mix designed for peak cognitive
+          performance.
+        </p>
+
+        <div class='flex space-x-4'>
           {% if section.settings.facebook_url != blank %}
-            <a href="{{ section.settings.facebook_url }}" class="text-light hover:text-primary transition-colors">
+            <a href='{{ section.settings.facebook_url }}' class='text-light hover:text-primary transition-colors'>
               {% render 'icon-facebook' %}
             </a>
           {% endif %}
-          
+
           {% if section.settings.twitter_url != blank %}
-            <a href="{{ section.settings.twitter_url }}" class="text-light hover:text-primary transition-colors">
+            <a href='{{ section.settings.twitter_url }}' class='text-light hover:text-primary transition-colors'>
               {% render 'icon-twitter' %}
             </a>
           {% endif %}
-          
+
           {% if section.settings.instagram_url != blank %}
-            <a href="{{ section.settings.instagram_url }}" class="text-light hover:text-primary transition-colors">
+            <a href='{{ section.settings.instagram_url }}' class='text-light hover:text-primary transition-colors'>
               {% render 'icon-instagram' %}
             </a>
           {% endif %}
-          
+
           {% if section.settings.youtube_url != blank %}
-            <a href="{{ section.settings.youtube_url }}" class="text-light hover:text-primary transition-colors">
+            <a href='{{ section.settings.youtube_url }}' class='text-light hover:text-primary transition-colors'>
               {% render 'icon-youtube' %}
             </a>
           {% endif %}
         </div>
       </div>
-      
+
+      {% section 'footer-link-group' %}
+      {% section 'footer-link-group' %}
+      {% section 'footer-link-group' %}
+
       <div>
-        <h5 class="text-white font-semibold mb-4">Shop</h5>
-        <ul class="space-y-2">
-          <li><a href="/collections/all" class="text-light hover:text-primary transition-colors">All Products</a></li>
-          <li><a href="/collections/starter-packs" class="text-light hover:text-primary transition-colors">Starter Packs</a></li>
-          <li><a href="/collections/subscriptions" class="text-light hover:text-primary transition-colors">Subscriptions</a></li>
-          <li><a href="/products/gift-card" class="text-light hover:text-primary transition-colors">Gift Cards</a></li>
+        <h5 class='text-white font-semibold mb-4'>Shop</h5>
+        <ul class='space-y-2'>
+          <li><a href='/collections/all' class='text-light hover:text-primary transition-colors'>All Products</a></li>
+          <li>
+            <a href='/collections/starter-packs' class='text-light hover:text-primary transition-colors'
+              >Starter Packs</a
+            >
+          </li>
+          <li>
+            <a href='/collections/subscriptions' class='text-light hover:text-primary transition-colors'
+              >Subscriptions</a
+            >
+          </li>
+          <li><a href='/products/gift-card' class='text-light hover:text-primary transition-colors'>Gift Cards</a></li>
         </ul>
       </div>
-      
+
       <div>
-        <h5 class="text-white font-semibold mb-4">Learn</h5>
-        <ul class="space-y-2">
-          <li><a href="/pages/science" class="text-light hover:text-primary transition-colors">Our Science</a></li>
-          <li><a href="/pages/ingredients" class="text-light hover:text-primary transition-colors">Ingredients</a></li>
-          <li><a href="/pages/research" class="text-light hover:text-primary transition-colors">Research</a></li>
-          <li><a href="/blogs/news" class="text-light hover:text-primary transition-colors">Blog</a></li>
+        <h5 class='text-white font-semibold mb-4'>Learn</h5>
+        <ul class='space-y-2'>
+          <li><a href='/pages/science' class='text-light hover:text-primary transition-colors'>Our Science</a></li>
+          <li><a href='/pages/ingredients' class='text-light hover:text-primary transition-colors'>Ingredients</a></li>
+          <li><a href='/pages/research' class='text-light hover:text-primary transition-colors'>Research</a></li>
+          <li><a href='/blogs/news' class='text-light hover:text-primary transition-colors'>Blog</a></li>
         </ul>
       </div>
-      
+
       <div>
-        <h5 class="text-white font-semibold mb-4">Support</h5>
-        <ul class="space-y-2">
-          <li><a href="/pages/faq" class="text-light hover:text-primary transition-colors">FAQ</a></li>
-          <li><a href="/pages/contact" class="text-light hover:text-primary transition-colors">Contact</a></li>
-          <li><a href="/pages/shipping" class="text-light hover:text-primary transition-colors">Shipping</a></li>
-          <li><a href="/pages/returns" class="text-light hover:text-primary transition-colors">Returns</a></li>
-          <li><a href="/pages/track-order" class="text-light hover:text-primary transition-colors">Track Order</a></li>
+        <h5 class='text-white font-semibold mb-4'>Support</h5>
+        <ul class='space-y-2'>
+          <li><a href='/pages/faq' class='text-light hover:text-primary transition-colors'>FAQ</a></li>
+          <li><a href='/pages/contact' class='text-light hover:text-primary transition-colors'>Contact</a></li>
+          <li><a href='/pages/shipping' class='text-light hover:text-primary transition-colors'>Shipping</a></li>
+          <li><a href='/pages/returns' class='text-light hover:text-primary transition-colors'>Returns</a></li>
+          <li><a href='/pages/track-order' class='text-light hover:text-primary transition-colors'>Track Order</a></li>
         </ul>
       </div>
     </div>
-    
-    <div class="border-t border-gray-800 pt-8">
-      <div class="flex flex-col md:flex-row justify-between items-center">
-        <p class="text-light/60 text-sm mb-4 md:mb-0">&copy; {{ 'now' | date: "%Y" }} {{ shop.name }}. All rights reserved.</p>
-        
-        <div class="flex space-x-6">
-          <a href="/pages/terms" class="text-light/60 hover:text-primary text-sm transition-colors">Terms</a>
-          <a href="/pages/privacy" class="text-light/60 hover:text-primary text-sm transition-colors">Privacy</a>
-          <a href="/pages/fda-disclaimer" class="text-light/60 hover:text-primary text-sm transition-colors">FDA Disclaimer</a>
-          <a href="/pages/affiliate" class="text-light/60 hover:text-primary text-sm transition-colors">Affiliate Program</a>
+
+    <div class='border-t border-gray-800 pt-8'>
+      <div class='flex flex-col md:flex-row justify-between items-center'>
+        <p class='text-light/60 text-sm mb-4 md:mb-0'>
+          &copy; {{ 'now' | date: '%Y' }}
+          {{ shop.name }}. All rights reserved.
+        </p>
+
+        <div class='flex space-x-6'>
+          <a href='/pages/terms' class='text-light/60 hover:text-primary text-sm transition-colors'>Terms</a>
+          <a href='/pages/privacy' class='text-light/60 hover:text-primary text-sm transition-colors'>Privacy</a>
+          <a href='/pages/fda-disclaimer' class='text-light/60 hover:text-primary text-sm transition-colors'
+            >FDA Disclaimer</a
+          >
+          <a href='/pages/affiliate' class='text-light/60 hover:text-primary text-sm transition-colors'
+            >Affiliate Program</a
+          >
         </div>
       </div>
-      
-      <p class="text-light/40 text-xs mt-8 text-center">*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
+
+      <p class='text-light/40 text-xs mt-8 text-center'>
+        *These statements have not been evaluated by the Food and Drug Administration. This product is not intended to
+        diagnose, treat, cure, or prevent any disease.
+      </p>
     </div>
   </div>
 </footer>
