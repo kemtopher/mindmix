@@ -15,10 +15,28 @@
       <a href='#science' class='text-light hover:text-primary transition-colors'>Science</a>
       <a href='#pricing' class='text-light hover:text-primary transition-colors'>Pricing</a>
       <a href='#try-it-free' class='text-primary hover:text-primary transition-colors'>Try It Free</a>
-      <a href='/cart' class='cart-icon text-primary hover:text-primary transition-colors'>
-        {% render 'icon-cart' %}
-        <p class='item-count'>{{ cart.item_count }}</p>
-      </a>
+
+      {% if cart.item_count > 0 %}
+        <a href='/cart' class='cart-icon cart-active text-primary hover:text-primary transition-colors'>
+          {% render 'icon-shopping-cart' %}
+          <p class='item-count items'>{{ cart.item_count }}</p>
+        </a>
+      {% else %}
+        <a href='/cart' class='cart-icon cart-empty text-primary hover:text-primary transition-colors'>
+          {% render 'icon-shopping-cart' %}
+          <p class='item-count no-items'>{{ cart.item_count }}</p>
+        </a>
+      {% endif %}
+
+      {% if customer %}
+        <a href='{{ routes.account_url }}' class='account-icon logged-in'>
+          {% render 'icon-account' %}
+        </a>
+      {% else %}
+        <a href='/account/login?return_url={{ request.path | url_encode }}' class='account-icon logged-out'>
+          {% render 'icon-account' %}
+        </a>
+      {% endif %}
     </nav>
 
     <button
