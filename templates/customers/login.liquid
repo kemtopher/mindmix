@@ -3,15 +3,15 @@
 <div id='template'>
   <div id='customer'>
     <div class='template_header'>
-      <h2 class='title'>Customer Login</h2>
+      <h2 class='title text-2xl md:text-4xl mb-8'>Customer Login</h2>
     </div>
 
     {% form 'customer_login' %}
       {{ form.errors | default_errors }}
 
-      <div id='login_email' class='clearfix large_form'>
-        <label for='customer_email' class='login'>Email Address</label>
-        <input type='email' value='' name='customer[email]' id='customer_email' class='large' size='30'>
+      <div id='login_email' class='clearfix mb-4 large_form flex flex-col'>
+        <label for='customer_email' class='login text-sm mb-2'>Email Address</label>
+        <input type='email' value='' name='customer[email]' id='customer_email' class='large input-custom' size='30'>
       </div>
 
       {% if form.password_needed %}
@@ -19,25 +19,24 @@
           Customer Account Login
         {% endcomment %}
 
-        <div id='login_password' class='clearfix large_form'>
-          <label for='customer_password' class='login'>Password</label>
+        <div id='login_password' class='clearfix large_form flex flex-col mb-6'>
+          <label for='customer_password' class='login text-sm mb-2'>Password</label>
           <input
             type='password'
             value=''
             name='customer[password]'
             id='customer_password'
-            class='large password'
+            class='large password input-custom'
             size='16'
           >
-          <div id='forgot_password'>
-            <a href='#' onclick='showRecoverPasswordForm();return false;'>Forgot your password?</a>
+          <div id='forgot_password' class='mt-6'>
+            <a href='#' onclick='showRecoverPasswordForm();return false;' class='link-primary'>Forgot your password?</a>
           </div>
         </div>
       {% endif %}
-      {{ form | captcha }}
-      <div class='action_bottom'>
-        <input class='btn' type='submit' value='Sign In'>
-        <span class='note'>or <a href='{{ shop.url }}'>Return to Store</a></span>
+      <div class='action_bottom flex flex-col gap-8'>
+        <button type='submit' class='btn-outline-primary text-white w-full' value='Sign In'>Sign In</button>
+        <a href='{{ shop.url }}' class='link-primary'>Return to Store</a>
       </div>
     {% endform %}
   </div>
@@ -59,7 +58,7 @@
         <label for='email' class='large'>Email</label>
         <input type='email' value='' size='30' name='email' id='recover-email' class='large'>
       </div>
-      {{ form | captcha }}
+
       <div class='action_bottom'>
         <input class='btn' type='submit' value='Submit'>
         <span class='note'>or <a href='#' onclick='hideRecoverPasswordForm();return false;'>Cancel</a></span>
@@ -99,4 +98,3 @@
     showRecoverPasswordForm();
   }
 </script>
--->
