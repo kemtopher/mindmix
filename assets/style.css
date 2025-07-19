@@ -1708,6 +1708,14 @@ video {
   padding: 2rem;
 }
 
+.p-10 {
+  padding: 2.5rem;
+}
+
+.p-20 {
+  padding: 5rem;
+}
+
 .px-3 {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
@@ -1839,6 +1847,14 @@ video {
 
 .pt-\[36px\] {
   padding-top: 36px;
+}
+
+.pt-\[8rem\] {
+  padding-top: 8rem;
+}
+
+.pt-10 {
+  padding-top: 2.5rem;
 }
 
 .text-left {

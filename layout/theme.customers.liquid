@@ -31,8 +31,17 @@
     {% section 'header' %}
 
     <!-- Main Content -->
-    <main role='main' id='main-content' tabindex='-1'>
-      {{ content_for_layout }}
+    <main role='main' id='main-content' class="pt-10 w-screen h-screen" tabindex='-1'>
+      <div class="accounts-layout w-full h-full flex flex-col md:flex-row">
+        <div class="forms-well w-1/2 h-full flex justify-center items-center">
+          {{ content_for_layout }}
+        </div>
+        <div class="image-well w-1/2 h-full">
+          <div class="image-container h-full">
+            <img class="w-full h-full object-cover" src="https://framerusercontent.com/images/Nka45pis1Qs7RzOVU6aPd8tLCI.png" />
+          </div>
+        </div>
+      </div>
     </main>
 
     <!-- Footer -->
