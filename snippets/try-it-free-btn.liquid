@@ -1,0 +1,8 @@
+{% if customer %}
+  <!-- Customer is logged in -->
+  <!-- <a href="{{ product.url }}" class="btn-try">Try It Free</a> -->
+  <a href='{{ product.url }}' class='text-primary hover:text-primary transition-colors'>Try It Free</a>
+{% else %}
+  <!-- Customer is not logged in, send to login with return_url -->
+  <a href='/account/login?return_url={{ product.url | url_encode }}' class='btn-try'>Try It Free</a>
+{% endif %}

@@ -45,19 +45,34 @@
           {% endfor %}
         </div>
       </div>
-      <div class='add-to-cart'>
-        <form method='post' action='/cart/add' id='add-to-cart-form' class='mt-8'>
-          <input type='hidden' name='id' id='selected-variant-id'>
-
-          <button
-            type='submit'
-            id='add-to-cart-btn'
-            class='bg-primary text-white font-semibold py-4 px-8 rounded text-xl transition hover:bg-opacity-90 disabled:hover:bg-primary disabled:opacity-50 disabled:cursor-not-allowed'
-            disabled
-          >
-            Add To Cart
-          </button>
-        </form>
+      <div class='add-to-cart'></div>
+        {% if product.handle == 'try-it-free' %}
+          <!-- if they land on the trial product -->
+          {% if customer %}
+            {% if customer.tags contains 'has_trial' %}
+              <!-- Customer has already used their free trial -->
+              <p class="text-red-600 font-semibold">You've already claimed your free trial.</p>
+            {% else %}
+              <!-- Customer still has a free trial available -->
+              <form method='post' action='/cart/add' id='add-to-cart-form' class='mt-8'>
+                    <input type='hidden' name='id' id='selected-variant-id'>
+                    <button
+                      type='submit'
+                      id='add-to-cart-btn'
+                      class='bg-primary text-white font-semibold py-4 px-8 rounded text-xl transition hover:bg-opacity-90 disabled:hover:bg-primary disabled:opacity-50 disabled:cursor-not-allowed'
+                      disabled
+                    >
+                      Add To Cart
+                    </button>
+                  </form>
+            {% endif %}
+          {% else %}
+            <!-- Not logged in yet -->
+            <a href="/account/login?return_url={{ product.url | url_encode }}" class="btn-add-to-cart">
+              Log in to claim your free trial
+            </a>
+          {% endif %}
+        {% endif %}
       </div>
     </div>
   </div>

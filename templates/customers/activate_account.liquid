@@ -1,26 +1,49 @@
-{% layout settings.customer_layout %}
-
-<div id="template">
-  <div class="template_header">
-    <h2 class="title">Activate Account</h2>
-    <p class="note">Create your password to activate your account</p>
+{% layout customers %}
+<div class='flex min-h-screen'>
+  <div class='w-full lg:w-1/2 flex flex-col justify-center items-center px-8 py-12'>
+    <div class='w-full max-w-md'>
+      <div class='text-3xl font-bold text-purple-700 mb-8'>YourStore</div>
+      <h1 class='text-3xl font-bold mb-2'>Activate your account</h1>
+      <p class='text-gray-600 mb-6'>Set your password to activate your account and start shopping.</p>
+      {% form 'activate_customer_password' %}
+        {{ form.errors | default_errors }}
+        <div>
+          <label for='ActivatePassword' class='block text-sm font-medium text-gray-700'>Password</label>
+          <input
+            type='password'
+            name='customer[password]'
+            id='ActivatePassword'
+            required
+            class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500'
+          >
+        </div>
+        <div>
+          <label for='ActivatePasswordConfirm' class='block text-sm font-medium text-gray-700'>Confirm password</label>
+          <input
+            type='password'
+            name='customer[password_confirmation]'
+            id='ActivatePasswordConfirm'
+            required
+            class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500'
+          >
+        </div>
+        <button
+          type='submit'
+          class='w-full mt-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-md shadow'
+        >
+          Activate Account
+        </button>
+      {% endform %}
+      <p class='mt-4 text-sm text-center'>
+        Already activated? <a href='/account/login' class='text-purple-600 hover:underline'>Log in here</a>
+      </p>
+    </div>
   </div>
-
-  {% form 'activate_customer_password' %}
-    {{ form.errors | default_errors }}
-
-    <div id="password" class="clearfix large_form">
-      <label class="large" for="password">Password</label>
-      <input type="password" value="" name="customer[password]" id="customer_password" class="large password" size="16" />
-    </div>
-    <div id="password_confirm" class="clearfix large_form">
-      <label class="large" for="password_confirmation">Password Confirmation</label>
-      <input type="password" value="" name="customer[password_confirmation]" id="customer_password_confirmation" class="large password" size="16" />
-    </div>
-    <div class="action_bottom">
-      <input class="btn" type="submit" value="Activate Account" />
-      <span class="note">or</span>
-      <input type="submit" class="cancel" name="decline" id="customer_decline" value="Decline Invitation" />
-    </div>
-  {% endform %}
+  <div class='hidden lg:block lg:w-1/2'>
+    <div
+      class='h-full w-full bg-cover bg-center'
+    ></div>
+  </div>
 </div>
+<!-- style="background-image: url('{{ 'login-side-image.jpg' | asset_url }}');" -->
+>>>>>>> feature/customer-features
