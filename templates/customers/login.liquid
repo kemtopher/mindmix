@@ -2,6 +2,7 @@
 
 {% form 'customer_login' %}
   {{ form.errors | default_errors }}
+  <p>thsi si the new layout</p>
   <input type='email' name='customer[email]' placeholder='Email'>
   <input type='password' name='customer[password]' placeholder='Password'>
   {{ form | captcha }}
