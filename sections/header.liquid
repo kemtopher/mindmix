@@ -14,7 +14,7 @@
       <a href='#benefits' class='text-light hover:text-primary transition-colors'>Benefits</a>
       <a href='#science' class='text-light hover:text-primary transition-colors'>Science</a>
       <a href='#pricing' class='text-light hover:text-primary transition-colors'>Pricing</a>
-      <a href='#try-it-free' class='text-primary hover:text-primary transition-colors'>Try It Free</a>
+      {% render 'try-it-free-btn' %}
 
       {% if cart.item_count > 0 %}
         <a href='/cart' class='cart-icon cart-active text-primary hover:text-primary transition-colors'>

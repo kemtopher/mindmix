@@ -9,7 +9,18 @@
   "market": [],
   "order": [],
   "page": [],
-  "product": [],
+  "product": [
+    {
+      "key": "beverage-product-form",
+      "namespace": "shopify",
+      "name": "Beverage product form",
+      "description": "Describes how the beverage is presented or consumed, such as ready-to-drink or capsules",
+      "type": {
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
+      }
+    }
+  ],
   "variant": [
     {
       "key": "variant_description",
