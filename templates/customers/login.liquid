@@ -6,7 +6,7 @@
       <h2 class='title'>Customer Login</h2>
     </div>
 
-    {% form 'customer_login', data-shopify-captcha: 'true' %}
+    {% form 'customer_login' %}
       {{ form.errors | default_errors }}
 
       <div id='login_email' class='clearfix large_form'>
