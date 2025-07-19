@@ -6,7 +6,7 @@
       <h2 class='title'>Customer Login</h2>
     </div>
 
-    {% form 'customer_login' %}
+    {% form 'customer_login', data-shopify-captcha: 'true' %}
       {{ form.errors | default_errors }}
 
       <div id='login_email' class='clearfix large_form'>
@@ -34,7 +34,6 @@
           </div>
         </div>
       {% endif %}
-      {{ form | captcha }}
       <div class='action_bottom'>
         <input class='btn' type='submit' value='Sign In'>
         <span class='note'>or <a href='{{ shop.url }}'>Return to Store</a></span>
