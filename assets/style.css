@@ -2349,7 +2349,7 @@ video {
   line-height: 1.5rem;
   font-weight: 700;
   font-family: Inter, sans-serif;
-  border: 2px solid var(--color-primary, #00e5a0);
+  border: 2px solid var(--color-primary);
   color: var(--color-primary, #00e5a0);
   background: transparent;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -2408,22 +2408,23 @@ video {
 
 .link-primary {
   color: #ffffff;
-  /* text-white */
   text-align: center;
-  /* text-center */
   font-family: Inter, sans-serif;
-  /* font-inter */
   cursor: default;
-  /* normal cursor by default */
   transition: color 0.2s ease;
-  /* smooth color change */
 }
 
 .link-primary:hover {
-  color: var(--color-primary, #00e5a0);
-  /* hover:text-primary */
+  color: var(--color-primary);
   cursor: pointer;
-  /* hover:cursor-pointer */
+}
+
+.link-static {
+  color: var(--color-primary);
+}
+
+.link-static:hover {
+  text-decoration: underline;
 }
 
 .hover\:-translate-y-1:hover {
