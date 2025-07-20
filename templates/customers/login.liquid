@@ -52,7 +52,7 @@
   <div id='recover-password' style='display:none'>
     <div class='template_header'>
       <h2 class='title text-2xl md:text-4xl mb-2'>Reset Password</h2>
-      <p class='note mb-6'>We will send you an email to reset your password.</p>
+      <p class='note mb-6'>We'll send a reset link to your email.</p>
     </div>
 
     {% form 'recover_customer_password' %}
@@ -65,8 +65,8 @@
 
       <div class='action_bottom mt-3 flex flex-col gap-8'>
         <button type='submit' class='btn-outline-primary text-white w-full' value='Submit'>Submit</button>
-        <a href='{{ shop.url }}' class='link-primary' onclick='hideRecoverPasswordForm();return false;'
-          >Return to Store</a
+        <a href='/account/login' class='link-primary' onclick='hideRecoverPasswordForm();return false;'
+          >Return to Login</a
         >
       </div>
     {% endform %}
