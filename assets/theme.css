@@ -16,6 +16,11 @@
   --color-blue: #009bff;
 }
 
+body,
+html {
+  height: 100%;
+}
+
 .neural-bg {
   background-image:
     radial-gradient(

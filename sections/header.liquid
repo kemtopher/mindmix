@@ -2,18 +2,31 @@
 
 <header class='fixed top-0 left-0 right-0 z-50 bg-dark/90 backdrop-blur-md shadow-lg h-20'>
   <div class='container-custom flex items-center justify-between h-full'>
-    <a href='/' class='group'>
+    <a href='/' class='group z-[99]'>
       <span class='text-3xl font-bold text-primary transition-colors duration-300'>
         {{ shop.name }}
       </span>
     </a>
 
     <nav class='hidden md:flex items-center space-x-6'>
-      <a href='#why-it-works' class='text-light hover:text-primary transition-colors'>Why It Works</a>
-      <a href='#flavors' class='text-light hover:text-primary transition-colors'>Flavors</a>
-      <a href='#benefits' class='text-light hover:text-primary transition-colors'>Benefits</a>
-      <a href='#science' class='text-light hover:text-primary transition-colors'>Science</a>
-      <a href='#pricing' class='text-light hover:text-primary transition-colors'>Pricing</a>
+      <div class='h-[24px] flex gap-2 group'>
+        <a href='#' class='text-light group-hover:text-primary transition-colors'> Products </a>
+        <a href='#' class='h-[24px] w-[24px]'>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            viewBox='0 0 16 16'
+            role='presentation'
+            class='h-full w-full text-light transition-colors transition-transform duration-300 group-hover:rotate-180 group-hover:text-primary'
+          >
+            <path
+              fill="currentColor"
+              fill-rule="evenodd"
+              d="M2.183 5.183a.625.625 0 0 1 .884 0l4.827 4.828a.208.208 0 0 0 .295 0l4.827-4.828a.625.625 0 0 1 .884.884l-4.827 4.827c-.57.57-1.493.57-2.063 0L2.183 6.067a.625.625 0 0 1 0-.884Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </a>
+      </div>
       {% render 'try-it-free-btn' %}
 
       {% if cart.item_count > 0 %}
@@ -39,47 +52,121 @@
       {% endif %}
     </nav>
 
-    <button
-      class='md:hidden text-light hover:text-primary'
-      onclick="document.getElementById('mobile-menu').classList.toggle('hidden')"
-    >
+    <button id='menu-hamburger' class='md:hidden text-light hover:text-primary z-[99]' onclick='toggleMobileMenu()'>
       <svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
     </button>
   </div>
 
-  <!-- Mobile Menu -->
-  <div id='mobile-menu' class='md:hidden bg-darker py-4 px-4 shadow-lg hidden'>
-    <nav class='flex flex-col space-y-4'>
-      <a href='#why-it-works' class='text-light hover:text-primary transition-colors py-2'>Why It Works</a>
-      <a href='#flavors' class='text-light hover:text-primary transition-colors py-2'>Flavors</a>
-      <a href='#benefits' class='text-light hover:text-primary transition-colors py-2'>Benefits</a>
-      <a href='#science' class='text-light hover:text-primary transition-colors py-2'>Science</a>
-      <a href='#pricing' class='text-light hover:text-primary transition-colors py-2'>Pricing</a>
-
-      <a href='#pricing' class='btn btn-primary w-full relative overflow-hidden'>
-        <span class='relative z-10 text-center'>
-          <span class='text-sm font-bold block'>Try It Free</span>
-          <span class='block text-xs font-normal opacity-90'>Just Cover Shipping</span>
-        </span>
-        <div
-          class='absolute inset-0 bg-gradient-to-r from-cta via-primary via-blue to-cta bg-[length:300%_100%] animate-shimmer opacity-90'
-        ></div>
-      </a>
+  <div
+    id='mobile-menu'
+    class='fixed h-screen inset-0 z-50 hidden md:hidden bg-darker pt-20 pb-4 px-4 shadow-lg overflow-y-auto'
+  >
+    <nav class='flex flex-col space-y-4 h-full'>
+      <ul>
+        <li class='border-b border-white py-4 text-semibold text-3xl px-4'>
+          {% render 'try-it-free-btn' %}
+        </li>
+        <li class='border-b border-white py-4 px-4'>
+          <button
+            id='toggleListBtn'
+            class='w-full h-[42px] flex justify-between items-center group'
+            onclick='toggleMobileMenuList()'
+          >
+            <span class='text-3xl text-semibold transition-colors'>Products</span>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              viewBox='0 0 16 16'
+              role='presentation'
+              id='expandableListArrow'
+              class='h-full w-auto text-3xl text-semibold transition-colors transition-transform duration-300'
+            >
+              <path
+                fill="currentColor"
+                fill-rule="evenodd"
+                d="M2.183 5.183a.625.625 0 0 1 .884 0l4.827 4.828a.208.208 0 0 0 .295 0l4.827-4.828a.625.625 0 0 1 .884.884l-4.827 4.827c-.57.57-1.493.57-2.063 0L2.183 6.067a.625.625 0 0 1 0-.884Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+          <ul id='expandableList' class='max-h-0 pt-1 overflow-hidden transition-transform duration-300'>
+            <li class='text-3xl text-semibold transition-colors pb-1'>Product 1</li>
+            <li class='text-3xl text-semibold transition-colors'>Product 2</li>
+          </ul>
+        </li>
+        <li class='border-b border-white py-4 text-semibold text-3xl px-4 flex justify-between items-center self-end'>
+          <p>Customer Account</p>
+          {% if customer %}
+            <a href='{{ routes.account_url }}' class='account-icon logged-in'>
+              {% render 'icon-account' %}
+            </a>
+          {% else %}
+            <a href='/account/login?return_url={{ request.path | url_encode }}' class='account-icon logged-out'>
+              {% render 'icon-account' %}
+            </a>
+          {% endif %}
+        </li>
+      </ul>
     </nav>
   </div>
 </header>
 
+<button
+  id='toggleListBtn'
+  class='px-4 py-2 bg-primary text-white font-bold rounded hover:opacity-80'
+>
+  Products
+</button>
+
+<ul
+  id='expandableList'
+  class='max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-darker text-white mt-4 rounded'
+>
+  <li class='p-2 border-b border-gray-700'>Item 1</li>
+  <li class='p-2 border-b border-gray-700'>Item 2</li>
+  <li class='p-2 border-b border-gray-700'>Item 3</li>
+</ul>
+
 <script>
+  function toggleMobileMenuList() {
+    const list = document.getElementById('expandableList');
+    const arrow = document.getElementById('expandableListArrow');
+
+    if (!list.classList.contains('list-expanded')) {
+      const fullHeight = list.scrollHeight;
+      list.style.maxHeight = fullHeight + 'px';
+
+      list.classList.add('list-expanded');
+      arrow.classList.add('rotate-180');
+    } else {
+      list.style.maxHeight = '0px';
+      list.classList.remove('list-expanded');
+      arrow.classList.remove('rotate-180');
+    }
+  }
+
+  function toggleMobileMenu() {
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    const isHidden = mobileMenu.classList.contains('hidden');
+    if (isHidden) {
+      mobileMenu.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    } else {
+      mobileMenu.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    }
+  }
+
+  // Close menu when clicking a link
   document.addEventListener('DOMContentLoaded', function () {
     const mobileMenu = document.getElementById('mobile-menu');
-    const mobileLinks = mobileMenu.getElementsByTagName('a');
-
-    // Close mobile menu when clicking a link
+    const mobileLinks = mobileMenu.querySelectorAll('a');
     for (let link of mobileLinks) {
       link.addEventListener('click', function () {
         mobileMenu.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
       });
     }
   });
