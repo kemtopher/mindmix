@@ -21,7 +21,7 @@
     <!-- Tailwind styles -->
     {{ 'style.css' | asset_url | stylesheet_tag }}
     <!-- Theme styles -->
-    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    <!-- {{ 'theme.css' | asset_url | stylesheet_tag }} -->
 
     <!-- Shopify required -->
     {{ content_for_header }}
@@ -31,13 +31,13 @@
     {% section 'header' %}
 
     <!-- Main Content -->
-    <main role='main' id='main-content' class="pt-10 w-screen h-screen" tabindex='-1'>
-      <div class="accounts-layout w-full h-full flex flex-col md:flex-row">
-        <div class="forms-well w-1/2 h-full flex justify-center items-center">
+    <main role='main' id='main-content' class="pt-20 md:pt-10 w-screen" tabindex='-1'>
+      <div class="accounts-layout w-full flex flex-col md:flex-row">
+        <div class="forms-well w-full md:w-1/2 py-12 flex justify-center items-start md:items-center">
           {{ content_for_layout }}
         </div>
-        <div class="image-well w-1/2 h-full">
-          <div class="image-container h-full">
+        <div class="image-well w-full md:w-1/2 hidden md:block">
+          <div class="image-container">
             <img class="w-full h-full object-cover" src="{{ 'powder-texture.png' | asset_url }}" />
           </div>
         </div>
