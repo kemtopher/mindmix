@@ -8,10 +8,32 @@
       </span>
     </a>
 
-    <nav class='hidden md:flex items-center space-x-6'>
-      <div class='h-[24px] flex gap-2 group'>
-        <a href='#' class='text-light group-hover:text-primary transition-colors'> Products </a>
-        <a href='#' class='h-[24px] w-[24px]'>
+    <nav class='h-full hidden md:flex items-center space-x-6'>
+      <div class='h-full flex gap-2 items-center group'>
+        <a href='#' class='text-light group-hover:text-primary transition-colors'>Shop</a>
+        <!--
+          <a href='#' class='h-[24px] w-[24px]'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              viewBox='0 0 16 16'
+              role='presentation'
+              class='h-full w-full text-light transition-colors transition-transform duration-300 group-hover:rotate-180 group-hover:text-primary'
+            >
+              <path
+                fill="currentColor"
+                fill-rule="evenodd"
+                d="M2.183 5.183a.625.625 0 0 1 .884 0l4.827 4.828a.208.208 0 0 0 .295 0l4.827-4.828a.625.625 0 0 1 .884.884l-4.827 4.827c-.57.57-1.493.57-2.063 0L2.183 6.067a.625.625 0 0 1 0-.884Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </a>
+        -->
+      </div>
+      <div id='menu-item-learn' class='h-full items-center flex gap-2 group relative'>
+        <a href='#' class='text-light group-hover:text-primary transition-colors h-full flex items-center'
+          >Learn More</a
+        >
+        <a href='#' class='h-[24px] w-[24px] h-full flex items-center'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 16 16'
@@ -26,7 +48,28 @@
             />
           </svg>
         </a>
+
+        <ul id='learn-more-menu' class='pb-4 absolute top-full hidden'>
+          <li class='mb-2 text-light hover:text-primary transition-colors hover:cursor-pointer'>
+            <a href='#why-it-works'>Why It Works</a>
+          </li>
+          <li class='mb-2 text-light hover:text-primary transition-colors hover:cursor-pointer'>
+            <a href='#flavors'>Flavors</a>
+          </li>
+          <li class='mb-2 text-light hover:text-primary transition-colors hover:cursor-pointer'>
+            <a href='#benefits'>Benefits</a>
+          </li>
+          <!--
+            <li class="mb-2 text-light hover:text-primary transition-colors hover:cursor-pointer">
+              <a href='#science'>Science</a>
+            </li>
+          -->
+          <li class='mb-0 text-light hover:text-primary transition-colors hover:cursor-pointer'>
+            <a href='#pricing'>Pricing</a>
+          </li>
+        </ul>
       </div>
+
       {% render 'try-it-free-btn' %}
 
       {% if cart.item_count > 0 %}
@@ -42,16 +85,21 @@
       {% endif %}
 
       {% if customer %}
-        <a href='{{ routes.account_url }}' class='account-icon logged-in'>
+        <a id='customer-menu-btn' href='{{ routes.account_url }}' class='account-icon logged-in'>
           {% render 'icon-account' %}
         </a>
       {% else %}
-        <a href='/account/login?return_url={{ request.path | url_encode }}' class='account-icon logged-out'>
+        <a
+          id='customer-menu-btn'
+          href='/account/login?return_url={{ request.path | url_encode }}'
+          class='account-icon logged-out'
+        >
           {% render 'icon-account' %}
         </a>
       {% endif %}
     </nav>
 
+    <!-- MOBILE MENU -->
     <button id='menu-hamburger' class='md:hidden text-light hover:text-primary z-[99]' onclick='toggleMobileMenu()'>
       <svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -112,13 +160,6 @@
   </div>
 </header>
 
-<button
-  id='toggleListBtn'
-  class='px-4 py-2 bg-primary text-white font-bold rounded hover:opacity-80'
->
-  Products
-</button>
-
 <ul
   id='expandableList'
   class='max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-darker text-white mt-4 rounded'
@@ -129,6 +170,23 @@
 </ul>
 
 <script>
+  const menuItem = document.getElementById('menu-item-learn');
+  const learnMenu = document.getElementById('learn-more-menu');
+  let hoverTimeout;
+
+  menuItem.addEventListener('mouseenter', () => {
+    clearTimeout(hoverTimeout);
+    menuItem.classList.add('active');
+    learnMenu.classList.remove('hidden');
+  });
+
+  menuItem.addEventListener('mouseleave', () => {
+    hoverTimeout = setTimeout(() => {
+      menuItem.classList.remove('active');
+      learnMenu.classList.add('hidden');
+    }, 150);
+  });
+
   function toggleMobileMenuList() {
     const list = document.getElementById('expandableList');
     const arrow = document.getElementById('expandableListArrow');
