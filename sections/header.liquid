@@ -93,7 +93,7 @@
             class='menu-dropdown absolute top-full left-1/2 -translate-x-1/2 hidden inline-block whitespace-nowrap px-4 py-3 bg-dark/90 backdrop-blur-md shadow-lg'
           >
             <li class='mb-2 text-light hover:text-primary transition-colors'>
-              <a href='{{ routes.account_url }}'>Account</a>
+              <a href='{{ routes.account_url }}'>Dashboard</a>
             </li>
             <!--
               <li class='mb-2 text-light hover:text-primary transition-colors'>
@@ -133,10 +133,10 @@
             class='menu-dropdown absolute top-full left-1/2 -translate-x-1/2 hidden inline-block whitespace-nowrap px-4 py-3 bg-dark/90 backdrop-blur-md shadow-lg'
           >
             <li class='mb-2 text-light hover:text-primary transition-colors'>
-              <a href='{{ routes.account_login_url }}'>Sign In</a>
+              <a href='{{ routes.account_login_url }}?return_url={{ request.path | url_encode }}'>Sign In</a>
             </li>
             <li class='mb-2 text-light hover:text-primary transition-colors'>
-              <a href='{{ routes.account_register_url }}'>Sign Up</a>
+              <a href='{{ routes.account_register_url }}?return_url={{ request.path | url_encode }}'>Sign Up</a>
             </li>
           </ul>
         </div>
@@ -162,17 +162,14 @@
         </li>
         <li class='border-b border-white py-4 px-4'>
           <button
-            id='toggleListBtn'
-            class='w-full h-[42px] flex justify-between items-center group'
-            onclick='toggleMobileMenuList()'
+            class='toggle-list-btn w-full h-[42px] flex justify-between items-center group'
           >
             <span class='text-3xl text-semibold transition-colors'>Products</span>
             <svg
+              class='expandable-list-arrow h-full w-auto text-3xl text-semibold transition-colors transition-transform duration-300'
               xmlns='http://www.w3.org/2000/svg'
               viewBox='0 0 16 16'
               role='presentation'
-              id='expandableListArrow'
-              class='h-full w-auto text-3xl text-semibold transition-colors transition-transform duration-300'
             >
               <path
                 fill="currentColor"
@@ -182,36 +179,51 @@
               />
             </svg>
           </button>
-          <ul id='expandableList' class='max-h-0 pt-1 overflow-hidden transition-transform duration-300'>
+          <ul class='expandable-list max-h-0 pt-1 overflow-hidden transition-all duration-300'>
             <li class='text-3xl text-semibold transition-colors pb-1'>Product 1</li>
             <li class='text-3xl text-semibold transition-colors'>Product 2</li>
           </ul>
         </li>
-        <li class='border-b border-white py-4 text-semibold text-3xl px-4 flex justify-between items-center self-end'>
-          <p>Customer Account</p>
-          {% if customer %}
-            <a href='{{ routes.account_url }}' class='account-icon logged-in'>
-              {% render 'icon-account' %}
-            </a>
-          {% else %}
-            <a href='/account/login?return_url={{ request.path | url_encode }}' class='account-icon logged-out'>
-              {% render 'icon-account' %}
-            </a>
-          {% endif %}
+
+        <li class='border-b border-white py-4 px-4'>
+          <button
+            class='toggle-list-btn w-full h-[42px] flex justify-between items-center group'
+          >
+            <span class='text-3xl text-semibold transition-colors'>Account</span>
+            {% if customer %}
+              <span class='account-icon logged-in'>{% render 'icon-account' %}</span>
+            {% else %}
+              <span class='account-icon logged-out'>{% render 'icon-account' %}</span>
+            {% endif %}
+          </button>
+
+          <ul class='list-expanded expandable-list max-h-0 pt-1 overflow-hidden transition-all duration-300'>
+            {% if customer %}
+              <li class='text-3xl text-semibold transition-colors pb-1'>
+                <a href='{{ routes.account_url }}'>Dashboard</a>
+              </li>
+              <!--
+                <li class='text-3xl text-semibold transition-colors pb-1'>
+                  <a href='{{ routes.account_addresses_url }}'>Addresses</a>
+                </li>
+              -->
+              <li class='text-3xl text-semibold transition-colors pb-1'>
+                <a href='{{ routes.account_logout_url }}'>Log Out</a>
+              </li>
+            {% else %}
+              <li class='text-3xl text-semibold transition-colors pb-1'>
+                <a href='{{ routes.account_login_url }}?return_url={{ request.path | url_encode }}'>Sign In</a>
+              </li>
+              <li class='text-3xl text-semibold transition-colors pb-1'>
+                <a href='{{ routes.account_register_url }}?return_url={{ request.path | url_encode }}'>Sign Up</a>
+              </li>
+            {% endif %}
+          </ul>
         </li>
       </ul>
     </nav>
   </div>
 </header>
-
-<ul
-  id='expandableList'
-  class='max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-darker text-white mt-4 rounded'
->
-  <li class='p-2 border-b border-gray-700'>Item 1</li>
-  <li class='p-2 border-b border-gray-700'>Item 2</li>
-  <li class='p-2 border-b border-gray-700'>Item 3</li>
-</ul>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -247,22 +259,23 @@
     });
   });
 
-  function toggleMobileMenuList() {
-    const list = document.getElementById('expandableList');
-    const arrow = document.getElementById('expandableListArrow');
+  document.querySelectorAll('.toggle-list-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const list = btn.nextElementSibling; // finds the <ul> right after the button
+      const arrow = btn.querySelector('.expandable-list-arrow'); // finds the arrow inside this button
 
-    if (!list.classList.contains('list-expanded')) {
-      const fullHeight = list.scrollHeight;
-      list.style.maxHeight = fullHeight + 'px';
-
-      list.classList.add('list-expanded');
-      arrow.classList.add('rotate-180');
-    } else {
-      list.style.maxHeight = '0px';
-      list.classList.remove('list-expanded');
-      arrow.classList.remove('rotate-180');
-    }
-  }
+      if (!list.classList.contains('list-expanded')) {
+        const fullHeight = list.scrollHeight;
+        list.style.maxHeight = fullHeight + 'px';
+        list.classList.add('list-expanded');
+        if (arrow) arrow.classList.add('rotate-180');
+      } else {
+        list.style.maxHeight = '0px';
+        list.classList.remove('list-expanded');
+        if (arrow) arrow.classList.remove('rotate-180');
+      }
+    });
+  });
 
   function toggleMobileMenu() {
     const mobileMenu = document.getElementById('mobile-menu');
