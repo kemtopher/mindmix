@@ -29,7 +29,7 @@
           </a>
         -->
       </div>
-      <div id='menu-item-learn' class='h-full items-center flex gap-2 group relative'>
+      <div id='menu-item-learn' class='menu-item h-full items-center flex gap-2 group relative'>
         <a href='#' class='text-light group-hover:text-primary transition-colors h-full flex items-center'
           >Learn More</a
         >
@@ -49,22 +49,20 @@
           </svg>
         </a>
 
-        <ul id='learn-more-menu' class='pb-4 absolute top-full hidden'>
-          <li class='mb-2 text-light hover:text-primary transition-colors hover:cursor-pointer'>
+        <ul
+          id='learn-more-menu'
+          class='menu-dropdown absolute top-full left-1/2 -translate-x-1/2 hidden inline-block whitespace-nowrap px-4 py-3 bg-dark/90 backdrop-blur-md shadow-lg'
+        >
+          <li class='mb-2 text-light hover:text-primary transition-colors'>
             <a href='#why-it-works'>Why It Works</a>
           </li>
-          <li class='mb-2 text-light hover:text-primary transition-colors hover:cursor-pointer'>
+          <li class='mb-2 text-light hover:text-primary transition-colors'>
             <a href='#flavors'>Flavors</a>
           </li>
-          <li class='mb-2 text-light hover:text-primary transition-colors hover:cursor-pointer'>
+          <li class='mb-2 text-light hover:text-primary transition-colors'>
             <a href='#benefits'>Benefits</a>
           </li>
-          <!--
-            <li class="mb-2 text-light hover:text-primary transition-colors hover:cursor-pointer">
-              <a href='#science'>Science</a>
-            </li>
-          -->
-          <li class='mb-0 text-light hover:text-primary transition-colors hover:cursor-pointer'>
+          <li class='mb-0 text-light hover:text-primary transition-colors'>
             <a href='#pricing'>Pricing</a>
           </li>
         </ul>
@@ -85,17 +83,63 @@
       {% endif %}
 
       {% if customer %}
-        <a id='customer-menu-btn' href='{{ routes.account_url }}' class='account-icon logged-in'>
-          {% render 'icon-account' %}
-        </a>
+        <div class='menu-item h-full flex items-center relative'>
+          <a id='customer-menu-btn' href='{{ routes.account_url }}' class='account-icon logged-in'>
+            {% render 'icon-account' %}
+          </a>
+
+          <ul
+            id='learn-more-menu'
+            class='menu-dropdown absolute top-full left-1/2 -translate-x-1/2 hidden inline-block whitespace-nowrap px-4 py-3 bg-dark/90 backdrop-blur-md shadow-lg'
+          >
+            <li class='mb-2 text-light hover:text-primary transition-colors'>
+              <a href='{{ routes.account_url }}'>Account</a>
+            </li>
+            <!--
+              <li class='mb-2 text-light hover:text-primary transition-colors'>
+                <a href='{{ routes.account_url }}/orders'>Orders</a>
+              </li>
+            -->
+            <li class='mb-2 text-light hover:text-primary transition-colors'>
+              <a href='{{ routes.account_addresses_url }}'>Addresses</a>
+            </li>
+            <!--
+              <li class='mb-2 hover:text-primary'>
+                <a href='/pages/wishlist'>Wishlist</a>
+              </li>
+            -->
+            <!--
+              <li class='mb-2 hover:text-primary'>
+                <a href='/pages/subscriptions'>Subscriptions</a>
+              </li>
+            -->
+            <li class='mb-0 text-light hover:text-primary transition-colors'>
+              <a href='{{ routes.account_logout_url }}'>Log Out</a>
+            </li>
+          </ul>
+        </div>
       {% else %}
-        <a
-          id='customer-menu-btn'
-          href='/account/login?return_url={{ request.path | url_encode }}'
-          class='account-icon logged-out'
-        >
-          {% render 'icon-account' %}
-        </a>
+        <div class='menu-item h-full flex items-center relative'>
+          <a
+            id='customer-menu-btn'
+            href='#'
+            class='account-icon logged-out'
+          >
+            {% render 'icon-account' %}
+          </a>
+
+          <ul
+            id='learn-more-menu'
+            class='menu-dropdown absolute top-full left-1/2 -translate-x-1/2 hidden inline-block whitespace-nowrap px-4 py-3 bg-dark/90 backdrop-blur-md shadow-lg'
+          >
+            <li class='mb-2 text-light hover:text-primary transition-colors'>
+              <a href='{{ routes.account_login_url }}'>Sign In</a>
+            </li>
+            <li class='mb-2 text-light hover:text-primary transition-colors'>
+              <a href='{{ routes.account_register_url }}'>Sign Up</a>
+            </li>
+          </ul>
+        </div>
       {% endif %}
     </nav>
 
@@ -170,21 +214,37 @@
 </ul>
 
 <script>
-  const menuItem = document.getElementById('menu-item-learn');
-  const learnMenu = document.getElementById('learn-more-menu');
-  let hoverTimeout;
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuItems = document.querySelectorAll('.menu-item');
 
-  menuItem.addEventListener('mouseenter', () => {
-    clearTimeout(hoverTimeout);
-    menuItem.classList.add('active');
-    learnMenu.classList.remove('hidden');
-  });
+    menuItems.forEach((item) => {
+      const dropdown = item.querySelector('.menu-dropdown');
+      if (!dropdown) return; // skip if no dropdown found
+      let hoverTimeout;
 
-  menuItem.addEventListener('mouseleave', () => {
-    hoverTimeout = setTimeout(() => {
-      menuItem.classList.remove('active');
-      learnMenu.classList.add('hidden');
-    }, 150);
+      // Show dropdown
+      item.addEventListener('mouseenter', () => {
+        clearTimeout(hoverTimeout);
+        item.classList.add('active');
+        dropdown.classList.remove('hidden');
+      });
+
+      // Hide dropdown
+      item.addEventListener('mouseleave', () => {
+        hoverTimeout = setTimeout(() => {
+          item.classList.remove('active');
+          dropdown.classList.add('hidden');
+        }, 150);
+      });
+
+      // Close dropdown when a link inside is clicked
+      dropdown.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          item.classList.remove('active');
+          dropdown.classList.add('hidden');
+        });
+      });
+    });
   });
 
   function toggleMobileMenuList() {
