@@ -1073,14 +1073,6 @@ video {
   min-width: 100%;
 }
 
-.min-w-\[10rem\] {
-  min-width: 10rem;
-}
-
-.min-w-\[3rem\] {
-  min-width: 3rem;
-}
-
 .max-w-2xl {
   max-width: 42rem;
 }
@@ -1107,14 +1099,6 @@ video {
 
 .max-w-xl {
   max-width: 36rem;
-}
-
-.max-w-\[10rem\] {
-  max-width: 10rem;
-}
-
-.max-w-\[6rem\] {
-  max-width: 6rem;
 }
 
 .flex-shrink-0 {
@@ -1157,11 +1141,6 @@ video {
 
 .translate-y-8 {
   --tw-translate-y: 2rem;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.-translate-x-full {
-  --tw-translate-x: -100%;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -1396,10 +1375,6 @@ video {
   margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
 }
 
-.self-end {
-  align-self: flex-end;
-}
-
 .justify-self-end {
   justify-self: end;
 }
@@ -1481,11 +1456,6 @@ video {
 .border-citrus {
   --tw-border-opacity: 1;
   border-color: rgb(255 165 0 / var(--tw-border-opacity, 1));
-}
-
-.border-gray-700 {
-  --tw-border-opacity: 1;
-  border-color: rgb(55 65 81 / var(--tw-border-opacity, 1));
 }
 
 .border-gray-800 {
@@ -1904,10 +1874,6 @@ video {
   padding-top: 6rem;
 }
 
-.pt-4 {
-  padding-top: 1rem;
-}
-
 .pt-40 {
   padding-top: 10rem;
 }
@@ -1922,14 +1888,6 @@ video {
 
 .pt-\[36px\] {
   padding-top: 36px;
-}
-
-.pl-4 {
-  padding-left: 1rem;
-}
-
-.pr-6 {
-  padding-right: 1.5rem;
 }
 
 .text-left {
@@ -2008,10 +1966,6 @@ video {
 
 .font-semibold {
   font-weight: 600;
-}
-
-.leading-tight {
-  line-height: 1.25;
 }
 
 .tracking-tight {
@@ -2554,10 +2508,6 @@ html {
 
 .hover\:transform:hover {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.hover\:cursor-pointer:hover {
-  cursor: pointer;
 }
 
 .hover\:border-primary\/30:hover {

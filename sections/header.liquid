@@ -10,7 +10,9 @@
 
     <nav class='h-full hidden md:flex items-center space-x-6'>
       <div class='h-full flex gap-2 items-center group'>
-        <a href='#' class='text-light group-hover:text-primary transition-colors'>Shop</a>
+        <a href='{{ routes.root_url }}products/mindmix' class='text-light group-hover:text-primary transition-colors'
+          >Shop MindMix</a
+        >
         <!--
           <a href='#' class='h-[24px] w-[24px]'>
             <svg
@@ -160,11 +162,33 @@
         <li class='border-b border-white py-4 text-semibold text-3xl px-4'>
           {% render 'try-it-free-btn' %}
         </li>
+        <li class='border-b border-white py-4 text-semibold text-3xl px-4'>
+          <a href='{{ routes.root_url }}products/mindmix'>Shop MindMix</a>
+        </li>
+        <!--
+          <ul
+            id='learn-more-menu'
+            class='menu-dropdown absolute top-full left-1/2 -translate-x-1/2 hidden inline-block whitespace-nowrap px-4 py-3 bg-dark/90 backdrop-blur-md shadow-lg'
+          >
+            <li class='mb-2 text-light hover:text-primary transition-colors'>
+              <a href='#why-it-works'>Why It Works</a>
+            </li>
+            <li class='mb-2 text-light hover:text-primary transition-colors'>
+              <a href='#flavors'>Flavors</a>
+            </li>
+            <li class='mb-2 text-light hover:text-primary transition-colors'>
+              <a href='#benefits'>Benefits</a>
+            </li>
+            <li class='mb-0 text-light hover:text-primary transition-colors'>
+              <a href='#pricing'>Pricing</a>
+            </li>
+          </ul>
+        -->
         <li class='border-b border-white py-4 px-4'>
           <button
             class='toggle-list-btn w-full h-[42px] flex justify-between items-center group'
           >
-            <span class='text-3xl text-semibold transition-colors'>Products</span>
+            <span class='text-3xl text-semibold transition-colors'>Learn More</span>
             <svg
               class='expandable-list-arrow h-full w-auto text-3xl text-semibold transition-colors transition-transform duration-300'
               xmlns='http://www.w3.org/2000/svg'
@@ -180,8 +204,10 @@
             </svg>
           </button>
           <ul class='expandable-list max-h-0 pt-1 overflow-hidden transition-all duration-300'>
-            <li class='text-3xl text-semibold transition-colors pb-1'>Product 1</li>
-            <li class='text-3xl text-semibold transition-colors'>Product 2</li>
+            <li class='text-3xl text-semibold transition-colors pb-1'><a href='#why-it-works'>Why It Works</a></li>
+            <li class='text-3xl text-semibold transition-colors'><a href='#flavors'>Flavors</a></li>
+            <li class='text-3xl text-semibold transition-colors'><a href='#benefits'>Benefits</a></li>
+            <li class='text-3xl text-semibold transition-colors'><a href='#pricing'>Pricing</a></li>
           </ul>
         </li>
 
