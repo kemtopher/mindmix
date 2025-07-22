@@ -19,6 +19,8 @@
 body,
 html {
   height: 100%;
+  width: 100%;
+  box-sizing: border-box !important;
 }
 
 .neural-bg {
@@ -276,4 +278,13 @@ html {
 
 .link-static:hover {
   text-decoration: underline;
+}
+
+#menu-item-learn.active > a {
+  color: var(--color-primary); /* or use Tailwind utilities with @apply */
+}
+#menu-item-learn.active svg {
+  color: var(--color-primary);
+  transform: rotate(180deg);
+  transition: transform 0.3s;
 }

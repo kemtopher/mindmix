@@ -8,10 +8,32 @@
       </span>
     </a>
 
-    <nav class='hidden md:flex items-center space-x-6'>
-      <div class='h-[24px] flex gap-2 group'>
-        <a href='#' class='text-light group-hover:text-primary transition-colors'> Products </a>
-        <a href='#' class='h-[24px] w-[24px]'>
+    <nav class='h-full hidden md:flex items-center space-x-6'>
+      <div class='h-full flex gap-2 items-center group'>
+        <a href='#' class='text-light group-hover:text-primary transition-colors'>Shop</a>
+        <!--
+          <a href='#' class='h-[24px] w-[24px]'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              viewBox='0 0 16 16'
+              role='presentation'
+              class='h-full w-full text-light transition-colors transition-transform duration-300 group-hover:rotate-180 group-hover:text-primary'
+            >
+              <path
+                fill="currentColor"
+                fill-rule="evenodd"
+                d="M2.183 5.183a.625.625 0 0 1 .884 0l4.827 4.828a.208.208 0 0 0 .295 0l4.827-4.828a.625.625 0 0 1 .884.884l-4.827 4.827c-.57.57-1.493.57-2.063 0L2.183 6.067a.625.625 0 0 1 0-.884Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </a>
+        -->
+      </div>
+      <div id='menu-item-learn' class='menu-item h-full items-center flex gap-2 group relative'>
+        <a href='#' class='text-light group-hover:text-primary transition-colors h-full flex items-center'
+          >Learn More</a
+        >
+        <a href='#' class='h-[24px] w-[24px] h-full flex items-center'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 16 16'
@@ -26,7 +48,26 @@
             />
           </svg>
         </a>
+
+        <ul
+          id='learn-more-menu'
+          class='menu-dropdown absolute top-full left-1/2 -translate-x-1/2 hidden inline-block whitespace-nowrap px-4 py-3 bg-dark/90 backdrop-blur-md shadow-lg'
+        >
+          <li class='mb-2 text-light hover:text-primary transition-colors'>
+            <a href='#why-it-works'>Why It Works</a>
+          </li>
+          <li class='mb-2 text-light hover:text-primary transition-colors'>
+            <a href='#flavors'>Flavors</a>
+          </li>
+          <li class='mb-2 text-light hover:text-primary transition-colors'>
+            <a href='#benefits'>Benefits</a>
+          </li>
+          <li class='mb-0 text-light hover:text-primary transition-colors'>
+            <a href='#pricing'>Pricing</a>
+          </li>
+        </ul>
       </div>
+
       {% render 'try-it-free-btn' %}
 
       {% if cart.item_count > 0 %}
@@ -42,16 +83,67 @@
       {% endif %}
 
       {% if customer %}
-        <a href='{{ routes.account_url }}' class='account-icon logged-in'>
-          {% render 'icon-account' %}
-        </a>
+        <div class='menu-item h-full flex items-center relative'>
+          <a id='customer-menu-btn' href='{{ routes.account_url }}' class='account-icon logged-in'>
+            {% render 'icon-account' %}
+          </a>
+
+          <ul
+            id='learn-more-menu'
+            class='menu-dropdown absolute top-full left-1/2 -translate-x-1/2 hidden inline-block whitespace-nowrap px-4 py-3 bg-dark/90 backdrop-blur-md shadow-lg'
+          >
+            <li class='mb-2 text-light hover:text-primary transition-colors'>
+              <a href='{{ routes.account_url }}'>Dashboard</a>
+            </li>
+            <!--
+              <li class='mb-2 text-light hover:text-primary transition-colors'>
+                <a href='{{ routes.account_url }}/orders'>Orders</a>
+              </li>
+            -->
+            <li class='mb-2 text-light hover:text-primary transition-colors'>
+              <a href='{{ routes.account_addresses_url }}'>Addresses</a>
+            </li>
+            <!--
+              <li class='mb-2 hover:text-primary'>
+                <a href='/pages/wishlist'>Wishlist</a>
+              </li>
+            -->
+            <!--
+              <li class='mb-2 hover:text-primary'>
+                <a href='/pages/subscriptions'>Subscriptions</a>
+              </li>
+            -->
+            <li class='mb-0 text-light hover:text-primary transition-colors'>
+              <a href='{{ routes.account_logout_url }}'>Log Out</a>
+            </li>
+          </ul>
+        </div>
       {% else %}
-        <a href='/account/login?return_url={{ request.path | url_encode }}' class='account-icon logged-out'>
-          {% render 'icon-account' %}
-        </a>
+        <div class='menu-item h-full flex items-center relative'>
+          <a
+            id='customer-menu-btn'
+            href='#'
+            class='account-icon logged-out'
+          >
+            {% render 'icon-account' %}
+          </a>
+
+          <ul
+            id='learn-more-menu'
+            class='menu-dropdown absolute top-full left-1/2 -translate-x-1/2 hidden inline-block whitespace-nowrap px-4 py-3 bg-dark/90 backdrop-blur-md shadow-lg'
+          >
+            <li class='mb-2 text-light hover:text-primary transition-colors'>
+              <a href='{{ routes.account_login_url }}?return_url={{ request.path | url_encode }}'>Sign In</a>
+            </li>
+            <li class='mb-2 text-light hover:text-primary transition-colors'>
+              <a href='{{ routes.account_register_url }}?return_url={{ request.path | url_encode }}'>Sign Up</a>
+            </li>
+          </ul>
+        </div>
       {% endif %}
     </nav>
 
+    <!-- MOBILE MENU -->
     <button id='menu-hamburger' class='md:hidden text-light hover:text-primary z-[99]' onclick='toggleMobileMenu()'>
       <svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -70,17 +162,14 @@
         </li>
         <li class='border-b border-white py-4 px-4'>
           <button
-            id='toggleListBtn'
-            class='w-full h-[42px] flex justify-between items-center group'
-            onclick='toggleMobileMenuList()'
+            class='toggle-list-btn w-full h-[42px] flex justify-between items-center group'
           >
             <span class='text-3xl text-semibold transition-colors'>Products</span>
             <svg
+              class='expandable-list-arrow h-full w-auto text-3xl text-semibold transition-colors transition-transform duration-300'
               xmlns='http://www.w3.org/2000/svg'
               viewBox='0 0 16 16'
               role='presentation'
-              id='expandableListArrow'
-              class='h-full w-auto text-3xl text-semibold transition-colors transition-transform duration-300'
             >
               <path
                 fill="currentColor"
@@ -90,61 +179,103 @@
               />
             </svg>
           </button>
-          <ul id='expandableList' class='max-h-0 pt-1 overflow-hidden transition-transform duration-300'>
+          <ul class='expandable-list max-h-0 pt-1 overflow-hidden transition-all duration-300'>
             <li class='text-3xl text-semibold transition-colors pb-1'>Product 1</li>
             <li class='text-3xl text-semibold transition-colors'>Product 2</li>
           </ul>
         </li>
-        <li class='border-b border-white py-4 text-semibold text-3xl px-4 flex justify-between items-center self-end'>
-          <p>Customer Account</p>
-          {% if customer %}
-            <a href='{{ routes.account_url }}' class='account-icon logged-in'>
-              {% render 'icon-account' %}
-            </a>
-          {% else %}
-            <a href='/account/login?return_url={{ request.path | url_encode }}' class='account-icon logged-out'>
-              {% render 'icon-account' %}
-            </a>
-          {% endif %}
+
+        <li class='border-b border-white py-4 px-4'>
+          <button
+            class='toggle-list-btn w-full h-[42px] flex justify-between items-center group'
+          >
+            <span class='text-3xl text-semibold transition-colors'>Account</span>
+            {% if customer %}
+              <span class='account-icon logged-in'>{% render 'icon-account' %}</span>
+            {% else %}
+              <span class='account-icon logged-out'>{% render 'icon-account' %}</span>
+            {% endif %}
+          </button>
+
+          <ul class='list-expanded expandable-list max-h-0 pt-1 overflow-hidden transition-all duration-300'>
+            {% if customer %}
+              <li class='text-3xl text-semibold transition-colors pb-1'>
+                <a href='{{ routes.account_url }}'>Dashboard</a>
+              </li>
+              <!--
+                <li class='text-3xl text-semibold transition-colors pb-1'>
+                  <a href='{{ routes.account_addresses_url }}'>Addresses</a>
+                </li>
+              -->
+              <li class='text-3xl text-semibold transition-colors pb-1'>
+                <a href='{{ routes.account_logout_url }}'>Log Out</a>
+              </li>
+            {% else %}
+              <li class='text-3xl text-semibold transition-colors pb-1'>
+                <a href='{{ routes.account_login_url }}?return_url={{ request.path | url_encode }}'>Sign In</a>
+              </li>
+              <li class='text-3xl text-semibold transition-colors pb-1'>
+                <a href='{{ routes.account_register_url }}?return_url={{ request.path | url_encode }}'>Sign Up</a>
+              </li>
+            {% endif %}
+          </ul>
         </li>
       </ul>
     </nav>
   </div>
 </header>
 
-<button
-  id='toggleListBtn'
-  class='px-4 py-2 bg-primary text-white font-bold rounded hover:opacity-80'
->
-  Products
-</button>
-
-<ul
-  id='expandableList'
-  class='max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-darker text-white mt-4 rounded'
->
-  <li class='p-2 border-b border-gray-700'>Item 1</li>
-  <li class='p-2 border-b border-gray-700'>Item 2</li>
-  <li class='p-2 border-b border-gray-700'>Item 3</li>
-</ul>
-
 <script>
-  function toggleMobileMenuList() {
-    const list = document.getElementById('expandableList');
-    const arrow = document.getElementById('expandableListArrow');
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuItems = document.querySelectorAll('.menu-item');
 
-    if (!list.classList.contains('list-expanded')) {
-      const fullHeight = list.scrollHeight;
-      list.style.maxHeight = fullHeight + 'px';
+    menuItems.forEach((item) => {
+      const dropdown = item.querySelector('.menu-dropdown');
+      if (!dropdown) return; // skip if no dropdown found
+      let hoverTimeout;
 
-      list.classList.add('list-expanded');
-      arrow.classList.add('rotate-180');
-    } else {
-      list.style.maxHeight = '0px';
-      list.classList.remove('list-expanded');
-      arrow.classList.remove('rotate-180');
-    }
-  }
+      // Show dropdown
+      item.addEventListener('mouseenter', () => {
+        clearTimeout(hoverTimeout);
+        item.classList.add('active');
+        dropdown.classList.remove('hidden');
+      });
+
+      // Hide dropdown
+      item.addEventListener('mouseleave', () => {
+        hoverTimeout = setTimeout(() => {
+          item.classList.remove('active');
+          dropdown.classList.add('hidden');
+        }, 150);
+      });
+
+      // Close dropdown when a link inside is clicked
+      dropdown.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          item.classList.remove('active');
+          dropdown.classList.add('hidden');
+        });
+      });
+    });
+  });
+
+  document.querySelectorAll('.toggle-list-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const list = btn.nextElementSibling; // finds the <ul> right after the button
+      const arrow = btn.querySelector('.expandable-list-arrow'); // finds the arrow inside this button
+
+      if (!list.classList.contains('list-expanded')) {
+        const fullHeight = list.scrollHeight;
+        list.style.maxHeight = fullHeight + 'px';
+        list.classList.add('list-expanded');
+        if (arrow) arrow.classList.add('rotate-180');
+      } else {
+        list.style.maxHeight = '0px';
+        list.classList.remove('list-expanded');
+        if (arrow) arrow.classList.remove('rotate-180');
+      }
+    });
+  });
 
   function toggleMobileMenu() {
     const mobileMenu = document.getElementById('mobile-menu');
