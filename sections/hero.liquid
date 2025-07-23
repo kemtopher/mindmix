@@ -1,88 +1,40 @@
-<section class='min-h-screen pt-24 pb-16 relative overflow-hidden neural-bg flex items-center'>
-  <div class='container-custom relative z-10'>
-    <div class='grid lg:grid-cols-2 gap-12 items-center'>
-      <div class='fade-in'>
-        <p class='text-white font-semibold mb-8'>{{ section.settings.tagline }}</p>
-        <h1 class='text-white mb-4'>
-          {% assign words = section.settings.heading | split: ' ' %}
-          {% for word in words %}
-            <!-- <br> -->
-            <span class='text-primary mb-4 text-5xl md:text-6xl font-bold tracking-tight'>{{ word }}</span>
-          {% endfor %}
-        </h1>
-        <h3 class='text-white mb-4 text-xl md:text-2xl font-bold tracking-tight'>{{ section.settings.subheading }}</h3>
-        <p class='text-primary  text-3xl md:text-4xl font-bold tracking-tight font-bold mb-6'>
-          {{ section.settings.benefits }}
-        </p>
-        <p class='text-light mb-8 max-w-md'>{{ section.settings.description }}</p>
-
-        <!--
-          <a
-            href='#pricing'
-            class='btn btn-cta  px-8 py-4 text-lg font-bold hover:transform hover:scale-105 transition-transform shadow-lg hover:shadow-glow'
-          >
-            {{ section.settings.cta_text }}
-          </a>
-          <a
-            href='#pricing'
-            class='btn btn-mint px-8 py-4 text-lg font-bold hover:transform hover:scale-105 transition-transform'
-          >
-            {{ section.settings.secondary_cta_text }}
-          </a>
-        -->
-
-        <!--
-          <div class='grid grid-cols-1 sm:grid-cols-3 gap-6'>
-            {% for block in section.blocks %}
-              {% if block.type == 'stat' %}
-                <div class='fade-in flex items-center transition delay-200'>
-                  {% case forloop.index %}
-                    {% when 1 %}
-                      {% render 'icon-clock' %}
-                    {% when 2 %}
-                      {% render 'icon-users' %}
-                    {% when 3 %}
-                      {% render 'icon-shield' %}
-                  {% endcase %}
-                  <p class='text-white'>
-                    {% if block.settings.highlight != blank %}
-                      {{ block.settings.text }}:
-                      <span class='text-primary font-semibold'>{{ block.settings.highlight }}</span>
-                    {% else %}
-                      {{ block.settings.text }}
-                    {% endif %}
-                  </p>
-                </div>
-              {% endif %}
+<section class='min-h-screen pt-24 pb-16 relative overflow-hidden neural-bg flex flex-col justify-between'>
+  <div class='flex items-center'>
+    <div class='container-custom relative z-10'>
+      <div class='grid lg:grid-cols-2 gap-12 items-center'>
+        <div class='fade-in'>
+          <p class='text-white font-semibold mb-8'>{{ section.settings.tagline }}</p>
+          <h1 class='text-white mb-4'>
+            {% assign words = section.settings.heading | split: ' ' %}
+            {% for word in words %}
+              <!-- <br> -->
+              <span class='text-primary mb-4 text-5xl md:text-6xl font-bold tracking-tight'>{{ word }}</span>
             {% endfor %}
-          </div>
-        -->
-      </div>
-
-      <div class='fade-in relative' style='transition-delay: 0.3s'>
-        <div class='relative flex justify-center items-center h-[500px]'>
-          <img class='h-full' alt='Photo of MindMix Guava Passion package' src='{{ "guava-passion.jpeg" | asset_url }}'>
-          <!--
-            <img class='h-full' alt='Photo of MindMix Guava Passion package' src='{{ "product-line.png" | asset_url }}'>
-          -->
+          </h1>
+          <h3 class='text-white mb-4 text-xl md:text-2xl font-bold tracking-tight'>
+            {{ section.settings.subheading }}
+          </h3>
+          <p class='text-primary  text-3xl md:text-4xl font-bold tracking-tight font-bold mb-6'>
+            {{ section.settings.benefits }}
+          </p>
+          <p class='text-light mb-8 max-w-md'>{{ section.settings.description }}</p>
         </div>
 
-        <!--
-          <div class='text-center mt-8'>
-            <a
-              href='#pricing'
-              class='text-primary text-3xl font-bold mb-6 tracking-wide'
+        <div class='fade-in relative' style='transition-delay: 0.3s'>
+          <div class='relative flex justify-center items-center h-[500px]'>
+            <img
+              class='h-full'
+              alt='Photo of MindMix Guava Passion package'
+              src='{{ "guava-passion.jpeg" | asset_url }}'
             >
-              {{ section.settings.secondary_cta_text }}
-            </a>
           </div>
-        -->
+        </div>
       </div>
     </div>
   </div>
-</section>
 
-{% render 'animations' %}
+  {% render 'benefits-banner' %}
+</section>
 
 {% schema %}
 {
