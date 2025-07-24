@@ -22,11 +22,7 @@
 
         <div class='fade-in relative' style='transition-delay: 0.3s'>
           <div class='relative flex justify-center items-center h-[500px]'>
-            <img
-              class='h-full'
-              alt='Photo of MindMix Guava Passion package'
-              src='{{ "guava-passion.jpeg" | asset_url }}'
-            >
+            {{ section.settings.hero_image | image_url: width: 800 }}
           </div>
         </div>
       </div>
@@ -40,6 +36,11 @@
 {
   "name": "Hero Section",
   "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    },
     {
       "type": "text",
       "id": "tagline",
