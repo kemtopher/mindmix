@@ -423,6 +423,14 @@
       "product-tabs": {
         "type": "product-tabs",
         "blocks": {
+          "content_tab_8mx9qr": {
+            "type": "content_tab",
+            "settings": {
+              "tab_label": "FAQs",
+              "heading": "Frequently Asked Questions about MindMix",
+              "content": "<p>Your content here</p>"
+            }
+          },
           "content_tab_gkmGWg": {
             "type": "content_tab",
             "settings": {
@@ -433,6 +441,7 @@
           }
         },
         "block_order": [
+          "content_tab_8mx9qr",
           "content_tab_gkmGWg"
         ],
         "settings": {}
