@@ -1,0 +1,102 @@
+<section class='product-tabs w-full h-[100vh] md:h-[75vh] bg-dark text-light'>
+  <div class='container-custom mx-auto h-full flex flex-col'>
+    <!-- Tab headers -->
+    <div class='flex justify-center gap-4 border-b border-gray-700'>
+      {% for block in section.blocks %}
+        <button
+          class='tab-btn py-4 px-6 text-base font-semibold hover:text-primary transition-colors {% if forloop.first %}active text-primary border-b-2 border-primary{% endif %}'
+          data-tab='tab-{{ block.id }}'
+        >
+          {{ block.settings.tab_label }}
+        </button>
+      {% endfor %}
+    </div>
+
+    <!-- Tab content container -->
+    <div class='tab-content flex-1 overflow-y-auto p-6'>
+      {% for block in section.blocks %}
+        <div
+          id='tab-{{ block.id }}'
+          class='tab-panel {% if forloop.first %}block{% else %}hidden{% endif %}'
+        >
+          <h3 class='text-2xl font-bold mb-4'>{{ block.settings.tab_heading }}</h3>
+          <div class='prose max-w-none'>
+            {{ block.settings.tab_content }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Tabs",
+  "tag": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_label",
+          "label": "Tab Label",
+          "default": "Tab"
+        },
+        {
+          "type": "text",
+          "id": "tab_heading",
+          "label": "Tab Heading",
+          "default": "Tab Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "tab_content",
+          "label": "Tab Content",
+          "default": "<p>Your content here</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Product Tabs",
+      "category": "Product",
+      "blocks": [
+        {
+          "type": "tab"
+        },
+        {
+          "type": "tab"
+        },
+        {
+          "type": "tab"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabBtns = document.querySelectorAll('.product-tabs .tab-btn');
+    const panels = document.querySelectorAll('.product-tabs .tab-panel');
+
+    tabBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        // reset active states
+        tabBtns.forEach((b) => b.classList.remove('active', 'text-primary', 'border-b-2', 'border-primary'));
+        panels.forEach((panel) => panel.classList.add('hidden'));
+
+        // activate this one
+        btn.classList.add('active', 'text-primary', 'border-b-2', 'border-primary');
+        const target = btn.getAttribute('data-tab');
+        document.getElementById(target).classList.remove('hidden');
+      });
+    });
+  });
+</script>
