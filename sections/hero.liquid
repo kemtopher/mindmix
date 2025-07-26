@@ -22,7 +22,11 @@
 
         <div class='fade-in relative' style='transition-delay: 0.3s'>
           <div class='relative flex justify-center items-center h-[500px]'>
-            {{ section.settings.hero_image | image_url: width: 800 }}
+            <img
+              class='h-full'
+              alt='Photo of MindMix Guava Passion package'
+              src='{{ section.settings.hero_image | image_url: width: 800}}'
+            >
           </div>
         </div>
       </div>
