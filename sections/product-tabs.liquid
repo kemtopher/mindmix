@@ -12,7 +12,7 @@
       {% endfor %}
     </div>
 
-    <!-- Tab panels -->
+    <!-- Tab content container -->
     <div class='tab-content flex-1 overflow-y-auto p-6'>
       {% for block in section.blocks %}
         <div id='tab-{{ block.id }}' class='tab-panel {% if forloop.first %}block{% else %}hidden{% endif %}'>
@@ -33,17 +33,18 @@
   "settings": [],
   "blocks": [
     {
-      "type": "testimonials",
-      "name": "Testimonials Tab",
+      "type": "tab",
+      "name": "Tab",
       "settings": [
         {
           "type": "text",
           "id": "tab_label",
           "label": "Tab Label",
-          "default": "Testimonials"
+          "default": "Tab"
         },
         {
           "type": "text",
+<<<<<<< HEAD
           "id": "heading",
           "label": "Heading",
           "default": "What Our Customers Say"
@@ -77,6 +78,17 @@
           "id": "content",
           "label": "Tab Content",
           "default": "<p><strong>How soon does it work?</strong><br>Most people feel effects within 30 minutes.</p><p><strong>Can I take it every day?</strong><br>Yes! It’s designed for daily use.</p>"
+=======
+          "id": "tab_heading",
+          "label": "Tab Heading",
+          "default": "Tab Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "tab_content",
+          "label": "Tab Content",
+          "default": "<p>Your content here</p>"
+>>>>>>> 630af4ffe0f89ab422962c92ba340141bb165bce
         }
       ]
     }
@@ -88,10 +100,13 @@
       "category": "Product",
       "blocks": [
         {
-          "type": "testimonials"
+          "type": "tab"
         },
         {
-          "type": "faq"
+          "type": "tab"
+        },
+        {
+          "type": "tab"
         }
       ]
     }
@@ -106,13 +121,14 @@
 
     tabBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
-        // reset active state
+        // reset active states
         tabBtns.forEach((b) => b.classList.remove('active', 'text-primary', 'border-b-2', 'border-primary'));
         panels.forEach((panel) => panel.classList.add('hidden'));
 
-        // activate clicked tab
+        // activate this one
         btn.classList.add('active', 'text-primary', 'border-b-2', 'border-primary');
-        document.getElementById(btn.getAttribute('data-tab')).classList.remove('hidden');
+        const target = btn.getAttribute('data-tab');
+        document.getElementById(target).classList.remove('hidden');
       });
     });
   });
