@@ -422,6 +422,19 @@
       },
       "product-tabs": {
         "type": "product-tabs",
+        "blocks": {
+          "content_tab_gkmGWg": {
+            "type": "content_tab",
+            "settings": {
+              "tab_label": "Testimonials",
+              "heading": "What are customers are saying about MindMix",
+              "content": "<p>Your content here</p>"
+            }
+          }
+        },
+        "block_order": [
+          "content_tab_gkmGWg"
+        ],
         "settings": {}
       }
     },
