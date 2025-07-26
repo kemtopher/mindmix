@@ -1,0 +1,156 @@
+<section id='shopify-section-main-product' class='w-full pt-24 pb-16 flex flex-col md:flex-row items-center justify-center'>
+  <div class='container flex flex-col md:flex-row gap-8 md:max-h-[70vh]'>
+    <div class='product-gallery w-full md:w-1/2'>
+      <img src='{{ product.featured_image | img_url: "master" }}' class="h-full" alt='{{ product.title }}'>
+    </div>
+    <div class='product-details w-full md:w-1/2'>
+      <!-- product info block -->
+      <div class='product-info pb-8 border-b'>
+        <h1 class='text-4xl font-bold text-primary mb-4'>{{ product.title | upcase }}</h1>
+        <div class='text-sm text-white h-max max-w-full md:max-w-[420px] mb-12'>{{ product.description }}</div>
+        <div id='variant-price' class='text-3xl font-bold text-primary'>$39.99{{ variant.price | money }}</div>
+      </div>
+
+      <div class='product-variant-select pb-8 border-b'>
+        <p class='py-4 text-base text-white'>Choose your quantity:</p>
+        <div class='variant-well flex py-4 gap-8'>
+          {% for variant in product.variants %}
+            {% if forloop.first %}
+              <div
+                class='variant-button p-4 border hover:cursor-pointer hover:border-primary active'
+                data-variant-id='{{ variant.id }}'
+                data-variant-price='{{ variant.price }}'
+                data-default="true"
+                onclick='handleVariantClick(event, "{{ variant.id }}", "{{ variant.price | json }}")'
+              >
+                <h3 class=''>{{ variant.title }}</h3>
+                <input
+                  type='radio'
+                  name='variant'
+                  id='variant-{{ variant.id }}'
+                  value='{{ variant.id }}'
+                  hidden
+                >
+              </div>
+              {% else %}
+              <div
+                class='variant-button p-4 border hover:cursor-pointer hover:border-primary'
+                data-variant-id='{{ variant.id }}'
+                data-variant-price='{{ variant.price }}'
+                data-default="true"
+                onclick='handleVariantClick(event, "{{ variant.id }}", "{{ variant.price | json }}")'
+              >
+                <h3 class=''>{{ variant.title }}</h3>
+                <input
+                  type='radio'
+                  name='variant'
+                  id='variant-{{ variant.id }}'
+                  value='{{ variant.id }}'
+                  hidden
+                >
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="add-to-cart">
+        {% if product.handle == 'try-it-free' %}
+          <!-- if they land on the trial product -->
+          {% if customer %}
+            {% if customer.tags contains 'has_trial' %}
+              <!-- Customer has already used their free trial -->
+              <p class="text-red-600 font-semibold">You've already claimed your free trial.</p>
+            {% else %}
+              <!-- Customer still has a free trial available -->
+              <form method='post' action='/cart/add' id='add-to-cart-form' class='mt-8'>
+                    <input type='hidden' name='id' id='selected-variant-id'>
+                    <button
+                      type='submit'
+                      id='add-to-cart-btn'
+                      class='bg-primary text-white font-semibold py-4 px-8 rounded text-xl transition hover:bg-opacity-90 disabled:hover:bg-primary disabled:opacity-50 disabled:cursor-not-allowed'
+                      disabled
+                    >
+                      Add To Cart
+                    </button>
+                  </form>
+            {% endif %}
+          {% else %}
+            <!-- Not logged in yet -->
+            <a href="/account/login?return_url={{ product.url | url_encode }}" class="btn-add-to-cart">
+              Log in to claim your free trial
+            </a>
+          {% endif %}
+        {% else %}
+          <form method='post' action='/cart/add' id='add-to-cart-form' class='mt-8'>
+            <input type='hidden' name='id' id='selected-variant-id'>
+            <button
+            type='submit'
+            id='add-to-cart-btn'
+            class='bg-primary text-white font-semibold py-4 px-8 rounded text-xl transition hover:bg-opacity-90 disabled:hover:bg-primary disabled:opacity-50 disabled:cursor-not-allowed'
+            disabled
+            >
+            Add To Cart
+            </button>
+          </form>
+        {% endif %}
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const variantButtons = document.querySelectorAll('.variant-button');
+  const priceField = document.getElementById('variant-price');
+  const hiddenInput = document.getElementById('selected-variant-id');
+  const addToCartBtn = document.getElementById('add-to-cart-btn');
+
+  // Preselect default variant
+  const defaultButton = document.querySelector('.variant-button[data-default="true"]');
+  if (defaultButton) {
+    selectVariant(defaultButton);
+  }
+
+  variantButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // If this button is already active, do nothing (cannot unselect)
+      if (button.classList.contains('active')) return;
+      selectVariant(button);
+    });
+  });
+
+  function selectVariant(button) {
+    // Clear active state on all buttons
+    variantButtons.forEach(btn => {
+      btn.classList.remove('active', 'border-primary');
+      const input = btn.querySelector('input[type="radio"]');
+      if (input) input.checked = false;
+    });
+
+    // Set active on clicked
+    button.classList.add('active', 'border-primary');
+    const input = button.querySelector('input[type="radio"]');
+    if (input) input.checked = true;
+
+    // Update hidden input for form
+    const variantId = button.dataset.variantId;
+    if (hiddenInput) hiddenInput.value = variantId;
+
+    // Update price field
+    const variantPrice = button.dataset.variantPrice;
+    if (priceField && variantPrice) {
+      const formatted = (variantPrice / 100).toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD'
+      });
+      priceField.textContent = formatted;
+    }
+
+    // Enable add to cart
+    if (addToCartBtn) addToCartBtn.disabled = false;
+  }
+});
+</script>
