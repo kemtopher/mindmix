@@ -4,11 +4,12 @@
     <div class='product-gallery'>
       <img src='{{ product.featured_image | img_url: "master" }}' alt='{{ product.title }}' class='w-full rounded'>
     </div>
-    <div class='product-details'>
-      <h1 class='text-6xl font-bold text-primary mb-4'>{{ product.title | upcase }}</h1>
-      <div class='text-xl text-gray-600 h-max mb-12'>{{ product.description }}</div>
-
-      <div class=''>
+    <div class='product-details pb-26 border-b-white'>
+      <h1 class='text-4xl font-bold text-primary mb-4'>{{ product.title | upcase }}</h1>
+      <div class='text-base text-white h-max mb-12'>{{ product.description }}</div>
+      <div id="variant-price" class="text-3xl font-bold text-white text-primary">$39.99{{ variant.price | money }}</div>
+    </div>
+      <!-- <div class=''>
         <h2 class='text-2xl font-bold mb-6'>Choose Your Pack</h2>
         <div id='variant-accordion' class='space-y-4'>
           {% for variant in product.variants %}
@@ -44,7 +45,7 @@
             </div>
           {% endfor %}
         </div>
-      </div>
+      </div> -->
       <div class='add-to-cart'></div>
         {% if product.handle == 'try-it-free' %}
           <!-- if they land on the trial product -->
@@ -74,7 +75,7 @@
           {% endif %}
         {% endif %}
       </div>
-    </div>
+    <!-- </div> -->
   </div>
 </section>
 
