@@ -22,11 +22,19 @@
 
         <div class='fade-in relative' style='transition-delay: 0.3s'>
           <div class='relative flex justify-center items-center h-[500px]'>
-            <img
-              class='h-full'
-              alt='Photo of MindMix Guava Passion package'
-              src='{{ section.settings.hero_image | image_url: width: 800}}'
-            >
+            {% if section.settings.hero_image != blank %}
+              <img
+                class='h-full'
+                alt='Photo of MindMix Guava Passion package'
+                src='{{ section.settings.hero_image | image_url }}'
+              >
+            {% else %}
+              <img
+                class='h-full max-w-[200px]'
+                alt='Photo of MindMix Guava Passion package'
+                src='{{ mindmix_green_apple_kiwi.png | asset_url }}'
+              >
+            {% endif %}
           </div>
         </div>
       </div>

@@ -1101,6 +1101,10 @@ video {
   max-width: 36rem;
 }
 
+.max-w-\[200px\] {
+  max-width: 200px;
+}
+
 .flex-shrink-0 {
   flex-shrink: 0;
 }
@@ -1986,6 +1990,11 @@ video {
   color: rgb(11 11 11 / var(--tw-text-opacity, 1));
 }
 
+.text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity, 1));
+}
+
 .text-gray-700 {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity, 1));
@@ -2047,11 +2056,6 @@ video {
 .text-yellow-500 {
   --tw-text-opacity: 1;
   color: rgb(234 179 8 / var(--tw-text-opacity, 1));
-}
-
-.text-gray-600 {
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity, 1));
 }
 
 .line-through {
