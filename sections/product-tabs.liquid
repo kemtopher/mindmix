@@ -12,41 +12,17 @@
       {% endfor %}
     </div>
 
-    <!-- Tab panels -->
+    <!-- Tab content container -->
     <div class='tab-content flex-1 overflow-y-auto p-6'>
       {% for block in section.blocks %}
         <div
           id='tab-{{ block.id }}'
           class='tab-panel {% if forloop.first %}block{% else %}hidden{% endif %}'
         >
-          {% if block.type == 'testimonials' %}
-            <h3 class='text-2xl font-bold mb-6'>{{ block.settings.heading }}</h3>
-            <div class='grid grid-cols-1 md:grid-cols-3 gap-6'>
-              {% for testimonial in block.blocks %}
-                <div class='p-6 bg-gray-800 rounded-lg'>
-                  <p class='text-light italic mb-4'>"{{ testimonial.settings.quote }}"</p>
-                  <p class='text-primary font-semibold'>- {{ testimonial.settings.author }}</p>
-                </div>
-              {% endfor %}
-            </div>
-
-          {% elsif block.type == 'faq' %}
-            <h3 class='text-2xl font-bold mb-6'>{{ block.settings.heading }}</h3>
-            <div class='space-y-4'>
-              {% for faq in block.blocks %}
-                <div class='border-b border-gray-700 pb-4'>
-                  <h4 class='text-lg font-semibold mb-2'>{{ faq.settings.question }}</h4>
-                  <p class='text-light'>{{ faq.settings.answer }}</p>
-                </div>
-              {% endfor %}
-            </div>
-
-          {% else %}
-            <!-- If you add a new block type later -->
-            <div class='text-center text-light/70'>
-              <p>No content configured for this tab yet.</p>
-            </div>
-          {% endif %}
+          <h3 class='text-2xl font-bold mb-4'>{{ block.settings.tab_heading }}</h3>
+          <div class='prose max-w-none'>
+            {{ block.settings.tab_content }}
+          </div>
         </div>
       {% endfor %}
     </div>
@@ -60,82 +36,28 @@
   "settings": [],
   "blocks": [
     {
-      "type": "testimonials",
-      "name": "Testimonials Tab",
+      "type": "tab",
+      "name": "Tab",
       "settings": [
         {
           "type": "text",
           "id": "tab_label",
           "label": "Tab Label",
-          "default": "Testimonials"
+          "default": "Tab"
         },
         {
           "type": "text",
-          "id": "heading",
-          "label": "Heading",
-          "default": "What Our Customers Say"
-        }
-      ],
-      "blocks": [
-        {
-          "type": "quote",
-          "name": "Testimonial",
-          "settings": [
-            {
-              "type": "text",
-              "id": "quote",
-              "label": "Quote",
-              "default": "This product changed my life!"
-            },
-            {
-              "type": "text",
-              "id": "author",
-              "label": "Author",
-              "default": "John Doe"
-            }
-          ]
-        }
-      ],
-      "max_blocks": 6
-    },
-    {
-      "type": "faq",
-      "name": "FAQ Tab",
-      "settings": [
-        {
-          "type": "text",
-          "id": "tab_label",
-          "label": "Tab Label",
-          "default": "FAQ"
+          "id": "tab_heading",
+          "label": "Tab Heading",
+          "default": "Tab Heading"
         },
         {
-          "type": "text",
-          "id": "heading",
-          "label": "Heading",
-          "default": "Frequently Asked Questions"
+          "type": "richtext",
+          "id": "tab_content",
+          "label": "Tab Content",
+          "default": "<p>Your content here</p>"
         }
-      ],
-      "blocks": [
-        {
-          "type": "faq_item",
-          "name": "FAQ Item",
-          "settings": [
-            {
-              "type": "text",
-              "id": "question",
-              "label": "Question",
-              "default": "How soon does it work?"
-            },
-            {
-              "type": "textarea",
-              "id": "answer",
-              "label": "Answer",
-              "default": "Most people feel effects within 30 minutes."
-            }
-          ]
-        }
-      ],
-      "max_blocks": 10
+      ]
     }
   ],
   "max_blocks": 3,
@@ -145,10 +67,13 @@
       "category": "Product",
       "blocks": [
         {
-          "type": "testimonials"
+          "type": "tab"
         },
         {
-          "type": "faq"
+          "type": "tab"
+        },
+        {
+          "type": "tab"
         }
       ]
     }
@@ -163,13 +88,14 @@
 
     tabBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
-        // reset active state
+        // reset active states
         tabBtns.forEach((b) => b.classList.remove('active', 'text-primary', 'border-b-2', 'border-primary'));
         panels.forEach((panel) => panel.classList.add('hidden'));
 
-        // activate clicked tab
+        // activate this one
         btn.classList.add('active', 'text-primary', 'border-b-2', 'border-primary');
-        document.getElementById(btn.getAttribute('data-tab')).classList.remove('hidden');
+        const target = btn.getAttribute('data-tab');
+        document.getElementById(target).classList.remove('hidden');
       });
     });
   });

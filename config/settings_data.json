@@ -415,6 +415,27 @@
         "settings": {
           "heading": "Support"
         }
+      },
+      "new-product": {
+        "type": "new-product",
+        "settings": {}
+      },
+      "product-tabs": {
+        "type": "product-tabs",
+        "blocks": {
+          "tab_AfQMGj": {
+            "type": "tab",
+            "settings": {
+              "tab_label": "Testimonials",
+              "tab_heading": "What customers are saying about MindMix",
+              "tab_content": "<p>Your content here</p>"
+            }
+          }
+        },
+        "block_order": [
+          "tab_AfQMGj"
+        ],
+        "settings": {}
       }
     },
     "content_for_index": [],
