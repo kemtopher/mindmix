@@ -13,29 +13,23 @@
     <title>{{ page_title | escape }}</title>
     <meta name='description' content='{{ page_description | escape }}'>
 
-    <!-- Preconnect to required origins -->
     <link rel='preconnect' href='https://fonts.googleapis.com'>
     <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
     <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap' rel='stylesheet'>
 
-    <!-- Tailwind styles -->
     {{ 'style.css' | asset_url | stylesheet_tag }}
-    <!-- Theme styles -->
+
     {{ 'theme.css' | asset_url | stylesheet_tag }}
 
-    <!-- Shopify required -->
     {{ content_for_header }}
   </head>
   <body class='bg-dark text-light'>
-    <!-- Header -->
     {% section 'header' %}
 
-    <!-- Main Content -->
     <main role='main' id='main-content' tabindex='-1'>
       {{ content_for_layout }}
     </main>
 
-    <!-- Footer -->
     <footer class='bg-darker pt-16 pb-8'>
       <div class='container-custom'>
         <div class='flex flex-col mb-12'>
@@ -50,48 +44,77 @@
                 Unlock Your Mental Edge with our scientifically formulated nootropic drink mix designed for peak
                 cognitive performance.
               </p>
-
               <div class='flex space-x-4'>
                 {% section 'social-links' %}
               </div>
             </div>
             <div class='w-full md:w-[60vw] flex flex-col md:flex-row justify-end gap-8'>
-                {% section 'footer-link-group-1' %}
-                {% section 'footer-link-group-2' %}
-                {% section 'footer-link-group-3' %}
-              </div>
+              {% section 'footer-link-group-1' %}
+              {% section 'footer-link-group-2' %}
+              {% section 'footer-link-group-3' %}
             </div>
           </div>
-          <div class='border-t border-gray-800 pt-8'>
-            <div class='flex flex-col md:flex-row justify-between items-center'>
-              <p class='text-light/60 text-sm mb-4 md:mb-0'>
-                &copy; {{ 'now' | date: '%Y' }}
-                {{ shop.name }}. All rights reserved.
-              </p>
-
-              <div class='flex space-x-6'>
-                <a href='/pages/terms-and-conditions' class='text-light/60 hover:text-primary text-sm transition-colors'>Terms & Conditions</a>
-                <a href='/pages/privacy' class='text-light/60 hover:text-primary text-sm transition-colors'>Privacy</a>
-                <a href='/pages/fda-disclaimer' class='text-light/60 hover:text-primary text-sm transition-colors'
-                  >FDA Disclaimer</a
-                >
-                <a href='/pages/affiliate-program' class='text-light/60 hover:text-primary text-sm transition-colors'
-                  >Affiliate Program</a
-                >
-              </div>
-            </div>
-
-            <p class='text-light/40 text-xs mt-8 text-center'>
-              *These statements have not been evaluated by the Food and Drug Administration. This product is not
-              intended to diagnose, treat, cure, or prevent any disease.
-            </p>
-          </div>
+          <!-- closes the flex wrap -->
         </div>
+        <!-- closes the mb-12 block -->
+
+        <div class='border-t border-gray-800 pt-8'>
+          <div class='flex flex-col md:flex-row justify-between items-center'>
+            <p class='text-light/60 text-sm mb-4 md:mb-0'>
+              &copy; {{ 'now' | date: '%Y' }}
+              {{ shop.name }}. All rights reserved.
+            </p>
+
+            <div class='flex space-x-6'>
+              <a href='/pages/terms-and-conditions' class='text-light/60 hover:text-primary text-sm transition-colors'
+                >Terms & Conditions</a
+              >
+              <a href='/pages/privacy' class='text-light/60 hover:text-primary text-sm transition-colors'>Privacy</a>
+              <a href='/pages/fda-disclaimer' class='text-light/60 hover:text-primary text-sm transition-colors'
+                >FDA Disclaimer</a
+              >
+              <a href='/pages/affiliate-program' class='text-light/60 hover:text-primary text-sm transition-colors'
+                >Affiliate Program</a
+              >
+            </div>
+          </div>
+
+          <p class='text-light/40 text-xs mt-8 text-center'>
+            *These statements have not been evaluated by the Food and Drug Administration. This product is not intended
+            to diagnose, treat, cure, or prevent any disease.
+          </p>
+        </div>
+        <!-- closes border-t section -->
       </div>
+      <!-- closes container-custom -->
     </footer>
 
-    <!-- Theme Scripts -->
-    <!-- {{ 'theme.js' | asset_url | script_tag }} -->
+    <div
+      id='feature-modal-backdrop'
+      class='fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50'
+    >
+      <div
+        id='feature-modal'
+        class='bg-white rounded-lg overflow-hidden relative w-full max-w-[900px] md:w-3/4 h-auto max-h-[90vh] flex flex-col'
+      >
+        <button
+          id='feature-modal-close'
+          class='absolute top-4 right-4 text-black text-2xl font-bold hover:text-gray-600'
+        >
+          &times;
+        </button>
+
+        <div class='w-full h-[200px] md:h-[256px] bg-gray-200 overflow-hidden'>
+          <img id='feature-modal-image' src='' alt='Feature image' class='w-full h-full object-cover'>
+        </div>
+
+        <div id='feature-modal-content' class='p-6 overflow-y-auto'>
+          <h3 id='feature-modal-title' class='text-2xl font-bold mb-4'></h3>
+
+          <p id='feature-modal-description' class='text-gray-700 mb-4'></p>
+        </div>
+      </div>
+    </div>
 
     <script>
       document.addEventListener('DOMContentLoaded', function () {
@@ -108,6 +131,59 @@
         );
 
         document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+      });
+    </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const cards = document.querySelectorAll('.feature-card');
+        const backdrop = document.getElementById('feature-modal-backdrop');
+        const modal = document.getElementById('feature-modal');
+        const closeBtn = document.getElementById('feature-modal-close');
+
+        const modalTitle = document.getElementById('feature-modal-title');
+        const modalDesc = document.getElementById('feature-modal-description');
+        const modalImg = document.getElementById('feature-modal-image');
+
+        cards.forEach((card) => {
+          card.addEventListener('click', () => {
+            // Grab content from card
+            const title = card.querySelector('h4')?.innerText || '';
+            const desc = card.querySelector('p')?.innerText || '';
+            // Optional: set hero image dynamically if you have data attributes
+            // For now, placeholder:
+            const heroImage = card.dataset.image || 'https://via.placeholder.com/900x400';
+
+            modalTitle.textContent = title;
+            modalDesc.textContent = desc;
+            modalImg.src = heroImage;
+
+            backdrop.classList.remove('hidden');
+            backdrop.classList.add('flex');
+          });
+        });
+
+        // Close modal
+        closeBtn.addEventListener('click', () => {
+          backdrop.classList.add('hidden');
+          backdrop.classList.remove('flex');
+        });
+
+        // Close on backdrop click
+        backdrop.addEventListener('click', (e) => {
+          if (e.target === backdrop) {
+            backdrop.classList.add('hidden');
+            backdrop.classList.remove('flex');
+          }
+        });
+
+        // Optional: ESC key closes modal
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            backdrop.classList.add('hidden');
+            backdrop.classList.remove('flex');
+          }
+        });
       });
     </script>
   </body>
