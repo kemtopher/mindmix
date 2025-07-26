@@ -1101,6 +1101,14 @@ video {
   max-width: 36rem;
 }
 
+.max-w-\[200px\] {
+  max-width: 200px;
+}
+
+.flex-1 {
+  flex: 1 1 0%;
+}
+
 .flex-shrink-0 {
   flex-shrink: 0;
 }
@@ -1969,6 +1977,10 @@ video {
   font-weight: 600;
 }
 
+.leading-tight {
+  line-height: 1.25;
+}
+
 .tracking-tight {
   letter-spacing: -0.025em;
 }
@@ -1980,6 +1992,11 @@ video {
 .text-dark {
   --tw-text-opacity: 1;
   color: rgb(11 11 11 / var(--tw-text-opacity, 1));
+}
+
+.text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity, 1));
 }
 
 .text-gray-700 {
