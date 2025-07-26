@@ -15,38 +15,11 @@
     <!-- Tab panels -->
     <div class='tab-content flex-1 overflow-y-auto p-6'>
       {% for block in section.blocks %}
-        <div
-          id='tab-{{ block.id }}'
-          class='tab-panel {% if forloop.first %}block{% else %}hidden{% endif %}'
-        >
-          {% if block.type == 'testimonials' %}
-            <h3 class='text-2xl font-bold mb-6'>{{ block.settings.heading }}</h3>
-            <div class='grid grid-cols-1 md:grid-cols-3 gap-6'>
-              {% for testimonial in block.blocks %}
-                <div class='p-6 bg-gray-800 rounded-lg'>
-                  <p class='text-light italic mb-4'>"{{ testimonial.settings.quote }}"</p>
-                  <p class='text-primary font-semibold'>- {{ testimonial.settings.author }}</p>
-                </div>
-              {% endfor %}
-            </div>
-
-          {% elsif block.type == 'faq' %}
-            <h3 class='text-2xl font-bold mb-6'>{{ block.settings.heading }}</h3>
-            <div class='space-y-4'>
-              {% for faq in block.blocks %}
-                <div class='border-b border-gray-700 pb-4'>
-                  <h4 class='text-lg font-semibold mb-2'>{{ faq.settings.question }}</h4>
-                  <p class='text-light'>{{ faq.settings.answer }}</p>
-                </div>
-              {% endfor %}
-            </div>
-
-          {% else %}
-            <!-- If you add a new block type later -->
-            <div class='text-center text-light/70'>
-              <p>No content configured for this tab yet.</p>
-            </div>
-          {% endif %}
+        <div id='tab-{{ block.id }}' class='tab-panel {% if forloop.first %}block{% else %}hidden{% endif %}'>
+          <h3 class='text-2xl font-bold mb-6'>{{ block.settings.heading }}</h3>
+          <div class='prose max-w-none'>
+            {{ block.settings.content }}
+          </div>
         </div>
       {% endfor %}
     </div>
@@ -74,29 +47,14 @@
           "id": "heading",
           "label": "Heading",
           "default": "What Our Customers Say"
-        }
-      ],
-      "blocks": [
+        },
         {
-          "type": "quote",
-          "name": "Testimonial",
-          "settings": [
-            {
-              "type": "text",
-              "id": "quote",
-              "label": "Quote",
-              "default": "This product changed my life!"
-            },
-            {
-              "type": "text",
-              "id": "author",
-              "label": "Author",
-              "default": "John Doe"
-            }
-          ]
+          "type": "richtext",
+          "id": "content",
+          "label": "Tab Content",
+          "default": "<p>⭐️⭐️⭐️⭐️⭐️ Great product! – John Doe</p><p>⭐️⭐️⭐️⭐️ Excellent results! – Jane Smith</p>"
         }
-      ],
-      "max_blocks": 6
+      ]
     },
     {
       "type": "faq",
@@ -113,29 +71,14 @@
           "id": "heading",
           "label": "Heading",
           "default": "Frequently Asked Questions"
-        }
-      ],
-      "blocks": [
+        },
         {
-          "type": "faq_item",
-          "name": "FAQ Item",
-          "settings": [
-            {
-              "type": "text",
-              "id": "question",
-              "label": "Question",
-              "default": "How soon does it work?"
-            },
-            {
-              "type": "textarea",
-              "id": "answer",
-              "label": "Answer",
-              "default": "Most people feel effects within 30 minutes."
-            }
-          ]
+          "type": "richtext",
+          "id": "content",
+          "label": "Tab Content",
+          "default": "<p><strong>How soon does it work?</strong><br>Most people feel effects within 30 minutes.</p><p><strong>Can I take it every day?</strong><br>Yes! It’s designed for daily use.</p>"
         }
-      ],
-      "max_blocks": 10
+      ]
     }
   ],
   "max_blocks": 3,
