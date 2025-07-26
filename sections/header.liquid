@@ -13,23 +13,6 @@
         <a href='{{ routes.root_url }}products/mindmix' class='text-light group-hover:text-primary transition-colors'
           >Shop MindMix</a
         >
-        <!--
-          <a href='#' class='h-[24px] w-[24px]'>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              viewBox='0 0 16 16'
-              role='presentation'
-              class='h-full w-full text-light transition-colors transition-transform duration-300 group-hover:rotate-180 group-hover:text-primary'
-            >
-              <path
-                fill="currentColor"
-                fill-rule="evenodd"
-                d="M2.183 5.183a.625.625 0 0 1 .884 0l4.827 4.828a.208.208 0 0 0 .295 0l4.827-4.828a.625.625 0 0 1 .884.884l-4.827 4.827c-.57.57-1.493.57-2.063 0L2.183 6.067a.625.625 0 0 1 0-.884Z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </a>
-        -->
       </div>
       <div id='menu-item-learn' class='menu-item h-full items-center flex gap-2 group relative'>
         <a href='#' class='text-light group-hover:text-primary transition-colors h-full flex items-center'
@@ -70,8 +53,6 @@
         </ul>
       </div>
 
-      {% render 'try-it-free-btn' %}
-
       {% if cart.item_count > 0 %}
         <a href='/cart' class='cart-icon cart-active text-primary hover:text-primary transition-colors'>
           {% render 'icon-shopping-cart' %}
@@ -97,24 +78,9 @@
             <li class='mb-2 text-light hover:text-primary transition-colors'>
               <a href='{{ routes.account_url }}'>Dashboard</a>
             </li>
-            <!--
-              <li class='mb-2 text-light hover:text-primary transition-colors'>
-                <a href='{{ routes.account_url }}/orders'>Orders</a>
-              </li>
-            -->
             <li class='mb-2 text-light hover:text-primary transition-colors'>
               <a href='{{ routes.account_addresses_url }}'>Addresses</a>
             </li>
-            <!--
-              <li class='mb-2 hover:text-primary'>
-                <a href='/pages/wishlist'>Wishlist</a>
-              </li>
-            -->
-            <!--
-              <li class='mb-2 hover:text-primary'>
-                <a href='/pages/subscriptions'>Subscriptions</a>
-              </li>
-            -->
             <li class='mb-0 text-light hover:text-primary transition-colors'>
               <a href='{{ routes.account_logout_url }}'>Log Out</a>
             </li>
@@ -143,6 +109,12 @@
           </ul>
         </div>
       {% endif %}
+
+      {% unless customer %}
+        {% unless customer.tags contains 'has_trial' %}
+          {% render 'try-it-free-btn' %}
+        {% endunless %}
+      {% endunless %}
     </nav>
 
     <!-- MOBILE MENU -->
@@ -165,25 +137,6 @@
         <li class='border-b border-white py-4 text-semibold text-3xl px-4'>
           <a href='{{ routes.root_url }}products/mindmix'>Shop MindMix</a>
         </li>
-        <!--
-          <ul
-            id='learn-more-menu'
-            class='menu-dropdown absolute top-full left-1/2 -translate-x-1/2 hidden inline-block whitespace-nowrap px-4 py-3 bg-dark/90 backdrop-blur-md shadow-lg'
-          >
-            <li class='mb-2 text-light hover:text-primary transition-colors'>
-              <a href='#why-it-works'>Why It Works</a>
-            </li>
-            <li class='mb-2 text-light hover:text-primary transition-colors'>
-              <a href='#flavors'>Flavors</a>
-            </li>
-            <li class='mb-2 text-light hover:text-primary transition-colors'>
-              <a href='#benefits'>Benefits</a>
-            </li>
-            <li class='mb-0 text-light hover:text-primary transition-colors'>
-              <a href='#pricing'>Pricing</a>
-            </li>
-          </ul>
-        -->
         <li class='border-b border-white py-4 px-4'>
           <button
             class='toggle-list-btn w-full h-[42px] flex justify-between items-center group'
@@ -228,11 +181,6 @@
               <li class='text-3xl text-semibold transition-colors pb-1'>
                 <a href='{{ routes.account_url }}'>Dashboard</a>
               </li>
-              <!--
-                <li class='text-3xl text-semibold transition-colors pb-1'>
-                  <a href='{{ routes.account_addresses_url }}'>Addresses</a>
-                </li>
-              -->
               <li class='text-3xl text-semibold transition-colors pb-1'>
                 <a href='{{ routes.account_logout_url }}'>Log Out</a>
               </li>
