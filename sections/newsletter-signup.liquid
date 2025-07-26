@@ -1,0 +1,76 @@
+<section class='newsletter-signup bg-dark text-light py-16'>
+  <div class='container-custom mx-auto text-center max-w-xl px-4'>
+    <h2 class='text-3xl md:text-4xl font-bold mb-4'>
+      {{ section.settings.heading }}
+    </h2>
+    <p class='text-light/80 mb-8'>
+      {{ section.settings.subheading }}
+    </p>
+
+    <form
+      method='post'
+      action='/contact#newsletter-signup'
+      id='newsletter-signup'
+      accept-charset='UTF-8'
+      class='flex flex-col sm:flex-row gap-4 justify-center'
+    >
+      <input type='hidden' name='form_type' value='customer'>
+      <input type='hidden' name='utf8' value='✓'>
+      <input type='hidden' name='contact[tags]' value='newsletter'>
+
+      <input
+        type='email'
+        name='contact[email]'
+        placeholder='Enter your email'
+        class='flex-1 px-4 py-3 rounded text-dark'
+        required
+      >
+      <button
+        type='submit'
+        class='bg-primary text-white font-semibold px-6 py-3 rounded hover:bg-opacity-90 transition'
+      >
+        {{ section.settings.button_label }}
+      </button>
+    </form>
+
+    {% if form.posted_successfully? %}
+      <p class='text-green-500 mt-4'>Thanks for subscribing!</p>
+    {% endif %}
+    {% if form.errors %}
+      <p class='text-red-500 mt-4'>There was an error. Please try again.</p>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter Signup",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Join our newsletter"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Get updates, special offers, and more."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Subscribe"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter Signup",
+      "category": "Promotional"
+    }
+  ]
+}
+{% endschema %}
