@@ -423,6 +423,14 @@
       "product-tabs": {
         "type": "product-tabs",
         "blocks": {
+          "tab_xJcRnQ": {
+            "type": "tab",
+            "settings": {
+              "tab_label": "FAQ",
+              "tab_heading": "Frequently Asked Questions",
+              "tab_content": "<p>Your content here</p>"
+            }
+          },
           "tab_AfQMGj": {
             "type": "tab",
             "settings": {
@@ -433,6 +441,7 @@
           }
         },
         "block_order": [
+          "tab_xJcRnQ",
           "tab_AfQMGj"
         ],
         "settings": {}
