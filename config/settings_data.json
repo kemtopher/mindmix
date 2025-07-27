@@ -430,6 +430,28 @@
       },
       "product-tabs": {
         "type": "product-tabs",
+        "blocks": {
+          "content_tab_8mx9qr": {
+            "type": "content_tab",
+            "settings": {
+              "tab_label": "Ingredients",
+              "heading": "What's it's made of",
+              "content": "<ul><li></li></ul>"
+            }
+          },
+          "content_tab_gkmGWg": {
+            "type": "content_tab",
+            "settings": {
+              "tab_label": "Testimonials",
+              "heading": "What are customers are saying about MindMix",
+              "content": "<p>Your content here</p>"
+            }
+          }
+        },
+        "block_order": [
+          "content_tab_8mx9qr",
+          "content_tab_gkmGWg"
+        ],
         "settings": {}
       },
       "global-faq": {
@@ -498,25 +520,6 @@
           "heading": "JOIN THE PEAK PERFORMANCE COMMUNITY",
           "subheading": "Get exclusive tips, research updates, and member-only discounts.",
           "button_label": "Unlock Insider Access"
-        }
-      },
-      "pdp-testimonials": {
-        "type": "pdp-testimonials",
-        "blocks": {
-          "testimonial_j6e7nJ": {
-            "type": "testimonial",
-            "settings": {
-              "reviewer_name": "Jack Stroganoff",
-              "stars": 5,
-              "content": "<p>MindMix has revolutionized my productivity at work and school so much that it's scary. My boss and my teachers have been telling me that they've been seeing the increase in productivity and they love it!</p>"
-            }
-          }
-        },
-        "block_order": [
-          "testimonial_j6e7nJ"
-        ],
-        "settings": {
-          "heading": "What our customers are saying"
         }
       }
     },
