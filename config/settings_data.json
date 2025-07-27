@@ -491,6 +491,13 @@
               "question": "What if I don't like it?",
               "answer": "We offer a 30-day money-back guarantee. If you're not completely satisfied with MindMix for any reason, simply contact our customer service team for a full refund. We stand behind our product's effectiveness."
             }
+          },
+          "faq_item_NEP4HA": {
+            "type": "faq_item",
+            "settings": {
+              "question": "Is there caffeine?",
+              "answer": "MindMix contains a minimal amount of natural caffeine from green tea extract, equivalent to approximately 1/4 cup of coffee per serving. This is enough to provide synergistic benefits with other ingredients without causing jitters or sleep disruption."
+            }
           }
         },
         "block_order": [
@@ -498,7 +505,8 @@
           "faq_item_9eep86",
           "faq_item_XpnpEC",
           "faq_item_NpHAYN",
-          "faq_item_QAhNyC"
+          "faq_item_QAhNyC",
+          "faq_item_NEP4HA"
         ],
         "settings": {
           "heading": "FREQUENTLY ASKED QUESTIONS",
