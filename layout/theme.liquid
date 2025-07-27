@@ -30,7 +30,12 @@
       {{ content_for_layout }}
     </main>
 
-    {% section 'global-faq' %}
+    <section class='section-padding bg-darker relative'>
+      <div class='container-custom relative z-10 max-w-4xl mx-auto'>
+        {% section 'global-faq' %}
+      </div>
+    </section>
+
     {% section 'newsletter-signup' %}
 
     <footer class='bg-darker pt-16 pb-8'>
