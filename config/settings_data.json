@@ -217,6 +217,13 @@
               "answer": "Yes, but we recommend starting with half doses of each. MindMix complements coffee well, with L-theanine helping to smooth out caffeine's potential jitters while enhancing focus. Many users find they need less coffee when using MindMix."
             }
           },
+          "faq_item_KeTfpE": {
+            "type": "faq_item",
+            "settings": {
+              "question": "",
+              "answer": ""
+            }
+          },
           "faq_item_8ezVkG": {
             "type": "faq_item",
             "settings": {
@@ -237,6 +244,7 @@
           "faq_item_nqWdkj",
           "faq_item_i7g48Q",
           "faq_item_3kVN9E",
+          "faq_item_KeTfpE",
           "faq_item_8ezVkG",
           "faq_item_64jrGy"
         ],
@@ -476,13 +484,21 @@
               "question": "Can I mix with coffee?",
               "answer": "Yes, but we recommend starting with half doses of each. MindMix complements coffee well, with L-theanine helping to smooth out caffeine's potential jitters while enhancing focus. Many users find they need less coffee when using MindMix."
             }
+          },
+          "faq_item_QAhNyC": {
+            "type": "faq_item",
+            "settings": {
+              "question": "What if I don't like it?",
+              "answer": "We offer a 30-day money-back guarantee. If you're not completely satisfied with MindMix for any reason, simply contact our customer service team for a full refund. We stand behind our product's effectiveness."
+            }
           }
         },
         "block_order": [
           "faq_item_8mVJwP",
           "faq_item_9eep86",
           "faq_item_XpnpEC",
-          "faq_item_NpHAYN"
+          "faq_item_NpHAYN",
+          "faq_item_QAhNyC"
         ],
         "settings": {
           "heading": "FREQUENTLY ASKED QUESTIONS",
