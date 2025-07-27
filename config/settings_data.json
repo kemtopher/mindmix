@@ -469,12 +469,20 @@
               "question": "Will I crash later?",
               "answer": "No, MindMix is specifically designed to avoid the crash associated with caffeine and energy drinks. The formula works by optimizing your brain's natural processes rather than artificially stimulating them, resulting in a smooth, gradual decline in effects rather than a sudden crash."
             }
+          },
+          "faq_item_NpHAYN": {
+            "type": "faq_item",
+            "settings": {
+              "question": "Can I mix with coffee?",
+              "answer": "Yes, but we recommend starting with half doses of each. MindMix complements coffee well, with L-theanine helping to smooth out caffeine's potential jitters while enhancing focus. Many users find they need less coffee when using MindMix."
+            }
           }
         },
         "block_order": [
           "faq_item_8mVJwP",
           "faq_item_9eep86",
-          "faq_item_XpnpEC"
+          "faq_item_XpnpEC",
+          "faq_item_NpHAYN"
         ],
         "settings": {
           "heading": "FREQUENTLY ASKED QUESTIONS",
