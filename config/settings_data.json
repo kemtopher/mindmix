@@ -502,6 +502,19 @@
       },
       "pdp-testimonials": {
         "type": "pdp-testimonials",
+        "blocks": {
+          "testimonial_j6e7nJ": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Jack Stroganoff",
+              "stars": 5,
+              "content": "<p>MindMix has revolutionized my productivity at work and school so much that it's scary. My boss and my teachers have been telling me that they've been seeing the increase in productivity and they love it!</p>"
+            }
+          }
+        },
+        "block_order": [
+          "testimonial_j6e7nJ"
+        ],
         "settings": {
           "heading": "What our customers are saying"
         }
