@@ -1,0 +1,170 @@
+<div class='text-center max-w-3xl mx-auto mb-16 fade-in is-visible'>
+  <h2 class='text-white mb-6 text-5xl md:text-6xl font-bold tracking-tight'>
+    {% assign heading_string = section.settings.heading | escape %}
+    {% assign string_words = heading_string | split: ' ' %}
+    {% assign word_count = string_words | size %}
+    {% assign slice_length = word_count | minus: 1 %}
+    {% assign heading_words = string_words | slice: 0, slice_length %}
+    {% assign truncated_string = heading_words | join: ' ' %}
+
+    {% assign clean_string = heading_string | replace: '.', '' %}
+    {% assign words = clean_string | split: ' ' %}
+    {% assign last_word = words | last %}
+    {{ truncated_string }}
+    <span class='block text-5xl md:text-6xl font-bold tracking-tight mt-2 text-primary'>{{ last_word }}</span>
+  </h2>
+</div>
+
+<div class='space-y-4 mb-12 fade-in' id='faq-container'>
+  {% for block in section.blocks %}
+    {% if block.type == 'faq_item' %}
+      <div class='faq-item bg-dark rounded-lg overflow-hidden border border-gray-800 hover:border-primary/30 transition-colors'>
+        <button
+          class='faq-question w-full text-left p-5 flex items-center justify-between focus:outline-none'
+          type='button'
+          aria-expanded='false'
+        >
+          <h4 class='text-white font-medium'>{{ block.settings.question }}</h4>
+          <svg
+            class='chevron-icon h-5 w-5 text-primary flex-shrink-0'
+            fill='none'
+            stroke='currentColor'
+            viewBox='0 0 24 24'
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div class='faq-answer px-5 max-h-0 overflow-hidden transition-all duration-300'>
+          <p class='text-light pb-5'>{{ block.settings.answer }}</p>
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+
+<!--
+  <div class='text-center fade-in'>
+    <p class='text-light text-xl'>{{ section.settings.contact_text }}</p>
+    <a href='{{ section.settings.contact_link }}' class='btn btn-secondary'>Contact Our Team</a>
+  </div>
+-->
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach((item) => {
+      const button = item.querySelector('.faq-question');
+      const answer = item.querySelector('.faq-answer');
+      const icon = item.querySelector('.chevron-icon');
+
+      button.addEventListener('click', () => {
+        const isOpen = button.getAttribute('aria-expanded') === 'true';
+
+        faqItems.forEach((el) => {
+          el.querySelector('.faq-answer').style.maxHeight = null;
+          el.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+          el.querySelector('.chevron-icon').style.transform = '';
+        });
+
+        if (!isOpen) {
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+          button.setAttribute('aria-expanded', 'true');
+          icon.style.transform = 'rotate(180deg)';
+        }
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "PDP FAQ Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "FREQUENTLY ASKED QUESTIONS"
+    },
+    {
+      "type": "text",
+      "id": "contact_text",
+      "label": "Contact Text",
+      "default": "Still have questions? We're here to help!"
+    },
+    {
+      "type": "url",
+      "id": "contact_link",
+      "label": "Contact Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Section",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How quickly does MindMix work?",
+            "answer": "Most users feel the cognitive benefits within 30-45 minutes after consumption. The formula is designed to provide a steady, sustained boost to mental performance without the crash associated with caffeine or other stimulants."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is it safe to take daily?",
+            "answer": "Yes, MindMix is formulated with natural ingredients that are safe for daily consumption. The adaptogenic herbs and nootropic compounds are specifically selected to support long-term brain health and function without dependency or tolerance buildup."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Will I crash later?",
+            "answer": "No, MindMix is specifically designed to avoid the crash associated with caffeine and energy drinks. The formula works by optimizing your brain's natural processes rather than artificially stimulating them, resulting in a smooth, gradual decline in effects rather than a sudden crash."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I mix with coffee?",
+            "answer": "Yes, but we recommend starting with half doses of each. MindMix complements coffee well, with L-theanine helping to smooth out caffeine's potential jitters while enhancing focus. Many users find they need less coffee when using MindMix."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What if I don't like it?",
+            "answer": "We offer a 30-day money-back guarantee. If you're not completely satisfied with MindMix for any reason, simply contact our customer service team for a full refund. We stand behind our product's effectiveness."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is there caffeine?",
+            "answer": "MindMix contains a minimal amount of natural caffeine from green tea extract, equivalent to approximately 1/4 cup of coffee per serving. This is enough to provide synergistic benefits with other ingredients without causing jitters or sleep disruption."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
