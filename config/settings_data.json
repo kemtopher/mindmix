@@ -445,6 +445,34 @@
           "content_tab_gkmGWg"
         ],
         "settings": {}
+      },
+      "global-faq": {
+        "type": "global-faq",
+        "blocks": {
+          "faq_item_8mVJwP": {
+            "type": "faq_item",
+            "settings": {
+              "question": "Is it safe to take daily?",
+              "answer": "Yes, MindMix is formulated with natural ingredients that are safe for daily consumption. The adaptogenic herbs and nootropic compounds are specifically selected to support long-term brain health and function without dependency or tolerance buildup."
+            }
+          }
+        },
+        "block_order": [
+          "faq_item_8mVJwP"
+        ],
+        "settings": {
+          "heading": "FREQUENTLY ASKED QUESTIONS",
+          "contact_text": "Still have questions? We're here to help!",
+          "contact_link": ""
+        }
+      },
+      "newsletter-signup": {
+        "type": "newsletter-signup",
+        "settings": {
+          "heading": "JOIN THE PEAK PERFORMANCE COMMUNITY",
+          "subheading": "Get exclusive tips, research updates, and member-only discounts.",
+          "button_label": "Unlock Insider Access"
+        }
       }
     },
     "content_for_index": [],
