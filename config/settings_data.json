@@ -462,11 +462,19 @@
               "question": "How quickly does MindMix work?",
               "answer": "Most users feel the cognitive benefits within 30-45 minutes after consumption. The formula is designed to provide a steady, sustained boost to mental performance without the crash associated with caffeine or other stimulants."
             }
+          },
+          "faq_item_XpnpEC": {
+            "type": "faq_item",
+            "settings": {
+              "question": "Will I crash later?",
+              "answer": "No, MindMix is specifically designed to avoid the crash associated with caffeine and energy drinks. The formula works by optimizing your brain's natural processes rather than artificially stimulating them, resulting in a smooth, gradual decline in effects rather than a sudden crash."
+            }
           }
         },
         "block_order": [
           "faq_item_8mVJwP",
-          "faq_item_9eep86"
+          "faq_item_9eep86",
+          "faq_item_XpnpEC"
         ],
         "settings": {
           "heading": "FREQUENTLY ASKED QUESTIONS",
