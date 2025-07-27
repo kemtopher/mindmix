@@ -455,10 +455,18 @@
               "question": "Is it safe to take daily?",
               "answer": "Yes, MindMix is formulated with natural ingredients that are safe for daily consumption. The adaptogenic herbs and nootropic compounds are specifically selected to support long-term brain health and function without dependency or tolerance buildup."
             }
+          },
+          "faq_item_9eep86": {
+            "type": "faq_item",
+            "settings": {
+              "question": "How quickly does MindMix work?",
+              "answer": "Most users feel the cognitive benefits within 30-45 minutes after consumption. The formula is designed to provide a steady, sustained boost to mental performance without the crash associated with caffeine or other stimulants."
+            }
           }
         },
         "block_order": [
-          "faq_item_8mVJwP"
+          "faq_item_8mVJwP",
+          "faq_item_9eep86"
         ],
         "settings": {
           "heading": "FREQUENTLY ASKED QUESTIONS",
