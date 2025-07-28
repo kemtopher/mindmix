@@ -532,10 +532,19 @@
               "stars": 4,
               "content": "<p>MindMix has given me the energy and focus to land a job offer from Meta. I can not speak highly enough about the power of this mix.</p>"
             }
+          },
+          "testimonial_mGw8PW": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Sarah Torette",
+              "stars": 5,
+              "content": "<p>I 👏 LOVE 👏 MINDMIX 👏</p>"
+            }
           }
         },
         "block_order": [
-          "testimonial_P6y4Fn"
+          "testimonial_P6y4Fn",
+          "testimonial_mGw8PW"
         ],
         "settings": {
           "heading": "What our customers are saying"
