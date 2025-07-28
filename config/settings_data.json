@@ -525,6 +525,14 @@
       "pdp-testimonials": {
         "type": "pdp-testimonials",
         "blocks": {
+          "testimonial_9YnzbR": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Jackie Williams",
+              "stars": 4,
+              "content": "<p>I originally tried MindMix to help with low energy and found that not only did it increase my energy levels but also my cognitive ability and productivity numbers. Now I have gotten my entire family on it!</p>"
+            }
+          },
           "testimonial_P6y4Fn": {
             "type": "testimonial",
             "settings": {
@@ -543,6 +551,7 @@
           }
         },
         "block_order": [
+          "testimonial_9YnzbR",
           "testimonial_P6y4Fn",
           "testimonial_mGw8PW"
         ],
