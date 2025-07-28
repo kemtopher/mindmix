@@ -521,6 +521,25 @@
           "subheading": "Get exclusive tips, research updates, and member-only discounts.",
           "button_label": "Unlock Insider Access"
         }
+      },
+      "pdp-testimonials": {
+        "type": "pdp-testimonials",
+        "blocks": {
+          "testimonial_P6y4Fn": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Jack Smith",
+              "stars": 4,
+              "content": "<p>MindMix has given me the energy and focus to land a job offer from Meta. I can not speak highly enough about the power of this mix.</p>"
+            }
+          }
+        },
+        "block_order": [
+          "testimonial_P6y4Fn"
+        ],
+        "settings": {
+          "heading": "What our customers are saying"
+        }
       }
     },
     "content_for_index": [],
