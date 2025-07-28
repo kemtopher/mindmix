@@ -521,6 +521,43 @@
           "subheading": "Get exclusive tips, research updates, and member-only discounts.",
           "button_label": "Unlock Insider Access"
         }
+      },
+      "pdp-testimonials": {
+        "type": "pdp-testimonials",
+        "blocks": {
+          "testimonial_9YnzbR": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Jackie Williams",
+              "stars": 4,
+              "content": "<p>I originally tried MindMix to help with low energy and found that not only did it increase my energy levels but also my cognitive ability and productivity numbers. Now I have gotten my entire family on it!</p>"
+            }
+          },
+          "testimonial_P6y4Fn": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Jack Smith",
+              "stars": 4,
+              "content": "<p>MindMix has given me the energy and focus to land a job offer from Meta. I can not speak highly enough about the power of this mix.</p>"
+            }
+          },
+          "testimonial_mGw8PW": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Sarah Torette",
+              "stars": 5,
+              "content": "<p>I 👏 LOVE 👏 MINDMIX 👏</p>"
+            }
+          }
+        },
+        "block_order": [
+          "testimonial_9YnzbR",
+          "testimonial_P6y4Fn",
+          "testimonial_mGw8PW"
+        ],
+        "settings": {
+          "heading": "What our customers are saying"
+        }
       }
     },
     "content_for_index": [],
