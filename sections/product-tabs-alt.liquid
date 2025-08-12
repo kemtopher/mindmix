@@ -1,0 +1,49 @@
+<section class='product-tabs w-full h-[100vh] md:h-[75vh] bg-dark text-light'>
+  <div class='container-custom mx-auto h-full flex flex-col'>
+    <div class='flex justify-center gap-4 border-b border-gray-700'>
+      <button
+        class='tab-btn py-4 px-6 text-base font-semibold hover:text-primary transition-colors {% if forloop.first %}active text-primary border-b-2 border-primary{% endif %}'
+        data-tab='tab-ingredients'
+      >
+        Ingredients
+      </button>
+      <button
+        class='tab-btn py-4 px-6 text-base font-semibold hover:text-primary transition-colors {% if forloop.first %}active text-primary border-b-2 border-primary{% endif %}'
+        data-tab='tab-testimonials'
+      >
+        Testimonials
+      </button>
+    </div>
+
+    <div class='tab-content flex-1 overflow-y-auto p-6'>
+      <div id='tab-ingredients' class='tab-panel {% if forloop.first %}block{% else %}hidden{% endif %}'>
+        <h3 class='text-2xl font-bold mb-6'>Ingredients</h3>
+        <div class='prose max-w-none'></div>
+      </div>
+
+      <div id='tab-testimonials' class='tab-panel {% if forloop.first %}block{% else %}hidden{% endif %}'>
+        <h3 class='text-2xl font-bold mb-6'>Testimonials</h3>
+        <div class='prose max-w-none'>
+          {% section 'pdp-testimonials' %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabBtns = document.querySelectorAll('.product-tabs .tab-btn');
+    const panels = document.querySelectorAll('.product-tabs .tab-panel');
+
+    tabBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach((b) => b.classList.remove('active', 'text-primary', 'border-b-2', 'border-primary'));
+        panels.forEach((panel) => panel.classList.add('hidden'));
+
+        btn.classList.add('active', 'text-primary', 'border-b-2', 'border-primary');
+        document.getElementById(btn.dataset.tab).classList.remove('hidden');
+      });
+    });
+  });
+</script>

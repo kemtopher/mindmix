@@ -5,7 +5,12 @@
 
 <section class='py-12 bg-darker text-light'>
   <div class='container-custom'>
-    <h2 class='text-3xl font-bold mb-8'>{{ section.settings.heading }}</h2>
+    <div class='text-center max-w-3xl mx-auto mb-16 fade-in is-visible'>
+      <h2 class='text-white mb-6 text-5xl md:text-6xl font-bold tracking-tight'>
+        WHAT ARE CUSTOMERS ARE SAYING ABOUT
+        <span class='block text-5xl md:text-6xl font-bold tracking-tight mt-2 text-primary'>MINDMIX</span>
+      </h2>
+    </div>
 
     <!-- Carousel Wrapper -->
     <div class='relative'>
@@ -40,13 +45,39 @@
         id='prev-btn'
         class='absolute top-1/2 left-0 transform -translate-y-1/2 bg-darkest p-2 rounded-full hover:bg-primary hover:text-dark transition'
       >
-        <
+        <svg
+          aria-hidden='true'
+          width='20'
+          height='20'
+          viewBox='0 0 24 24'
+          fill='none'
+          stroke='currentColor'
+          stroke-width='2'
+          stroke-linecap='round'
+          stroke-linejoin='round'
+        >
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+        <span class='sr-only'>Previous</span>
       </button>
       <button
         id='next-btn'
         class='absolute top-1/2 right-0 transform -translate-y-1/2 bg-darkest p-2 rounded-full hover:bg-primary hover:text-dark transition'
       >
+        <span class='sr-only'>Next</span>
+        <svg
+          aria-hidden='true'
+          width='20'
+          height='20'
+          viewBox='0 0 24 24'
+          fill='none'
+          stroke='currentColor'
+          stroke-width='2'
+          stroke-linecap='round'
+          stroke-linejoin='round'
         >
+          <path d="M9 6l6 6-6 6" />
+        </svg>
       </button>
     </div>
   </div>
