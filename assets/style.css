@@ -602,6 +602,18 @@ video {
   }
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 .visible {
   visibility: visible;
 }
@@ -967,6 +979,10 @@ video {
 
 .max-h-96 {
   max-height: 24rem;
+}
+
+.max-h-\[400px\] {
+  max-height: 400px;
 }
 
 .max-h-\[90vh\] {
@@ -2946,6 +2962,10 @@ html {
 
   .lg\:h-full {
     height: 100%;
+  }
+
+  .lg\:max-h-\[700px\] {
+    max-height: 700px;
   }
 
   .lg\:w-\[40vw\] {
