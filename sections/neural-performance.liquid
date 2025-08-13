@@ -112,8 +112,9 @@
           <div class='h-2 w-2 rounded-full bg-primary mr-2'></div>
           <span class='text-primary'>Works in 15-30 minutes</span>
         </div>
-        <div class='mt-4 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500'></div></button
-      ><button class='feature-card group hover:shadow-glow fade-in text-left is-visible style-VktoH' id='style-VktoH'>
+        <div class='mt-4 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500'></div>
+      </button>
+      <button class='feature-card group hover:shadow-glow fade-in text-left is-visible style-VktoH' id='style-VktoH'>
         <div class='mb-4'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -142,3 +143,66 @@
     </div>
   </div>
 </section>
+
+{% schema %}
+{
+  "name": "Nutrient Card + Modal",
+  "settings": [
+    { "type": "image_picker", "id": "card_icon", "label": "Card icon (image)" },
+
+    { "type": "text", "id": "card_title", "label": "Card title", "default": "L-Theanine" },
+    {
+      "type": "text",
+      "id": "card_description",
+      "label": "Card description",
+      "default": "Optimized neurotransmitter function + mental clarity"
+    },
+    {
+      "type": "text",
+      "id": "card_info",
+      "label": "Card info (small helper)",
+      "default": "<p>Write the front card info here.</p>"
+    },
+
+    { "type": "image_picker", "id": "modal_image", "label": "Modal image" },
+    { "type": "text", "id": "modal_title", "label": "Modal title", "default": "L-Theanine" },
+    {
+      "type": "text",
+      "id": "modal_subtitle",
+      "label": "Modal subtitle",
+      "default": "Optimized neurotransmitter function + mental clarity"
+    },
+
+    { "type": "text", "id": "modal_desc_title", "label": "Description title", "default": "The Science" },
+    {
+      "type": "richtext",
+      "id": "modal_desc_content",
+      "label": "Description content",
+      "default": "<p>Write the science-backed description here.</p>"
+    },
+
+    { "type": "text", "id": "modal_bullets_title", "label": "Bullets section title", "default": "Key Benefits" }
+  ],
+  "blocks": [
+    {
+      "type": "bullet",
+      "name": "Bullet point",
+      "limit": 6,
+      "settings": [{ "type": "text", "id": "text", "label": "Bullet text", "default": "Promotes calm alertness" }]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Nutrient Card + Modal",
+      "blocks": [
+        { "type": "bullet", "settings": { "text": "Promotes calm alertness" } },
+        { "type": "bullet", "settings": { "text": "Enhances focus" } },
+        { "type": "bullet", "settings": { "text": "Supports cognitive function" } },
+        { "type": "bullet", "settings": { "text": "Reduces mental stress" } },
+        { "type": "bullet", "settings": { "text": "Improves sleep quality" } },
+        { "type": "bullet", "settings": { "text": "Balances mood" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -143,6 +143,7 @@
     </script>
 
     <script>
+      const neuralData = {};
       document.addEventListener('DOMContentLoaded', () => {
         const cards = document.querySelectorAll('.feature-card');
         const backdrop = document.getElementById('feature-modal-backdrop');
@@ -156,15 +157,15 @@
         cards.forEach((card) => {
           card.addEventListener('click', () => {
             // Grab content from card
-            const title = card.querySelector('h4')?.innerText || '';
-            const desc = card.querySelector('p')?.innerText || '';
+            // const title = card.querySelector('h4')?.innerText || '';
+            // const desc = card.querySelector('p')?.innerText || '';
             // Optional: set hero image dynamically if you have data attributes
             // For now, placeholder:
-            const heroImage = card.dataset.image || 'https://via.placeholder.com/900x400';
+            // const heroImage = card.dataset.image || 'https://via.placeholder.com/900x400';
 
-            modalTitle.textContent = title;
-            modalDesc.textContent = desc;
-            modalImg.src = heroImage;
+            // modalTitle.textContent = title;
+            // modalDesc.textContent = desc;
+            // modalImg.src = heroImage;
 
             backdrop.classList.remove('hidden');
             backdrop.classList.add('flex');
