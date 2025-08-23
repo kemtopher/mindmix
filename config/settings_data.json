@@ -120,7 +120,28 @@
       },
       "flavor-experience": {
         "type": "flavor-experience",
-        "settings": {}
+        "blocks": {
+          "section_card_bPG7E3": {
+            "type": "section_card",
+            "settings": {
+              "card_title": "GREEN APPLE KIWI",
+              "card_subtitle": "Morning Focus Boost",
+              "card_image": "shopify://shop_images/green-apple-kiwi.png",
+              "card_benefits": "Energizing and bright, Perfect for early productivity",
+              "card_serving": "1 SERVING | POWERED BY RHODIOLA",
+              "card_accent": "4AM hustle ready"
+            }
+          }
+        },
+        "block_order": [
+          "section_card_bPG7E3"
+        ],
+        "settings": {
+          "section_title": "CHOOSE YOUR, COGNITIVE CATALYST",
+          "section_subtitle": "Science-backed formula designed for cognitive enhancement",
+          "section_subtext": "Mix & match for your optimal cognitive routine throughout the day",
+          "cta_link": ""
+        }
       },
       "lifestyle-performance": {
         "type": "lifestyle-performance",
