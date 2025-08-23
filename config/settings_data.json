@@ -29,7 +29,28 @@
       },
       "neural-performance": {
         "type": "neural-performance",
-        "settings": {}
+        "blocks": {
+          "section_card_CiGPFW": {
+            "type": "section_card",
+            "settings": {
+              "card_title": "Rhodiola Rosea",
+              "card_subtitle": "Enhanced focus without burnout + stress adaptation",
+              "accent_bullet": "Works in 30-45 minutes",
+              "modal_title": "",
+              "modal_subtitle": "",
+              "modal_secondary_text": "",
+              "modal_description": "",
+              "key_benefits": ""
+            }
+          }
+        },
+        "block_order": [
+          "section_card_CiGPFW"
+        ],
+        "settings": {
+          "section_title": "NEURAL PATHWAYS, ACTIVATED",
+          "section_subtitle": "Science-backed formula designed for cognitive enhancement"
+        }
       },
       "flavor-experience": {
         "type": "flavor-experience",
