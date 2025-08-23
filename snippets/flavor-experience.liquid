@@ -1,43 +1,51 @@
-<section id="flavors" class="section-padding bg-gradient-to-b from-dark to-darker relative">
-  <div class="absolute inset-0 bg-neuron-pattern opacity-5"></div>
-  
-  <div class="container-custom relative z-10">
-    <div class="text-center max-w-4xl mx-auto mb-16 fade-in">
-      <h2 class="text-white mb-6">
-        <span class="block text-5xl md:text-6xl font-bold tracking-tight">CHOOSE YOUR</span>
-        <span class="block text-5xl md:text-6xl font-bold tracking-tight mt-2 text-primary">COGNITIVE CATALYST</span>
+<section id='flavors' class='section-padding bg-gradient-to-b from-dark to-darker relative'>
+  <div class='absolute inset-0 bg-neuron-pattern opacity-5'></div>
+
+  <div class='container-custom relative'>
+    <div class='text-center max-w-4xl mx-auto mb-16 fade-in'>
+      <h2 class='text-white mb-6'>
+        <span class='block text-5xl md:text-6xl font-bold tracking-tight'>CHOOSE YOUR</span>
+        <span class='block text-5xl md:text-6xl font-bold tracking-tight mt-2 text-primary'>COGNITIVE CATALYST</span>
       </h2>
-      <p class="text-light text-xl">Three scientifically-formulated flavors, each optimized for peak mental performance</p>
+      <p class='text-light text-xl'>
+        Three scientifically-formulated flavors, each optimized for peak mental performance
+      </p>
     </div>
-    
-    <div class="grid md:grid-cols-3 gap-8 mb-16">
+
+    <div class='grid md:grid-cols-3 gap-8 mb-16'>
       {% for flavor in section.blocks %}
         {% if flavor.type == 'flavor' %}
-          <div class="card fade-in group relative overflow-hidden border border-{{ flavor.settings.accent_color }}/30 hover:border-{{ flavor.settings.accent_color }}/100 transition-all duration-500"
-               style="transition-delay: {{ forloop.index | times: 0.2 }}s">
-            <div class="absolute inset-0 bg-gradient-to-t from-{{ flavor.settings.color }}/20 to-transparent opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
-            
-            <div class="relative z-10 h-full flex flex-col p-6">
-              <div class="mb-4">
-                <h3 class="text-white text-2xl font-bold">{{ flavor.settings.name }}</h3>
-                <p class="text-primary font-medium">{{ flavor.settings.tagline }}</p>
+          <div
+            class='card fade-in group relative overflow-hidden border border-{{ flavor.settings.accent_color }}/30 hover:border-{{ flavor.settings.accent_color }}/100 transition-all duration-500'
+            style='transition-delay: {{ forloop.index | times: 0.2 }}s'
+          >
+            <div
+              class='absolute inset-0 bg-gradient-to-t from-{{ flavor.settings.color }}/20 to-transparent opacity-30 group-hover:opacity-50 transition-opacity duration-500'
+            ></div>
+
+            <div class='relative h-full flex flex-col p-6'>
+              <div class='mb-4'>
+                <h3 class='text-white text-2xl font-bold'>{{ flavor.settings.name }}</h3>
+                <p class='text-primary font-medium'>{{ flavor.settings.tagline }}</p>
               </div>
-              
-              <div class="flex-grow">
-                <div class="mx-auto w-12 h-64 relative bg-dark border border-{{ flavor.settings.accent_color }}/50 rounded-md overflow-hidden group-hover:transform group-hover:-translate-y-4 transition-transform duration-500">
-                  <div class="absolute bottom-0 w-full h-1/2 bg-gradient-to-t from-{{ flavor.settings.color }}/20"></div>
+
+              <div class='flex-grow'>
+                <div class='mx-auto w-12 h-64 relative bg-dark border border-{{ flavor.settings.accent_color }}/50 rounded-md overflow-hidden group-hover:transform group-hover:-translate-y-4 transition-transform duration-500'>
+                  <div
+                    class='absolute bottom-0 w-full h-1/2 bg-gradient-to-t from-{{ flavor.settings.color }}/20'
+                  ></div>
                 </div>
               </div>
-              
-              <div class="mt-auto">
-                <div class="bg-dark/70 p-3 rounded-md">
-                  <p class="text-light text-sm mb-1">{{ flavor.settings.description }}</p>
-                  <p class="text-light text-sm">{{ flavor.settings.use_case }}</p>
+
+              <div class='mt-auto'>
+                <div class='bg-dark/70 p-3 rounded-md'>
+                  <p class='text-light text-sm mb-1'>{{ flavor.settings.description }}</p>
+                  <p class='text-light text-sm'>{{ flavor.settings.use_case }}</p>
                 </div>
-                
-                <div class="mt-3 flex items-center justify-between">
-                  <span class="text-xs text-light">1 SERVING | POWERED BY RHODIOLA</span>
-                  <span class="text-xs text-primary font-medium">{{ flavor.settings.highlight }}</span>
+
+                <div class='mt-3 flex items-center justify-between'>
+                  <span class='text-xs text-light'>1 SERVING | POWERED BY RHODIOLA</span>
+                  <span class='text-xs text-primary font-medium'>{{ flavor.settings.highlight }}</span>
                 </div>
               </div>
             </div>
@@ -45,10 +53,10 @@
         {% endif %}
       {% endfor %}
     </div>
-    
-    <div class="text-center fade-in">
-      <p class="text-light text-lg mb-8">Mix & match for your optimal cognitive routine throughout the day</p>
-      <a href="#pricing" class="btn btn-mint text-lg px-8 py-4">Try All Three Flavors</a>
+
+    <div class='text-center fade-in'>
+      <p class='text-light text-lg mb-8'>Mix & match for your optimal cognitive routine throughout the day</p>
+      <a href='#pricing' class='btn btn-mint text-lg px-8 py-4'>Try All Three Flavors</a>
     </div>
   </div>
 </section>

@@ -1,61 +1,66 @@
-<section id="benefits" class="section-padding bg-dark relative">
-  <div class="absolute inset-0 bg-neuron-pattern opacity-5"></div>
-  
-  <div class="container-custom relative z-10">
-    <div class="text-center max-w-3xl mx-auto mb-16 fade-in">
-      <h2 class="text-white mb-4">HOW YOUR BRAIN <span class="text-primary">WILL FEEL</span></h2>
-      <p class="text-light">Scientifically-measured cognitive improvements</p>
+<section id='benefits' class='section-padding bg-dark relative'>
+  <div class='absolute inset-0 bg-neuron-pattern opacity-5'></div>
+
+  <div class='container-custom relative'>
+    <div class='text-center max-w-3xl mx-auto mb-16 fade-in'>
+      <h2 class='text-white mb-4'>HOW YOUR BRAIN <span class='text-primary'>WILL FEEL</span></h2>
+      <p class='text-light'>Scientifically-measured cognitive improvements</p>
     </div>
-    
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+
+    <div class='grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12'>
       {% for benefit in section.blocks %}
         {% if benefit.type == 'benefit' %}
-          <div class="feature-card group hover:shadow-glow fade-in" style="transition-delay: {{ forloop.index | times: 0.1 }}s">
-            <div class="mb-4">
+          <div
+            class='feature-card group hover:shadow-glow fade-in'
+            a
+          >
+            <div class='mb-4'>
               {% render benefit.settings.icon %}
             </div>
-            <h4 class="text-white text-lg font-semibold mb-2 group-hover:text-primary transition-colors">{{ benefit.settings.title }}</h4>
-            <p class="text-light">{{ benefit.settings.description }}</p>
-            
-            <div class="mt-4 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500"></div>
+            <h4 class='text-white text-lg font-semibold mb-2 group-hover:text-primary transition-colors'>
+              {{ benefit.settings.title }}
+            </h4>
+            <p class='text-light'>{{ benefit.settings.description }}</p>
+
+            <div class='mt-4 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500'></div>
           </div>
         {% endif %}
       {% endfor %}
     </div>
-    
-    <div class="text-center fade-in">
-      <a href="#pricing" class="btn btn-mint">Unlock Your Potential</a>
+
+    <div class='text-center fade-in'>
+      <a href='#pricing' class='btn btn-mint'>Unlock Your Potential</a>
     </div>
-    
-    <div class="mt-20 fade-in">
-      <div class="bg-darker rounded-xl overflow-hidden">
-        <div class="relative">
-          <div class="grid grid-cols-1 md:grid-cols-2">
-            <div class="p-4 md:p-8 bg-darkest">
-              <h4 class="text-white mb-4 text-lg md:text-xl">BEFORE MINDMIX</h4>
-              <div class="space-y-4 md:space-y-6">
+
+    <div class='mt-20 fade-in'>
+      <div class='bg-darker rounded-xl overflow-hidden'>
+        <div class='relative'>
+          <div class='grid grid-cols-1 md:grid-cols-2'>
+            <div class='p-4 md:p-8 bg-darkest'>
+              <h4 class='text-white mb-4 text-lg md:text-xl'>BEFORE MINDMIX</h4>
+              <div class='space-y-4 md:space-y-6'>
                 {% for metric in section.blocks %}
                   {% if metric.type == 'before_metric' %}
-                    <div class="flex items-center justify-between gap-4">
-                      <span class="text-light text-sm md:text-base whitespace-nowrap">{{ metric.settings.name }}</span>
-                      <div class="w-24 md:w-32 h-3 md:h-4 bg-dark rounded-full overflow-hidden">
-                        <div class="w-{{ metric.settings.percentage }}/100 h-full bg-primary/30"></div>
+                    <div class='flex items-center justify-between gap-4'>
+                      <span class='text-light text-sm md:text-base whitespace-nowrap'>{{ metric.settings.name }}</span>
+                      <div class='w-24 md:w-32 h-3 md:h-4 bg-dark rounded-full overflow-hidden'>
+                        <div class='w-{{ metric.settings.percentage }}/100 h-full bg-primary/30'></div>
                       </div>
                     </div>
                   {% endif %}
                 {% endfor %}
               </div>
             </div>
-            
-            <div class="p-4 md:p-8">
-              <h4 class="text-primary mb-4 text-lg md:text-xl">AFTER MINDMIX</h4>
-              <div class="space-y-4 md:space-y-6">
+
+            <div class='p-4 md:p-8'>
+              <h4 class='text-primary mb-4 text-lg md:text-xl'>AFTER MINDMIX</h4>
+              <div class='space-y-4 md:space-y-6'>
                 {% for metric in section.blocks %}
                   {% if metric.type == 'after_metric' %}
-                    <div class="flex items-center justify-between gap-4">
-                      <span class="text-light text-sm md:text-base whitespace-nowrap">{{ metric.settings.name }}</span>
-                      <div class="w-24 md:w-32 h-3 md:h-4 bg-dark rounded-full overflow-hidden">
-                        <div class="w-{{ metric.settings.percentage }}/100 h-full bg-primary animate-pulse-slow"></div>
+                    <div class='flex items-center justify-between gap-4'>
+                      <span class='text-light text-sm md:text-base whitespace-nowrap'>{{ metric.settings.name }}</span>
+                      <div class='w-24 md:w-32 h-3 md:h-4 bg-dark rounded-full overflow-hidden'>
+                        <div class='w-{{ metric.settings.percentage }}/100 h-full bg-primary animate-pulse-slow'></div>
                       </div>
                     </div>
                   {% endif %}
@@ -63,8 +68,8 @@
               </div>
             </div>
           </div>
-          
-          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-10 w-10 md:h-12 md:w-12 bg-primary rounded-full flex items-center justify-center z-10">
+
+          <div class='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-10 w-10 md:h-12 md:w-12 bg-primary rounded-full flex items-center justify-center'>
             {% render 'icon-zap', class: 'h-5 w-5 md:h-6 md:w-6 text-dark' %}
           </div>
         </div>

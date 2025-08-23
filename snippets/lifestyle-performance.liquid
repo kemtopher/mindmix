@@ -1,55 +1,58 @@
-<section class="section-padding bg-darker relative">
-  <div class="absolute inset-0 bg-neuron-pattern opacity-5"></div>
-  
-  <div class="container-custom relative z-10">
-    <div class="grid md:grid-cols-2 gap-12 items-center">
-      <div class="fade-in h-[500px] relative rounded-xl overflow-hidden">
+<section class='section-padding bg-darker relative'>
+  <div class='absolute inset-0 bg-neuron-pattern opacity-5'></div>
+
+  <div class='container-custom relative'>
+    <div class='grid md:grid-cols-2 gap-12 items-center'>
+      <div class='fade-in h-[500px] relative rounded-xl overflow-hidden'>
         {% for image in section.blocks %}
           {% if image.type == 'lifestyle_image' %}
-            <div class="absolute inset-0 transition-opacity duration-1000 {% if forloop.first %}opacity-100{% else %}opacity-0{% endif %}" data-image="{{ forloop.index0 }}">
-              <img 
-                src="{{ image.settings.image | img_url: '1200x' }}"
-                alt="{{ image.settings.caption }}"
-                class="w-full h-full object-cover"
-              />
-              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-dark to-transparent p-6">
-                <p class="text-white text-xl font-semibold">{{ image.settings.caption }}</p>
+            <div
+              class='absolute inset-0 transition-opacity duration-1000 {% if forloop.first %}opacity-100{% else %}opacity-0{% endif %}'
+              data-image='{{ forloop.index0 }}'
+            >
+              <img
+                src='{{ image.settings.image | img_url: '1200x' }}'
+                alt='{{ image.settings.caption }}'
+                class='w-full h-full object-cover'
+              >
+              <div class='absolute bottom-0 left-0 right-0 bg-gradient-to-t from-dark to-transparent p-6'>
+                <p class='text-white text-xl font-semibold'>{{ image.settings.caption }}</p>
               </div>
             </div>
           {% endif %}
         {% endfor %}
-        
-        <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+
+        <div class='absolute bottom-4 left-0 right-0 flex justify-center space-x-2'>
           {% for image in section.blocks %}
             {% if image.type == 'lifestyle_image' %}
               <button
-                class="w-2 h-2 rounded-full transition-all duration-300 {% if forloop.first %}bg-primary w-6{% else %}bg-white/50{% endif %}"
-                data-index="{{ forloop.index0 }}"
-                aria-label="Go to image {{ forloop.index }}"
+                class='w-2 h-2 rounded-full transition-all duration-300 {% if forloop.first %}bg-primary w-6{% else %}bg-white/50{% endif %}'
+                data-index='{{ forloop.index0 }}'
+                aria-label='Go to image {{ forloop.index }}'
               ></button>
             {% endif %}
           {% endfor %}
         </div>
       </div>
-      
-      <div class="fade-in" style="transition-delay: 0.2s">
-        <h2 class="text-white mb-4">DIALED IN. <span class="text-primary">NOT ON EDGE.</span></h2>
-        <p class="text-light mb-8">Peak mental performance when you need it most</p>
-        
-        <div class="space-y-4 mb-8">
+
+      <div class='fade-in' style='transition-delay: 0.2s'>
+        <h2 class='text-white mb-4'>DIALED IN. <span class='text-primary'>NOT ON EDGE.</span></h2>
+        <p class='text-light mb-8'>Peak mental performance when you need it most</p>
+
+        <div class='space-y-4 mb-8'>
           {% for benefit in section.blocks %}
             {% if benefit.type == 'benefit' %}
-              <div class="flex items-start">
+              <div class='flex items-start'>
                 {% render 'icon-check-circle', class: 'h-6 w-6 text-primary flex-shrink-0 mt-1 mr-3' %}
-                <p class="text-light">{{ benefit.settings.text }}</p>
+                <p class='text-light'>{{ benefit.settings.text }}</p>
               </div>
             {% endif %}
           {% endfor %}
         </div>
-        
-        <div class="flex flex-wrap gap-4">
-          <a href="#pricing" class="btn btn-primary">Experience the Edge</a>
-          <a href="#science" class="btn btn-secondary">Learn the Science</a>
+
+        <div class='flex flex-wrap gap-4'>
+          <a href='#pricing' class='btn btn-primary'>Experience the Edge</a>
+          <a href='#science' class='btn btn-secondary'>Learn the Science</a>
         </div>
       </div>
     </div>
@@ -57,15 +60,15 @@
 </section>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     const images = document.querySelectorAll('[data-image]');
     const buttons = document.querySelectorAll('[data-index]');
     let activeIndex = 0;
     let interval;
 
     function showImage(index) {
-      images.forEach(img => img.classList.add('opacity-0'));
-      buttons.forEach(btn => {
+      images.forEach((img) => img.classList.add('opacity-0'));
+      buttons.forEach((btn) => {
         btn.classList.remove('bg-primary', 'w-6');
         btn.classList.add('bg-white/50');
       });
@@ -81,7 +84,7 @@
       showImage(nextIndex);
     }
 
-    buttons.forEach(button => {
+    buttons.forEach((button) => {
       button.addEventListener('click', () => {
         const index = parseInt(button.dataset.index);
         showImage(index);
