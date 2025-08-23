@@ -89,6 +89,7 @@
           "section_card_FDzzwk": {
             "type": "section_card",
             "settings": {
+              "card_icon": "shopify://shop_images/svgviewer-png-output_4.png",
               "card_title": "Vitamin B12",
               "card_subtitle": "Neural pathway optimization + brain fuel",
               "accent_bullet": "Works in 45-60 minutes",
