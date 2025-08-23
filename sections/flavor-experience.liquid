@@ -38,7 +38,7 @@
             </div>
             <div class='mt-auto'>
               <div class='bg-dark/70 p-3 rounded-md'>
-                {% assign benefits_string = block.settings.flavor_benefits | default: '' %}
+                {% assign benefits_string = block.settings.card_benefits | default: '' %}
                 {% assign split_benefits = benefits_string | split: ',' %}
 
                 {% for benefit in split_benefits %}
@@ -52,7 +52,6 @@
                     <p class='text-light text-sm mb-1'>{{ item }}</p>
                   {% endif %}
                 {% endfor %}
-                <!-- <p class='text-light text-sm'>Perfect for early productivity</p> -->
               </div>
               <div class='mt-3 flex items-center justify-between'>
                 <span class='text-xs text-light'>{{ block.settings.card_serving }}</span
