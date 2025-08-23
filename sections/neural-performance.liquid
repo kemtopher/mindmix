@@ -45,8 +45,8 @@
         </button>
 
         <div
-          data-neural-modal='{{ trimmed_title }}'
-          id='action-{{ trimmed_title }}'
+          data-neural-card='{{ trimmed_title }}'
+          id='modal-{{ trimmed_title }}'
           class='fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50'
         >
           <div
@@ -115,10 +115,25 @@
 
     const openModal = (data) => {
       if (!data) return;
+      const modal = document.getElementById(`modal-${data}`);
 
       backdrop.classList.remove('hidden');
       backdrop.classList.add('flex');
     };
+
+    cards.forEach((card) => {
+      card.addEventListener('click', () => {
+        const cardKey = (card.dataset.neuralCard || '').trim();
+        console.log('Clicked: ', cardKey);
+
+        if (!cardKey) {
+          console.warn(`Card "${cardKey}" is missing ... Check neural-performance.liquid`);
+          return;
+        }
+
+        openModal(cardKey);
+      });
+    });
 
     // Close interactions
     closeBtn.addEventListener('click', () => {
