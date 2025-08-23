@@ -142,11 +142,23 @@
               "card_serving": "1 SERVING | POWERED BY RHODIOLA",
               "card_accent": "All-day clarity"
             }
+          },
+          "section_card_XjnPjd": {
+            "type": "section_card",
+            "settings": {
+              "card_title": "BLUEBERRY LEMONADE",
+              "card_subtitle": "Deep Work Sessions",
+              "card_image": "shopify://shop_images/blueberry-lemonade.png",
+              "card_benefits": "Bold and intense, Maximum concentration mode",
+              "card_serving": "1 SERVING | POWERED BY RHODIOLA",
+              "card_accent": "Flow state activated"
+            }
           }
         },
         "block_order": [
           "section_card_bPG7E3",
-          "section_card_yFKJBe"
+          "section_card_yFKJBe",
+          "section_card_XjnPjd"
         ],
         "settings": {
           "section_title": "CHOOSE YOUR, COGNITIVE CATALYST",
