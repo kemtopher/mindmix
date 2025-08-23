@@ -32,9 +32,11 @@
               <p class='text-primary font-medium'>{{ block.settings.card_subtitle }}</p>
             </div>
             <div class='flex-grow mb-4'>
-              <div class='mx-auto w-12 h-64 relative bg-dark border border-citrus border-opacity-50 rounded-md overflow-hidden transition-transform duration-500 '>
-                <div class='absolute bottom-0 w-full h-1/2 bg-gradient-to-t from-citrus/20 to-transparent'></div>
-              </div>
+              <img
+                class='h-full object-contain'
+                alt='Card Icon'
+                src='{{ block.settings.card_image | image_url }}'
+              >
             </div>
             <div class='mt-auto'>
               <div class='bg-dark/70 p-3 rounded-md'>
@@ -45,11 +47,7 @@
                   {% assign item = benefit | strip %}
 
                   {% if item != '' %}
-                    {% if forloop.last %}
-                      <p class='text-light text-sm'>{{ item }}</p>
-                    {% endif %}
-
-                    <p class='text-light text-sm mb-1'>{{ item }}</p>
+                    <p class='text-light text-sm mb-1 last:mb-0'>{{ item }}</p>
                   {% endif %}
                 {% endfor %}
               </div>

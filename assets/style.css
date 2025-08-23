@@ -1800,6 +1800,11 @@ video {
   fill: #00E5A0;
 }
 
+.object-contain {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
@@ -2583,6 +2588,10 @@ html {
   color: var(--color-primary);
   transform: rotate(180deg);
   transition: transform 0.3s;
+}
+
+.last\:mb-0:last-child {
+  margin-bottom: 0px;
 }
 
 .hover\:-translate-y-1:hover {
