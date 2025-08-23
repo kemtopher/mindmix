@@ -97,33 +97,6 @@
       <!-- closes container-custom -->
     </footer>
 
-    <div
-      id='feature-modal-backdrop'
-      class='fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50'
-    >
-      <div
-        id='feature-modal'
-        class='bg-white rounded-lg overflow-hidden relative w-full max-w-[900px] md:w-3/4 h-auto max-h-[90vh] flex flex-col'
-      >
-        <button
-          id='feature-modal-close'
-          class='absolute top-4 right-4 text-black text-2xl font-bold hover:text-gray-600'
-        >
-          &times;
-        </button>
-
-        <div class='w-full h-[200px] md:h-[256px] bg-gray-200 overflow-hidden'>
-          <img id='feature-modal-image' src='' alt='Feature image' class='w-full h-full object-cover'>
-        </div>
-
-        <div id='feature-modal-content' class='p-6 overflow-y-auto'>
-          <h3 id='feature-modal-title' class='text-2xl font-bold mb-4'></h3>
-
-          <p id='feature-modal-description' class='text-gray-700 mb-4'></p>
-        </div>
-      </div>
-    </div>
-
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         // Initialize animations
@@ -139,59 +112,6 @@
         );
 
         document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
-      });
-    </script>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const cards = document.querySelectorAll('.feature-card');
-        const backdrop = document.getElementById('feature-modal-backdrop');
-        const modal = document.getElementById('feature-modal');
-        const closeBtn = document.getElementById('feature-modal-close');
-
-        const modalTitle = document.getElementById('feature-modal-title');
-        const modalDesc = document.getElementById('feature-modal-description');
-        const modalImg = document.getElementById('feature-modal-image');
-
-        cards.forEach((card) => {
-          card.addEventListener('click', () => {
-            // Grab content from card
-            const title = card.querySelector('h4')?.innerText || '';
-            const desc = card.querySelector('p')?.innerText || '';
-            // Optional: set hero image dynamically if you have data attributes
-            // For now, placeholder:
-            const heroImage = card.dataset.image || 'https://via.placeholder.com/900x400';
-
-            modalTitle.textContent = title;
-            modalDesc.textContent = desc;
-            modalImg.src = heroImage;
-
-            backdrop.classList.remove('hidden');
-            backdrop.classList.add('flex');
-          });
-        });
-
-        // Close modal
-        closeBtn.addEventListener('click', () => {
-          backdrop.classList.add('hidden');
-          backdrop.classList.remove('flex');
-        });
-
-        // Close on backdrop click
-        backdrop.addEventListener('click', (e) => {
-          if (e.target === backdrop) {
-            backdrop.classList.add('hidden');
-            backdrop.classList.remove('flex');
-          }
-        });
-
-        // Optional: ESC key closes modal
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape') {
-            backdrop.classList.add('hidden');
-            backdrop.classList.remove('flex');
-          }
-        });
       });
     </script>
   </body>
