@@ -29,7 +29,94 @@
       },
       "neural-performance": {
         "type": "neural-performance",
-        "settings": {}
+        "blocks": {
+          "section_card_wrDzxK": {
+            "type": "section_card",
+            "settings": {
+              "card_icon": "shopify://shop_images/svgviewer-png-output.png",
+              "card_title": "Rhodiola Rosea",
+              "card_subtitle": "Enhanced focus withou burnout + stress adaptation",
+              "accent_bullet": "Works in 30-45 minutes",
+              "modal_image": "shopify://shop_images/bg-rhodiola.jpg",
+              "modal_title": "Rhodiola Rosea",
+              "modal_subtitle": "Enhanced focus without burnout + stress adaptation",
+              "modal_secondary_text": "The Science",
+              "modal_description": "Rhodiola Rosea is an adaptogenic herb that has been used in traditional medicine for centuries. Clinical studies show it helps reduce mental fatigue and improves cognitive function during stress-inducing tasks by modulating cortisol levels and enhancing neurotransmitter activity.",
+              "key_benefits": "Reduces mental fatigue, Enhances cognitive performance, Supports mood balance,Improves stress resilience, Boosts mental energy, Optimizes brain function"
+            }
+          },
+          "section_card_yUXrpF": {
+            "type": "section_card",
+            "settings": {
+              "card_icon": "shopify://shop_images/svgviewer-png-output_1.png",
+              "card_title": "Lion's Mane",
+              "card_subtitle": "Accelerated memory retention + neural growth",
+              "accent_bullet": "Works in 40-60 minutes",
+              "modal_image": "shopify://shop_images/bg-lionsmane.jpg",
+              "modal_title": "Lion's Mane",
+              "modal_subtitle": "Accelerated memory retention + neural growth",
+              "modal_secondary_text": "The Science",
+              "modal_description": "Lion's Mane mushroom contains compounds that stimulate the production of nerve growth factor (NGF), supporting neuroplasticity and cognitive function. Research indicates it can enhance memory formation and protect against cognitive decline.",
+              "key_benefits": "Supports nerve growth, Improves focus and clarity, Boosts learning ability, Enhances memory formation, Protects brain cells, Promotes neuroplasticity"
+            }
+          },
+          "section_card_6bEDd7": {
+            "type": "section_card",
+            "settings": {
+              "card_icon": "shopify://shop_images/svgviewer-png-output_2.png",
+              "card_title": "L-Theanine",
+              "card_subtitle": "Optimized neurotransmitter function + mental clarity",
+              "accent_bullet": "Works in 20-30 minutes",
+              "modal_image": "shopify://shop_images/bg-ltheanine.jpg",
+              "modal_title": "L-Theanine",
+              "modal_subtitle": "Optimized neurotransmitter function + mental clarity",
+              "modal_secondary_text": "The Science",
+              "modal_description": "L-Theanine is an amino acid that promotes alpha brain wave activity, creating a state of relaxed alertness. It works synergistically with caffeine to enhance focus while reducing jitters and anxiety.",
+              "key_benefits": "Promotes calm alertness, Enhances focus, Supports cognitive function, Reduces mental stress, Improves sleep quality, Balances mood"
+            }
+          },
+          "section_card_Nr66Ki": {
+            "type": "section_card",
+            "settings": {
+              "card_icon": "shopify://shop_images/svgviewer-png-output_3.png",
+              "card_title": "Green Tea Extract",
+              "card_subtitle": "Sustained cognitive energy + antioxidant protection",
+              "accent_bullet": "Works in 15-30 minutes",
+              "modal_image": "shopify://shop_images/bg-greentea.jpg",
+              "modal_title": "Green Tea Extract",
+              "modal_subtitle": "Sustained cognitive energy + antioxidant protection",
+              "modal_secondary_text": "The Science",
+              "modal_description": "Green tea extract contains EGCG and L-theanine, providing sustained energy and neuroprotective benefits. Studies show it enhances memory and attention while protecting brain cells from oxidative stress.",
+              "key_benefits": "Sustained energy, Enhanced memory, Neuroprotective effects, Antioxidant protection, Improved attention, Cellular health support"
+            }
+          },
+          "section_card_PeWb7h": {
+            "type": "section_card",
+            "settings": {
+              "card_icon": "shopify://shop_images/svgviewer-png-output_4.png",
+              "card_title": "Vitamin B12",
+              "card_subtitle": "Neural pathway optimization + brain fuel",
+              "accent_bullet": "Works in 45-60 minutes",
+              "modal_image": "shopify://shop_images/bg-ltheanine.jpg",
+              "modal_title": "Vitamin B12",
+              "modal_subtitle": "Neural pathway optimization + brain fuel",
+              "modal_secondary_text": "The Science",
+              "modal_description": "Vitamin B12 is essential for neural metabolism and DNA synthesis. It supports myelin formation, enhancing signal transmission between neurons and maintaining cognitive function.",
+              "key_benefits": "Supports brain energy, Maintains cognitive function, Supports memory, Enhances neural signals, Promotes mental clarity, Optimizes brain health"
+            }
+          }
+        },
+        "block_order": [
+          "section_card_wrDzxK",
+          "section_card_yUXrpF",
+          "section_card_6bEDd7",
+          "section_card_Nr66Ki",
+          "section_card_PeWb7h"
+        ],
+        "settings": {
+          "section_title": "NEURAL PATHWAYS, ACTIVATED",
+          "section_subtitle": "Science-backed formula designed for cognitive enhancement"
+        }
       },
       "flavor-experience": {
         "type": "flavor-experience",
