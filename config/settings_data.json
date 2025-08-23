@@ -33,6 +33,7 @@
           "section_card_CiGPFW": {
             "type": "section_card",
             "settings": {
+              "card_icon": "shopify://shop_images/svgviewer-png-output.png",
               "card_title": "Rhodiola Rosea",
               "card_subtitle": "Enhanced focus without burnout + stress adaptation",
               "accent_bullet": "Works in 30-45 minutes",
