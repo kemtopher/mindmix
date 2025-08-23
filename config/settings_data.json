@@ -68,12 +68,26 @@
               "modal_description": "",
               "key_benefits": ""
             }
+          },
+          "section_card_CVQ4ER": {
+            "type": "section_card",
+            "settings": {
+              "card_title": "Green Tea Extract",
+              "card_subtitle": "Sustained cognitive energy + antioxidant protection",
+              "accent_bullet": "Works in 15-30 minutes",
+              "modal_title": "",
+              "modal_subtitle": "",
+              "modal_secondary_text": "",
+              "modal_description": "",
+              "key_benefits": ""
+            }
           }
         },
         "block_order": [
           "section_card_CiGPFW",
           "section_card_t4JDYh",
-          "section_card_FRymQJ"
+          "section_card_FRymQJ",
+          "section_card_CVQ4ER"
         ],
         "settings": {
           "section_title": "NEURAL PATHWAYS, ACTIVATED",
