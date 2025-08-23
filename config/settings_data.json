@@ -55,11 +55,25 @@
               "modal_description": "",
               "key_benefits": ""
             }
+          },
+          "section_card_FRymQJ": {
+            "type": "section_card",
+            "settings": {
+              "card_title": "L-Theanine",
+              "card_subtitle": "Optimized neurotransmitter function + mental clarity",
+              "accent_bullet": "Works in 20-30 minutes",
+              "modal_title": "",
+              "modal_subtitle": "",
+              "modal_secondary_text": "",
+              "modal_description": "",
+              "key_benefits": ""
+            }
           }
         },
         "block_order": [
           "section_card_CiGPFW",
-          "section_card_t4JDYh"
+          "section_card_t4JDYh",
+          "section_card_FRymQJ"
         ],
         "settings": {
           "section_title": "NEURAL PATHWAYS, ACTIVATED",
