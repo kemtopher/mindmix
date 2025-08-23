@@ -47,6 +47,7 @@
           "section_card_t4JDYh": {
             "type": "section_card",
             "settings": {
+              "card_icon": "shopify://shop_images/svgviewer-png-output_1.png",
               "card_title": "Lion's Mane",
               "card_subtitle": "Accelerated memory retention + neural growth",
               "accent_bullet": "Works in 40-60 minutes",
