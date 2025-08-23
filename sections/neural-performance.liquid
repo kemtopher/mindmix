@@ -1,144 +1,217 @@
 <section id='why-it-works' class='section-padding bg-dark relative'>
   <div class='absolute inset-0 bg-neuron-pattern opacity-5'></div>
   <div class='container-custom relative z-10'>
+    {% assign title = section.settings.section_title | default: '' %}
+    {% assign parts = title | split: ',' %}
+    {% assign main_title = parts[0] | strip %}
+
     <div class='text-center max-w-3xl mx-auto mb-16 fade-in is-visible'>
       <h2 class='text-white mb-6 text-5xl md:text-6xl font-bold tracking-tight'>
-        NEURAL PATHWAYS
-        <span class='block text-5xl md:text-6xl font-bold tracking-tight mt-2 text-primary'>ACTIVATED</span>
+        {{ main_title }}
+        {% if parts.size > 1 %}
+          <span class='block text-5xl md:text-6xl font-bold tracking-tight mt-2 text-primary'>
+            {{ parts[1] | strip }}
+          </span>
+        {% endif %}
       </h2>
-      <p class='text-light text-xl'>Science-backed formula designed for cognitive enhancement</p>
+      <p class='text-light text-xl'>{{ section.settings.section_subtitle }}</p>
     </div>
+
     <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4'>
-      <button class='feature-card group hover:shadow-glow fade-in text-left is-visible style-MldOF' id='style-MldOF'>
-        <div class='mb-4'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='24'
-            height='24'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            stroke-width='2'
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            class='lucide lucide-brain h-8 w-8 md:h-10 md:w-10 text-primary'
+      {% for block in section.blocks %}
+        {% assign trimmed_title = section.settings.section_title | handleize %}
+
+        <button
+          data-neural-card='{{ trimmed_title }}'
+          class='feature-card group hover:shadow-glow fade-in text-left is-visible style-VktoH'
+          id='action-{{ trimmed_title }}'
+        >
+          <div class='mb-4'>
+            <img
+              class='h-full'
+              alt='Neural Pathways Card Icon'
+              src='{{ section.settings.card_icon | image_url }}'
+            >
+          </div>
+          <h4 class='text-white text-lg font-semibold mb-2 group-hover:text-primary transition-colors'>
+            {{ block.settings.card_title }}
+          </h4>
+          <p class='text-light mb-4'>{{ block.settings.card_subtitle }}</p>
+          <div class='flex items-center text-sm'>
+            <div class='h-2 w-2 rounded-full bg-primary mr-2'></div>
+            <span class='text-primary'>{{ block.settings.accent_bullet }}</span>
+          </div>
+          <div class='mt-4 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500'></div>
+        </button>
+
+        <div
+          data-neural-modal='{{ trimmed_title }}'
+          id='action-{{ trimmed_title }}'
+          class='fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50'
+        >
+          <div
+            id='feature-modal'
+            class='bg-darker rounded-lg overflow-hidden relative w-full max-w-[900px] md:w-3/4 h-auto max-h-[90vh] flex flex-col'
           >
-            <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"></path>
-            <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"></path>
-          </svg>
+            <button
+              id='feature-modal-close'
+              class='absolute top-4 right-4 text-black text-2xl font-bold hover:text-gray-600'
+            >
+              &times;
+            </button>
+
+            <div class='w-full h-[200px] md:h-[256px] bg-gray-200 overflow-hidden'>
+              <img
+                id='feature-modal-image'
+                class='w-full h-full object-cover'
+                alt='Feature image'
+                src='{{ block.settings.modal_image | image_url }}'
+              >
+            </div>
+
+            <div id='feature-modal-content' class='p-8 overflow-y-auto'>
+              <h3 id='feature-modal-title' class='text-3xl font-bold text-white mb-2'>
+                {{ block.settings.modal_title }}
+              </h3>
+              <h4 id='feature-modal-subtitle' class='text-primary text-lg mb-6'>{{ block.settings.modal_subtitle }}</h4>
+
+              <div>
+                <h3 id='feature-modal-descTitle' class='text-white text-xl font-semibold mb-4'>
+                  {{ block.settings.modal_secondary_text }}
+                </h3>
+                <p id='feature-modal-descContent' class='text-light'>{{ block.settings.modal_description }}</p>
+              </div>
+              <div>
+                <h3 id='feature-modal-bulletsTitle' class='text-white text-xl font-semibold mb-4'>Key Benefits</h3>
+                <ul
+                  id='feature-modal-description'
+                  class='text-gray-700 mb-4 grid grid-cols-1 md:grid-cols-2 gap-4'
+                >
+                  {% assign benefits_string = section.settings.key_benefits | default: '' %}
+                  {% assign split_benefits = benefits_string | split: ',' %}
+
+                  {% for benefit in split_benefits %}
+                    {% assign item = benefit | strip %}
+
+                    {% if item != '' %}
+                      <li>{{ item }}</li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
-        <h4 class='text-white text-lg font-semibold mb-2 group-hover:text-primary transition-colors'>Rhodiola Rosea</h4>
-        <p class='text-light mb-4'>Enhanced focus without burnout + stress adaptation</p>
-        <div class='flex items-center text-sm'>
-          <div class='h-2 w-2 rounded-full bg-primary mr-2'></div>
-          <span class='text-primary'>Works in 30-45 minutes</span>
-        </div>
-        <div class='mt-4 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500'></div></button
-      ><button class='feature-card group hover:shadow-glow fade-in text-left is-visible style-ANmil' id='style-ANmil'>
-        <div class='mb-4'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='24'
-            height='24'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            stroke-width='2'
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            class='lucide lucide-chrome h-8 w-8 md:h-10 md:w-10 text-primary'
-          >
-            <circle cx="12" cy="12" r="10"></circle>
-            <circle cx="12" cy="12" r="4"></circle>
-            <line x1="21.17" x2="12" y1="8" y2="8"></line>
-            <line x1="3.95" x2="8.54" y1="6.06" y2="14"></line>
-            <line x1="10.88" x2="15.46" y1="21.94" y2="14"></line>
-          </svg>
-        </div>
-        <h4 class='text-white text-lg font-semibold mb-2 group-hover:text-primary transition-colors'>Lion's Mane</h4>
-        <p class='text-light mb-4'>Accelerated memory retention + neural growth</p>
-        <div class='flex items-center text-sm'>
-          <div class='h-2 w-2 rounded-full bg-primary mr-2'></div>
-          <span class='text-primary'>Works in 40-60 minutes</span>
-        </div>
-        <div class='mt-4 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500'></div></button
-      ><button class='feature-card group hover:shadow-glow fade-in text-left is-visible style-RGdem' id='style-RGdem'>
-        <div class='mb-4'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='24'
-            height='24'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            stroke-width='2'
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            class='lucide lucide-zap h-8 w-8 md:h-10 md:w-10 text-primary'
-          >
-            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-          </svg>
-        </div>
-        <h4 class='text-white text-lg font-semibold mb-2 group-hover:text-primary transition-colors'>L-Theanine</h4>
-        <p class='text-light mb-4'>Optimized neurotransmitter function + mental clarity</p>
-        <div class='flex items-center text-sm'>
-          <div class='h-2 w-2 rounded-full bg-primary mr-2'></div>
-          <span class='text-primary'>Works in 20-30 minutes</span>
-        </div>
-        <div class='mt-4 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500'></div></button
-      ><button class='feature-card group hover:shadow-glow fade-in text-left is-visible style-B51yJ' id='style-B51yJ'>
-        <div class='mb-4'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='24'
-            height='24'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            stroke-width='2'
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            class='lucide lucide-leaf h-8 w-8 md:h-10 md:w-10 text-primary'
-          >
-            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
-            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
-          </svg>
-        </div>
-        <h4 class='text-white text-lg font-semibold mb-2 group-hover:text-primary transition-colors'>
-          Green Tea Extract
-        </h4>
-        <p class='text-light mb-4'>Sustained cognitive energy + antioxidant protection</p>
-        <div class='flex items-center text-sm'>
-          <div class='h-2 w-2 rounded-full bg-primary mr-2'></div>
-          <span class='text-primary'>Works in 15-30 minutes</span>
-        </div>
-        <div class='mt-4 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500'></div></button
-      ><button class='feature-card group hover:shadow-glow fade-in text-left is-visible style-VktoH' id='style-VktoH'>
-        <div class='mb-4'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='24'
-            height='24'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            stroke-width='2'
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            class='lucide lucide-battery h-8 w-8 md:h-10 md:w-10 text-primary'
-          >
-            <rect width="16" height="10" x="2" y="7" rx="2" ry="2"></rect>
-            <line x1="22" x2="22" y1="11" y2="13"></line>
-          </svg>
-        </div>
-        <h4 class='text-white text-lg font-semibold mb-2 group-hover:text-primary transition-colors'>Vitamin B12</h4>
-        <p class='text-light mb-4'>Neural pathway optimization + brain fuel</p>
-        <div class='flex items-center text-sm'>
-          <div class='h-2 w-2 rounded-full bg-primary mr-2'></div>
-          <span class='text-primary'>Works in 45-60 minutes</span>
-        </div>
-        <div class='mt-4 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500'></div>
-      </button>
+      {% endfor %}
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.feature-card');
+    const backdrop = document.getElementById('feature-modal-backdrop');
+    const closeBtn = document.getElementById('feature-modal-close');
+
+    const openModal = (data) => {
+      if (!data) return;
+
+      backdrop.classList.remove('hidden');
+      backdrop.classList.add('flex');
+    };
+
+    // Close interactions
+    closeBtn.addEventListener('click', () => {
+      backdrop.classList.add('hidden');
+      backdrop.classList.remove('flex');
+    });
+    backdrop.addEventListener('click', (e) => {
+      if (e.target === backdrop) {
+        backdrop.classList.add('hidden');
+        backdrop.classList.remove('flex');
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        backdrop.classList.add('hidden');
+        backdrop.classList.remove('flex');
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Neural Cards",
+  "settings": [
+    { "type": "text", "id": "section_title", "label": "Section title", "default": "NEURAL PATHWAYS, ACTIVATED" },
+    {
+      "type": "text",
+      "id": "section_subtitle",
+      "label": "Section subtitle",
+      "default": "Science-backed formula designed for cognitive enhancement",
+      "info": "Separate title with comma to split white & green text/new line"
+    }
+  ],
+  "max_blocks": 5,
+  "blocks": [
+    {
+      "type": "section_card",
+      "name": "Section Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "card_icon",
+          "label": "Card Icon"
+        },
+        {
+          "type": "text",
+          "id": "card_title",
+          "label": "Card Subtitle"
+        },
+        {
+          "type": "text",
+          "id": "card_subtitle",
+          "label": "Card Subtitle"
+        },
+        {
+          "type": "text",
+          "id": "accent_bullet",
+          "label": "Accent Bulletpoint"
+        },
+        {
+          "type": "image_picker",
+          "id": "modal_image",
+          "label": "Modal Image"
+        },
+        {
+          "type": "text",
+          "id": "modal_title",
+          "label": "Modal Title"
+        },
+        {
+          "type": "text",
+          "id": "modal_subtitle",
+          "label": "Modal Subtitle"
+        },
+        {
+          "type": "text",
+          "id": "modal_secondary_text",
+          "label": "Modal Secondary Text"
+        },
+        {
+          "type": "text",
+          "id": "modal_description",
+          "label": "Modal Description"
+        },
+        {
+          "type": "text",
+          "id": "key_benefits",
+          "label": "Key Benefits",
+          "info": "Separate each key benefit by a comma"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
