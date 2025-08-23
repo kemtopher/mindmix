@@ -75,6 +75,7 @@
           "section_card_CVQ4ER": {
             "type": "section_card",
             "settings": {
+              "card_icon": "shopify://shop_images/svgviewer-png-output_3.png",
               "card_title": "Green Tea Extract",
               "card_subtitle": "Sustained cognitive energy + antioxidant protection",
               "accent_bullet": "Works in 15-30 minutes",
