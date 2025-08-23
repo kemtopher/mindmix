@@ -42,10 +42,24 @@
               "modal_description": "",
               "key_benefits": ""
             }
+          },
+          "section_card_t4JDYh": {
+            "type": "section_card",
+            "settings": {
+              "card_title": "Lion's Mane",
+              "card_subtitle": "Accelerated memory retention + neural growth",
+              "accent_bullet": "Works in 40-60 minutes",
+              "modal_title": "",
+              "modal_subtitle": "",
+              "modal_secondary_text": "",
+              "modal_description": "",
+              "key_benefits": ""
+            }
           }
         },
         "block_order": [
-          "section_card_CiGPFW"
+          "section_card_CiGPFW",
+          "section_card_t4JDYh"
         ],
         "settings": {
           "section_title": "NEURAL PATHWAYS, ACTIVATED",
