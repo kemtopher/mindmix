@@ -1,6 +1,6 @@
 <section id='flavors' class='section-padding bg-gradient-to-b from-dark to-darker relative'>
   <div class='absolute inset-0 bg-neuron-pattern opacity-5'></div>
-  <div class='container-custom relative z-10'>
+  <div class='container-custom relative'>
     {% assign title = section.settings.section_title | default: '' %}
     {% assign parts = title | split: ',' %}
     {% assign main_title = parts[0] | strip %}
@@ -26,7 +26,7 @@
           <div
             class='absolute inset-0 bg-gradient-to-t from-citrus/20 to-transparent opacity-30 transition-opacity duration-500 opacity-30'
           ></div>
-          <div class='relative z-10 h-full flex flex-col'>
+          <div class='relative h-full flex flex-col'>
             <div class='mb-4'>
               <h3 class='text-white text-2xl font-bold'>{{ block.settings.card_title }}</h3>
               <p class='text-primary font-medium'>{{ block.settings.card_subtitle }}</p>
