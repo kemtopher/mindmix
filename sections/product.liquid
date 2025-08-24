@@ -1,6 +1,6 @@
 <section id='shopify-section-main-product' class='w-full pt-44 pb-16 flex flex-col md:flex-row items-center justify-center'>
   <div class='container flex flex-col md:flex-row justify-between gap-8'>
-    <div class='product-gallery w-full max-w-[555px] h-full lg:h-[60vh] flex flex-col gap-16 justify-between'>
+    <div class='product-gallery w-full max-w-[400px] lg:max-w-full h-full lg:h-[500px] flex flex-col gap-16 justify-between'>
       <div class="product-images flex flex-row gap-4 order-2 lg:order-1 justify-center">
         {% for media in product.media %}
           {% if media.media_type == 'image' %}
@@ -16,7 +16,7 @@
           {% endif %}
         {% endfor %}
       </div>
-      <div class="h-[450px] lg:h-[40vh] w-full text-center aspect-w-4 aspect-h-5 ">
+      <div class="h-[450px] lg:h-[40vh] w-full text-center aspect-w-4 aspect-h-5">
         <img 
           id="main-product-image"
           src="{{ product.featured_image | img_url: 'master' }}" 
@@ -35,6 +35,7 @@
 
       <div class='product-variant-select pb-8 border-b'>
         <p class='py-4 text-base text-white'>Choose your quantity:</p>
+        <!-- <p class='py-4 text-base text-white'>{{ variant.metafields.custom.variant_description | metafield_text }}</p> -->
         <div class='variant-well flex py-4 gap-8'>
           {% for variant in product.variants %}
             {% if forloop.first %}
