@@ -1,0 +1,69 @@
+<section id='net-geo' class='py-16 md:py-24 relative overflow-hidden'>
+  <div class='absolute inset-0'>
+    <img
+      src='https://images.pexels.com/photos/6590699/pexels-photo-6590699.jpeg'
+      alt='Rhodiola rosea flowers'
+      class='w-full h-full object-cover'
+    >
+    <div class='absolute inset-0 bg-gradient-to-b from-dark/95 via-dark/90 to-dark/95'></div>
+    <div
+      class='absolute inset-0 bg-gradient-radial from-primary/[0.02] via-transparent to-transparent opacity-70'
+    ></div>
+  </div>
+  <div class='container-custom relative z-10'>
+    <div class='text-center max-w-3xl mx-auto fade-in is-visible'>
+      <h2 class='text-white text-3xl md:text-5xl lg:text-6xl font-bold mb-4'>
+        POWERED BY <span class='text-primary'>RHODIOLA</span>
+      </h2>
+      <p class='text-light text-base md:text-xl px-4 mb-8'>The adaptogenic powerhouse behind peak mental performance</p>
+      <div class='max-w-2xl mx-auto bg-darker/80 backdrop-blur-sm rounded-lg p-6 border border-primary/20 hover:border-primary/30 transition-colors duration-300'>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='24'
+          height='24'
+          viewBox='0 0 24 24'
+          fill='none'
+          stroke='currentColor'
+          stroke-width='2'
+          stroke-linecap='round'
+          stroke-linejoin='round'
+          class='lucide lucide-quote h-8 w-8 text-primary mb-4 mx-auto'
+        >
+          <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path>
+        </svg>
+        <p class='text-light/90 italic mb-4 text-lg'>
+          "Used by Soviet scientists to enhance physical and mental endurance, Rhodiola rosea was their secret weapon
+          long before modern performance enhancers."
+        </p>
+        <p class='text-primary text-sm font-medium'>— National Geographic</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Nat Geo",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "POWERED BY, RHODIOLA",
+      "info": "Separate title with comma to split white & green text/new line"
+    },
+    {
+      "type": "text",
+      "id": "section_subtitle",
+      "label": "Section Subtitle",
+      "default": "The adaptogenic powerhouse behind peak mental performance"
+    },
+    {
+      "type": "text",
+      "id": "section_quote",
+      "label": "Section Quote",
+      "default": "Used by Soviet scientists to enhance physical and mental endurance, Rhodiola rosea was their secret weapon long before modern performance enhancers."
+    }
+  ]
+}
+{% endschema %}
