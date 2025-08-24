@@ -208,11 +208,24 @@
               "cta_text": "Start Performing",
               "cta_link": ""
             }
+          },
+          "section_card_nDENQt": {
+            "type": "section_card",
+            "settings": {
+              "card_title": "PEAK PERFORMER",
+              "pack_size": "30-Pack",
+              "card_price": "$79.95",
+              "price_extra": "(Save 35%)",
+              "card_list": "Complete monthly supply, Priority customer support, Subscribe & save 20% option",
+              "cta_text": "Go Pro",
+              "cta_link": ""
+            }
           }
         },
         "block_order": [
           "section_card_WCjN7R",
-          "section_card_4gnpT3"
+          "section_card_4gnpT3",
+          "section_card_nDENQt"
         ],
         "settings": {
           "section_title": "CHOOSE YOUR, MENTAL ADVANTAGE",
