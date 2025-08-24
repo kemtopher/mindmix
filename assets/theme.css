@@ -50,6 +50,13 @@ html {
   transition-duration: 0.3s;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+.btn-mint {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 229 160 / var(--tw-bg-opacity, 1));
+  --tw-text-opacity: 1;
+  color: rgb(11 11 11 / var(--tw-text-opacity, 1));
+}
 .card {
   overflow: hidden;
   border-radius: 0.5rem;

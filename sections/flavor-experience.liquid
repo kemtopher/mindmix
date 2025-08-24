@@ -63,7 +63,11 @@
 
     <div class='text-center fade-in is-visible'>
       <p class='text-light text-lg mb-8'>{{ section.settings.section_subtext }}</p>
-      <a href='{{ cta_link | default: "#"}}' class='btn btn-mint text-lg px-8 py-4'>Try All Three Flavors</a>
+      <a
+        href='{{ cta_link | default: "#"}}'
+        class='btn btn-mint px-8 py-4 text-lg font-bold hover:transform hover:scale-105 transition-transform'
+        >Try All Three Flavors</a
+      >
     </div>
   </div>
 </section>

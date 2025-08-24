@@ -1359,10 +1359,6 @@ video {
   gap: 0.5rem;
 }
 
-.gap-3 {
-  gap: 0.75rem;
-}
-
 .gap-4 {
   gap: 1rem;
 }
@@ -1604,6 +1600,10 @@ video {
   background-color: rgb(24 24 24 / var(--tw-bg-opacity, 1));
 }
 
+.bg-darker\/80 {
+  background-color: rgb(24 24 24 / 0.8);
+}
+
 .bg-darkest {
   --tw-bg-opacity: 1;
   background-color: rgb(31 31 31 / var(--tw-bg-opacity, 1));
@@ -1647,10 +1647,6 @@ video {
 
 .bg-white\/50 {
   background-color: rgb(255 255 255 / 0.5);
-}
-
-.bg-darker\/80 {
-  background-color: rgb(24 24 24 / 0.8);
 }
 
 .bg-opacity-70 {
@@ -1713,6 +1709,12 @@ video {
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
+.from-dark\/95 {
+  --tw-gradient-from: rgb(11 11 11 / 0.95) var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(11 11 11 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
 .from-darker {
   --tw-gradient-from: #181818 var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(24 24 24 / 0) var(--tw-gradient-to-position);
@@ -1749,12 +1751,6 @@ video {
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
-.from-dark\/95 {
-  --tw-gradient-from: rgb(11 11 11 / 0.95) var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(11 11 11 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
 .from-primary\/\[0\.02\] {
   --tw-gradient-from: rgb(0 229 160 / 0.02) var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(0 229 160 / 0) var(--tw-gradient-to-position);
@@ -1776,11 +1772,6 @@ video {
   --tw-gradient-stops: var(--tw-gradient-from), transparent var(--tw-gradient-via-position), var(--tw-gradient-to);
 }
 
-.via-dark\/90 {
-  --tw-gradient-to: rgb(11 11 11 / 0)  var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), rgb(11 11 11 / 0.9) var(--tw-gradient-via-position), var(--tw-gradient-to);
-}
-
 .to-cta {
   --tw-gradient-to: #FF4D00 var(--tw-gradient-to-position);
 }
@@ -1795,10 +1786,6 @@ video {
 
 .to-transparent {
   --tw-gradient-to: transparent var(--tw-gradient-to-position);
-}
-
-.to-dark\/95 {
-  --tw-gradient-to: rgb(11 11 11 / 0.95) var(--tw-gradient-to-position);
 }
 
 .bg-\[length\:300\%_100\%\] {
@@ -2367,6 +2354,13 @@ html {
   transition-property: all;
   transition-duration: 0.3s;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-mint {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 229 160 / var(--tw-bg-opacity, 1));
+  --tw-text-opacity: 1;
+  color: rgb(11 11 11 / var(--tw-text-opacity, 1));
 }
 
 .card {
