@@ -189,7 +189,7 @@
             "type": "section_card",
             "settings": {
               "card_title": "COGNITIVE TRIAL PACK",
-              "pack_size": "",
+              "pack_size": "Sample Pack",
               "card_price": "$5.95",
               "price_extra": "(Just Cover Shipping",
               "card_list": "3 premium stick packs (one of each flavor), Complete ingredient profile guide, 30-day money-back guarantee",
@@ -735,6 +735,14 @@
         ],
         "settings": {
           "heading": "What our customers are saying"
+        }
+      },
+      "nat-geo": {
+        "type": "nat-geo",
+        "settings": {
+          "section_title": "POWERED BY, RHODIOLA",
+          "section_subtitle": "The adaptogenic powerhouse behind peak mental performance",
+          "section_quote": "Used by Soviet scientists to enhance physical and mental endurance, Rhodiola rosea was their secret weapon long before modern performance enhancers."
         }
       }
     },
