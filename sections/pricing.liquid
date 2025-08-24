@@ -45,7 +45,7 @@
             </div>
 
             <ul class='space-y-3 mb-8'>
-              {% assign benefits_string = section.settings.key_benefits | default: '' %}
+              {% assign benefits_string = block.settings.card_list | default: '' %}
               {% assign split_benefits = benefits_string | split: ',' %}
 
               {% for benefit in split_benefits %}
@@ -71,7 +71,7 @@
               {% endfor %}
             </ul>
 
-            <a href='{{ block.settings.cta_link }}' class='btn btn-primary w-full'> {{ cta_text }} </a>
+            <a href='{{ block.settings.cta_link }}' class='btn btn-primary w-full'> {{ block.settings.cta_text }} </a>
           </div>
         </div>
       {% endfor %}
