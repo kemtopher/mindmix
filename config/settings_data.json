@@ -184,7 +184,27 @@
       },
       "pricing": {
         "type": "pricing",
-        "settings": {}
+        "blocks": {
+          "section_card_WCjN7R": {
+            "type": "section_card",
+            "settings": {
+              "card_title": "COGNITIVE TRIAL PACK",
+              "pack_size": "",
+              "card_price": "$5.95",
+              "price_extra": "(Just Cover Shipping",
+              "card_list": "3 premium stick packs (one of each flavor), Complete ingredient profile guide, 30-day money-back guarantee",
+              "cta_text": "Unlock Your Edge - Try Free Today",
+              "cta_link": ""
+            }
+          }
+        },
+        "block_order": [
+          "section_card_WCjN7R"
+        ],
+        "settings": {
+          "section_title": "CHOOSE YOUR, MENTAL ADVANTAGE",
+          "section_subtitle": "Risk-free trial or select the plan that fits your performance goals"
+        }
       },
       "testimonials": {
         "type": "testimonials",
