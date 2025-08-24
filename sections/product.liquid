@@ -1,14 +1,31 @@
-<section id='shopify-section-main-product' class='w-full pt-24 pb-16 flex flex-col md:flex-row items-center justify-center'>
-  <div class='container flex flex-col md:flex-row gap-8 md:max-h-[70vh]'>
-    <div class='product-gallery w-full md:w-1/2 mb-6 aspect-w-4 aspect-h-5 object-contain'>
-      <img 
-        id="main-product-image"
-        src="{{ product.featured_image | img_url: 'master' }}" 
-        alt="{{ product.title }}" 
-        class="h-full w-full object-contain transition-opacity duration-500"
-      >
+<section id='shopify-section-main-product' class='w-full pt-44 pb-16 flex flex-col md:flex-row items-center justify-center'>
+  <div class='container flex flex-col md:flex-row justify-between gap-8'>
+    <div class='product-gallery w-full max-w-[555px] h-full lg:h-[60vh] flex flex-col gap-16 justify-between'>
+      <div class="product-images flex flex-row gap-4 order-2 lg:order-1 justify-center">
+        {% for media in product.media %}
+          {% if media.media_type == 'image' %}
+            <div class="product-image aspect-square w-[50px] h-[50px] overflow-hidden">
+              <img 
+                src="{{ media | img_url: '75x75' }}" 
+                data-full="{{ media | img_url: 'master' }}" 
+                alt="{{ media.alt | escape | default: product.title }}" 
+                class="thumb cursor-pointer w-full h-auto object-contain transition hover:opacity-80"
+                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+              >
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="h-[450px] lg:h-[40vh] w-full text-center aspect-w-4 aspect-h-5 ">
+        <img 
+          id="main-product-image"
+          src="{{ product.featured_image | img_url: 'master' }}" 
+          alt="{{ product.title }}" 
+          class="h-full w-full object-contain transition-opacity duration-500"
+        >
+      </div>
     </div>
-    <div class='product-details w-full md:w-1/2'>
+    <div class='product-details w-full lg:w-1/2 max-w-[500px]'>
       <!-- product info block -->
       <div class='product-info pb-8 border-b'>
         <h1 class='text-4xl font-bold text-primary mb-4'>{{ product.title | upcase }}</h1>
@@ -58,29 +75,8 @@
           {% endfor %}
         </div>
       </div>
-      </div>
-    </div>
-  </div>
-  <div class='container flex flex-col md:flex-row gap-8 md:max-h-[70vh]'>
-    <div class='product-gallery w-full md:w-1/2'>
-      <div class="product-images flex gap-8">
-        {% for media in product.media %}
-          {% if media.media_type == 'image' %}
-            <div class="product-image aspect-square w-full max-w-sm overflow-hidden">
-              <img 
-                src="{{ media | img_url: '400x400' }}" 
-                data-full="{{ media | img_url: 'master' }}" 
-                alt="{{ media.alt | escape | default: product.title }}" 
-                class="thumb cursor-pointer w-full h-auto object-cover rounded transition hover:opacity-80"
-                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-              >
-            </div>
-          {% endif %}
-        {% endfor %}
-      </div>
-    </div>
-    <div class='product-gallery w-full md:w-1/2'>
       {% render 'add-to-cart-btn' %}
+      </div>
     </div>
   </div>
 </section>
