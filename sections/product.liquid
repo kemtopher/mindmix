@@ -1,6 +1,6 @@
 <section id='shopify-section-main-product' class='w-full pt-44 pb-16 flex flex-col md:flex-row items-center justify-center'>
   <div class='container flex flex-col md:flex-row justify-between gap-8'>
-    <div class='product-gallery w-full max-w-[400px] lg:max-w-full h-full lg:h-[500px] flex flex-col gap-16 justify-between'>
+    <div class='product-gallery w-full max-w-[400px] lg:max-w-full h-full lg:min-h-[500px] flex flex-col gap-16 justify-between'>
       <div class="product-images flex flex-row gap-4 order-2 lg:order-1 justify-center">
         {% for media in product.media %}
           {% if media.media_type == 'image' %}

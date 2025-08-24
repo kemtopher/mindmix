@@ -3148,6 +3148,10 @@ html {
     max-height: 700px;
   }
 
+  .lg\:min-h-\[500px\] {
+    min-height: 500px;
+  }
+
   .lg\:w-\[40vw\] {
     width: 40vw;
   }
