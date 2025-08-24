@@ -37,6 +37,10 @@ html {
     );
 }
 
+#main-product-image {
+  @apply transition-opacity duration-500;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
