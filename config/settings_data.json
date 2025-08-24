@@ -196,10 +196,23 @@
               "cta_text": "Unlock Your Edge - Try Free Today",
               "cta_link": ""
             }
+          },
+          "section_card_4gnpT3": {
+            "type": "section_card",
+            "settings": {
+              "card_title": "FOCUS STARTER",
+              "pack_size": "10-Pack",
+              "card_price": "$29.95",
+              "price_extra": "(Save 25%)",
+              "card_list": "Mix & match all flavors, Free shipping nationwide, Subscribe & save 15% option",
+              "cta_text": "Start Performing",
+              "cta_link": ""
+            }
           }
         },
         "block_order": [
-          "section_card_WCjN7R"
+          "section_card_WCjN7R",
+          "section_card_4gnpT3"
         ],
         "settings": {
           "section_title": "CHOOSE YOUR, MENTAL ADVANTAGE",
