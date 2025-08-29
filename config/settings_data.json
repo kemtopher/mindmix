@@ -16,6 +16,18 @@
       },
       "hero": {
         "type": "hero",
+        "blocks": {
+          "stat_XQHcE3": {
+            "type": "stat",
+            "settings": {
+              "text": "",
+              "highlight": ""
+            }
+          }
+        },
+        "block_order": [
+          "stat_XQHcE3"
+        ],
         "settings": {
           "hero_image": "shopify://shop_images/mindmix_green_apple_kiwi.png",
           "tagline": "DAILY NOOTROPIC DRINK MIX",
@@ -161,8 +173,8 @@
           "section_card_XjnPjd"
         ],
         "settings": {
-          "section_title": "CHOOSE YOUR, COGNITIVE CATALYST",
-          "section_subtitle": "Science-backed formula designed for cognitive enhancement",
+          "section_title": "YOUR MENTAL EDGE, YOUR FLAVOR",
+          "section_subtitle": "Your new ritual tastes better, works harder, and never crashes.",
           "section_subtext": "Mix & match for your optimal cognitive routine throughout the day",
           "cta_link": ""
         }
@@ -601,10 +613,6 @@
         "settings": {
           "heading": "Support"
         }
-      },
-      "new-product": {
-        "type": "new-product",
-        "settings": {}
       },
       "product-tabs": {
         "type": "product-tabs",
