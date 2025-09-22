@@ -23,13 +23,21 @@
               "text": "",
               "highlight": ""
             }
+          },
+          "stat_yAKdTd": {
+            "type": "stat",
+            "settings": {
+              "text": "",
+              "highlight": ""
+            }
           }
         },
         "block_order": [
-          "stat_XQHcE3"
+          "stat_XQHcE3",
+          "stat_yAKdTd"
         ],
         "settings": {
-          "hero_image": "shopify://shop_images/mindmix_green_apple_kiwi.png",
+          "hero_image": "shopify://shop_images/Hero.png",
           "tagline": "DAILY NOOTROPIC DRINK MIX",
           "heading": "UNLOCK YOUR MENTAL EDGE",
           "subheading": "ENGINEERED FOR PEAK PERFORMANCE",
