@@ -9,15 +9,18 @@
  */
 {
   "current": {
+    "trial_product": "try-it-free",
     "sections": {
       "header": {
         "type": "header",
-        "settings": {}
+        "settings": {
+          "trial_product": "/"
+        }
       },
       "hero": {
         "type": "hero",
         "settings": {
-          "hero_image": "shopify://shop_images/mindmix_green_apple_kiwi.png",
+          "hero_image": "shopify://shop_images/green_apple_kiwi_studio_professional.png",
           "tagline": "DAILY NOOTROPIC DRINK MIX",
           "heading": "UNLOCK YOUR MENTAL EDGE",
           "subheading": "ENGINEERED FOR PEAK PERFORMANCE",
@@ -162,7 +165,7 @@
         ],
         "settings": {
           "section_title": "YOUR MENTAL EDGE, YOUR FLAVOR",
-          "section_subtitle": "Science-backed formula designed for cognitive enhancement",
+          "section_subtitle": "Your new ritual tastes better, works harder, and never crashes.",
           "section_subtext": "Mix & match for your optimal cognitive routine throughout the day",
           "cta_link": ""
         }
@@ -173,7 +176,10 @@
       },
       "cognitive-benefits": {
         "type": "cognitive-benefits",
-        "settings": {}
+        "settings": {
+          "section_title": "NEURAL PATHWAYS, ACTIVATED",
+          "section_subtitle": "Science-backed formula designed for cognitive enhancement"
+        }
       },
       "scientific-credibility": {
         "type": "scientific-credibility",
@@ -228,7 +234,7 @@
           "section_card_nDENQt"
         ],
         "settings": {
-          "section_title": "CHOOSE YOUR, MENTAL ADVANTAGE",
+          "section_title": "CHOOSE YOUR, COGNITIVE CATALYST",
           "section_subtitle": "Risk-free trial or select the plan that fits your performance goals"
         }
       },
@@ -601,10 +607,6 @@
         "settings": {
           "heading": "Support"
         }
-      },
-      "new-product": {
-        "type": "new-product",
-        "settings": {}
       },
       "product-tabs": {
         "type": "product-tabs",
