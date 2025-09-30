@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "name": "Free Trial Product",
+    "settings": [
+      {
+        "type": "product",
+        "id": "trial_product",
+        "label": "Poduct",
+      },
+    ]
+  },
+]

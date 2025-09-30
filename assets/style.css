@@ -964,16 +964,16 @@ video {
   height: 42px;
 }
 
+.h-\[450px\] {
+  height: 450px;
+}
+
 .h-\[500px\] {
   height: 500px;
 }
 
 .h-\[50px\] {
   height: 50px;
-}
-
-.h-\[50vh\] {
-  height: 50vh;
 }
 
 .h-auto {
@@ -991,10 +991,6 @@ video {
 
 .h-screen {
   height: 100vh;
-}
-
-.h-\[450px\] {
-  height: 450px;
 }
 
 .max-h-0 {
@@ -1149,6 +1145,14 @@ video {
   max-width: 200px;
 }
 
+.max-w-\[400px\] {
+  max-width: 400px;
+}
+
+.max-w-\[500px\] {
+  max-width: 500px;
+}
+
 .max-w-\[900px\] {
   max-width: 900px;
 }
@@ -1171,18 +1175,6 @@ video {
 
 .max-w-xl {
   max-width: 36rem;
-}
-
-.max-w-\[555px\] {
-  max-width: 555px;
-}
-
-.max-w-\[500px\] {
-  max-width: 500px;
-}
-
-.max-w-\[400px\] {
-  max-width: 400px;
 }
 
 .flex-1 {
@@ -1982,16 +1974,6 @@ video {
   padding-bottom: 36px;
 }
 
-.px-0 {
-  padding-left: 0px;
-  padding-right: 0px;
-}
-
-.py-8 {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
-
 .pb-1 {
   padding-bottom: 0.25rem;
 }
@@ -2032,6 +2014,10 @@ video {
   padding-top: 6rem;
 }
 
+.pt-44 {
+  padding-top: 11rem;
+}
+
 .pt-5 {
   padding-top: 1.25rem;
 }
@@ -2042,22 +2028,6 @@ video {
 
 .pt-\[36px\] {
   padding-top: 36px;
-}
-
-.pl-0 {
-  padding-left: 0px;
-}
-
-.pr-0 {
-  padding-right: 0px;
-}
-
-.pt-36 {
-  padding-top: 9rem;
-}
-
-.pt-44 {
-  padding-top: 11rem;
 }
 
 .text-left {
@@ -2905,10 +2875,6 @@ html {
 }
 
 @media (min-width: 768px) {
-  .md\:order-1 {
-    order: 1;
-  }
-
   .md\:col-span-2 {
     grid-column: span 2 / span 2;
   }
@@ -3124,24 +3090,12 @@ html {
     display: inline-block;
   }
 
-  .lg\:h-full {
-    height: 100%;
-  }
-
   .lg\:h-\[40vh\] {
     height: 40vh;
   }
 
-  .lg\:h-\[50vh\] {
-    height: 50vh;
-  }
-
-  .lg\:h-\[60vh\] {
-    height: 60vh;
-  }
-
-  .lg\:h-\[500px\] {
-    height: 500px;
+  .lg\:h-full {
+    height: 100%;
   }
 
   .lg\:max-h-\[700px\] {
@@ -3150,6 +3104,10 @@ html {
 
   .lg\:min-h-\[500px\] {
     min-height: 500px;
+  }
+
+  .lg\:w-1\/2 {
+    width: 50%;
   }
 
   .lg\:w-\[40vw\] {
@@ -3162,14 +3120,6 @@ html {
 
   .lg\:w-\[55vw\] {
     width: 55vw;
-  }
-
-  .lg\:w-1\/2 {
-    width: 50%;
-  }
-
-  .lg\:w-1\/3 {
-    width: 33.333333%;
   }
 
   .lg\:max-w-full {
@@ -3198,10 +3148,6 @@ html {
 
   .lg\:flex-row {
     flex-direction: row;
-  }
-
-  .lg\:flex-col {
-    flex-direction: column;
   }
 
   .lg\:items-center {

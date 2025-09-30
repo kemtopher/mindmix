@@ -110,6 +110,12 @@
         </div>
       {% endif %}
 
+      {% if settings.trial_product %}
+        {% assign trial_product = settings.trial_product %}
+      {% else %}
+        {% assign trial_product = '/products/try-it-free' %}
+      {% endif %}
+
       {% unless customer %}
         {% unless customer.tags contains 'has_trial' %}
           {% render 'try-it-free-btn' %}
@@ -276,3 +282,16 @@
     }
   });
 </script>
+
+{% schema %}
+{
+  "name": "Header Settings",
+  "settings": [
+    {
+      "type": "product_list",
+      "id": "product_list",
+      "label": "Product Menu List"
+    }
+  ]
+}
+{% endschema %}

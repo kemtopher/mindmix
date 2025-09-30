@@ -19,8 +19,10 @@
       <h2 class='text-white text-3xl md:text-5xl lg:text-6xl font-bold mb-4'>
         {{ main_title }}
         {% if parts.size > 1 %}
-          <span className='text-primary'>{{ parts[1] | strip }}</span>
-        {%- endif %}
+          <span class='block text-5xl md:text-6xl font-bold tracking-tight mt-2 text-primary'>
+            {{ parts[1] | strip }}
+          </span>
+        {% endif %}
       </h2>
       <p class='text-light text-base md:text-xl px-4 mb-8'>{{ section.settings.section_subtitle }}</p>
       <div class='max-w-2xl mx-auto bg-darker/80 backdrop-blur-sm rounded-lg p-6 border border-primary/20 hover:border-primary/30 transition-colors duration-300'>
