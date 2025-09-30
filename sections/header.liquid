@@ -110,15 +110,8 @@
         </div>
       {% endif %}
 
-      {% if settings.trial_product %}
-        {% assign trial_product = settings.trial_product %}
-      {% else %}
-        {% assign trial_product = '/products/try-it-free' %}
-      {% endif %}
-
       {% unless customer %}
         {% unless customer.tags contains 'has_trial' %}
-          {% assign product_url = '/products/try-it-free' %}
           {% render 'try-it-free-btn' %}
         {% endunless %}
       {% endunless %}
