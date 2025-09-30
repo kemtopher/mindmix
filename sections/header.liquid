@@ -118,6 +118,7 @@
 
       {% unless customer %}
         {% unless customer.tags contains 'has_trial' %}
+          {% assign product_url = '/products/try-it-free' %}
           {% render 'try-it-free-btn' %}
         {% endunless %}
       {% endunless %}
@@ -282,16 +283,3 @@
     }
   });
 </script>
-
-{% schema %}
-{
-  "name": "Header Settings",
-  "settings": [
-    {
-      "type": "product_list",
-      "id": "product_list",
-      "label": "Product Menu List"
-    }
-  ]
-}
-{% endschema %}
