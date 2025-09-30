@@ -711,7 +711,7 @@
       "newsletter-signup": {
         "type": "newsletter-signup",
         "settings": {
-          "heading": "JOIN THE PEAK PERFORMANCE COMMUNITY",
+          "heading": "JOIN THE PEAK, PERFORMANCE COMMUNITY",
           "subheading": "Get exclusive tips, research updates, and member-only discounts.",
           "button_label": "Unlock Insider Access"
         }
