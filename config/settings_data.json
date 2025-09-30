@@ -9,10 +9,13 @@
  */
 {
   "current": {
+    "trial_product": "try-it-free",
     "sections": {
       "header": {
         "type": "header",
-        "settings": {}
+        "settings": {
+          "trial_product": "/"
+        }
       },
       "hero": {
         "type": "hero",
@@ -173,7 +176,10 @@
       },
       "cognitive-benefits": {
         "type": "cognitive-benefits",
-        "settings": {}
+        "settings": {
+          "section_title": "NEURAL PATHWAYS, ACTIVATED",
+          "section_subtitle": "Science-backed formula designed for cognitive enhancement"
+        }
       },
       "scientific-credibility": {
         "type": "scientific-credibility",
