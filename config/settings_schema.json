@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "name": "Free Trial Product",
+    "settings": [
+      {
+        "type": "color",
+        "id": "primary_color",
+        "label": "Primary Color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "range",
+        "id": "border_width",
+        "label": "Border Width",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "default": 2
+      }
+    ]
+  },
+]

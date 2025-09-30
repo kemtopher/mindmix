@@ -112,6 +112,7 @@
 
       {% unless customer %}
         {% unless customer.tags contains 'has_trial' %}
+          {% assign product_url = '/products/try-it-free' %}
           {% render 'try-it-free-btn' %}
         {% endunless %}
       {% endunless %}
@@ -276,3 +277,17 @@
     }
   });
 </script>
+
+{% schema %}
+{
+  "name": "Header Settings",
+  "settings": [
+    {
+      "type": "text",
+      "id": "trial_product",
+      "label": "Free Trial Product",
+      "default": "/"
+    }
+  ]
+}
+{% endschema %}

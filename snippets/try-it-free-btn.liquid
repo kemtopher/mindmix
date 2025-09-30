@@ -1,7 +1,7 @@
 {% if customer %}
   <div class='hidden md:block relative group'>
     <a
-      href='{{ product_url }}'
+      href='{{ trial_product.url }}'
       class='btn btn-primary  relative overflow-hidden group-hover:scale-105 transform transition-all duration-500 px-6 py-3 rounded-xl shadow-lg hover:shadow-glow'
       ><span class='relative z-10 flex flex-col items-center leading-tight font-bold text-white'
         ><span class='text-sm font-bold'>Try It Free</span
@@ -18,7 +18,7 @@
 {% else %}
   <div class='hidden md:block relative group'>
     <a
-      href='/account/login?return_url={{ product_url | url_encode }}'
+      href='/account/login?return_url={{ trial_product.url | url_encode }}'
       class='btn btn-primary  relative overflow-hidden group-hover:scale-105 transform transition-all duration-500 px-6 py-3 rounded-xl shadow-lg hover:shadow-glow'
       ><span class='relative z-10 flex flex-col items-center leading-tight font-bold text-white'
         ><span class='text-sm font-bold'>Try It Free</span

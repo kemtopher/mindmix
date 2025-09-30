@@ -16,28 +16,8 @@
       },
       "hero": {
         "type": "hero",
-        "blocks": {
-          "stat_XQHcE3": {
-            "type": "stat",
-            "settings": {
-              "text": "",
-              "highlight": ""
-            }
-          },
-          "stat_yAKdTd": {
-            "type": "stat",
-            "settings": {
-              "text": "",
-              "highlight": ""
-            }
-          }
-        },
-        "block_order": [
-          "stat_XQHcE3",
-          "stat_yAKdTd"
-        ],
         "settings": {
-          "hero_image": "shopify://shop_images/green_apple_kiwi_studio_professional.png",
+          "hero_image": "shopify://shop_images/mindmix_green_apple_kiwi.png",
           "tagline": "DAILY NOOTROPIC DRINK MIX",
           "heading": "UNLOCK YOUR MENTAL EDGE",
           "subheading": "ENGINEERED FOR PEAK PERFORMANCE",
@@ -181,9 +161,9 @@
           "section_card_XjnPjd"
         ],
         "settings": {
-          "section_title": "YOUR MENTAL EDGE, YOUR FLAVOR",
-          "section_subtitle": "Your new ritual tastes better, works harder, and never crashes.",
-          "section_subtext": "Fresh focus, straight from nature.",
+          "section_title": "CHOOSE YOUR, COGNITIVE CATALYST",
+          "section_subtitle": "Science-backed formula designed for cognitive enhancement",
+          "section_subtext": "Mix & match for your optimal cognitive routine throughout the day",
           "cta_link": ""
         }
       },
@@ -248,7 +228,7 @@
           "section_card_nDENQt"
         ],
         "settings": {
-          "section_title": "CHOOSE YOUR, COGNITIVE CATALYST",
+          "section_title": "CHOOSE YOUR, MENTAL ADVANTAGE",
           "section_subtitle": "Risk-free trial or select the plan that fits your performance goals"
         }
       },
@@ -711,7 +691,7 @@
       "newsletter-signup": {
         "type": "newsletter-signup",
         "settings": {
-          "heading": "JOIN THE PEAK, PERFORMANCE COMMUNITY",
+          "heading": "JOIN THE PEAK PERFORMANCE COMMUNITY",
           "subheading": "Get exclusive tips, research updates, and member-only discounts.",
           "button_label": "Unlock Insider Access"
         }

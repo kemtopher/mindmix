@@ -2,21 +2,24 @@
   <div class='absolute inset-0 bg-neuron-pattern opacity-5'></div>
 
   <div class='container-custom relative'>
-    {% assign title = section.settings.section_title | default: '' %}
-    {% assign parts = title | split: ',' %}
-    {% assign main_title = parts[0] | strip %}
+    <!--
+      {% assign title = section.settings.section_title | default: '' %}
+      {% assign parts = title | split: ',' %}
+      {% assign main_title = parts[0] | strip %}
 
-    <div class='text-center max-w-3xl mx-auto mb-16 fade-in is-visible'>
-      <h2 class='text-white mb-6 text-5xl md:text-6xl font-bold tracking-tight'>
-        {{ main_title }}
-        {% if parts.size > 1 %}
-          <span class='block text-5xl md:text-6xl font-bold tracking-tight mt-2 text-primary'>
-            {{ parts[1] | strip }}
-          </span>
-        {% endif %}
-      </h2>
-      <p class='text-light text-xl'>{{ section.settings.section_subtitle }}</p>
-    </div>
+      <div class='text-center max-w-3xl mx-auto mb-16 fade-in is-visible'>
+        <h2 class='text-white mb-6 text-5xl md:text-6xl font-bold tracking-tight'>
+          {{ main_title }}
+          {% if parts.size > 1 %}
+            <span class='block text-5xl md:text-6xl font-bold tracking-tight mt-2 text-primary'>
+              {{ parts[1] | strip }}
+            </span>
+          {% endif %}
+        </h2>
+        <p class='text-light text-xl'>{{ section.settings.section_subtitle }}</p>
+      </div>
+    -->
+    {% render 'section-title' %}
 
     <div class='grid md:grid-cols-3 gap-8'>
       {% for block in section.blocks %}

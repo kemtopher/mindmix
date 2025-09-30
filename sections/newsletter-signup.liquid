@@ -1,7 +1,16 @@
+{% assign title = section.settings.heading | default: '' %}
+{% assign parts = title | split: ',' %}
+{% assign main_title = parts[0] | strip %}
+
 <section class='newsletter-signup bg-dark text-light py-16'>
   <div class='container-custom mx-auto text-center max-w-xl px-4'>
     <h2 class='text-3xl md:text-4xl font-bold mb-4'>
-      {{ section.settings.heading }}
+      {{ main_title }}
+      {% if parts.size > 1 %}
+        <span class='text-primary'>
+          {{ parts[1] | strip }}
+        </span>
+      {% endif %}
     </h2>
     <p class='text-light/80 mb-8'>
       {{ section.settings.subheading }}
