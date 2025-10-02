@@ -18,7 +18,7 @@
       "hero": {
         "type": "hero",
         "settings": {
-          "hero_image": "shopify://shop_images/green_apple_kiwi_studio_professional.png",
+          "hero_image": "shopify://shop_images/Gemini_Generated_Image_cbtdzlcbtdzlcbtd.png",
           "tagline": "DAILY NOOTROPIC DRINK MIX",
           "heading": "UNLOCK YOUR MENTAL EDGE",
           "subheading": "ENGINEERED FOR PEAK PERFORMANCE",
@@ -192,6 +192,7 @@
           "section_card_WCjN7R": {
             "type": "section_card",
             "settings": {
+              "card_image": "shopify://shop_images/Gemini_Generated_Image_9aeqeu9aeqeu9aeq.png",
               "card_title": "COGNITIVE TRIAL PACK",
               "pack_size": "Sample Pack",
               "card_price": "$5.95",
@@ -204,6 +205,7 @@
           "section_card_4gnpT3": {
             "type": "section_card",
             "settings": {
+              "card_image": "shopify://shop_images/Gemini_Generated_Image_z34rjhz34rjhz34r.png",
               "card_title": "FOCUS STARTER",
               "pack_size": "10-Pack",
               "card_price": "$29.95",
@@ -216,6 +218,7 @@
           "section_card_nDENQt": {
             "type": "section_card",
             "settings": {
+              "card_image": "shopify://shop_images/Gemini_Generated_Image_d6v5jqd6v5jqd6v5.png",
               "card_title": "PEAK PERFORMER",
               "pack_size": "30-Pack",
               "card_price": "$79.95",
