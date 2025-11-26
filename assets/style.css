@@ -734,6 +734,10 @@ video {
   grid-column: span 2 / span 2;
 }
 
+.m-auto {
+  margin: auto;
+}
+
 .mx-\[auto\] {
   margin-left: auto;
   margin-right: auto;
@@ -1170,6 +1174,10 @@ video {
   max-width: 36rem;
 }
 
+.max-w-40 {
+  max-width: 10rem;
+}
+
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -1332,6 +1340,10 @@ video {
 
 .grid-cols-6 {
   grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.flex-row {
+  flex-direction: row;
 }
 
 .flex-col {
