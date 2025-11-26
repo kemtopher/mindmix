@@ -1,38 +1,36 @@
-<section class="section-padding bg-dark relative">
-  <div class="absolute inset-0 bg-neuron-pattern opacity-5"></div>
-  
-  <div class="container-custom relative z-10 max-w-4xl mx-auto">
-    <div class="p-8 md:p-12 bg-darker rounded-xl border border-primary/20 fade-in">
-      <div class="text-center max-w-3xl mx-auto mb-8">
-        <h2 class="text-white mb-4">JOIN THE PEAK <span class="text-primary">PERFORMANCE COMMUNITY</span></h2>
-        <p class="text-light">Get exclusive tips, research updates, and member-only discounts</p>
+<section class='section-padding bg-dark relative'>
+  <div class='absolute inset-0 bg-neuron-pattern opacity-5'></div>
+
+  <div class='container-custom relative z-10 max-w-4xl mx-auto'>
+    <div class='p-8 md:p-12 bg-darker rounded-xl border border-primary/20 fade-in'>
+      <div class='text-center max-w-3xl mx-auto mb-8'>
+        <h2 class='text-white mb-4'>JOIN THE PEAK <span class='text-primary'>PERFORMANCE COMMUNITY</span></h2>
+        <p class='text-light'>Get exclusive tips, research updates, and member-only discounts</p>
       </div>
-      
+
       {% form 'customer' %}
-        <div class="max-w-md mx-auto">
-          <div class="flex flex-col sm:flex-row gap-4">
+        <div class='max-w-md mx-auto'>
+          <div class='flex flex-col sm:flex-row gap-4'>
             <input
-              type="email"
-              name="contact[email]"
-              placeholder="Enter your email"
-              class="flex-grow px-4 py-3 bg-dark border border-gray-800 focus:border-primary rounded-md text-light focus:outline-none"
+              type='email'
+              name='contact[email]'
+              placeholder='Enter your email'
+              class='flex-grow px-4 py-3 bg-dark border border-gray-800 focus:border-primary rounded-md text-light focus:outline-none'
               required
-            />
-            <button type="submit" class="btn btn-mint">
-              Unlock Insider Access
-            </button>
+            >
+            <button type='submit' class='btn btn-mint'>Unlock Insider Access</button>
           </div>
         </div>
       {% endform %}
-      
-      <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4 mt-10">
+
+      <div class='grid sm:grid-cols-2 md:grid-cols-4 gap-4 mt-10'>
         {% for benefit in section.blocks %}
           {% if benefit.type == 'newsletter_benefit' %}
-            <div class="text-center">
-              <div class="h-12 w-12 mx-auto mb-3 rounded-full bg-primary/10 flex items-center justify-center">
+            <div class='text-center'>
+              <div class='h-12 w-12 mx-auto mb-3 rounded-full bg-primary/10 flex items-center justify-center'>
                 {% render benefit.settings.icon %}
               </div>
-              <p class="text-light text-sm">{{ benefit.settings.text }}</p>
+              <p class='text-light text-sm'>{{ benefit.settings.text }}</p>
             </div>
           {% endif %}
         {% endfor %}

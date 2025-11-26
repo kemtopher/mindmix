@@ -1,43 +1,43 @@
-<section id="science" class="section-padding bg-gradient-to-b from-darker to-dark relative">
-  <div class="absolute inset-0 bg-neuron-pattern opacity-5"></div>
-  
-  <div class="container-custom relative z-10">
-    <div class="text-center max-w-3xl mx-auto mb-16 fade-in">
-      <h2 class="text-white mb-4">BACKED BY <span class="text-primary">NEUROSCIENCE</span></h2>
-      <p class="text-light">Every ingredient chosen for maximum cognitive impact</p>
+<section id='science' class='section-padding bg-gradient-to-b from-darker to-dark relative'>
+  <div class='absolute inset-0 bg-neuron-pattern opacity-5'></div>
+
+  <div class='container-custom relative z-10'>
+    <div class='text-center max-w-3xl mx-auto mb-16 fade-in'>
+      <h2 class='text-white mb-4'>BACKED BY <span class='text-primary'>NEUROSCIENCE</span></h2>
+      <p class='text-light'>Every ingredient chosen for maximum cognitive impact</p>
     </div>
-    
-    <div class="grid lg:grid-cols-2 gap-12 items-center">
-      <div class="fade-in">
-        <div class="p-6 bg-darker rounded-xl border border-primary/20 hover:border-primary/40 transition-colors">
-          <div class="flex items-center mb-6">
+
+    <div class='grid lg:grid-cols-2 gap-12 items-center'>
+      <div class='fade-in'>
+        <div class='p-6 bg-darker rounded-xl border border-primary/20 hover:border-primary/40 transition-colors'>
+          <div class='flex items-center mb-6'>
             {% render 'icon-flask', class: 'h-8 w-8 text-primary mr-3' %}
-            <h3 class="text-white text-xl">Clinical Research</h3>
+            <h3 class='text-white text-xl'>Clinical Research</h3>
           </div>
-          
-          <div class="space-y-4">
+
+          <div class='space-y-4'>
             {% for study in section.blocks %}
               {% if study.type == 'research_study' %}
-                <div class="p-4 bg-darkest rounded-lg">
-                  <h5 class="text-primary font-medium mb-2">{{ study.settings.ingredient }}</h5>
-                  <p class="text-light text-sm">{{ study.settings.findings }}</p>
-                  <p class="text-xs text-light/70 mt-2">Source: {{ study.settings.source }}</p>
+                <div class='p-4 bg-darkest rounded-lg'>
+                  <h5 class='text-primary font-medium mb-2'>{{ study.settings.ingredient }}</h5>
+                  <p class='text-light text-sm'>{{ study.settings.findings }}</p>
+                  <p class='text-xs text-light/70 mt-2'>Source: {{ study.settings.source }}</p>
                 </div>
               {% endif %}
             {% endfor %}
           </div>
         </div>
       </div>
-      
-      <div class="fade-in" style="transition-delay: 0.2s">
-        <div class="grid grid-cols-2 gap-6">
+
+      <div class='fade-in' style='transition-delay: 0.2s'>
+        <div class='grid grid-cols-2 gap-6'>
           {% for credential in section.blocks %}
             {% if credential.type == 'credential' %}
-              <div class="p-6 bg-darker rounded-xl border border-primary/20 hover:border-primary/40 transition-colors">
-                <div class="flex flex-col items-center text-center">
+              <div class='p-6 bg-darker rounded-xl border border-primary/20 hover:border-primary/40 transition-colors'>
+                <div class='flex flex-col items-center text-center'>
                   {% render credential.settings.icon, class: 'h-12 w-12 text-primary mb-4' %}
-                  <h4 class="text-white text-lg mb-2">{{ credential.settings.title }}</h4>
-                  <p class="text-light text-sm">{{ credential.settings.description }}</p>
+                  <h4 class='text-white text-lg mb-2'>{{ credential.settings.title }}</h4>
+                  <p class='text-light text-sm'>{{ credential.settings.description }}</p>
                 </div>
               </div>
             {% endif %}

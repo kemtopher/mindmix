@@ -1,52 +1,62 @@
 {% comment %}Cart template{% endcomment %}
 
-<div class="container-custom py-24">
-  <h1 class="text-4xl font-bold mb-12">Shopping Cart</h1>
-  
+<div class='container-custom py-24'>
+  <h1 class='text-4xl font-bold mb-12'>Shopping Cart</h1>
+
   {% if cart.item_count > 0 %}
-    <form action="/cart" method="post" novalidate>
-      <table class="w-full">
+    <form action='/cart' method='post' novalidate>
+      <table class='w-full'>
         <thead>
-          <tr class="border-b border-gray-800">
-            <th class="text-left py-4">Product</th>
-            <th class="text-center">Quantity</th>
-            <th class="text-right">Total</th>
+          <tr class='border-b border-gray-800'>
+            <th class='text-left py-4'>Product</th>
+            <th class='text-center'>Quantity</th>
+            <th class='text-right'>Total</th>
           </tr>
         </thead>
         <tbody>
           {% for item in cart.items %}
-            <tr class="border-b border-gray-800">
-              <td class="py-4">
-                <div class="flex items-center">
-                  <img src="{{ item.image | img_url: '120x' }}" alt="{{ item.title }}" class="w-20 h-20 rounded-lg mr-4">
+            <tr class='border-b border-gray-800'>
+              <td class='py-4'>
+                <div class='flex items-center'>
+                  <img
+                    src='{{ item.image | img_url: '120x' }}'
+                    alt='{{ item.title }}'
+                    class='w-20 h-20 rounded-lg mr-4'
+                  >
                   <div>
-                    <h3 class="font-medium">{{ item.product.title }}</h3>
-                    <p class="text-light/70">{{ item.variant.title }}</p>
+                    <h3 class='font-medium'>{{ item.product.title }}</h3>
+                    <p class='text-light/70'>{{ item.variant.title }}</p>
                   </div>
                 </div>
               </td>
-              <td class="text-center">
-                <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" class="w-20 bg-darker border border-gray-800 rounded text-center">
+              <td class='text-center'>
+                <input
+                  type='number'
+                  name='updates[]'
+                  value='{{ item.quantity }}'
+                  min='0'
+                  class='w-20 bg-darker border border-gray-800 rounded text-center'
+                >
               </td>
-              <td class="text-right">{{ item.line_price | money }}</td>
+              <td class='text-right'>{{ item.line_price | money }}</td>
             </tr>
           {% endfor %}
         </tbody>
       </table>
-      
-      <div class="flex justify-between items-center mt-8">
-        <button type="submit" name="update" class="btn btn-secondary">Update Cart</button>
-        <div class="text-2xl font-bold">Total: {{ cart.total_price | money }}</div>
+
+      <div class='flex justify-between items-center mt-8'>
+        <button type='submit' name='update' class='btn btn-secondary'>Update Cart</button>
+        <div class='text-2xl font-bold'>Total: {{ cart.total_price | money }}</div>
       </div>
-      
-      <div class="mt-8">
-        <button type="submit" name="checkout" class="btn btn-primary w-full">Checkout</button>
+
+      <div class='mt-8'>
+        <button type='submit' name='checkout' class='btn btn-primary w-full'>Checkout</button>
       </div>
     </form>
   {% else %}
-    <p class="text-center text-light/70">Your cart is empty</p>
-    <div class="text-center mt-8">
-      <a href="/collections/all" class="btn btn-primary">Continue Shopping</a>
+    <p class='text-center text-light/70'>Your cart is empty</p>
+    <div class='text-center mt-8'>
+      <a href='/collections/all' class='btn btn-primary'>Continue Shopping</a>
     </div>
   {% endif %}
 </div>

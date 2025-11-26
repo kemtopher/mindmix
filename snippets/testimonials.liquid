@@ -1,50 +1,53 @@
-<section class="section-padding bg-darker relative">
-  <div class="absolute inset-0 bg-neuron-pattern opacity-5"></div>
-  
-  <div class="container-custom relative z-10">
-    <div class="text-center max-w-3xl mx-auto mb-16 fade-in">
-      <h2 class="text-white mb-4">PEAK PERFORMERS <span class="text-primary">CHOOSE MINDMIX</span></h2>
-      <p class="text-light">See how top students and professionals unlock their mental edge</p>
+<section class='section-padding bg-darker relative'>
+  <div class='absolute inset-0 bg-neuron-pattern opacity-5'></div>
+
+  <div class='container-custom relative z-10'>
+    <div class='text-center max-w-3xl mx-auto mb-16 fade-in'>
+      <h2 class='text-white mb-4'>PEAK PERFORMERS <span class='text-primary'>CHOOSE MINDMIX</span></h2>
+      <p class='text-light'>See how top students and professionals unlock their mental edge</p>
     </div>
-    
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+
+    <div class='grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16'>
       {% for testimonial in section.blocks %}
         {% if testimonial.type == 'testimonial' %}
-          <div class="card fade-in group relative overflow-hidden" style="transition-delay: {{ forloop.index | times: 0.1 }}s">
-            <div class="aspect-w-16 aspect-h-9 relative">
-              <img 
-                src="{{ testimonial.settings.image | img_url: '800x' }}"
-                alt="{{ testimonial.settings.name }} testimonial"
-                class="w-full h-48 object-cover"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent opacity-70"></div>
-              
+          <div
+            class='card fade-in group relative overflow-hidden'
+            style='transition-delay: {{ forloop.index | times: 0.1 }}s'
+          >
+            <div class='aspect-w-16 aspect-h-9 relative'>
+              <img
+                src='{{ testimonial.settings.image | img_url: '800x' }}'
+                alt='{{ testimonial.settings.name }} testimonial'
+                class='w-full h-48 object-cover'
+              >
+              <div class='absolute inset-0 bg-gradient-to-t from-dark to-transparent opacity-70'></div>
+
               {% if testimonial.settings.video_url != blank %}
-                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div class="h-14 w-14 rounded-full bg-primary/80 flex items-center justify-center">
+                <div class='absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity'>
+                  <div class='h-14 w-14 rounded-full bg-primary/80 flex items-center justify-center'>
                     {% render 'icon-play', class: 'h-6 w-6 text-dark' %}
                   </div>
                 </div>
               {% endif %}
             </div>
-            
-            <div class="p-5">
-              <div class="flex items-center mb-2">
-                <p class="text-white font-semibold">{{ testimonial.settings.name }}</p>
-                <p class="text-primary text-xs ml-2">{{ testimonial.settings.handle }}</p>
+
+            <div class='p-5'>
+              <div class='flex items-center mb-2'>
+                <p class='text-white font-semibold'>{{ testimonial.settings.name }}</p>
+                <p class='text-primary text-xs ml-2'>{{ testimonial.settings.handle }}</p>
               </div>
-              
-              <p class="text-light/70 text-sm mb-3">{{ testimonial.settings.role }}</p>
-              
-              <p class="text-light mb-3">"{{ testimonial.settings.quote }}"</p>
-              
-              <div class="flex items-center mb-2">
+
+              <p class='text-light/70 text-sm mb-3'>{{ testimonial.settings.role }}</p>
+
+              <p class='text-light mb-3'>"{{ testimonial.settings.quote }}"</p>
+
+              <div class='flex items-center mb-2'>
                 {% for i in (1..testimonial.settings.rating) %}
                   {% render 'icon-star', class: 'h-4 w-4 text-primary fill-primary' %}
                 {% endfor %}
               </div>
-              
-              <div class="p-2 bg-dark/50 rounded text-primary text-sm font-medium">
+
+              <div class='p-2 bg-dark/50 rounded text-primary text-sm font-medium'>
                 {{ testimonial.settings.improvement }}
               </div>
             </div>
@@ -52,13 +55,13 @@
         {% endif %}
       {% endfor %}
     </div>
-    
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 fade-in">
+
+    <div class='grid grid-cols-2 md:grid-cols-4 gap-8 fade-in'>
       {% for stat in section.blocks %}
         {% if stat.type == 'social_proof' %}
-          <div class="text-center">
-            <p class="text-primary text-3xl font-bold mb-2">{{ stat.settings.number }}</p>
-            <p class="text-light text-sm">{{ stat.settings.description }}</p>
+          <div class='text-center'>
+            <p class='text-primary text-3xl font-bold mb-2'>{{ stat.settings.number }}</p>
+            <p class='text-light text-sm'>{{ stat.settings.description }}</p>
           </div>
         {% endif %}
       {% endfor %}
