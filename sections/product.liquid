@@ -35,15 +35,15 @@
     <div class='product-details w-full'>
       <!-- product info block -->
       <div class='product-info pb-8 border-b'>
-        <h1 class='text-4xl font-bold text-primary mb-4'>{{ product.title | upcase }}</h1>
-        <div class='text-sm text-white h-max mb-12'>{{ product.description }}</div>
-        <div id='variant-price' class='text-3xl font-bold text-primary'>$39.99{{ variant.price | money }}</div>
+        <h1 class='text-2xl lg:text-4xl font-bold text-primary mb-4'>{{ product.title | upcase }}</h1>
+        <div class='text-sm text-white h-max mb-4'>{{ product.description }}</div>
+        <div id='variant-price' class='text-2xl lg:text-3xl text-primary'>{{ variant.price | money }}</div>
       </div>
 
-      <div class='product-variant-select pb-8 border-b'>
-        <p class='py-4 text-base text-white'>Choose your quantity:</p>
+      <div class='product-variant-select py-4 border-b'>
+        <p class='text-base text-white'>Pack Quantity:</p>
         <!-- <p class='py-4 text-base text-white'>{{ variant.metafields.custom.variant_description | metafield_text }}</p> -->
-        <div class='variant-well flex py-4 gap-8'>
+        <div class='variant-well flex py-4 gap-4'>
           {% for variant in product.variants %}
             {% if forloop.first %}
               <div
