@@ -9,7 +9,7 @@
  */
 {
   "current": {
-    "trial_product": "try-it-free",
+    "trial_product": "free-trial",
     "sections": {
       "header": {
         "type": "header",
