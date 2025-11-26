@@ -9,7 +9,7 @@
  */
 {
   "current": {
-    "trial_product": "try-it-free",
+    "trial_product": "free-trial",
     "sections": {
       "header": {
         "type": "header",
@@ -165,7 +165,7 @@
           "section_title": "YOUR MENTAL EDGE, YOUR FLAVOR",
           "section_subtitle": "Your new ritual tastes better, works harder, and never crashes.",
           "section_subtext": "Fresh focus, straight from nature.",
-          "cta_link": ""
+          "cta_link": "shopify://products/green-apple-kiwi"
         }
       },
       "lifestyle-performance": {
