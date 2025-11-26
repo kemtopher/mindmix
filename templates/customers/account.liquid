@@ -1,66 +1,190 @@
-{% layout customers %}
+{%- comment -%}
+  Customer Account Page (/account)
 
-<div id='admin_header'>
-  <div class='action_link action_return note' id='return_to_store'><a href='{{ shop.url }}'>Return to Store</a></div>
-  <h2 class='title'>Account Details and Order History</h2>
-</div>
+  - Shows customer details
+  - Splits orders into:
+      * Active orders (not fully fulfilled / canceled / refunded)
+      * Past orders (fulfilled, refunded, or canceled)
+  - Hides the Active Orders table if there are none
+{%- endcomment -%}
 
-<div id='customer_sidebar'>
-  <div id='customer_detail' class='group'>
-    <h5 class='name'>{{ customer.name }}</h5>
-    <p class='email note'>{{ customer.email }}</p>
-    <div class='address note'>
-      {% if customer.default_address != null %}
-        <p>{{ customer.default_address.address1 }}</p>
-        {% if customer.default_address.address2 != '' %}
-          <p>{{ customer.default_address.address2 }}</p>
-        {% endif %}
-        <p>
-          {{ customer.default_address.city }},
-          {% if address.province_code %}{{ customer.default_address.province_code }}, {% endif -%}
-          {{- customer.default_address.country }}
+{% if customer %}
+  <section class='container account-page container mx-auto w-full pt-44 pb-16'>
+    <!-- Header -->
+    <header class='mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4'>
+      <div>
+        <h1 class='text-2xl font-bold'>My Account</h1>
+        <p class='text-sm text-gray-600'>
+          Logged in as {{ customer.first_name }}
+          {{ customer.last_name }} ({{ customer.email }})
         </p>
-        <p>{{ customer.default_address.zip }}</p>
-        <p>{{ customer.default_address.phone }}</p>
-      {% endif %}
-      <a id='view_address' href='/account/addresses'>View Addresses ({{ customer.addresses_count }})</a>
-    </div>
-  </div>
-</div>
+      </div>
 
-<div id='customer_orders'>
-  {% if customer.orders.size != 0 %}
-    <table>
-      <thead>
-        <tr>
-          <th class='order_number'>Order</th>
-          <th class='date'>Date</th>
-          <th class='payment_status'>Payment Status</th>
-          <th class='fulfillment_status'>Fulfillment Status</th>
-          <th class='total'>Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for order in customer.orders %}
-          <tr class='{% cycle 'odd', 'even' %} {% if order.cancelled %}cancelled_order{% endif %}'>
-            <td>{{ order.name | link_to: order.customer_url }}</td>
-            <td>
-              <span class='note'>{{ order.created_at | date: '%b %d, %Y' }}</span>
-            </td>
-            <td>
-              <span class='status_{{ order.financial_status }}'>{{ order.financial_status }}</span>
-            </td>
-            <td>
-              <span class='status_{{ order.fulfillment_status }}'>{{ order.fulfillment_status }}</span>
-            </td>
-            <td>
-              <span class='total money'>{{ order.total_price | money }}</span>
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  {% else %}
-    <p>You haven't placed any orders yet.</p>
-  {% endif %}
-</div>
+      <div class='flex gap-4'>
+        <a href='/account/addresses' class='text-md underline leading-tight'> Manage addresses </a>
+
+        <form method='post' action='/account/logout'>
+          <button type='submit' class='text-md underline'>Log out</button>
+        </form>
+      </div>
+    </header>
+
+    {%- comment -%}
+      Determine if the customer has active and/or past orders
+    {%- endcomment -%}
+    {% assign has_active_orders = false %}
+    {% assign has_past_orders = false %}
+
+    {% paginate customer.orders by 50 %}
+      {% for order in customer.orders %}
+        {% if order.cancelled_at or order.financial_status == 'refunded' or order.fulfillment_status == 'fulfilled' %}
+          {% assign has_past_orders = true %}
+        {% else %}
+          {% assign has_active_orders = true %}
+        {% endif %}
+      {% endfor %}
+
+      {% if customer.orders_count == 0 %}
+        <p class='text-gray-700'>You don't have any orders yet.</p>
+      {% else %}
+        <!-- Active Orders -->
+        {% if has_active_orders %}
+          <section class='mb-10'>
+            <h2 class='text-xl font-semibold mb-4'>Active Orders</h2>
+
+            <div class='overflow-x-auto border rounded-lg'>
+              <table class='min-w-full text-left text-sm'>
+                <thead class='bg-gray-100'>
+                  <tr>
+                    <th class='px-4 py-3'>Order</th>
+                    <th class='px-4 py-3'>Date</th>
+                    <th class='px-4 py-3'>Payment</th>
+                    <th class='px-4 py-3'>Fulfillment</th>
+                    <th class='px-4 py-3'>Total</th>
+                    <th class='px-4 py-3'></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for order in customer.orders %}
+                    {% unless order.cancelled_at
+                      or order.financial_status == 'refunded'
+                      or order.fulfillment_status == 'fulfilled'
+                    %}
+                      <tr class='border-t'>
+                        <td class='px-4 py-3'>
+                          <span class='font-medium'>{{ order.name }}</span>
+                        </td>
+                        <td class='px-4 py-3'>
+                          {{ order.created_at | date: '%b %d, %Y' }}
+                        </td>
+                        <td class='px-4 py-3'>
+                          {{ order.financial_status | capitalize }}
+                        </td>
+                        <td class='px-4 py-3'>
+                          {% if order.fulfillment_status %}
+                            {{ order.fulfillment_status | capitalize }}
+                          {% else %}
+                            Unfulfilled
+                          {% endif %}
+                        </td>
+                        <td class='px-4 py-3'>
+                          {{ order.total_price | money_with_currency }}
+                        </td>
+                        <td class='px-4 py-3'>
+                          <a href='{{ order.order_status_url }}' class='text-sm underline'> View status </a>
+                        </td>
+                      </tr>
+                    {% endunless %}
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        {% endif %}
+
+        <!-- Past Orders -->
+        {% if has_past_orders %}
+          <section>
+            <h2 class='text-xl font-semibold mb-4'>Past Orders</h2>
+
+            <div class='overflow-x-auto border rounded-lg'>
+              <table class='min-w-full text-left text-sm'>
+                <thead class='bg-gray-100'>
+                  <tr>
+                    <th class='px-4 py-3'>Order</th>
+                    <th class='px-4 py-3'>Date</th>
+                    <th class='px-4 py-3'>Payment</th>
+                    <th class='px-4 py-3'>Fulfillment</th>
+                    <th class='px-4 py-3'>Total</th>
+                    <th class='px-4 py-3'></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for order in customer.orders %}
+                    {% if order.cancelled_at
+                      or order.financial_status == 'refunded'
+                      or order.fulfillment_status == 'fulfilled'
+                    %}
+                      <tr class='border-t'>
+                        <td class='px-4 py-3'>
+                          <span class='font-medium'>{{ order.name }}</span>
+                        </td>
+                        <td class='px-4 py-3'>
+                          {{ order.created_at | date: '%b %d, %Y' }}
+                        </td>
+                        <td class='px-4 py-3'>
+                          {{ order.financial_status | capitalize }}
+                        </td>
+                        <td class='px-4 py-3'>
+                          {% if order.cancelled_at %}
+                            Cancelled
+                          {% elsif order.financial_status == 'refunded' %}
+                            Refunded
+                          {% elsif order.fulfillment_status %}
+                            {{ order.fulfillment_status | capitalize }}
+                          {% else %}
+                            —
+                          {% endif %}
+                        </td>
+                        <td class='px-4 py-3'>
+                          {{ order.total_price | money_with_currency }}
+                        </td>
+                        <td class='px-4 py-3'>
+                          <a href='{{ order.order_status_url }}' class='text-sm underline'> View details </a>
+                        </td>
+                      </tr>
+                    {% endif %}
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        {% else %}
+          {%- comment -%}
+            If there are no past orders but there *were* active orders,
+            we simply skip the past orders table.
+          {%- endcomment -%}
+        {% endif %}
+
+        <!-- Pagination (optional, if lots of orders) -->
+        {% if paginate.pages > 1 %}
+          <nav class='mt-6 flex gap-2 text-sm'>
+            {% if paginate.previous %}
+              <a href='{{ paginate.previous.url }}' class='underline'>Previous</a>
+            {% endif %}
+            <span>Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
+            {% if paginate.next %}
+              <a href='{{ paginate.next.url }}' class='underline'>Next</a>
+            {% endif %}
+          </nav>
+        {% endif %}
+      {% endif %}
+    {% endpaginate %}
+  </section>
+
+{% else %}
+  {%- comment -%}
+    If somehow this template renders without a logged-in customer
+  {%- endcomment -%}
+  <p>You need to be logged in to view your account.</p>
+{% endif %}
