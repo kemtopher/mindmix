@@ -29,20 +29,21 @@
           </svg>
         </a>
 
-        <ul
-          id='learn-more-menu'
-          class='menu-dropdown absolute top-full left-1/2 -translate-x-1/2 hidden inline-block whitespace-nowrap px-4 py-3 bg-dark/90 backdrop-blur-md shadow-lg'
-        >
-          <li class='mb-2 text-light hover:text-primary transition-colors'>
-            <a href='/products/green-apple-kiwi'>Green Apple Kiwi</a>
-          </li>
-          <li class='mb-2 text-light hover:text-primary transition-colors'>
-            <a href='/products/blueberry-lemon-tea'>Blueberry Lemon Tea</a>
-          </li>
-          <li class='mb-2 text-light hover:text-primary transition-colors'>
-            <a href='/products/guava-passion'>Guava Passion</a>
-          </li>
-        </ul>
+        {%- assign menu_product = collections['menu-product'] -%}
+        {%- if menu_product and menu_product.products.size > 0 -%}
+          <ul
+            id='learn-more-menu'
+            class='menu-dropdown absolute top-full left-1/2 -translate-x-1/2 hidden inline-block whitespace-nowrap px-4 py-3 bg-dark/90 backdrop-blur-md shadow-lg'
+          >
+            {%- for product in menu_product.products -%}
+              <li class='mb-2 text-light hover:text-primary transition-colors'>
+                <a href='{{ product.url }}'>
+                  {{ product.title }}
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
       </div>
 
       <div id='menu-item-learn' class='menu-item h-full items-center flex gap-2 group relative'>
@@ -185,18 +186,18 @@
               />
             </svg>
           </button>
-
-          <ul class='expandable-list max-h-0 pt-4 overflow-hidden transition-all duration-300'>
-            <li class='text-2xl mb-3 text-primary transition-colors'>
-              <a href='/products/blueberry-lemon-tea'>Blueberry Lemon Tea</a>
-            </li>
-            <li class='text-2xl mb-3 text-primary transition-colors'>
-              <a href='/products/guava-passion'>Guava Passion</a>
-            </li>
-            <li class='text-2xl mb-3 text-primary transition-colors'>
-              <a href='/products/green-apple-kiwi'>Green Apple Kiwi</a>
-            </li>
-          </ul>
+          {%- assign menu_product = collections['menu-product'] -%}
+          {%- if menu_product and menu_product.products.size > 0 -%}
+            <ul class='expandable-list max-h-0 pt-4 overflow-hidden transition-all duration-300'></ul>
+            {%- for product in menu_product.products -%}
+              <li class='mb-2 text-light hover:text-primary transition-colors'>
+                <a href='{{ product.url }}'>
+                  {{ product.title }}
+                </a>
+              </li>
+            {%- endfor -%}
+            </ul>
+          {% endif %}
         </li>
         <li class='border-b border-white py-4 px-4'>
           <button
