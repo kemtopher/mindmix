@@ -9,12 +9,15 @@
  */
 {
   "current": {
+    "logo_white": "shopify://shop_images/MindMix-logo-white.svg",
+    "logo_black": "shopify://shop_images/MindMix-logo-black.svg",
+    "logo_brand_color": "shopify://shop_images/MindMix-logo-brand.svg",
     "trial_product": "free-trial",
     "sections": {
       "header": {
         "type": "header",
         "settings": {
-          "logo": "shopify://shop_images/MindMix-logo-white.svg"
+          "logo_variant": "white"
         }
       },
       "hero": {
@@ -451,10 +454,12 @@
       "footer": {
         "type": "footer",
         "settings": {
-          "facebook_url": "",
-          "twitter_url": "",
-          "instagram_url": "",
-          "youtube_url": ""
+          "logo_variant": "white",
+          "footer_text": "Unlock Your Mental Edge with our scientifically formulated nootropic drink mix designed for peak cognitive performance.",
+          "column_1_heading": "Shop",
+          "column_2_heading": "Learn",
+          "column_3_heading": "Support",
+          "legal_text": "*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease."
         }
       },
       "main-product": {
@@ -554,64 +559,6 @@
           "twitter_url": "",
           "instagram_url": "",
           "youtube_url": ""
-        }
-      },
-      "footer-link-group-1": {
-        "type": "footer-link-group-1",
-        "settings": {
-          "heading": ""
-        }
-      },
-      "footer-link-group-2": {
-        "type": "footer-link-group-2",
-        "blocks": {
-          "link_item_rKa3Wg": {
-            "type": "link_item",
-            "settings": {
-              "link_label": "All Products",
-              "link_url": "shopify://collections"
-            }
-          },
-          "link_item_dWTeVB": {
-            "type": "link_item",
-            "settings": {
-              "link_label": "Try It Free",
-              "link_url": "shopify://products/mindmix"
-            }
-          }
-        },
-        "block_order": [
-          "link_item_rKa3Wg",
-          "link_item_dWTeVB"
-        ],
-        "settings": {
-          "heading": "Store"
-        }
-      },
-      "footer-link-group-3": {
-        "type": "footer-link-group-3",
-        "blocks": {
-          "link_item_NtPUrm": {
-            "type": "link_item",
-            "settings": {
-              "link_label": "FAQ",
-              "link_url": "shopify://pages/faq"
-            }
-          },
-          "link_item_mqwrFi": {
-            "type": "link_item",
-            "settings": {
-              "link_label": "Contact",
-              "link_url": "shopify://pages/contact"
-            }
-          }
-        },
-        "block_order": [
-          "link_item_NtPUrm",
-          "link_item_mqwrFi"
-        ],
-        "settings": {
-          "heading": "Support"
         }
       },
       "product-tabs": {
