@@ -3,6 +3,11 @@
   "name": "Footer",
   "settings": [
     {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+    {
       "type": "text",
       "id": "facebook_url",
       "label": "Facebook URL"
@@ -30,10 +35,19 @@
   <div class='container-custom'>
     <div class='grid md:grid-cols-5 gap-8 mb-12'>
       <div class='md:col-span-2'>
-        <a href='/' class='group mb-4 inline-block'>
-          <span class='text-3xl font-bold text-white group-hover:text-primary transition-colors duration-300'>
-            {{ shop.name }}
-          </span>
+        <a href='{{ routes.root_url }}' class='group z-[99] w-[127px] h-[36px] flex items-center'>
+          {% if section.settings.logo != blank %}
+            {{ section.settings.logo | image_url: width: 127 | image_tag: alt: shop.name, class: 'h-8 w-auto' }}
+            {%- comment -%}
+              Optional: extra text node for SEO/screen readers.
+              Alt text is already accessible, so this is strictly bonus.
+            {%- endcomment -%}
+            <span class='sr-only'>{{ shop.name }}</span>
+          {% else %}
+            <span class='text-3xl font-bold text-white transition-colors duration-300'>
+              {{ shop.name }}
+            </span>
+          {% endif %}
         </a>
         <p class='text-light mb-6 max-w-md'>
           Unlock Your Mental Edge with our scientifically formulated nootropic drink mix designed for peak cognitive
