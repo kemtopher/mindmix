@@ -602,6 +602,18 @@ video {
   }
 }
 
+#benefits-banner .benefit-text strong {
+  font-weight: 600;
+  --tw-text-opacity: 1;
+  color: rgb(0 229 160 / var(--tw-text-opacity, 1));
+}
+
+#main-product-image {
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -956,6 +968,10 @@ video {
   height: 24px;
 }
 
+.h-\[36px\] {
+  height: 36px;
+}
+
 .h-\[40vh\] {
   height: 40vh;
 }
@@ -987,10 +1003,6 @@ video {
 
 .h-screen {
   height: 100vh;
-}
-
-.h-\[36px\] {
-  height: 36px;
 }
 
 .max-h-0 {
@@ -1101,6 +1113,10 @@ video {
   width: 24rem;
 }
 
+.w-\[127px\] {
+  width: 127px;
+}
+
 .w-\[24px\] {
   width: 24px;
 }
@@ -1119,10 +1135,6 @@ video {
 
 .w-screen {
   width: 100vw;
-}
-
-.w-\[127px\] {
-  width: 127px;
 }
 
 .min-w-\[600px\] {
@@ -2388,12 +2400,6 @@ html {
       rgba(0, 229, 160, 0.05) 0%,
       transparent 30%
     );
-}
-
-#main-product-image {
-  transition-property: opacity;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 500ms;
 }
 
 .btn {
