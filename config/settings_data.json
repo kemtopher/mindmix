@@ -13,7 +13,9 @@
     "sections": {
       "header": {
         "type": "header",
-        "settings": {}
+        "settings": {
+          "logo": "shopify://shop_images/MindMix-logo-white.svg"
+        }
       },
       "hero": {
         "type": "hero",
@@ -125,6 +127,7 @@
           "section_card_bPG7E3": {
             "type": "section_card",
             "settings": {
+              "card_link": "",
               "card_title": "GREEN APPLE KIWI",
               "card_subtitle": "Morning Focus Boost",
               "card_image": "shopify://shop_images/green-apple-kiwi.png",
@@ -136,6 +139,7 @@
           "section_card_yFKJBe": {
             "type": "section_card",
             "settings": {
+              "card_link": "",
               "card_title": "GUAVA PASSION",
               "card_subtitle": "Sustained Mental Energy",
               "card_image": "shopify://shop_images/guava-passion.png",
@@ -147,6 +151,7 @@
           "section_card_XjnPjd": {
             "type": "section_card",
             "settings": {
+              "card_link": "",
               "card_title": "BLUEBERRY LEMON TEA",
               "card_subtitle": "Deep Work Sessions",
               "card_image": "shopify://shop_images/blueberry-lemonade.png",
