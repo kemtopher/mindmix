@@ -1,125 +1,134 @@
-{% schema %}
-{
-  "name": "Footer",
-  "settings": [
-    {
-      "type": "image_picker",
-      "id": "logo",
-      "label": "Logo Image"
-    },
-    {
-      "type": "text",
-      "id": "facebook_url",
-      "label": "Facebook URL"
-    },
-    {
-      "type": "text",
-      "id": "twitter_url",
-      "label": "Twitter URL"
-    },
-    {
-      "type": "text",
-      "id": "instagram_url",
-      "label": "Instagram URL"
-    },
-    {
-      "type": "text",
-      "id": "youtube_url",
-      "label": "YouTube URL"
-    }
-  ]
-}
-{% endschema %}
-
 <footer class='bg-darker pt-16 pb-8'>
   <div class='container-custom'>
-    <div class='grid md:grid-cols-5 gap-8 mb-12'>
-      <div class='md:col-span-2'>
-        <a href='{{ routes.root_url }}' class='group z-[99] w-[127px] h-[36px] flex items-center'>
-          {% if section.settings.logo != blank %}
-            {{ section.settings.logo | image_url: width: 127 | image_tag: alt: shop.name, class: 'h-8 w-auto' }}
-            {%- comment -%}
-              Optional: extra text node for SEO/screen readers.
-              Alt text is already accessible, so this is strictly bonus.
-            {%- endcomment -%}
-            <span class='sr-only'>{{ shop.name }}</span>
-          {% else %}
-            <span class='text-3xl font-bold text-white transition-colors duration-300'>
-              {{ shop.name }}
-            </span>
-          {% endif %}
-        </a>
-        <p class='text-light mb-6 max-w-md'>
-          Unlock Your Mental Edge with our scientifically formulated nootropic drink mix designed for peak cognitive
-          performance.
-        </p>
+    <div class='flex flex-col mb-12'>
+      <div class='flex wrap flex-col md:flex-row md:nowrap justify-between gap-10'>
+        <div class='w-full lg:w-[40vw] max-w-full md:max-w-[400px] text-center md:text-left'>
+          <a href='{{ routes.root_url }}' class='group z-[99] w-[127px] h-[36px] mb-4 flex items-center'>
+            {% if settings.logo != blank %}
+              {{ settings.logo | image_url: width: 127 | image_tag: alt: shop.name, class: 'h-8 w-auto' }}
+              <span class='sr-only'>{{ shop.name }}</span>
+            {% else %}
+              <span class='text-3xl font-bold text-white transition-colors duration-300'>
+                {{ shop.name }}
+              </span>
+            {% endif %}
+          </a>
 
-        <div class='flex space-x-4'>
-          {% if section.settings.facebook_url != blank %}
-            <a href='{{ section.settings.facebook_url }}' class='text-light hover:text-primary transition-colors'>
-              {% render 'icon-facebook' %}
-            </a>
+          {% if section.settings.footer_text != blank %}
+            <p class='text-light mb-6 max-w-md'>
+              {{ section.settings.footer_text }}
+            </p>
           {% endif %}
 
-          {% if section.settings.twitter_url != blank %}
-            <a href='{{ section.settings.twitter_url }}' class='text-light hover:text-primary transition-colors'>
-              {% render 'icon-twitter' %}
-            </a>
-          {% endif %}
+          <div class='flex space-x-4'>
+            {% if settings.social_facebook_url != blank %}
+              <a
+                href='{{ settings.social_facebook_url }}'
+                class='text-light hover:text-primary transition-colors'
+                aria-label='Facebook'
+              >
+                {% render 'icon-facebook' %}
+              </a>
+            {% endif %}
 
-          {% if section.settings.instagram_url != blank %}
-            <a href='{{ section.settings.instagram_url }}' class='text-light hover:text-primary transition-colors'>
-              {% render 'icon-instagram' %}
-            </a>
-          {% endif %}
+            {% if settings.social_twitter_url != blank %}
+              <a
+                href='{{ settings.social_twitter_url }}'
+                class='text-light hover:text-primary transition-colors'
+                aria-label='Twitter'
+              >
+                {% render 'icon-twitter' %}
+              </a>
+            {% endif %}
 
-          {% if section.settings.youtube_url != blank %}
-            <a href='{{ section.settings.youtube_url }}' class='text-light hover:text-primary transition-colors'>
-              {% render 'icon-youtube' %}
-            </a>
-          {% endif %}
+            {% if settings.social_instagram_url != blank %}
+              <a
+                href='{{ settings.social_instagram_url }}'
+                class='text-light hover:text-primary transition-colors'
+                aria-label='Instagram'
+              >
+                {% render 'icon-instagram' %}
+              </a>
+            {% endif %}
+
+            {% if settings.social_youtube_url != blank %}
+              <a
+                href='{{ settings.social_youtube_url }}'
+                class='text-light hover:text-primary transition-colors'
+                aria-label='YouTube'
+              >
+                {% render 'icon-youtube' %}
+              </a>
+            {% endif %}
+          </div>
+        </div>
+
+        {%- assign col1_blocks = section.blocks | where: 'type', 'column_1_link' -%}
+        {%- assign col2_blocks = section.blocks | where: 'type', 'column_2_link' -%}
+        {%- assign col3_blocks = section.blocks | where: 'type', 'column_3_link' -%}
+
+        <div class='w-full md:w-[60vw] flex flex-col md:flex-row justify-end gap-8'>
+          {%- if section.settings.column_1_heading != blank or col1_blocks.size > 0 -%}
+            <div class='justify-self-end w-full md:w-1/5 min-w-full md:min-w-[150px] pt-5 md:pt-0 pb-2 md:pb-0 border-t md:border-none'>
+              <div class='footer-link-group'>
+                {% if section.settings.column_1_heading != blank %}
+                  <h5 class='text-white font-semibold mb-4'>{{ section.settings.column_1_heading }}</h5>
+                {% endif %}
+                <ul class='space-y-2'>
+                  {% for block in col1_blocks %}
+                    <li>
+                      <a href='{{ block.settings.link_url }}' class='text-light hover:text-primary transition-colors'>
+                        {{ block.settings.link_label }}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.column_2_heading != blank or col2_blocks.size > 0 -%}
+            <div class='justify-self-end w-full md:w-1/5 min-w-full md:min-w-[150px] pt-5 md:pt-0 pb-2 md:pb-0 border-t md:border-none'>
+              <div class='footer-link-group'>
+                {% if section.settings.column_2_heading != blank %}
+                  <h5 class='text-white font-semibold mb-4'>{{ section.settings.column_2_heading }}</h5>
+                {% endif %}
+                <ul class='space-y-2'>
+                  {% for block in col2_blocks %}
+                    <li>
+                      <a href='{{ block.settings.link_url }}' class='text-light hover:text-primary transition-colors'>
+                        {{ block.settings.link_label }}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.column_3_heading != blank or col3_blocks.size > 0 -%}
+            <div class='justify-self-end w-full md:w-1/5 min-w-full md:min-w-[150px] pt-5 md:pt-0 pb-2 md:pb-0 border-t md:border-none'>
+              <div class='footer-link-group'>
+                {% if section.settings.column_3_heading != blank %}
+                  <h5 class='text-white font-semibold mb-4'>{{ section.settings.column_3_heading }}</h5>
+                {% endif %}
+                <ul class='space-y-2'>
+                  {% for block in col3_blocks %}
+                    <li>
+                      <a href='{{ block.settings.link_url }}' class='text-light hover:text-primary transition-colors'>
+                        {{ block.settings.link_label }}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          {%- endif -%}
         </div>
       </div>
-
-      <div>
-        <h5 class='text-white font-semibold mb-4'>Shop</h5>
-        <ul class='space-y-2'>
-          <li><a href='/collections/all' class='text-light hover:text-primary transition-colors'>All Products</a></li>
-          <li>
-            <a href='/collections/starter-packs' class='text-light hover:text-primary transition-colors'
-              >Starter Packs</a
-            >
-          </li>
-          <li>
-            <a href='/collections/subscriptions' class='text-light hover:text-primary transition-colors'
-              >Subscriptions</a
-            >
-          </li>
-          <li><a href='/products/gift-card' class='text-light hover:text-primary transition-colors'>Gift Cards</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h5 class='text-white font-semibold mb-4'>Learn</h5>
-        <ul class='space-y-2'>
-          <li><a href='/pages/science' class='text-light hover:text-primary transition-colors'>Our Science</a></li>
-          <li><a href='/pages/ingredients' class='text-light hover:text-primary transition-colors'>Ingredients</a></li>
-          <li><a href='/pages/research' class='text-light hover:text-primary transition-colors'>Research</a></li>
-          <li><a href='/blogs/news' class='text-light hover:text-primary transition-colors'>Blog</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h5 class='text-white font-semibold mb-4'>Support</h5>
-        <ul class='space-y-2'>
-          <li><a href='/pages/faq' class='text-light hover:text-primary transition-colors'>FAQ</a></li>
-          <li><a href='/pages/contact' class='text-light hover:text-primary transition-colors'>Contact</a></li>
-          <li><a href='/pages/shipping' class='text-light hover:text-primary transition-colors'>Shipping</a></li>
-          <li><a href='/pages/returns' class='text-light hover:text-primary transition-colors'>Returns</a></li>
-          <li><a href='/pages/track-order' class='text-light hover:text-primary transition-colors'>Track Order</a></li>
-        </ul>
-      </div>
+      <!-- closes the flex wrap -->
     </div>
+    <!-- closes the mb-12 block -->
 
     <div class='border-t border-gray-800 pt-8'>
       <div class='flex flex-col md:flex-row justify-between items-center'>
@@ -129,21 +138,123 @@
         </p>
 
         <div class='flex space-x-6'>
-          <a href='/pages/terms' class='text-light/60 hover:text-primary text-sm transition-colors'> Terms </a>
+          <a href='/pages/terms-and-conditions' class='text-light/60 hover:text-primary text-sm transition-colors'>
+            Terms &amp; Conditions
+          </a>
           <a href='/pages/privacy' class='text-light/60 hover:text-primary text-sm transition-colors'> Privacy </a>
           <a href='/pages/fda-disclaimer' class='text-light/60 hover:text-primary text-sm transition-colors'>
             FDA Disclaimer
           </a>
-          <a href='/pages/affiliate' class='text-light/60 hover:text-primary text-sm transition-colors'>
+          <a href='/pages/affiliate-program' class='text-light/60 hover:text-primary text-sm transition-colors'>
             Affiliate Program
           </a>
         </div>
       </div>
-
-      <p class='text-light/40 text-xs mt-8 text-center'>
-        *These statements have not been evaluated by the Food and Drug Administration. This product is not intended to
-        diagnose, treat, cure, or prevent any disease.
-      </p>
+      {% if section.settings.legal_text != blank %}
+        <p class='text-light/40 text-xs mt-8 text-center'>
+          {{ section.settings.legal_text }}
+        </p>
+      {% endif %}
     </div>
+    <!-- closes border-t section -->
   </div>
+  <!-- closes container-custom -->
 </footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "footer_text",
+      "label": "Footer description",
+      "default": "Unlock Your Mental Edge with our scientifically formulated nootropic drink mix designed for peak cognitive performance."
+    },
+    {
+      "type": "text",
+      "id": "column_1_heading",
+      "label": "Column 1 heading",
+      "default": "Shop"
+    },
+    {
+      "type": "text",
+      "id": "column_2_heading",
+      "label": "Column 2 heading",
+      "default": "Learn"
+    },
+    {
+      "type": "text",
+      "id": "column_3_heading",
+      "label": "Column 3 heading",
+      "default": "Support"
+    },
+    {
+      "type": "textarea",
+      "id": "legal_text",
+      "label": "Footer legal description",
+      "default": "*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column_1_link",
+      "name": "Column 1 link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "default": "Example link"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        }
+      ]
+    },
+    {
+      "type": "column_2_link",
+      "name": "Column 2 link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "default": "Example link"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        }
+      ]
+    },
+    {
+      "type": "column_3_link",
+      "name": "Column 3 link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "default": "Example link"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 60,
+  "presets": [
+    {
+      "name": "Custom footer",
+      "category": "Footer"
+    }
+  ]
+}
+{% endschema %}

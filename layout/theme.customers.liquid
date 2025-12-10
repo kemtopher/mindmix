@@ -31,69 +31,21 @@
     {% section 'header' %}
 
     <!-- Main Content -->
-    <main role='main' id='main-content' class="pt-20 md:pt-10 w-screen" tabindex='-1'>
-      <div class="accounts-layout w-full flex flex-col md:flex-row">
-        <div class="forms-well w-full md:w-1/2 py-12 flex justify-center items-start md:items-center">
+    <main role='main' id='main-content' class='pt-20 md:pt-10 w-screen' tabindex='-1'>
+      <div class='accounts-layout w-full flex flex-col md:flex-row'>
+        <div class='forms-well w-full md:w-1/2 py-12 flex justify-center items-start md:items-center'>
           {{ content_for_layout }}
         </div>
-        <div class="image-well w-full md:w-1/2 hidden md:block">
-          <div class="image-container">
-            <img class="w-full h-full object-cover" src="{{ 'powder-texture.png' | asset_url }}" />
+        <div class='image-well w-full md:w-1/2 hidden md:block'>
+          <div class='image-container'>
+            <img class='w-full h-full object-cover' src='{{ 'powder-texture.png' | asset_url }}'>
           </div>
         </div>
       </div>
     </main>
 
     <!-- Footer -->
-    <footer class='bg-darker pt-16 pb-8'>
-      <div class='container-custom'>
-        <div class='flex flex-col mb-12'>
-          <div class='flex wrap flex-col md:flex-row md:nowrap justify-between gap-10'>
-            <div class='w-full lg:w-[40vw] max-w-full md:max-w-[400px] text-center md:text-left'>
-              <a href='/' class='group mb-4 inline-block'>
-                <span class='text-3xl font-bold text-white group-hover:text-primary transition-colors duration-300'>
-                  {{ shop.name }}
-                </span>
-              </a>
-              <p class='text-light mb-6 max-w-md'>
-                Unlock Your Mental Edge with our scientifically formulated nootropic drink mix designed for peak
-                cognitive performance.
-              </p>
-
-              <div class='flex space-x-4'>
-                {% section 'social-links' %}
-              </div>
-            </div>
-            <div class='w-full md:w-[60vw] flex flex-col md:flex-row justify-end gap-8'>
-                {% section 'footer-link-group-1' %}
-                {% section 'footer-link-group-2' %}
-                {% section 'footer-link-group-3' %}
-              </div>
-            </div>
-          </div>
-          <div class='border-t border-gray-800 pt-8'>
-            <div class='flex flex-col md:flex-row justify-between items-center'>
-              <p class='text-light/60 text-sm mb-4 md:mb-0'>
-                &copy; {{ 'now' | date: '%Y' }}
-                {{ shop.name }}. All rights reserved.
-              </p>
-
-              <div class='flex space-x-6'>
-                <a href='/pages/terms-and-conditions' class='text-light/60 hover:text-primary text-sm transition-colors'>Terms & Conditions</a>
-                <a href='/pages/privacy' class='text-light/60 hover:text-primary text-sm transition-colors'>Privacy</a>
-                <a href='/pages/fda-disclaimer' class='text-light/60 hover:text-primary text-sm transition-colors'>FDA Disclaimer</a>
-                <a href='/pages/affiliate-program' class='text-light/60 hover:text-primary text-sm transition-colors'>Affiliate Program</a>
-              </div>
-            </div>
-
-            <p class='text-light/40 text-xs mt-8 text-center'>
-              *These statements have not been evaluated by the Food and Drug Administration. This product is not
-              intended to diagnose, treat, cure, or prevent any disease.
-            </p>
-          </div>
-        </div>
-      </div>
-    </footer>
+    {% section 'footer' %}
 
     <!-- Theme Scripts -->
     <!-- {{ 'theme.js' | asset_url | script_tag }} -->
