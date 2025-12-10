@@ -2,20 +2,7 @@
 
 <header class='fixed top-0 left-0 right-0 z-50 bg-dark/90 backdrop-blur-md shadow-lg h-20'>
   <div class='container-custom flex items-center justify-between h-full'>
-    <a href='{{ routes.root_url }}' class='group z-[99] w-[127px] h-[36px] flex items-center'>
-      {% if settings.logo != blank %}
-        {{ settings.logo | image_url: width: 127 | image_tag: alt: shop.name, class: 'h-8 w-auto' }}
-        {%- comment -%}
-          Optional: extra text node for SEO/screen readers.
-          Alt text is already accessible, so this is strictly bonus.
-        {%- endcomment -%}
-        <span class='sr-only'>{{ shop.name }}</span>
-      {% else %}
-        <span class='text-3xl font-bold text-white transition-colors duration-300'>
-          {{ shop.name }}
-        </span>
-      {% endif %}
-    </a>
+    {% render 'logo' %}
 
     <nav class='h-full hidden md:flex items-center space-x-6'>
       <div id='menu-item-learn' class='menu-item h-full items-center flex gap-2 group relative'>
@@ -270,6 +257,34 @@
     </nav>
   </div>
 </header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "select",
+      "id": "logo_variant",
+      "label": "Logo color",
+      "default": "white",
+      "options": [
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "black",
+          "label": "Black"
+        },
+        {
+          "value": "brand_color",
+          "label": "Brand color"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {

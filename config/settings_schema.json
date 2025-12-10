@@ -4,8 +4,18 @@
     "settings": [
       {
         "type": "image_picker",
-        "id": "logo",
-        "label": "Logo Image"
+        "id": "logo_white",
+        "label": "White logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_black",
+        "label": "Black logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_brand_color",
+        "label": "Brand color logo"
       }
     ]
   },

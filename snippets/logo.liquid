@@ -1,0 +1,28 @@
+{%- comment -%}
+  Usage:
+    {% render 'logo' %}
+    {% render 'logo', variant: 'black' %}
+    {% render 'logo', variant: section.settings.logo_variant %}
+{%- endcomment -%}
+
+{%- assign logo_variant = variant | default: section.settings.logo_variant | default: 'white' -%}
+
+{%- case logo_variant -%}
+  {%- when 'black' -%}
+    {%- assign logo_image = settings.logo_black -%}
+  {%- when 'brand_color' -%}
+    {%- assign logo_image = settings.logo_brand_color -%}
+  {%- else -%}
+    {%- assign logo_image = settings.logo_white -%}
+{%- endcase -%}
+
+<a href='{{ routes.root_url }}' class='group z-[99] w-[127px] h-[36px] flex items-center'>
+  {% if logo_image != blank %}
+    {{ logo_image | image_url: width: 127 | image_tag: alt: shop.name, class: 'h-8 w-auto' }}
+    <span class='sr-only'>{{ shop.name }}</span>
+  {% else %}
+    <span class='text-3xl font-bold text-white transition-colors duration-300'>
+      {{ shop.name }}
+    </span>
+  {% endif %}
+</a>
