@@ -3,8 +3,8 @@
 <header class='fixed top-0 left-0 right-0 z-50 bg-dark/90 backdrop-blur-md shadow-lg h-20'>
   <div class='container-custom flex items-center justify-between h-full'>
     <a href='{{ routes.root_url }}' class='group z-[99] w-[127px] h-[36px] flex items-center'>
-      {% if section.settings.logo != blank %}
-        {{ section.settings.logo | image_url: width: 127 | image_tag: alt: shop.name, class: 'h-8 w-auto' }}
+      {% if settings.logo != blank %}
+        {{ settings.logo | image_url: width: 127 | image_tag: alt: shop.name, class: 'h-8 w-auto' }}
         {%- comment -%}
           Optional: extra text node for SEO/screen readers.
           Alt text is already accessible, so this is strictly bonus.
@@ -348,16 +348,3 @@
     }
   });
 </script>
-
-{% schema %}
-{
-  "name": "Header Section",
-  "settings": [
-    {
-      "type": "image_picker",
-      "id": "logo",
-      "label": "Logo Image"
-    }
-  ]
-}
-{% endschema %}

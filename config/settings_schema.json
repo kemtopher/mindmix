@@ -1,12 +1,12 @@
 [
   {
-    "name": "Free Trial Product",
+    "name": "Header Section",
     "settings": [
       {
-        "type": "product",
-        "id": "trial_product",
-        "label": "Poduct",
-      },
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo Image"
+      }
     ]
   },
   {
@@ -32,6 +32,16 @@
         "id": "social_youtube_url",
         "label": "YouTube URL"
       }
+    ]
+  },
+  {
+    "name": "Free Trial Product",
+    "settings": [
+      {
+        "type": "product",
+        "id": "trial_product",
+        "label": "Poduct",
+      },
     ]
   }
 ]
