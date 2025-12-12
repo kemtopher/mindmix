@@ -299,7 +299,7 @@ html {
 }
 
 #menu-item-learn.active > a {
-  color: var(--color-primary); /* or use Tailwind utilities with @apply */
+  color: var(--color-primary);
 }
 #menu-item-learn.active svg {
   color: var(--color-primary);
@@ -307,6 +307,30 @@ html {
   transition: transform 0.3s;
 }
 
-.variant-button.active {
+.variant-button.active:not(:disabled) {
   color: var(--color-primary);
+}
+
+button:disabled.variant-button {
+  border-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+input:disabled,
+textarea:disabled {
+  border-color: #cccccc;
+}
+
+#variant-price.out-of-stock {
+  color: #9ca3af;
+  opacity: 0.7;
+}
+
+.btn--out-of-stock {
+  background-color: transparent;
+  border-width: 1px;
+  border-color: #9ca3af;
+  color: #9ca3af;
 }

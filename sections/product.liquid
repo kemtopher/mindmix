@@ -42,7 +42,11 @@
         <div class='text-sm text-white h-max mb-4 font-light'>{{ product.description }}</div>
 
         {% assign current_variant = product.selected_or_first_available_variant %}
-        <div id='variant-price' class='text-2xl lg:text-3xl text-primary'>
+
+        <div
+          id='variant-price'
+          class='text-2xl lg:text-3xl text-primary {% unless current_variant.available %}out-of-stock{% endunless %}'
+        >
           {% if current_variant.price == 0 %}
             Free - just pay shipping
           {% else %}
@@ -57,48 +61,43 @@
       {% if product.handle != 'free-trial-pack' %}
         <div class='product-variant-select'>
           <p class='text-base text-white font-normal'>Quantity:</p>
-          <!--
-            <p class='py-4 text-base text-white'>{{ variant.metafields.custom.variant_description | metafield_text }}</p>
-          -->
-          {%- assign variant_size = product.variants -%}
+
+          {% assign variant_size = product.variants %}
           {% if variant_size.size > 0 %}
-            <div class='variant-well flex py-4 gap-4 group'>
+            {% assign current_variant = product.selected_or_first_available_variant %}
+
+            <div class='variant-well flex py-4 gap-4 group flex-wrap'>
               {% for variant in product.variants %}
-                {% if forloop.first %}
-                  <div
-                    class='variant-button p-4 border group-hover:cursor-pointer hover:border-primary hover:text-primary active'
-                    data-variant-id='{{ variant.id }}'
-                    data-variant-price='{{ variant.price }}'
-                    data-default='true'
-                    onclick='handleVariantClick(event, "{{ variant.id }}", "{{ variant.price | json }}")'
-                  >
-                    <h3>{{ variant.title }}</h3>
-                    <input
-                      type='radio'
-                      name='variant'
-                      id='variant-{{ variant.id }}'
-                      value='{{ variant.id }}'
-                      hidden
-                    >
-                  </div>
-                {% else %}
-                  <div
-                    class='variant-button p-4 border hover:cursor-pointer hover:border-primary hover:text-primary'
-                    data-variant-id='{{ variant.id }}'
-                    data-variant-price='{{ variant.price }}'
-                    data-default='true'
-                    onclick='handleVariantClick(event, "{{ variant.id }}", "{{ variant.price | json }}")'
-                  >
-                    <h3>{{ variant.title }}</h3>
-                    <input
-                      type='radio'
-                      name='variant'
-                      id='variant-{{ variant.id }}'
-                      value='{{ variant.id }}'
-                      hidden
-                    >
-                  </div>
+                {% assign is_default = false %}
+                {% if current_variant and variant.id == current_variant.id and variant.available %}
+                  {% assign is_default = true %}
                 {% endif %}
+
+                <div class='variant-option flex flex-col items-start'>
+                  <button
+                    class='variant-button p-4 border hover:cursor-pointer hover:border-primary hover:text-primary{% if is_default %} active border-primary{% endif %}{% unless variant.available %} opacity-50{% endunless %}'
+                    data-variant-id='{{ variant.id }}'
+                    data-variant-price='{{ variant.price }}'
+                    data-available='{{ variant.available }}'
+                    data-default='{% if is_default %}true{% else %}false{% endif %}'
+                    onclick='handleVariantClick(event, "{{ variant.id }}", "{{ variant.price | json }}")'
+                  >
+                    <h3>{{ variant.title }}</h3>
+                    <input
+                      type='radio'
+                      name='variant'
+                      id='variant-{{ variant.id }}'
+                      value='{{ variant.id }}'
+                      hidden
+                    >
+                  </button>
+
+                  <!--
+                    {% unless variant.available %}
+                      <p class='mt-1 text-xs text-red-400'>Out of stock</p>
+                    {% endunless %}
+                  -->
+                </div>
               {% endfor %}
             </div>
           {% endif %}
@@ -131,7 +130,6 @@
           mainImage.onload = () => mainImage.classList.remove('opacity-0');
         }, 200);
 
-        // Optional: add a simple active border highlight
         thumbs.forEach((t) => t.classList.remove('border-2', 'border-primary'));
         thumb.classList.add('border-2', 'border-primary');
       });
@@ -141,8 +139,9 @@
     const priceField = document.getElementById('variant-price');
     const hiddenInput = document.getElementById('selected-variant-id');
     const addToCartBtn = document.getElementById('add-to-cart-btn');
+    const addToCartOriginalText = addToCartBtn ? addToCartBtn.textContent.trim() : 'Add to Cart';
 
-    // Preselect default variant
+    // Preselect default variant (first available)
     const defaultButton = document.querySelector('.variant-button[data-default="true"]');
     if (defaultButton) {
       selectVariant(defaultButton);
@@ -157,7 +156,7 @@
     });
 
     function selectVariant(button) {
-      // Clear active state on all buttons
+      // Clear active on all variant buttons
       variantButtons.forEach((btn) => {
         btn.classList.remove('active', 'border-primary');
         const input = btn.querySelector('input[type="radio"]');
@@ -171,9 +170,11 @@
 
       // Update hidden input for form
       const variantId = button.dataset.variantId;
-      if (hiddenInput) hiddenInput.value = variantId;
+      if (hiddenInput && variantId) {
+        hiddenInput.value = variantId;
+      }
 
-      // Update price field
+      // Update price display
       const variantPrice = button.dataset.variantPrice;
       if (priceField && variantPrice) {
         const formatted = (variantPrice / 100).toLocaleString('en-US', {
@@ -183,8 +184,49 @@
         priceField.textContent = formatted;
       }
 
-      // Enable add to cart
-      if (addToCartBtn) addToCartBtn.disabled = false;
+      const isAvailable = button.dataset.available === 'true';
+
+      // Toggle price out-of-stock styling
+      if (priceField) {
+        if (isAvailable) {
+          priceField.classList.remove('out-of-stock');
+        } else {
+          priceField.classList.add('out-of-stock');
+        }
+      }
+
+      // Toggle Add to Cart button state & styles
+      if (addToCartBtn) {
+        if (isAvailable) {
+          addToCartBtn.disabled = false;
+          addToCartBtn.textContent = 'Add to cart';
+
+          addToCartBtn.classList.remove(
+            'btn--out-of-stock',
+            'border',
+            'border-primary',
+            'text-gray-400',
+            'bg-transparent',
+            'cursor-not-allowed',
+            'opacity-50'
+          );
+          addToCartBtn.classList.add('btn-mint', 'btn--add-to-cart');
+        } else {
+          addToCartBtn.disabled = true;
+          addToCartBtn.textContent = 'Currently out of stock';
+
+          addToCartBtn.classList.add(
+            'btn--out-of-stock',
+            'border',
+            'border-primary',
+            'text-gray-400',
+            'bg-transparent',
+            'cursor-not-allowed',
+            'opacity-50'
+          );
+          addToCartBtn.classList.remove('btn-mint', 'btn--add-to-cart');
+        }
+      }
     }
   });
 </script>

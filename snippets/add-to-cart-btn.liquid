@@ -1,14 +1,25 @@
+{% assign current_variant = product.selected_or_first_available_variant %}
+
 <div class='add-to-cart'>
   <form method='post' action='/cart/add' id='add-to-cart-form' class='mt-8'>
     <input
       type='hidden'
+      id='selected-variant-id'
       name='id'
-      value='{{ product.selected_or_first_available_variant.id }}'
+      value='{{ current_variant.id }}'
     >
+    <!-- removed from button:  hover:transform hover:scale-105 transition-transform -->
     <button
       type='button'
       id='add-to-cart-btn'
-      class='btn btn-mint btn--add-to-cart w-full px-8 py-4 text-lg font-bold hover:transform hover:scale-105 transition-transform disabled:hover:bg-primary disabled:opacity-50 disabled:cursor-not-allowed'
+      class='
+        w-full px-8 py-4 text-lg font-bold disabled:opacity-50 disabled:cursor-not-allowed
+        {% if product.available %}
+          btn btn-mint btn--add-to-cart
+        {% else %}
+          btn btn--out-of-stock border border-primary text-gray-400 bg-transparent
+        {% endif %}
+      '
       {% unless product.available %}
         disabled
       {% endunless %}
@@ -16,7 +27,7 @@
       {% if product.available %}
         Add to cart
       {% else %}
-        Currently Sold Out
+        Currently out of stock
       {% endif %}
     </button>
 

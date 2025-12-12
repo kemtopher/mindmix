@@ -1324,6 +1324,10 @@ video {
   animation: shimmer 8s linear infinite;
 }
 
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
@@ -2143,6 +2147,11 @@ video {
   color: rgb(11 11 11 / var(--tw-text-opacity, 1));
 }
 
+.text-gray-400 {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity, 1));
+}
+
 .text-gray-500 {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity, 1));
@@ -2194,6 +2203,11 @@ video {
 
 .text-primary\/20 {
   color: rgb(0 229 160 / 0.2);
+}
+
+.text-red-400 {
+  --tw-text-opacity: 1;
+  color: rgb(248 113 113 / var(--tw-text-opacity, 1));
 }
 
 .text-red-500 {
@@ -2664,7 +2678,6 @@ html {
 
 #menu-item-learn.active > a {
   color: var(--color-primary);
-  /* or use Tailwind utilities with @apply */
 }
 
 #menu-item-learn.active svg {
@@ -2673,8 +2686,32 @@ html {
   transition: transform 0.3s;
 }
 
-.variant-button.active {
+.variant-button.active:not(:disabled) {
   color: var(--color-primary);
+}
+
+button:disabled.variant-button {
+  border-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+input:disabled,
+textarea:disabled {
+  border-color: #cccccc;
+}
+
+#variant-price.out-of-stock {
+  color: #9ca3af;
+  opacity: 0.7;
+}
+
+.btn--out-of-stock {
+  background-color: transparent;
+  border-width: 1px;
+  border-color: #9ca3af;
+  color: #9ca3af;
 }
 
 .last\:mb-0:last-child {
@@ -2827,10 +2864,6 @@ html {
 
 .group:hover .group-hover\:transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.group:hover .group-hover\:cursor-pointer {
-  cursor: pointer;
 }
 
 .group:hover .group-hover\:fill-primary {
