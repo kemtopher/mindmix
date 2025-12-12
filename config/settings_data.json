@@ -699,6 +699,10 @@
           "section_subtitle": "The adaptogenic powerhouse behind peak mental performance",
           "section_quote": "Used by Soviet scientists to enhance physical and mental endurance, Rhodiola rosea was their secret weapon long before modern performance enhancers."
         }
+      },
+      "product": {
+        "type": "product",
+        "settings": {}
       }
     },
     "content_for_index": [],
@@ -707,6 +711,19 @@
         "type": "shopify://apps/tiktok-ads-tiktok-pixels/blocks/turbo-tiktok/0f61e244-e2c9-43da-9523-9762c9f7e6bf",
         "disabled": false,
         "settings": {}
+      },
+      "1768834845299682660": {
+        "type": "shopify://apps/subscriptions/blocks/app-embed-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
+        "disabled": false,
+        "settings": {
+          "color_text_title": "#6D7175",
+          "color_text_body": "#6D7175",
+          "dividers_color": "#8F8D8D",
+          "bacgkround_color": "#FFFFFF",
+          "border_thickness": 1,
+          "border_radius": 0,
+          "subscription_policy_url": ""
+        }
       }
     }
   }
