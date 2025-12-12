@@ -1,6 +1,6 @@
 {% comment %}Header section{% endcomment %}
 
-<header class='fixed top-0 left-0 right-0 z-50 bg-dark/90 backdrop-blur-md shadow-lg h-20'>
+<header class='fixed top-0 left-0 right-0 bg-dark/90 backdrop-blur-md shadow-lg h-20 z-50'>
   <div class='container-custom flex items-center justify-between h-full'>
     {% render 'logo' %}
 
@@ -146,24 +146,36 @@
     </nav>
 
     <!-- BEGIN MOBILE MENU -->
-    <button id='menu-hamburger' class='md:hidden text-light hover:text-primary z-[99]' onclick='toggleMobileMenu()'>
-      <svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-    </button>
+    <div class='relative flex gap-6 md:hidden'>
+      {% if cart.item_count > 0 %}
+        <a href='/cart' class='z-50 cart-icon cart-active text-primary hover:text-primary transition-colors'>
+          {% render 'icon-shopping-cart' %}
+          <p class='item-count items'>{{ cart.item_count }}</p>
+        </a>
+      {% else %}
+        <a href='/cart' class='z-50 cart-icon cart-empty text-primary hover:text-primary transition-colors'>
+          {% render 'icon-shopping-cart' %}
+          <p class='item-count no-items'>{{ cart.item_count }}</p>
+        </a>
+      {% endif %}
+
+      <button id='menu-hamburger' class='z-50 md:hidden text-light hover:text-primary' onclick='toggleMobileMenu()'>
+        <svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
   </div>
 
   <div
     id='mobile-menu'
-    class='fixed h-screen inset-0 z-50 hidden md:hidden bg-darker pt-20 pb-4 px-4 shadow-lg overflow-y-auto'
+    class='fixed h-screen inset-0 hidden md:hidden bg-darker pt-20 pb-24 px-4 shadow-lg overflow-y-auto'
   >
-    <nav class='flex flex-col space-y-4 h-full'>
+    <nav class='flex flex-col space-y-4'>
       <ul>
-        <!--
-          <li class='border-b border-white py-4 text-semibold text-3xl px-4'>
-            {% render 'try-it-free-btn' %}
-          </li>
-        -->
+        <li class='border-b border-white py-4 text-semibold text-3xl px-4 w-full'>
+          {% render 'try-it-free-btn' %}
+        </li>
 
         <li class='border-b border-white py-4 px-4'>
           <button

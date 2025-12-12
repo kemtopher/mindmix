@@ -31,13 +31,13 @@
 
     <main role='main' id='main-content' tabindex='-1'>
       {{ content_for_layout }}
-    </main>
 
-    <section class='section-padding bg-darker relative'>
-      <div class='container-custom relative max-w-4xl mx-auto'>
-        {% section 'global-faq' %}
-      </div>
-    </section>
+      <section class='section-padding bg-darker relative'>
+        <div class='container-custom relative max-w-4xl mx-auto'>
+          {% section 'global-faq' %}
+        </div>
+      </section>
+    </main>
 
     {% section 'newsletter-signup' %}
     {% section 'footer' %}
