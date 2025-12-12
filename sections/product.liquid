@@ -106,7 +106,10 @@
 
       {% render 'add-to-cart-btn' %}
       {% render 'da-restock' %}
-      <div class='subscriptions_app_embed_block'></div>
+
+      {% if product.available %}
+        <div class='subscriptions_app_embed_block mt-4'></div>
+      {% endif %}
 
       {% unless product.handle == 'free-trial-pack' %}
         {% render 'free-trial-btn' %}
