@@ -104,12 +104,16 @@
         </div>
       {% endif %}
 
-      {% render 'add-to-cart-btn' %}
       {% render 'da-restock' %}
 
-      {% if product.available %}
+      <div
+        id='subscription-wrapper'
+        class='mt-4 {% unless current_variant.available %}hidden{% endunless %}'
+      >
         <div class='subscriptions_app_embed_block mt-4'></div>
-      {% endif %}
+      </div>
+
+      {% render 'add-to-cart-btn' %}
 
       {% unless product.handle == 'free-trial-pack' %}
         {% render 'free-trial-btn' %}
@@ -146,6 +150,9 @@
     const addToCartBtn = document.getElementById('add-to-cart-btn');
     const addToCartOriginalText = addToCartBtn ? addToCartBtn.textContent.trim() : 'Add to Cart';
 
+    // 🔹 NEW: Subscription wrapper reference
+    const subscriptionWrapper = document.getElementById('subscription-wrapper');
+
     // Preselect default variant (first available)
     const defaultButton = document.querySelector('.variant-button[data-default="true"]');
     if (defaultButton) {
@@ -154,7 +161,6 @@
 
     variantButtons.forEach((button) => {
       button.addEventListener('click', () => {
-        // If this button is already active, do nothing (cannot unselect)
         if (button.classList.contains('active')) return;
         selectVariant(button);
       });
@@ -197,6 +203,15 @@
           priceField.classList.remove('out-of-stock');
         } else {
           priceField.classList.add('out-of-stock');
+        }
+      }
+
+      // ⭐️ NEW: Toggle subscription widget visibility
+      if (subscriptionWrapper) {
+        if (isAvailable) {
+          subscriptionWrapper.classList.remove('hidden');
+        } else {
+          subscriptionWrapper.classList.add('hidden');
         }
       }
 
