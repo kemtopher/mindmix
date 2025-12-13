@@ -30,7 +30,10 @@
           "benefits": "Clarity. Energy. Focus.",
           "description": "Experience cognitive enhancement with our scientifically formulated nootropic drink mix. Optimize your mind.",
           "cta_text": "Shop Now",
-          "secondary_cta_text": "Try Free Sample"
+          "secondary_cta_text": "Try Free Sample",
+          "benefit_1": "<p>Focus Kicks In: <strong>30 minutes</strong></p>",
+          "benefit_2": "<p>Clinically Proven Ingredients</p>",
+          "benefit_3": "<p>Zero Crash Guarantee</p>"
         }
       },
       "neural-performance": {
@@ -203,8 +206,8 @@
               "card_image": "shopify://shop_images/Gemini_Generated_Image_9aeqeu9aeqeu9aeq.png",
               "card_title": "COGNITIVE TRIAL PACK",
               "pack_size": "Sample Pack",
-              "card_price": "$5.95",
-              "price_extra": "(Just Cover Shipping",
+              "card_price": "Free",
+              "price_extra": "Just Cover Shipping",
               "card_list": "3 premium stick packs (one of each flavor), Complete ingredient profile guide, 30-day money-back guarantee",
               "cta_text": "Unlock Your Edge - Try Free Today",
               "cta_link": ""
@@ -714,7 +717,7 @@
       },
       "1768834845299682660": {
         "type": "shopify://apps/subscriptions/blocks/app-embed-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
-        "disabled": true,
+        "disabled": false,
         "settings": {
           "color_text_title": "#6d7175",
           "color_text_body": "#6d7175",
