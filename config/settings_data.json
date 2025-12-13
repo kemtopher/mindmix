@@ -30,7 +30,10 @@
           "benefits": "Clarity. Energy. Focus.",
           "description": "Experience cognitive enhancement with our scientifically formulated nootropic drink mix. Optimize your mind.",
           "cta_text": "Shop Now",
-          "secondary_cta_text": "Try Free Sample"
+          "secondary_cta_text": "Try Free Sample",
+          "benefit_1": "<p>Focus Kicks In: <strong>30 minutes</strong></p>",
+          "benefit_2": "<p>Clinically Proven Ingredients</p>",
+          "benefit_3": "<p>Zero Crash Guarantee</p>"
         }
       },
       "neural-performance": {
