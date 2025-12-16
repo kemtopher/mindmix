@@ -663,6 +663,15 @@
       "pdp-testimonials": {
         "type": "pdp-testimonials",
         "blocks": {
+          "testimonial_GFTK8B": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Jordan Rivera",
+              "reviewer_occupation": "Freelance Writer",
+              "stars": 5,
+              "content": "<p>I was stuck. Like, creatively dead. I'd open my laptop and just... nothing. My therapist suggested I look at my habits, and caffeine was destroying me. I switched to MindMix and within a week, the ideas started flowing again. It's not magic, but it gave me the mental space to think clearly and create again. I'm writing every day now and it feels good.</p>"
+            }
+          },
           "testimonial_9b9kwV": {
             "type": "testimonial",
             "settings": {
@@ -710,6 +719,7 @@
           }
         },
         "block_order": [
+          "testimonial_GFTK8B",
           "testimonial_9b9kwV",
           "testimonial_dP7kNp",
           "testimonial_db3gaG",
