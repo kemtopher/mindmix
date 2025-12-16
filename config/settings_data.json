@@ -663,6 +663,15 @@
       "pdp-testimonials": {
         "type": "pdp-testimonials",
         "blocks": {
+          "testimonial_dP7kNp": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "David Lee",
+              "reviewer_occupation": "Entrepreneur",
+              "stars": 5,
+              "content": "<p>I've known Sam for over 10 years. I watched him go from tinkering with ingredients in his kitchen to spending countless nights researching and perfecting this formula. This isn't a cash grab for him-it's his life's work. He genuinely cares about quality and helping people unlock their potential. I'm so proud to see this come to life and I'm a customer for life.</p>"
+            }
+          },
           "testimonial_db3gaG": {
             "type": "testimonial",
             "settings": {
@@ -692,6 +701,7 @@
           }
         },
         "block_order": [
+          "testimonial_dP7kNp",
           "testimonial_db3gaG",
           "testimonial_83UgpW",
           "testimonial_mUxA7f"
