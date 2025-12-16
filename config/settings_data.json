@@ -663,6 +663,15 @@
       "pdp-testimonials": {
         "type": "pdp-testimonials",
         "blocks": {
+          "testimonial_9b9kwV": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Michael Brown",
+              "reviewer_occupation": "Corporate Lawyer",
+              "stars": 5,
+              "content": "<p>I don't usually buy from e-commerce stores, and I'm generally skeptical of the whole supplement industry. But the level of transparency from this brand is something else. The founder isn't hiding. The ingredients are clearly listed and explained. It felt... honest. I gave it a try and I'm glad I did. This is a brand built on integrity, and the product actually works.</p>"
+            }
+          },
           "testimonial_dP7kNp": {
             "type": "testimonial",
             "settings": {
@@ -701,6 +710,7 @@
           }
         },
         "block_order": [
+          "testimonial_9b9kwV",
           "testimonial_dP7kNp",
           "testimonial_db3gaG",
           "testimonial_83UgpW",
