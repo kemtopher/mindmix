@@ -663,6 +663,15 @@
       "pdp-testimonials": {
         "type": "pdp-testimonials",
         "blocks": {
+          "testimonial_kgpjka": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Chris Anderson",
+              "reviewer_occupation": "Sales Executive",
+              "stars": 5,
+              "content": "<p>Six months ago, I was barely hitting my quota. I felt foggy, unmotivated, and honestly kind of lost. I started taking MindMix daily and something shifted. My conversations with clients became sharper, I could think on my feet, and I closed deals I would've fumbled before. Last quarter I hit 180% of quota. MindMix didn't do the work for me, but it gave me the clarity to show up as my best self.</p>"
+            }
+          },
           "testimonial_g93VRD": {
             "type": "testimonial",
             "settings": {
@@ -728,6 +737,7 @@
           }
         },
         "block_order": [
+          "testimonial_kgpjka",
           "testimonial_g93VRD",
           "testimonial_GFTK8B",
           "testimonial_9b9kwV",
