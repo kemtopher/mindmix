@@ -12,6 +12,7 @@
     "logo_white": "shopify://shop_images/MindMix-logo-white.svg",
     "logo_black": "shopify://shop_images/MindMix-logo-black.svg",
     "logo_brand_color": "shopify://shop_images/MindMix-logo-brand.svg",
+    "favicon": "shopify://shop_images/favicon.png",
     "trial_product": "free-trial",
     "sections": {
       "header": {
