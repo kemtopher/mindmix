@@ -663,6 +663,15 @@
       "pdp-testimonials": {
         "type": "pdp-testimonials",
         "blocks": {
+          "testimonial_xjLYG4": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Priya Patel",
+              "reviewer_occupation": "UX Designer",
+              "stars": 5,
+              "content": "<p>What I love most about MindMix isn't just the product-it's the community. Everyone in the Discord is ambitious, supportive, and genuinely trying to level up. It's rare to find a brand that actually fosters that kind of culture. Sam is in there answering questions and sharing his journey. You're not just buying a supplement, you're joining a movement of people who refuse to settle.</p>"
+            }
+          },
           "testimonial_kgpjka": {
             "type": "testimonial",
             "settings": {
@@ -737,6 +746,7 @@
           }
         },
         "block_order": [
+          "testimonial_xjLYG4",
           "testimonial_kgpjka",
           "testimonial_g93VRD",
           "testimonial_GFTK8B",
