@@ -663,6 +663,15 @@
       "pdp-testimonials": {
         "type": "pdp-testimonials",
         "blocks": {
+          "testimonial_db3gaG": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Ben Carter",
+              "reviewer_occupation": "PhD Candidate",
+              "stars": 5,
+              "content": "<p>I was drowning in research papers and my dissertation felt impossible. Coffee just gave me anxiety. A friend recommended MindMix and it's been a complete game-changer for my studies. My recall is faster, I can read for hours without feeling fatigued, and the words are just... coming out. It's like a cheat code for grad school.</p>"
+            }
+          },
           "testimonial_83UgpW": {
             "type": "testimonial",
             "settings": {
@@ -683,6 +692,7 @@
           }
         },
         "block_order": [
+          "testimonial_db3gaG",
           "testimonial_83UgpW",
           "testimonial_mUxA7f"
         ],
