@@ -663,6 +663,24 @@
       "pdp-testimonials": {
         "type": "pdp-testimonials",
         "blocks": {
+          "testimonial_hVGBFQ": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "",
+              "reviewer_occupation": "",
+              "stars": 5,
+              "content": ""
+            }
+          },
+          "testimonial_hLWnqy": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Liam O'Connor",
+              "reviewer_occupation": "Personal Trainer",
+              "stars": 5,
+              "content": "<p>I train clients all day, so I need sustained energy without the crash. Pre-workout drinks made me jittery, coffee wore off too fast, and energy drinks are just sugar bombs. MindMix gives me clean energy for 6+ hours with zero crash. I recommend it to all my clients now. It's the only nootropic I trust.</p>"
+            }
+          },
           "testimonial_fAygPc": {
             "type": "testimonial",
             "settings": {
@@ -782,6 +800,8 @@
           }
         },
         "block_order": [
+          "testimonial_hVGBFQ",
+          "testimonial_hLWnqy",
           "testimonial_fAygPc",
           "testimonial_qr77QM",
           "testimonial_3PU8WH",
