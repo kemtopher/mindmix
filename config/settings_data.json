@@ -663,6 +663,15 @@
       "pdp-testimonials": {
         "type": "pdp-testimonials",
         "blocks": {
+          "testimonial_3PU8WH": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Emma Thompson",
+              "reviewer_occupation": "Content Creator",
+              "stars": 5,
+              "content": "<p>I got the free trial stick at first because I was nervous about committing. After one day, I was kicking myself for not getting the 30-pack. The difference was immediate. I felt sharper, more present, and way more productive. I ordered the Founder's bundle the next day and I haven't looked back. If you're on the fence, just do it. You won't regret it.</p>"
+            }
+          },
           "testimonial_fzXTea": {
             "type": "testimonial",
             "settings": {
@@ -755,6 +764,7 @@
           }
         },
         "block_order": [
+          "testimonial_3PU8WH",
           "testimonial_fzXTea",
           "testimonial_xjLYG4",
           "testimonial_kgpjka",
