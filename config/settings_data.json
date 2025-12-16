@@ -663,6 +663,15 @@
       "pdp-testimonials": {
         "type": "pdp-testimonials",
         "blocks": {
+          "testimonial_fAygPc": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Sophie Martinez",
+              "reviewer_occupation": "Small Business Owner",
+              "stars": 5,
+              "content": "<p>There's so much fake stuff out there. Influencers pushing products they don't use, brands making wild claims with zero proof. MindMix feels different. Sam shows up, he's transparent about the process, and he's not trying to oversell you. It's refreshing. I tried it because I believed in the mission, and the product exceeded my expectations. This is what authentic branding looks like.</p>"
+            }
+          },
           "testimonial_qr77QM": {
             "type": "testimonial",
             "settings": {
@@ -773,6 +782,7 @@
           }
         },
         "block_order": [
+          "testimonial_fAygPc",
           "testimonial_qr77QM",
           "testimonial_3PU8WH",
           "testimonial_fzXTea",
