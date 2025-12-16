@@ -13,6 +13,7 @@
     "logo_black": "shopify://shop_images/MindMix-logo-black.svg",
     "logo_brand_color": "shopify://shop_images/MindMix-logo-brand.svg",
     "favicon": "shopify://shop_images/favicon.png",
+    "apple_touch_icon": "shopify://shop_images/favicon.png",
     "trial_product": "free-trial",
     "sections": {
       "header": {
@@ -662,35 +663,158 @@
       "pdp-testimonials": {
         "type": "pdp-testimonials",
         "blocks": {
-          "testimonial_9YnzbR": {
+          "testimonial_hVGBFQ": {
             "type": "testimonial",
             "settings": {
-              "reviewer_name": "Jackie Williams",
-              "stars": 4,
-              "content": "<p>I originally tried MindMix to help with low energy and found that not only did it increase my energy levels but also my cognitive ability and productivity numbers. Now I have gotten my entire family on it!</p>"
-            }
-          },
-          "testimonial_P6y4Fn": {
-            "type": "testimonial",
-            "settings": {
-              "reviewer_name": "Jack Smith",
-              "stars": 4,
-              "content": "<p>MindMix has given me the energy and focus to land a job offer from Meta. I can not speak highly enough about the power of this mix.</p>"
-            }
-          },
-          "testimonial_mGw8PW": {
-            "type": "testimonial",
-            "settings": {
-              "reviewer_name": "Sarah Torette",
+              "reviewer_name": "Nina Alvarez",
+              "reviewer_occupation": "Therapist",
               "stars": 5,
-              "content": "<p>I 👏 LOVE 👏 MINDMIX 👏</p>"
+              "content": "<p>I work with people's minds all day, so I'm very aware of my own mental state. I was feeling scattered, emotionally drained, and struggling to be present for my clients. A colleague recommended MindMix and I was skeptical, but I tried it. The mental clarity came first, then the emotional resilience. I feel like I have more bandwidth to hold space for others because I'm taking care of myself. It's been a profound shift.</p>"
+            }
+          },
+          "testimonial_hLWnqy": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Liam O'Connor",
+              "reviewer_occupation": "Personal Trainer",
+              "stars": 5,
+              "content": "<p>I train clients all day, so I need sustained energy without the crash. Pre-workout drinks made me jittery, coffee wore off too fast, and energy drinks are just sugar bombs. MindMix gives me clean energy for 6+ hours with zero crash. I recommend it to all my clients now. It's the only nootropic I trust.</p>"
+            }
+          },
+          "testimonial_fAygPc": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Sophie Martinez",
+              "reviewer_occupation": "Small Business Owner",
+              "stars": 5,
+              "content": "<p>There's so much fake stuff out there. Influencers pushing products they don't use, brands making wild claims with zero proof. MindMix feels different. Sam shows up, he's transparent about the process, and he's not trying to oversell you. It's refreshing. I tried it because I believed in the mission, and the product exceeded my expectations. This is what authentic branding looks like.</p>"
+            }
+          },
+          "testimonial_qr77QM": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "James Park",
+              "reviewer_occupation": "Financial Analyst",
+              "stars": 5,
+              "content": "<p>I've been using MindMix for four months now and it's become part of my morning routine. The consistency is what impresses me most. It's not a one-time boost-it's sustained, reliable performance every single day. My focus is sharper, my mood is more stable, and I'm genuinely enjoying my work again. This is a long-term investment in myself.</p>"
+            }
+          },
+          "testimonial_3PU8WH": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Emma Thompson",
+              "reviewer_occupation": "Content Creator",
+              "stars": 5,
+              "content": "<p>I got the free trial stick at first because I was nervous about committing. After one day, I was kicking myself for not getting the 30-pack. The difference was immediate. I felt sharper, more present, and way more productive. I ordered the Founder's bundle the next day and I haven't looked back. If you're on the fence, just do it. You won't regret it.</p>"
+            }
+          },
+          "testimonial_fzXTea": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Ryan Mitchell",
+              "reviewer_occupation": "Product Manager",
+              "stars": 5,
+              "content": "<p>I'm picky. Like, annoyingly picky. I research everything before I buy. The ingredient sourcing, the clinical backing, the third-party testing-MindMix checks every box. But what really sold me was the packaging. It sounds superficial, but when a brand cares that much about the details, you know they care about the product. This is premium in every sense of the word.</p>"
+            }
+          },
+          "testimonial_xjLYG4": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Priya Patel",
+              "reviewer_occupation": "UX Designer",
+              "stars": 5,
+              "content": "<p>What I love most about MindMix isn't just the product-it's the community. Everyone in the Discord is ambitious, supportive, and genuinely trying to level up. It's rare to find a brand that actually fosters that kind of culture. Sam is in there answering questions and sharing his journey. You're not just buying a supplement, you're joining a movement of people who refuse to settle.</p>"
+            }
+          },
+          "testimonial_kgpjka": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Chris Anderson",
+              "reviewer_occupation": "Sales Executive",
+              "stars": 5,
+              "content": "<p>Six months ago, I was barely hitting my quota. I felt foggy, unmotivated, and honestly kind of lost. I started taking MindMix daily and something shifted. My conversations with clients became sharper, I could think on my feet, and I closed deals I would've fumbled before. Last quarter I hit 180% of quota. MindMix didn't do the work for me, but it gave me the clarity to show up as my best self.</p>"
+            }
+          },
+          "testimonial_g93VRD": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Taylor Kim",
+              "reviewer_occupation": "Marketing Manager",
+              "stars": 5,
+              "content": "<p>I used to drink four cups of coffee a day just to function. By 3 PM I'd crash hard and feel awful. MindMix replaced all of that. One stick in the morning and I'm locked in for the entire day. No jitters, no crash, just clean, sustained energy. I can't believe I waited this long to make the switch.</p>"
+            }
+          },
+          "testimonial_GFTK8B": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Jordan Rivera",
+              "reviewer_occupation": "Freelance Writer",
+              "stars": 5,
+              "content": "<p>I was stuck. Like, creatively dead. I'd open my laptop and just... nothing. My therapist suggested I look at my habits, and caffeine was destroying me. I switched to MindMix and within a week, the ideas started flowing again. It's not magic, but it gave me the mental space to think clearly and create again. I'm writing every day now and it feels good.</p>"
+            }
+          },
+          "testimonial_9b9kwV": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Michael Brown",
+              "reviewer_occupation": "Corporate Lawyer",
+              "stars": 5,
+              "content": "<p>I don't usually buy from e-commerce stores, and I'm generally skeptical of the whole supplement industry. But the level of transparency from this brand is something else. The founder isn't hiding. The ingredients are clearly listed and explained. It felt... honest. I gave it a try and I'm glad I did. This is a brand built on integrity, and the product actually works.</p>"
+            }
+          },
+          "testimonial_dP7kNp": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "David Lee",
+              "reviewer_occupation": "Entrepreneur",
+              "stars": 5,
+              "content": "<p>I've known Sam for over 10 years. I watched him go from tinkering with ingredients in his kitchen to spending countless nights researching and perfecting this formula. This isn't a cash grab for him-it's his life's work. He genuinely cares about quality and helping people unlock their potential. I'm so proud to see this come to life and I'm a customer for life.</p>"
+            }
+          },
+          "testimonial_db3gaG": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Ben Carter",
+              "reviewer_occupation": "PhD Candidate",
+              "stars": 5,
+              "content": "<p>I was drowning in research papers and my dissertation felt impossible. Coffee just gave me anxiety. A friend recommended MindMix and it's been a complete game-changer for my studies. My recall is faster, I can read for hours without feeling fatigued, and the words are just... coming out. It's like a cheat code for grad school.</p>"
+            }
+          },
+          "testimonial_83UgpW": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Maria Garcia",
+              "reviewer_occupation": "Graphic Designer",
+              "stars": 5,
+              "content": "<p>As a freelancer, if I can't focus, I don't make money. Simple as that. I was hesitant about the price at first, but the ROI is undeniable. I'm now billing an extra 10 hours a week because I can just get into a flow state and stay there. MindMix literally pays for itself. My only regret is not finding it sooner.</p>"
+            }
+          },
+          "testimonial_mUxA7f": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Alex Chen",
+              "reviewer_occupation": "Software Engineer",
+              "stars": 5,
+              "content": "<p>Okay, I'll be honest. I thought this was just another one of those overhyped nootropics you see all over Instagram. But I kept seeing Sam's videos and he seemed... different. Not salesy. So I gave it a shot. Man, was I wrong. The focus is clean, there's zero crash, and I'm not just staring at my code, I'm actually solving problems. This is the real deal.</p>"
             }
           }
         },
         "block_order": [
-          "testimonial_9YnzbR",
-          "testimonial_P6y4Fn",
-          "testimonial_mGw8PW"
+          "testimonial_hVGBFQ",
+          "testimonial_hLWnqy",
+          "testimonial_fAygPc",
+          "testimonial_qr77QM",
+          "testimonial_3PU8WH",
+          "testimonial_fzXTea",
+          "testimonial_xjLYG4",
+          "testimonial_kgpjka",
+          "testimonial_g93VRD",
+          "testimonial_GFTK8B",
+          "testimonial_9b9kwV",
+          "testimonial_dP7kNp",
+          "testimonial_db3gaG",
+          "testimonial_83UgpW",
+          "testimonial_mUxA7f"
         ],
         "settings": {
           "heading": "What our customers are saying"
