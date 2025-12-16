@@ -13,6 +13,7 @@
     "logo_black": "shopify://shop_images/MindMix-logo-black.svg",
     "logo_brand_color": "shopify://shop_images/MindMix-logo-brand.svg",
     "favicon": "shopify://shop_images/favicon.png",
+    "apple_touch_icon": "shopify://shop_images/favicon.png",
     "trial_product": "free-trial",
     "sections": {
       "header": {
@@ -662,10 +663,20 @@
       "pdp-testimonials": {
         "type": "pdp-testimonials",
         "blocks": {
+          "testimonial_mUxA7f": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Alex Chen",
+              "reviewer_occupation": "Software Engineer",
+              "stars": 5,
+              "content": "<p>Okay, I'll be honest. I thought this was just another one of those overhyped nootropics you see all over Instagram. But I kept seeing Sam's videos and he seemed... different. Not salesy. So I gave it a shot. Man, was I wrong. The focus is clean, there's zero crash, and I'm not just staring at my code, I'm actually solving problems. This is the real deal.</p>"
+            }
+          },
           "testimonial_9YnzbR": {
             "type": "testimonial",
             "settings": {
               "reviewer_name": "Jackie Williams",
+              "reviewer_occupation": "",
               "stars": 4,
               "content": "<p>I originally tried MindMix to help with low energy and found that not only did it increase my energy levels but also my cognitive ability and productivity numbers. Now I have gotten my entire family on it!</p>"
             }
@@ -674,6 +685,7 @@
             "type": "testimonial",
             "settings": {
               "reviewer_name": "Jack Smith",
+              "reviewer_occupation": "",
               "stars": 4,
               "content": "<p>MindMix has given me the energy and focus to land a job offer from Meta. I can not speak highly enough about the power of this mix.</p>"
             }
@@ -682,12 +694,14 @@
             "type": "testimonial",
             "settings": {
               "reviewer_name": "Sarah Torette",
+              "reviewer_occupation": "",
               "stars": 5,
               "content": "<p>I 👏 LOVE 👏 MINDMIX 👏</p>"
             }
           }
         },
         "block_order": [
+          "testimonial_mUxA7f",
           "testimonial_9YnzbR",
           "testimonial_P6y4Fn",
           "testimonial_mGw8PW"
