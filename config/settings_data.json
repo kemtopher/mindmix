@@ -663,6 +663,15 @@
       "pdp-testimonials": {
         "type": "pdp-testimonials",
         "blocks": {
+          "testimonial_83UgpW": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Maria Garcia",
+              "reviewer_occupation": "Graphic Designer",
+              "stars": 5,
+              "content": "<p>As a freelancer, if I can't focus, I don't make money. Simple as that. I was hesitant about the price at first, but the ROI is undeniable. I'm now billing an extra 10 hours a week because I can just get into a flow state and stay there. MindMix literally pays for itself. My only regret is not finding it sooner.</p>"
+            }
+          },
           "testimonial_mUxA7f": {
             "type": "testimonial",
             "settings": {
@@ -671,40 +680,11 @@
               "stars": 5,
               "content": "<p>Okay, I'll be honest. I thought this was just another one of those overhyped nootropics you see all over Instagram. But I kept seeing Sam's videos and he seemed... different. Not salesy. So I gave it a shot. Man, was I wrong. The focus is clean, there's zero crash, and I'm not just staring at my code, I'm actually solving problems. This is the real deal.</p>"
             }
-          },
-          "testimonial_9YnzbR": {
-            "type": "testimonial",
-            "settings": {
-              "reviewer_name": "Jackie Williams",
-              "reviewer_occupation": "",
-              "stars": 4,
-              "content": "<p>I originally tried MindMix to help with low energy and found that not only did it increase my energy levels but also my cognitive ability and productivity numbers. Now I have gotten my entire family on it!</p>"
-            }
-          },
-          "testimonial_P6y4Fn": {
-            "type": "testimonial",
-            "settings": {
-              "reviewer_name": "Jack Smith",
-              "reviewer_occupation": "",
-              "stars": 4,
-              "content": "<p>MindMix has given me the energy and focus to land a job offer from Meta. I can not speak highly enough about the power of this mix.</p>"
-            }
-          },
-          "testimonial_mGw8PW": {
-            "type": "testimonial",
-            "settings": {
-              "reviewer_name": "Sarah Torette",
-              "reviewer_occupation": "",
-              "stars": 5,
-              "content": "<p>I 👏 LOVE 👏 MINDMIX 👏</p>"
-            }
           }
         },
         "block_order": [
-          "testimonial_mUxA7f",
-          "testimonial_9YnzbR",
-          "testimonial_P6y4Fn",
-          "testimonial_mGw8PW"
+          "testimonial_83UgpW",
+          "testimonial_mUxA7f"
         ],
         "settings": {
           "heading": "What our customers are saying"
