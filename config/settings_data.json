@@ -663,6 +663,15 @@
       "pdp-testimonials": {
         "type": "pdp-testimonials",
         "blocks": {
+          "testimonial_qr77QM": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "James Park",
+              "reviewer_occupation": "Financial Analyst",
+              "stars": 5,
+              "content": "<p>I've been using MindMix for four months now and it's become part of my morning routine. The consistency is what impresses me most. It's not a one-time boost-it's sustained, reliable performance every single day. My focus is sharper, my mood is more stable, and I'm genuinely enjoying my work again. This is a long-term investment in myself.</p>"
+            }
+          },
           "testimonial_3PU8WH": {
             "type": "testimonial",
             "settings": {
@@ -764,6 +773,7 @@
           }
         },
         "block_order": [
+          "testimonial_qr77QM",
           "testimonial_3PU8WH",
           "testimonial_fzXTea",
           "testimonial_xjLYG4",
