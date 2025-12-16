@@ -19,7 +19,7 @@
         {% for block in section.blocks %}
           <div class='testimonial-card flex-shrink-0 w-full md:w-1/3 px-4'>
             <div class='bg-darkest rounded-lg p-6 shadow-lg h-full'>
-              <h3 class='text-xl font-semibold mb-1'>{{ block.settings.reviewer_name }}</h3>
+              <h3 class='text-xl font-semibold'>{{ block.settings.reviewer_name }}</h3>
               <p class='text-md font-semibold italic mb-2'>{{ block.settings.reviewer_occupation }}</p>
               <div class='flex items-center mb-4'>
                 {% assign stars = block.settings.stars | plus: 0 %}
