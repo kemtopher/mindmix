@@ -663,6 +663,15 @@
       "pdp-testimonials": {
         "type": "pdp-testimonials",
         "blocks": {
+          "testimonial_g93VRD": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Taylor Kim",
+              "reviewer_occupation": "Marketing Manager",
+              "stars": 5,
+              "content": "<p>I used to drink four cups of coffee a day just to function. By 3 PM I'd crash hard and feel awful. MindMix replaced all of that. One stick in the morning and I'm locked in for the entire day. No jitters, no crash, just clean, sustained energy. I can't believe I waited this long to make the switch.</p>"
+            }
+          },
           "testimonial_GFTK8B": {
             "type": "testimonial",
             "settings": {
@@ -719,6 +728,7 @@
           }
         },
         "block_order": [
+          "testimonial_g93VRD",
           "testimonial_GFTK8B",
           "testimonial_9b9kwV",
           "testimonial_dP7kNp",
