@@ -20,6 +20,23 @@
     ]
   },
   {
+    "name": "Branding",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "Upload a square image (32x32 or 48x48 recommended)"
+      },
+      {
+        "type": "image_picker",
+        "id": "apple_touch_icon",
+        "label": "Apple Touch Icon (iOS)",
+        "info": "180x180 recommended"
+      }
+    ]
+  },
+  {
     "name": "Social media",
     "settings": [
       {

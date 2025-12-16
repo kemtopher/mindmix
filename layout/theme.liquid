@@ -25,6 +25,21 @@
     {{ 'theme.css' | asset_url | stylesheet_tag }}
 
     {{ content_for_header }}
+
+    {% if settings.favicon != blank %}
+      <link
+        rel='icon'
+        type='image/png'
+        href='{{ settings.favicon | image_url: width: 32 }}'
+      >
+    {% endif %}
+
+    {% if settings.apple_touch_icon != blank %}
+      <link
+        rel='apple-touch-icon'
+        href='{{ settings.apple_touch_icon | image_url: width: 180 }}'
+      >
+    {% endif %}
   </head>
   <body class='bg-dark text-light'>
     {% section 'header' %}
