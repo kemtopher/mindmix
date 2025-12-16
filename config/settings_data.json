@@ -663,6 +663,15 @@
       "pdp-testimonials": {
         "type": "pdp-testimonials",
         "blocks": {
+          "testimonial_fzXTea": {
+            "type": "testimonial",
+            "settings": {
+              "reviewer_name": "Ryan Mitchell",
+              "reviewer_occupation": "Product Manager",
+              "stars": 5,
+              "content": "<p>I'm picky. Like, annoyingly picky. I research everything before I buy. The ingredient sourcing, the clinical backing, the third-party testing-MindMix checks every box. But what really sold me was the packaging. It sounds superficial, but when a brand cares that much about the details, you know they care about the product. This is premium in every sense of the word.</p>"
+            }
+          },
           "testimonial_xjLYG4": {
             "type": "testimonial",
             "settings": {
@@ -746,6 +755,7 @@
           }
         },
         "block_order": [
+          "testimonial_fzXTea",
           "testimonial_xjLYG4",
           "testimonial_kgpjka",
           "testimonial_g93VRD",
