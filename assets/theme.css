@@ -355,3 +355,21 @@ textarea:disabled {
 .shopify_subscriptions_app_block_label {
   border-color: var(--color-primary) !important;
 }
+
+/* PDP Testimonials Carousel */
+/* optional: put in your theme css */
+.tcarousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: #333;
+  transition: all 200ms ease;
+}
+.tcarousel-dot:hover {
+  background: #555;
+}
+.tcarousel-dot.is-active {
+  width: 24px;
+  border-radius: 6px;
+  background: #00ff94;
+}
