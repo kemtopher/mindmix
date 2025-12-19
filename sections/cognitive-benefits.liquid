@@ -3,156 +3,37 @@
   <div class='container-custom relative'>
     {% render 'section-title' %}
     <div class='grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12'>
-      <div class='feature-card group hover:shadow-glow fade-in is-visible style-Fl8pN' id='style-Fl8pN'>
-        <div class='mb-4 text-primary'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='24'
-            height='24'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            stroke-width='2'
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            class='lucide lucide-zap h-10 w-10'
-          >
-            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-          </svg>
+      {% for block in section.blocks %}
+        <div
+          class="feature-card group hover:shadow-glow fade-in is-visible"
+          {{ block.shopify_attributes }}
+        >
+          {% if block.settings.icon %}
+            <div class="mb-4 text-primary">
+              <img
+                src="{{ block.settings.icon | image_url: width: 80 }}"
+                alt="{{ block.settings.title | escape }}"
+                class="h-10 w-10"
+                loading="lazy"
+              >
+            </div>
+          {% endif %}
+
+          {% if block.settings.title != blank %}
+            <h4 class="text-white text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
+              {{ block.settings.title }}
+            </h4>
+          {% endif %}
+
+          {% if block.settings.subtitle != blank %}
+            <p class="text-light">
+              {{ block.settings.subtitle }}
+            </p>
+          {% endif %}
+
+          <div class="mt-4 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500"></div>
         </div>
-        <h4 class='text-white text-lg font-semibold mb-2 group-hover:text-primary transition-colors'>
-          Enhanced processing speed
-        </h4>
-        <p class='text-light'>Think faster, decide quicker</p>
-        <div class='mt-4 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500'></div>
-      </div>
-      <div class='feature-card group hover:shadow-glow fade-in is-visible style-hvPI6' id='style-hvPI6'>
-        <div class='mb-4 text-primary'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='24'
-            height='24'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            stroke-width='2'
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            class='lucide lucide-brain h-10 w-10'
-          >
-            <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"></path>
-            <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"></path>
-          </svg>
-        </div>
-        <h4 class='text-white text-lg font-semibold mb-2 group-hover:text-primary transition-colors'>
-          Improved memory retention
-        </h4>
-        <p class='text-light'>Remember more, recall instantly</p>
-        <div class='mt-4 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500'></div>
-      </div>
-      <div class='feature-card group hover:shadow-glow fade-in is-visible style-EeTPi' id='style-EeTPi'>
-        <div class='mb-4 text-primary'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='24'
-            height='24'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            stroke-width='2'
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            class='lucide lucide-target h-10 w-10'
-          >
-            <circle cx="12" cy="12" r="10"></circle>
-            <circle cx="12" cy="12" r="6"></circle>
-            <circle cx="12" cy="12" r="2"></circle>
-          </svg>
-        </div>
-        <h4 class='text-white text-lg font-semibold mb-2 group-hover:text-primary transition-colors'>
-          Laser-sharp focus
-        </h4>
-        <p class='text-light'>Deep work for hours without distraction</p>
-        <div class='mt-4 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500'></div>
-      </div>
-      <div class='feature-card group hover:shadow-glow fade-in is-visible style-8D4NE' id='style-8D4NE'>
-        <div class='mb-4 text-primary'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='24'
-            height='24'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            stroke-width='2'
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            class='lucide lucide-star h-10 w-10'
-          >
-            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-          </svg>
-        </div>
-        <h4 class='text-white text-lg font-semibold mb-2 group-hover:text-primary transition-colors'>Mental clarity</h4>
-        <p class='text-light'>Clear thoughts, confident decisions</p>
-        <div class='mt-4 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500'></div>
-      </div>
-      <div class='feature-card group hover:shadow-glow fade-in is-visible style-aDohv' id='style-aDohv'>
-        <div class='mb-4 text-primary'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='24'
-            height='24'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            stroke-width='2'
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            class='lucide lucide-scale h-10 w-10'
-          >
-            <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
-            <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
-            <path d="M7 21h10"></path>
-            <path d="M12 3v18"></path>
-            <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path>
-          </svg>
-        </div>
-        <h4 class='text-white text-lg font-semibold mb-2 group-hover:text-primary transition-colors'>
-          Stress adaptation
-        </h4>
-        <p class='text-light'>Calm under pressure, composed in chaos</p>
-        <div class='mt-4 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500'></div>
-      </div>
-      <div class='feature-card group hover:shadow-glow fade-in is-visible style-BvMco' id='style-BvMco'>
-        <div class='mb-4 text-primary'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='24'
-            height='24'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            stroke-width='2'
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            class='lucide lucide-battery h-10 w-10'
-          >
-            <rect width="16" height="10" x="2" y="7" rx="2" ry="2"></rect>
-            <line x1="22" x2="22" y1="11" y2="13"></line>
-          </svg>
-        </div>
-        <h4 class='text-white text-lg font-semibold mb-2 group-hover:text-primary transition-colors'>
-          Sustained energy
-        </h4>
-        <p class='text-light'>No crash, no fade, consistent performance</p>
-        <div class='mt-4 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500'></div>
-      </div>
-    </div>
-    <!--
-      <div class='text-center fade-in is-visible'>
-        <a href='#pricing' class='btn btn-mint  '>Unlock Your Potential</a>
-      </div>
-    -->
+      {% endfor %}
   </div>
   <div class='container-custom relative'>
     <!--
@@ -252,7 +133,7 @@
 
 {% schema %}
 {
-  "name": "Cognitive card_benefits",
+  "name": "Cognitive Cards",
   "settings": [
     {
       "type": "text",
@@ -266,6 +147,31 @@
       "id": "section_subtitle",
       "label": "Section subtitle",
       "default": "Science-backed formula designed for cognitive enhancement"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature_card",
+      "name": "Feature card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon (PNG or SVG)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Enhanced processing speed"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Think faster, decide quicker"
+        }
+      ]
     }
   ]
 }
