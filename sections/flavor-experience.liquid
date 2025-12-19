@@ -50,14 +50,16 @@
       {% endfor %}
     </div>
 
-    <div class='text-center fade-in is-visible'>
-      <p class='text-light text-lg mb-8'>{{ section.settings.section_subtext }}</p>
-      <a
-        href='{{ cta_link | default: "#"}}'
-        class='btn btn-mint px-8 py-4 text-lg font-bold hover:transform hover:scale-105 transition-transform'
-        >Try All Three Flavors</a
-      >
-    </div>
+    <!--
+      <div class='text-center fade-in is-visible'>
+        <p class='text-light text-lg mb-8'>{{ section.settings.section_subtext }}</p>
+        <a
+          href='{{ cta_link | default: "#"}}'
+          class='btn btn-mint px-8 py-4 text-lg font-bold hover:transform hover:scale-105 transition-transform'
+          >Try All Three Flavors</a
+        >
+      </div>
+    -->
   </div>
 </section>
 
@@ -65,7 +67,12 @@
 {
   "name": "Flavor Experience",
   "settings": [
-    { "type": "text", "id": "section_title", "label": "Section title", "default": "CHOOSE YOUR, COGNITIVE CATALYST" },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section title",
+      "default": "CHOOSE YOUR, COGNITIVE CATALYST"
+    },
     {
       "type": "text",
       "id": "section_subtitle",
@@ -92,7 +99,7 @@
       "name": "Section Card",
       "settings": [
         {
-          "type": "page",
+          "type": "url",
           "id": "card_link",
           "label": "Card Link"
         },
