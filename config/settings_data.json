@@ -187,6 +187,18 @@
       },
       "cognitive-benefits": {
         "type": "cognitive-benefits",
+        "blocks": {
+          "feature_card_dEXbjR": {
+            "type": "feature_card",
+            "settings": {
+              "title": "Enhanced processing speed",
+              "subtitle": "Think faster, decide quicker"
+            }
+          }
+        },
+        "block_order": [
+          "feature_card_dEXbjR"
+        ],
         "settings": {
           "section_title": "HOW YOUR BRAIN, WILL FEEL",
           "section_subtitle": "Science-backed formula designed for cognitive enhancement"
