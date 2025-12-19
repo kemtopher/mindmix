@@ -12,8 +12,8 @@
     "logo_white": "shopify://shop_images/MindMix-logo-white.svg",
     "logo_black": "shopify://shop_images/MindMix-logo-black.svg",
     "logo_brand_color": "shopify://shop_images/MindMix-logo-brand.svg",
-    "favicon": "shopify://shop_images/favicon.png",
-    "apple_touch_icon": "shopify://shop_images/favicon.png",
+    "favicon": "shopify://shop_images/PFP_VER_1_1.png",
+    "apple_touch_icon": "shopify://shop_images/PFP_VER_1_1.png",
     "trial_product": "free-trial",
     "sections": {
       "header": {
@@ -25,7 +25,7 @@
       "hero": {
         "type": "hero",
         "settings": {
-          "hero_image": "shopify://shop_images/Gemini_Generated_Image_cbtdzlcbtdzlcbtd.png",
+          "hero_image": "shopify://shop_images/a83fe9a7-2c90-4600-b8a1-71df51f28984.png",
           "tagline": "DAILY NOOTROPIC DRINK MIX",
           "heading": "UNLOCK YOUR MENTAL EDGE",
           "subheading": "ENGINEERED FOR PEAK PERFORMANCE",
@@ -48,7 +48,7 @@
               "card_title": "Rhodiola Rosea",
               "card_subtitle": "Enhanced focus withou burnout + stress adaptation",
               "accent_bullet": "Works in 30-45 minutes",
-              "modal_image": "shopify://shop_images/bg-rhodiola.jpg",
+              "modal_image": "shopify://shop_images/3871bdac-fc7d-44bf-ad9a-c81ea451ac4c.png",
               "modal_title": "Rhodiola Rosea",
               "modal_subtitle": "Enhanced focus without burnout + stress adaptation",
               "modal_secondary_text": "The Science",
@@ -63,7 +63,7 @@
               "card_title": "Lion's Mane",
               "card_subtitle": "Accelerated memory retention + neural growth",
               "accent_bullet": "Works in 40-60 minutes",
-              "modal_image": "shopify://shop_images/bg-lionsmane.jpg",
+              "modal_image": "shopify://shop_images/e0530093-1c9a-44ae-ae1f-e34cea1fb287.png",
               "modal_title": "Lion's Mane",
               "modal_subtitle": "Accelerated memory retention + neural growth",
               "modal_secondary_text": "The Science",
@@ -78,7 +78,7 @@
               "card_title": "L-Theanine",
               "card_subtitle": "Optimized neurotransmitter function + mental clarity",
               "accent_bullet": "Works in 20-30 minutes",
-              "modal_image": "shopify://shop_images/bg-ltheanine.jpg",
+              "modal_image": "shopify://shop_images/b273d089-127a-4394-90fe-af568de7997b.png",
               "modal_title": "L-Theanine",
               "modal_subtitle": "Optimized neurotransmitter function + mental clarity",
               "modal_secondary_text": "The Science",
@@ -93,7 +93,7 @@
               "card_title": "Green Tea Extract",
               "card_subtitle": "Sustained cognitive energy + antioxidant protection",
               "accent_bullet": "Works in 15-30 minutes",
-              "modal_image": "shopify://shop_images/bg-greentea.jpg",
+              "modal_image": "shopify://shop_images/2bf34d12-7478-47ce-80ad-cd7841de0210.png",
               "modal_title": "Green Tea Extract",
               "modal_subtitle": "Sustained cognitive energy + antioxidant protection",
               "modal_secondary_text": "The Science",
@@ -108,7 +108,7 @@
               "card_title": "Vitamin B12",
               "card_subtitle": "Neural pathway optimization + brain fuel",
               "accent_bullet": "Works in 45-60 minutes",
-              "modal_image": "shopify://shop_images/bg-ltheanine.jpg",
+              "modal_image": "shopify://shop_images/228dfbaf-0338-4d48-9b38-54edea5f6916.png",
               "modal_title": "Vitamin B12",
               "modal_subtitle": "Neural pathway optimization + brain fuel",
               "modal_secondary_text": "The Science",
@@ -178,7 +178,7 @@
           "section_title": "YOUR MENTAL EDGE, YOUR FLAVOR",
           "section_subtitle": "Your new ritual tastes better, works harder, and never crashes.",
           "section_subtext": "Fresh focus, straight from nature.",
-          "cta_link": "shopify://products/green-apple-kiwi"
+          "cta_link": "shopify://products/guava-passion"
         }
       },
       "lifestyle-performance": {
