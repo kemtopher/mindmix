@@ -8,7 +8,7 @@
         {%- assign image_media = product.media | where: 'media_type', 'image' -%}
         {% if image_media.size > 0 %}
       -->
-      <div class='product-images w-[72px] flex flex-col gap-4 order-2 lg:order-1 justify-start'>
+      <div class='product-images w-[72px] flex flex-row md:flex-col gap-4 order-2 lg:order-1 justify-start'>
         {% for media in product.media %}
           {% if media.media_type == 'image' %}
             <div class='product-image aspect-square w-[72px] h-[72px] overflow-hidden'>

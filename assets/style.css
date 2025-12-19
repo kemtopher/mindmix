@@ -1864,6 +1864,10 @@ video {
   padding: 2rem;
 }
 
+.p-0 {
+  padding: 0px;
+}
+
 .px-3 {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
@@ -3001,6 +3005,10 @@ textarea:disabled {
     flex-direction: row;
   }
 
+  .md\:flex-col {
+    flex-direction: column;
+  }
+
   .md\:items-center {
     align-items: center;
   }
@@ -3025,6 +3033,10 @@ textarea:disabled {
 
   .md\:p-8 {
     padding: 2rem;
+  }
+
+  .md\:p-16 {
+    padding: 4rem;
   }
 
   .md\:py-24 {
