@@ -6,7 +6,7 @@
     <div class='grid md:grid-cols-3 gap-8 mb-16'>
       {% for block in section.blocks %}
         <a
-          class='card h-full p-6 max-h-[500px] relative overflow-hidden fade-in border-citrus border border-opacity-30 hover:border-opacity-100 transition-all duration-500 is-visible style-vgU7q'
+          class='card h-full p-6 relative overflow-hidden fade-in border-citrus border border-opacity-30 hover:border-opacity-100 transition-all duration-500 is-visible style-vgU7q'
           id='style-vgU7q'
           href='{{ block.settings.card_link }}'
         >
@@ -20,7 +20,7 @@
             </div>
             <div class='flex-grow mb-4'>
               <img
-                class='h-full object-contain'
+                class='max-h-full max-w-full object-contain'
                 alt='Card Icon'
                 src='{{ block.settings.card_image | image_url }}'
               >

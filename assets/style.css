@@ -1013,6 +1013,14 @@ video {
   max-height: 90vh;
 }
 
+.max-h-full {
+  max-height: 100%;
+}
+
+.max-h-\[550px\] {
+  max-height: 550px;
+}
+
 .min-h-\[60vh\] {
   min-height: 60vh;
 }
@@ -1472,6 +1480,14 @@ video {
   overflow-y: auto;
 }
 
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+
+.overflow-x-scroll {
+  overflow-x: scroll;
+}
+
 .whitespace-nowrap {
   white-space: nowrap;
 }
@@ -1836,8 +1852,13 @@ video {
      object-fit: cover;
 }
 
-.p-16 {
-  padding: 4rem;
+.object-center {
+  -o-object-position: center;
+     object-position: center;
+}
+
+.p-0 {
+  padding: 0px;
 }
 
 .p-2 {
@@ -1862,10 +1883,6 @@ video {
 
 .p-8 {
   padding: 2rem;
-}
-
-.p-0 {
-  padding: 0px;
 }
 
 .px-3 {
@@ -2344,6 +2361,10 @@ video {
 .will-change-transform {
   will-change: transform;
 }
+
+/* Chrome, Safari, and Opera */
+
+/* IE, Edge and Firefox */
 
 :root {
   --color-primary: #00e5a0;
@@ -3031,12 +3052,12 @@ textarea:disabled {
     padding: 3rem;
   }
 
-  .md\:p-8 {
-    padding: 2rem;
-  }
-
   .md\:p-16 {
     padding: 4rem;
+  }
+
+  .md\:p-8 {
+    padding: 2rem;
   }
 
   .md\:py-24 {

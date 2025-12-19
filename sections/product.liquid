@@ -8,15 +8,15 @@
         {%- assign image_media = product.media | where: 'media_type', 'image' -%}
         {% if image_media.size > 0 %}
       -->
-      <div class='product-images w-[72px] flex flex-row md:flex-col gap-4 order-2 lg:order-1 justify-start'>
+      <div class='product-images scrollbar-hide overflow-x-scroll overflow-y-hidden w-full flex flex-row md:flex-col gap-4 order-2 lg:order-1 justify-start'>
         {% for media in product.media %}
           {% if media.media_type == 'image' %}
-            <div class='product-image aspect-square w-[72px] h-[72px] overflow-hidden'>
+            <div class='product-image relative aspect-square w-[72px] h-[72px]'>
               <img
-                src='{{ media | img_url: '75x75' }}'
+                src='{{ media | img_url: '72x72' }}'
                 data-full='{{ media | img_url: 'master' }}'
                 alt='{{ media.alt | escape | default: product.title }}'
-                class='thumb cursor-pointer w-full h-auto object-contain transition hover:opacity-80'
+                class='thumb cursor-pointer w-full object-contain object-center transition hover:opacity-80'
                 loading='{% if forloop.first %}eager{% else %}lazy{% endif %}'
               >
             </div>
@@ -132,15 +132,29 @@
       thumb.addEventListener('click', () => {
         const newSrc = thumb.getAttribute('data-full');
         const newAlt = thumb.getAttribute('alt');
+        const parent = thumb.closest('.product-image');
+
         mainImage.classList.add('opacity-0');
+
         setTimeout(() => {
           mainImage.src = newSrc;
           mainImage.alt = newAlt;
           mainImage.onload = () => mainImage.classList.remove('opacity-0');
         }, 200);
 
-        thumbs.forEach((t) => t.classList.remove('border-2', 'border-primary'));
-        thumb.classList.add('border-2', 'border-primary');
+        thumbs.forEach((t) => {
+          // t.classList.remove('border-2', 'border-primary')
+          const p = t.closest('.product-image');
+
+          if (p) {
+            p.classList.remove('border-2', 'border-primary');
+          }
+        });
+
+        // thumb.classList.add('border-2', 'border-primary');
+        if (parent) {
+          parent.classList.add('border-2', 'border-primary');
+        }
       });
     });
 
