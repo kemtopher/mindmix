@@ -215,13 +215,21 @@
               "title": "Mental clarity",
               "subtitle": "Clear thoughts, confident decisions"
             }
+          },
+          "feature_card_iHRxXF": {
+            "type": "feature_card",
+            "settings": {
+              "title": "Stress adaptation",
+              "subtitle": "Calm under pressure, composed in chaos"
+            }
           }
         },
         "block_order": [
           "feature_card_dEXbjR",
           "feature_card_Wb9dnH",
           "feature_card_bFhyaM",
-          "feature_card_weVLKc"
+          "feature_card_weVLKc",
+          "feature_card_iHRxXF"
         ],
         "settings": {
           "section_title": "HOW YOUR BRAIN, WILL FEEL",
