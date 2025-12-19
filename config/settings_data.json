@@ -135,7 +135,7 @@
           "section_card_bPG7E3": {
             "type": "section_card",
             "settings": {
-              "card_link": "",
+              "card_link": "shopify://products/green-apple-kiwi",
               "card_title": "GREEN APPLE KIWI",
               "card_subtitle": "Morning Focus Boost",
               "card_image": "shopify://shop_images/green-apple-kiwi.png",
@@ -147,7 +147,7 @@
           "section_card_yFKJBe": {
             "type": "section_card",
             "settings": {
-              "card_link": "",
+              "card_link": "shopify://products/guava-passion",
               "card_title": "GUAVA PASSION",
               "card_subtitle": "Sustained Mental Energy",
               "card_image": "shopify://shop_images/guava-passion.png",
@@ -159,7 +159,7 @@
           "section_card_XjnPjd": {
             "type": "section_card",
             "settings": {
-              "card_link": "",
+              "card_link": "shopify://products/blueberry-lemon-tea",
               "card_title": "BLUEBERRY LEMON TEA",
               "card_subtitle": "Deep Work Sessions",
               "card_image": "shopify://shop_images/blueberry-lemonade.png",
@@ -187,6 +187,58 @@
       },
       "cognitive-benefits": {
         "type": "cognitive-benefits",
+        "blocks": {
+          "feature_card_dEXbjR": {
+            "type": "feature_card",
+            "settings": {
+              "title": "Enhanced processing speed",
+              "subtitle": "Think faster, decide quicker"
+            }
+          },
+          "feature_card_Wb9dnH": {
+            "type": "feature_card",
+            "settings": {
+              "title": "Improved memory retention",
+              "subtitle": "Remember more, recall instantly"
+            }
+          },
+          "feature_card_bFhyaM": {
+            "type": "feature_card",
+            "settings": {
+              "title": "Laser-sharp focus",
+              "subtitle": "Deep work for hours without distraction"
+            }
+          },
+          "feature_card_weVLKc": {
+            "type": "feature_card",
+            "settings": {
+              "title": "Mental clarity",
+              "subtitle": "Clear thoughts, confident decisions"
+            }
+          },
+          "feature_card_iHRxXF": {
+            "type": "feature_card",
+            "settings": {
+              "title": "Stress adaptation",
+              "subtitle": "Calm under pressure, composed in chaos"
+            }
+          },
+          "feature_card_qweFbd": {
+            "type": "feature_card",
+            "settings": {
+              "title": "Sustained energy",
+              "subtitle": "No crash, no fade, consistent performance"
+            }
+          }
+        },
+        "block_order": [
+          "feature_card_dEXbjR",
+          "feature_card_Wb9dnH",
+          "feature_card_bFhyaM",
+          "feature_card_weVLKc",
+          "feature_card_iHRxXF",
+          "feature_card_qweFbd"
+        ],
         "settings": {
           "section_title": "HOW YOUR BRAIN, WILL FEEL",
           "section_subtitle": "Science-backed formula designed for cognitive enhancement"
