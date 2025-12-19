@@ -222,6 +222,13 @@
               "title": "Stress adaptation",
               "subtitle": "Calm under pressure, composed in chaos"
             }
+          },
+          "feature_card_qweFbd": {
+            "type": "feature_card",
+            "settings": {
+              "title": "Sustained energy",
+              "subtitle": "No crash, no fade, consistent performance"
+            }
           }
         },
         "block_order": [
@@ -229,7 +236,8 @@
           "feature_card_Wb9dnH",
           "feature_card_bFhyaM",
           "feature_card_weVLKc",
-          "feature_card_iHRxXF"
+          "feature_card_iHRxXF",
+          "feature_card_qweFbd"
         ],
         "settings": {
           "section_title": "HOW YOUR BRAIN, WILL FEEL",
