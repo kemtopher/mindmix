@@ -201,11 +201,19 @@
               "title": "Improved memory retention",
               "subtitle": "Remember more, recall instantly"
             }
+          },
+          "feature_card_bFhyaM": {
+            "type": "feature_card",
+            "settings": {
+              "title": "Laser-sharp focus",
+              "subtitle": "Deep work for hours without distraction"
+            }
           }
         },
         "block_order": [
           "feature_card_dEXbjR",
-          "feature_card_Wb9dnH"
+          "feature_card_Wb9dnH",
+          "feature_card_bFhyaM"
         ],
         "settings": {
           "section_title": "HOW YOUR BRAIN, WILL FEEL",
