@@ -135,7 +135,7 @@
           "section_card_bPG7E3": {
             "type": "section_card",
             "settings": {
-              "card_link": "",
+              "card_link": "shopify://products/green-apple-kiwi",
               "card_title": "GREEN APPLE KIWI",
               "card_subtitle": "Morning Focus Boost",
               "card_image": "shopify://shop_images/green-apple-kiwi.png",
@@ -147,7 +147,7 @@
           "section_card_yFKJBe": {
             "type": "section_card",
             "settings": {
-              "card_link": "",
+              "card_link": "shopify://products/guava-passion",
               "card_title": "GUAVA PASSION",
               "card_subtitle": "Sustained Mental Energy",
               "card_image": "shopify://shop_images/guava-passion.png",
