@@ -42,7 +42,7 @@
     const messageEl = document.getElementById('custom-cart-message');
     if (!form || !btn || !messageEl) return;
 
-    const variantId = form.querySelector('input[name="id"]').value;
+    // const variantId = form.querySelector('input[name="id"]').value;
 
     // Change this if you want to allow more than 1
     const MAX_QTY_PER_VARIANT = 1;
@@ -94,28 +94,32 @@
     btn.addEventListener('click', async function () {
       if (btn.disabled) return;
 
+      // ✅ Read current variant at click time
+      const variantId = form.querySelector('input[name="id"]').value;
+
       setMessage('');
       btn.disabled = true;
 
       try {
-        // 1) Fetch current cart
         const cart = await getCart();
         const existingItem = findItemInCart(cart, variantId);
 
-        // 2) Prevent more than MAX_QTY_PER_VARIANT in cart
-        if (existingItem && existingItem.quantity >= MAX_QTY_PER_VARIANT) {
+        // ✅ Only enforce limit on trial product (best handled via Liquid, shown conceptually here)
+        const isTrial = window.location.pathname.includes('/products/free-trial-pack');
+
+        if (isTrial && existingItem && existingItem.quantity >= 1) {
           setMessage('Only one trial pack allowed per order', 'warning');
           btn.disabled = false;
           return;
         }
+        // if (MAX_QTY_PER_VARIANT && existingItem && existingItem.quantity >= MAX_QTY_PER_VARIANT) {
+        //   setMessage('Only one trial pack allowed per order', 'warning');
+        //   btn.disabled = false;
+        //   return;
+        // }
 
-        // 3) Try to add 1 unit – Shopify will enforce inventory on the server
         await addToCart(variantId, 1);
-
         setMessage('Added to cart ✅', 'success');
-
-        // Optional: refresh cart drawer / mini cart / badge.
-        // window.location.reload(); // or trigger your theme’s cart update event
       } catch (err) {
         setMessage(err.message || 'Sorry, this item is out of stock.', 'error');
       } finally {
