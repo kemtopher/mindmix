@@ -94,7 +94,7 @@
     btn.addEventListener('click', async function () {
       if (btn.disabled) return;
 
-      // ✅ Read current variant at click time
+      // Read current variant at click time
       const variantId = form.querySelector('input[name="id"]').value;
 
       setMessage('');
@@ -104,7 +104,7 @@
         const cart = await getCart();
         const existingItem = findItemInCart(cart, variantId);
 
-        // ✅ Only enforce limit on trial product (best handled via Liquid, shown conceptually here)
+        // Only enforce limit on trial product (best handled via Liquid, shown conceptually here)
         const isTrial = window.location.pathname.includes('/products/free-trial-pack');
 
         if (isTrial && existingItem && existingItem.quantity >= 1) {
@@ -119,6 +119,8 @@
         // }
 
         await addToCart(variantId, 1);
+        const updatedCart = await getCart();
+        document.getElementById('cart-count').innerHTML = updatedCart.item_count;
         setMessage('Added to cart ✅', 'success');
       } catch (err) {
         setMessage(err.message || 'Sorry, this item is out of stock.', 'error');

@@ -81,17 +81,28 @@
         </ul>
       </div>
 
-      {% if cart.item_count > 0 %}
-        <a href='/cart' class='cart-icon cart-active text-primary hover:text-primary transition-colors'>
-          {% render 'icon-shopping-cart' %}
-          <p class='item-count items'>{{ cart.item_count }}</p>
-        </a>
-      {% else %}
-        <a href='/cart' class='cart-icon cart-empty text-primary hover:text-primary transition-colors'>
-          {% render 'icon-shopping-cart' %}
-          <p class='item-count no-items'>{{ cart.item_count }}</p>
-        </a>
-      {% endif %}
+      <!--
+        {% if cart.item_count > 0 %}
+          <a href='/cart' class='cart-icon cart-active text-primary hover:text-primary transition-colors'>
+            {% render 'icon-shopping-cart' %}
+            <p class='item-count items'>{{ cart.item_count }}</p>
+          </a>
+        {% else %}
+          <a href='/cart' class='cart-icon cart-empty text-primary hover:text-primary transition-colors'>
+            {% render 'icon-shopping-cart' %}
+            <p class='item-count no-items'>{{ cart.item_count }}</p>
+          </a>
+        {% endif %}
+      -->
+      <a href='/cart' class='z-50 cart-icon text-primary hover:text-primary transition-colors'>
+        {% render 'icon-shopping-cart' %}
+        <p
+          id='cart-count'
+          class='item-count {% if cart.item_count > 0 %}items{% else %}no-items{% endif %}'
+        >
+          {{ cart.item_count }}
+        </p>
+      </a>
 
       {% if customer %}
         <div class='menu-item h-full flex items-center relative'>
@@ -147,17 +158,29 @@
 
     <!-- BEGIN MOBILE MENU -->
     <div class='relative flex gap-6 md:hidden'>
-      {% if cart.item_count > 0 %}
-        <a href='/cart' class='z-50 cart-icon cart-active text-primary hover:text-primary transition-colors'>
-          {% render 'icon-shopping-cart' %}
-          <p class='item-count items'>{{ cart.item_count }}</p>
-        </a>
-      {% else %}
-        <a href='/cart' class='z-50 cart-icon cart-empty text-primary hover:text-primary transition-colors'>
-          {% render 'icon-shopping-cart' %}
-          <p class='item-count no-items'>{{ cart.item_count }}</p>
-        </a>
-      {% endif %}
+      <!--
+        {% if cart.item_count > 0 %}
+          <a href='/cart' class='z-50 cart-icon cart-active text-primary hover:text-primary transition-colors'>
+            {% render 'icon-shopping-cart' %}
+            <p id='cart-count' class='item-count items'>{{ cart.item_count }}</p>
+          </a>
+        {% else %}
+          <a href='/cart' class='z-50 cart-icon cart-empty text-primary hover:text-primary transition-colors'>
+            {% render 'icon-shopping-cart' %}
+            <p class='item-count no-items'>{{ cart.item_count }}</p>
+          </a>
+        {% endif %}
+      -->
+
+      <a href='/cart' class='z-50 cart-icon text-primary hover:text-primary transition-colors'>
+        {% render 'icon-shopping-cart' %}
+        <p
+          id='cart-count'
+          class='item-count {% if cart.item_count > 0 %}items{% else %}no-items{% endif %}'
+        >
+          {{ cart.item_count }}
+        </p>
+      </a>
 
       <button id='menu-hamburger' class='z-50 md:hidden text-light hover:text-primary' onclick='toggleMobileMenu()'>
         <svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
