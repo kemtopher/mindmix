@@ -3,7 +3,7 @@
   class='w-full pt-44 pb-16 flex flex-col md:flex-row items-center justify-center'
 >
   <div class='container flex flex-col md:flex-row justify-between gap-8'>
-    <div class='product-gallery w-full flex flex-col lg:flex-row gap-4 lg:gap-8 justify-start'>
+    <div class='product-gallery w-full h-full md:max-h-[500px] flex flex-col lg:flex-row gap-4 lg:gap-8 justify-start'>
       <!--
         {%- assign image_media = product.media | where: 'media_type', 'image' -%}
         {% if image_media.size > 0 %}
@@ -11,12 +11,12 @@
       <div class='product-images scrollbar-hide overflow-x-scroll overflow-y-hidden w-full flex flex-row md:flex-col gap-4 order-2 lg:order-1 justify-start'>
         {% for media in product.media %}
           {% if media.media_type == 'image' %}
-            <div class='product-image relative aspect-square w-[72px] h-[72px]'>
+            <div class='product-image relative aspect-square w-[72px] h-[72px] sm:overflow-hidden'>
               <img
                 src='{{ media | img_url: '72x72' }}'
                 data-full='{{ media | img_url: 'master' }}'
                 alt='{{ media.alt | escape | default: product.title }}'
-                class='thumb cursor-pointer w-full object-contain object-center transition hover:opacity-80'
+                class='thumb cursor-pointer w-full object-cover transition hover:opacity-80'
                 loading='{% if forloop.first %}eager{% else %}lazy{% endif %}'
               >
             </div>
@@ -25,7 +25,7 @@
       </div>
       <!-- {% endif %} -->
 
-      <div class='order-1 lg:order-2 text-center aspect-w-4 aspect-h-6'>
+      <div class='order-1 lg:order-2 text-center overflow-hidden'>
         <img
           id='main-product-image'
           src='{{ product.featured_image | img_url: 'master' }}'

@@ -19,11 +19,11 @@
               <tr class='border-b border-gray-800'>
                 <td class='py-4'>
                   <div class='flex items-center'>
-                    <a href='{{ item.product.url }}' class='flex flex-row items-center'>
+                    <a href='{{ item.product.url }}' class='w-20 h-20 overflow-hidden flex flex-row items-center'>
                       <img
                         src='{{ item.image | img_url: '120x' }}'
                         alt='{{ item.title }}'
-                        class='w-20 h-20 rounded-lg mr-4'
+                        class='object-cover mr-4'
                       >
                       <div>
                         <h3 class='font-medium'>{{ item.product.title }}</h3>
