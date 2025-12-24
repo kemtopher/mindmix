@@ -511,6 +511,13 @@
       "footer": {
         "type": "footer",
         "blocks": {
+          "column_1_link_QAVAEX": {
+            "type": "column_1_link",
+            "settings": {
+              "link_label": "Green Apple Kiwi",
+              "link_url": "shopify://products/green-apple-kiwi"
+            }
+          },
           "column_1_link_hAHcWd": {
             "type": "column_1_link",
             "settings": {
@@ -524,19 +531,12 @@
               "link_label": "Free Trial",
               "link_url": "shopify://products/free-trial-pack"
             }
-          },
-          "column_2_link_RWkRtc": {
-            "type": "column_2_link",
-            "settings": {
-              "link_label": "Example link",
-              "link_url": ""
-            }
           }
         },
         "block_order": [
+          "column_1_link_QAVAEX",
           "column_1_link_hAHcWd",
-          "column_1_link_XwFHa3",
-          "column_2_link_RWkRtc"
+          "column_1_link_XwFHa3"
         ],
         "settings": {
           "logo_variant": "white",
