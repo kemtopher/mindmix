@@ -511,6 +511,13 @@
       "footer": {
         "type": "footer",
         "blocks": {
+          "column_2_link_Ct39wn": {
+            "type": "column_2_link",
+            "settings": {
+              "link_label": "All Products",
+              "link_url": "shopify://collections/menu-product"
+            }
+          },
           "column_2_link_tmFqqy": {
             "type": "column_2_link",
             "settings": {
@@ -534,6 +541,7 @@
           }
         },
         "block_order": [
+          "column_2_link_Ct39wn",
           "column_2_link_tmFqqy",
           "column_1_link_hAHcWd",
           "column_1_link_XwFHa3"
