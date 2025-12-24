@@ -510,6 +510,34 @@
       },
       "footer": {
         "type": "footer",
+        "blocks": {
+          "column_1_link_hAHcWd": {
+            "type": "column_1_link",
+            "settings": {
+              "link_label": "All Products",
+              "link_url": "shopify://collections/menu-product"
+            }
+          },
+          "column_1_link_XwFHa3": {
+            "type": "column_1_link",
+            "settings": {
+              "link_label": "Example link",
+              "link_url": ""
+            }
+          },
+          "column_2_link_RWkRtc": {
+            "type": "column_2_link",
+            "settings": {
+              "link_label": "Example link",
+              "link_url": ""
+            }
+          }
+        },
+        "block_order": [
+          "column_1_link_hAHcWd",
+          "column_1_link_XwFHa3",
+          "column_2_link_RWkRtc"
+        ],
         "settings": {
           "logo_variant": "white",
           "footer_text": "Unlock Your Mental Edge with our scientifically formulated nootropic drink mix designed for peak cognitive performance.",
