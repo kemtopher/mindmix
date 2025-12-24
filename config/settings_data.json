@@ -511,6 +511,13 @@
       "footer": {
         "type": "footer",
         "blocks": {
+          "column_3_link_JT63M7": {
+            "type": "column_3_link",
+            "settings": {
+              "link_label": "Contact",
+              "link_url": "shopify://pages/contact"
+            }
+          },
           "column_2_link_Ct39wn": {
             "type": "column_2_link",
             "settings": {
@@ -527,6 +534,7 @@
           }
         },
         "block_order": [
+          "column_3_link_JT63M7",
           "column_2_link_Ct39wn",
           "column_2_link_tmFqqy"
         ],
