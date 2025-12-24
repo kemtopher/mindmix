@@ -521,8 +521,8 @@
           "column_1_link_XwFHa3": {
             "type": "column_1_link",
             "settings": {
-              "link_label": "Example link",
-              "link_url": ""
+              "link_label": "Free Trial",
+              "link_url": "shopify://products/free-trial-pack"
             }
           },
           "column_2_link_RWkRtc": {
