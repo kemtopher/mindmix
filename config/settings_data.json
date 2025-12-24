@@ -518,6 +518,13 @@
               "link_url": "shopify://pages/contact"
             }
           },
+          "column_3_link_zk47LB": {
+            "type": "column_3_link",
+            "settings": {
+              "link_label": "FAQ",
+              "link_url": "shopify://pages/faq"
+            }
+          },
           "column_2_link_Ct39wn": {
             "type": "column_2_link",
             "settings": {
@@ -535,6 +542,7 @@
         },
         "block_order": [
           "column_3_link_JT63M7",
+          "column_3_link_zk47LB",
           "column_2_link_Ct39wn",
           "column_2_link_tmFqqy"
         ],
