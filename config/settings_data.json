@@ -510,12 +510,48 @@
       },
       "footer": {
         "type": "footer",
+        "blocks": {
+          "column_3_link_JT63M7": {
+            "type": "column_3_link",
+            "settings": {
+              "link_label": "Contact",
+              "link_url": "shopify://pages/contact"
+            }
+          },
+          "column_3_link_zk47LB": {
+            "type": "column_3_link",
+            "settings": {
+              "link_label": "FAQ",
+              "link_url": "shopify://pages/faq"
+            }
+          },
+          "column_2_link_Ct39wn": {
+            "type": "column_2_link",
+            "settings": {
+              "link_label": "All Products",
+              "link_url": "shopify://collections/menu-product"
+            }
+          },
+          "column_2_link_tmFqqy": {
+            "type": "column_2_link",
+            "settings": {
+              "link_label": "Try It Free",
+              "link_url": "shopify://products/free-trial-pack"
+            }
+          }
+        },
+        "block_order": [
+          "column_3_link_JT63M7",
+          "column_3_link_zk47LB",
+          "column_2_link_Ct39wn",
+          "column_2_link_tmFqqy"
+        ],
         "settings": {
           "logo_variant": "white",
           "footer_text": "Unlock Your Mental Edge with our scientifically formulated nootropic drink mix designed for peak cognitive performance.",
-          "column_1_heading": "Shop",
-          "column_2_heading": "Learn",
-          "column_3_heading": "Support",
+          "column_1_heading": "",
+          "column_2_heading": "Shop",
+          "column_3_heading": "About",
           "legal_text": "*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease."
         }
       },
