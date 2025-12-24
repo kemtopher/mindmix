@@ -6,10 +6,12 @@
 
     <nav class='h-full hidden md:flex items-center space-x-6'>
       <div id='menu-item-learn' class='menu-item h-full items-center flex gap-2 group relative'>
-        <a href='#' class='text-light group-hover:text-primary transition-colors h-full flex items-center'
+        <a
+          href='/collections/menu-product'
+          class='text-light group-hover:text-primary transition-colors h-full flex items-center'
           >Shop MindMix</a
         >
-        <a href='#' class='h-[24px] w-[24px] h-full flex items-center'>
+        <a href='/collections/menu-product' class='h-[24px] w-[24px] h-full flex items-center'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 16 16'
@@ -25,13 +27,13 @@
           </svg>
         </a>
 
-        {%- assign menu_product = collections['all-products'] -%}
-        {%- if menu_product and menu_product.products.size > 0 -%}
+        {%- assign all_products = collections['all-products'] -%}
+        {%- if all_products and all_products.products.size > 0 -%}
           <ul
             id='learn-more-menu'
             class='menu-dropdown absolute top-full left-1/2 -translate-x-1/2 hidden inline-block whitespace-nowrap px-4 py-3 bg-dark/90 backdrop-blur-md shadow-lg'
           >
-            {%- for product in menu_product.products -%}
+            {%- for product in all_products.products -%}
               <li class='mb-2 text-light hover:text-primary transition-colors'>
                 <a href='{{ product.url }}'>
                   {{ product.title }}
