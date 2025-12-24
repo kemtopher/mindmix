@@ -511,11 +511,11 @@
       "footer": {
         "type": "footer",
         "blocks": {
-          "column_1_link_QAVAEX": {
-            "type": "column_1_link",
+          "column_2_link_tmFqqy": {
+            "type": "column_2_link",
             "settings": {
-              "link_label": "Green Apple Kiwi",
-              "link_url": "shopify://products/green-apple-kiwi"
+              "link_label": "Example link",
+              "link_url": ""
             }
           },
           "column_1_link_hAHcWd": {
@@ -534,15 +534,15 @@
           }
         },
         "block_order": [
-          "column_1_link_QAVAEX",
+          "column_2_link_tmFqqy",
           "column_1_link_hAHcWd",
           "column_1_link_XwFHa3"
         ],
         "settings": {
           "logo_variant": "white",
           "footer_text": "Unlock Your Mental Edge with our scientifically formulated nootropic drink mix designed for peak cognitive performance.",
-          "column_1_heading": "Shop",
-          "column_2_heading": "Learn",
+          "column_1_heading": "",
+          "column_2_heading": "Shop",
           "column_3_heading": "Support",
           "legal_text": "*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease."
         }
