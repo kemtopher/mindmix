@@ -521,30 +521,14 @@
           "column_2_link_tmFqqy": {
             "type": "column_2_link",
             "settings": {
-              "link_label": "Example link",
-              "link_url": ""
-            }
-          },
-          "column_1_link_hAHcWd": {
-            "type": "column_1_link",
-            "settings": {
-              "link_label": "All Products",
-              "link_url": "shopify://collections/menu-product"
-            }
-          },
-          "column_1_link_XwFHa3": {
-            "type": "column_1_link",
-            "settings": {
-              "link_label": "Free Trial",
+              "link_label": "Try It Free",
               "link_url": "shopify://products/free-trial-pack"
             }
           }
         },
         "block_order": [
           "column_2_link_Ct39wn",
-          "column_2_link_tmFqqy",
-          "column_1_link_hAHcWd",
-          "column_1_link_XwFHa3"
+          "column_2_link_tmFqqy"
         ],
         "settings": {
           "logo_variant": "white",
