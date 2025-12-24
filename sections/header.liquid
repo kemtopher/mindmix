@@ -25,7 +25,7 @@
           </svg>
         </a>
 
-        {%- assign menu_product = collections['menu-product'] -%}
+        {%- assign menu_product = collections['all-products'] -%}
         {%- if menu_product and menu_product.products.size > 0 -%}
           <ul
             id='learn-more-menu'
@@ -218,7 +218,7 @@
               />
             </svg>
           </button>
-          {%- assign menu_product = collections['menu-product'] -%}
+          {%- assign menu_product = collections['all-products'] -%}
           {%- if menu_product and menu_product.products.size > 0 -%}
             <ul class='expandable-list max-h-0 pt-4 overflow-hidden transition-all duration-300'>
               {%- for product in menu_product.products -%}

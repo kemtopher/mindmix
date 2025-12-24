@@ -3,48 +3,48 @@
   Assumes Tailwind is already loaded in your theme (theme.liquid).
 {%- endcomment -%}
 
-<section class='bg-white text-neutral-900'>
+<section class='neural-bg text-neutral-900'>
   <div class='container-custom pt-[10rem] pb-[10rem]'>
     {%- comment -%} Top: title + hero image {%- endcomment -%}
     <div class='flex flex-col items-start justify-between gap-10 lg:flex-row lg:items-start'>
+      <div class='pt-2'>
+        <h1 class='text-4xl text-primary font-medium tracking-center'>
+          {{ collection.title }}
+        </h1>
+      </div>
+
       <!--
-        <div class='pt-2'>
-          <h1 class='text-4xl font-medium tracking-tight'>
-            {{ collection.title }}
-          </h1>
+        <div class='w-full'>
+          <div class='mx-auto flex items-center justify-center bg-neutral-100'>
+            {%- comment -%}
+              Uses collection.image if present. Falls back to first product image.
+            {%- endcomment -%}
+            {%- if collection.image -%}
+              <img
+                src='{{ collection.image | image_url: width: 900 }}'
+                alt='{{ collection.image.alt | escape | default: collection.title }}'
+                class='h-[190px] w-auto object-contain py-4 opacity-90'
+                loading='eager'
+              >
+            {%- elsif collection.products_count > 0 and collection.products.first.featured_image -%}
+              <img
+                src='{{ collection.products.first.featured_image | image_url: width: 900 }}'
+                alt='{{ collection.title | escape }}'
+                class='h-[190px] w-auto object-contain py-4 opacity-90'
+                loading='eager'
+              >
+            {%- else -%}
+              <div class='h-[190px] w-full'></div>
+            {%- endif -%}
+          </div>
         </div>
       -->
-
-      <div class='w-full'>
-        <div class='mx-auto flex items-center justify-center bg-neutral-100'>
-          {%- comment -%}
-            Uses collection.image if present. Falls back to first product image.
-          {%- endcomment -%}
-          {%- if collection.image -%}
-            <img
-              src='{{ collection.image | image_url: width: 900 }}'
-              alt='{{ collection.image.alt | escape | default: collection.title }}'
-              class='h-[190px] w-auto object-contain py-4 opacity-90'
-              loading='eager'
-            >
-          {%- elsif collection.products_count > 0 and collection.products.first.featured_image -%}
-            <img
-              src='{{ collection.products.first.featured_image | image_url: width: 900 }}'
-              alt='{{ collection.title | escape }}'
-              class='h-[190px] w-auto object-contain py-4 opacity-90'
-              loading='eager'
-            >
-          {%- else -%}
-            <div class='h-[190px] w-full'></div>
-          {%- endif -%}
-        </div>
-      </div>
     </div>
 
     {%- comment -%} Products + sorting/filter bar {%- endcomment -%}
     {%- paginate collection.products by section.settings.products_per_page -%}
       <div class='mt-12 flex items-end justify-between gap-6 flex-col sm:flex-row'>
-        <div class='order-2 sm:order-1 text-xs text-neutral-500'>{{ collection.products_count }} products</div>
+        <div class='order-2 sm:order-1 text-xs text-primary'>{{ collection.products_count }} products</div>
 
         <div class='order-1 sm:order-2 flex flex-wrap items-end gap-6'>
           {%- comment -%}
@@ -116,7 +116,7 @@
       <div class='mt-10 grid grid-cols-2 gap-x-10 gap-y-12 lg:grid-cols-4'>
         {%- for product in collection.products -%}
           <a href='{{ product.url }}' class='group block'>
-            <div class='aspect-square w-full bg-neutral-100 p-6'>
+            <div class='aspect-square w-full bg-black p-6'>
               {%- if product.featured_image -%}
                 <img
                   src='{{ product.featured_image | image_url: width: 720 }}'
@@ -127,13 +127,13 @@
               {%- endif -%}
             </div>
 
-            <div class='mt-3 text-xs text-neutral-900'>
+            <div class='mt-3 text-md text-primary'>
               {{ product.title }}
             </div>
 
-            <div class='mt-1 text-xs font-medium'>
+            <div class='mt-1 text-lg font-medium text-primary'>
               {%- if product.compare_at_price_max > product.price -%}
-                <span class='text-neutral-500 line-through'>
+                <span class='text-primary line-through'>
                   {{ product.compare_at_price_max | money }}
                 </span>
                 <span class='ml-2'>
@@ -152,7 +152,7 @@
         <div class='mt-12 flex items-center justify-center gap-4 text-sm'>
           {%- if paginate.previous -%}
             <a
-              class='px-2 py-1 text-neutral-600 hover:text-neutral-900'
+              class='px-2 py-1 text-primary hover:text-primary'
               href='{{ paginate.previous.url }}'
               aria-label='Previous page'
             >
@@ -162,11 +162,11 @@
 
           {%- for part in paginate.parts -%}
             {%- if part.is_link -%}
-              <a class='px-2 py-1 text-neutral-600 hover:text-neutral-900' href='{{ part.url }}'>
+              <a class='px-2 py-1 text-primary hover:text-primary' href='{{ part.url }}'>
                 {{ part.title }}
               </a>
             {%- else -%}
-              <span class='px-2 py-1 {% if part.title == paginate.current_page %}border-b border-neutral-900 text-neutral-900{% else %}text-neutral-400{% endif %}'>
+              <span class='px-2 py-1 {% if part.title == paginate.current_page %}border-b border-neutral-900 text-primary{% else %}text-primary{% endif %}'>
                 {{ part.title }}
               </span>
             {%- endif -%}
@@ -174,7 +174,7 @@
 
           {%- if paginate.next -%}
             <a
-              class='px-2 py-1 text-neutral-600 hover:text-neutral-900'
+              class='px-2 py-1 text-primary hover:text-primary'
               href='{{ paginate.next.url }}'
               aria-label='Next page'
             >
