@@ -2,22 +2,21 @@
   id='shopify-section-main-product'
   class='w-full pt-44 pb-16 flex flex-col md:flex-row items-center justify-center'
 >
-  <div class='container flex flex-col md:flex-row justify-between gap-8'>
-    <div class='product-gallery w-full h-full md:max-h-[500px] flex flex-col lg:flex-row gap-4 lg:gap-8 justify-start'>
+  <div class='container flex flex-col lg:flex-row justify-between gap-8'>
+    <div class='product-gallery w-full h-full lg:max-h-[500px] flex flex-col lg:flex-row gap-4 lg:gap-8 justify-start'>
       <!--
         {%- assign image_media = product.media | where: 'media_type', 'image' -%}
         {% if image_media.size > 0 %}
       -->
-      <div class='product-images scrollbar-hide overflow-x-scroll overflow-y-hidden w-full flex flex-row md:flex-col gap-4 order-2 lg:order-1 justify-start'>
+      <div class='product-images scrollbar-hide overflow-x-scroll overflow-y-hidden w-full lg:max-w-[72px] flex flex-row lg:flex-col gap-4 order-2 lg:order-1 justify-start'>
         {% for media in product.media %}
           {% if media.media_type == 'image' %}
             <div class='product-image relative aspect-square w-[72px] h-[72px] sm:overflow-hidden'>
               <img
                 src='{{ media | img_url: '72x72' }}'
-                data-full='{{ media | img_url: 'master' }}'
+                data-full='{{ media | img_url: '960x960' }}'
                 alt='{{ media.alt | escape | default: product.title }}'
-                class='thumb cursor-pointer w-full object-cover transition hover:opacity-80'
-                loading='{% if forloop.first %}eager{% else %}lazy{% endif %}'
+                class='thumb cursor-pointer w-full object-cover hover:opacity-80'
               >
             </div>
           {% endif %}
@@ -28,9 +27,10 @@
       <div class='order-1 lg:order-2 text-center overflow-hidden'>
         <img
           id='main-product-image'
-          src='{{ product.featured_image | img_url: 'master' }}'
+          src='{{ product.featured_image | img_url: '960x960' }}'
           alt='{{ product.title }}'
-          class='h-full w-full object-cover transition-opacity duration-500'
+          class='h-full w-full object-cover'
+          data-full='{{ product.featured_image | img_url: '960x960' }}'
         >
       </div>
     </div>
@@ -137,9 +137,11 @@
         mainImage.classList.add('opacity-0');
 
         setTimeout(() => {
+          mainImage.onload = () => mainImage.classList.remove('opacity-0');
           mainImage.src = newSrc;
           mainImage.alt = newAlt;
-          mainImage.onload = () => mainImage.classList.remove('opacity-0');
+
+          if (mainImage.complete) mainImage.classList.remove('opacity-0');
         }, 200);
 
         thumbs.forEach((t) => {

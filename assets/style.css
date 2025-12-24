@@ -2904,6 +2904,10 @@ textarea:disabled {
 }
 
 @media (min-width: 640px) {
+  .sm\:w-\[72px\] {
+    width: 72px;
+  }
+
   .sm\:max-w-\[75vw\] {
     max-width: 75vw;
   }
@@ -2926,6 +2930,10 @@ textarea:disabled {
 }
 
 @media (min-width: 768px) {
+  .md\:order-2 {
+    order: 2;
+  }
+
   .md\:col-span-2 {
     grid-column: span 2 / span 2;
   }
@@ -2972,6 +2980,10 @@ textarea:disabled {
 
   .md\:h-\[75vh\] {
     height: 75vh;
+  }
+
+  .md\:h-full {
+    height: 100%;
   }
 
   .md\:max-h-\[500px\] {
@@ -3024,6 +3036,10 @@ textarea:disabled {
 
   .md\:max-w-md {
     max-width: 28rem;
+  }
+
+  .md\:max-w-\[72px\] {
+    max-width: 72px;
   }
 
   .md\:grid-cols-2 {
@@ -3153,6 +3169,14 @@ textarea:disabled {
     height: 100%;
   }
 
+  .lg\:h-\[500px\] {
+    height: 500px;
+  }
+
+  .lg\:max-h-\[500px\] {
+    max-height: 500px;
+  }
+
   .lg\:w-\[40vw\] {
     width: 40vw;
   }
@@ -3163,6 +3187,10 @@ textarea:disabled {
 
   .lg\:w-\[55vw\] {
     width: 55vw;
+  }
+
+  .lg\:max-w-\[72px\] {
+    max-width: 72px;
   }
 
   .lg\:grid-cols-2 {
@@ -3189,12 +3217,20 @@ textarea:disabled {
     flex-direction: row;
   }
 
+  .lg\:flex-col {
+    flex-direction: column;
+  }
+
   .lg\:items-center {
     align-items: center;
   }
 
   .lg\:gap-8 {
     gap: 2rem;
+  }
+
+  .lg\:overflow-y-scroll {
+    overflow-y: scroll;
   }
 
   .lg\:text-3xl {
