@@ -75,13 +75,21 @@
       });
     </script>
 
-    <!-- MindMix Upsell Redirect Script -->
+    <!-- MindMix Upsell Redirect Script - FIXED VERSION -->
     <script>
     (function() {
-      console.log('[MINDMIX] Cart redirect script loaded');
+      console.log('[MINDMIX] Cart redirect script loaded (FIXED)');
       
       // Configuration
       const UPSELL_URL = '/pages/upsells';
+      
+      // Don't redirect if we're already on upsell page or checkout
+      if (window.location.pathname.includes('/pages/upsells') || 
+          window.location.pathname.includes('/checkout') ||
+          window.location.pathname.includes('/cart')) {
+        console.log('[MINDMIX] On upsell/checkout/cart page, skipping redirect setup');
+        return;
+      }
       
       // Method 1: Intercept Shopify's Cart API calls (AJAX add-to-cart)
       const originalFetch = window.fetch;
