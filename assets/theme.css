@@ -386,3 +386,8 @@ textarea:disabled {
   border-radius: 6px;
   background: #00ff94;
 }
+
+#benefits-banner {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
