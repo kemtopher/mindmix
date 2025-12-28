@@ -1,7 +1,7 @@
 <section id='net-geo' class='py-16 md:py-24 relative overflow-hidden'>
   <div class='absolute inset-0'>
     <img
-      src='https://images.pexels.com/photos/6590699/pexels-photo-6590699.jpeg'
+      src='{{ section.settings.section_bg_photo }}'
       alt='Rhodiola rosea flowers'
       class='w-full h-full object-cover'
     >
@@ -51,6 +51,11 @@
 {
   "name": "Nat Geo",
   "settings": [
+    {
+      "image_url",
+      "id": "section_bg_photo",
+      "label": "Section Background Photo"
+    },
     {
       "type": "text",
       "id": "section_title",
