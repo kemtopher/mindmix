@@ -911,6 +911,7 @@
       "nat-geo": {
         "type": "nat-geo",
         "settings": {
+          "section_bg_photo": "shopify://shop_images/3871bdac-fc7d-44bf-ad9a-c81ea451ac4c.png",
           "section_title": "POWERED BY, RHODIOLA",
           "section_subtitle": "The adaptogenic powerhouse behind peak mental performance",
           "section_quote": "Used by Soviet scientists to enhance physical and mental endurance, Rhodiola rosea was their secret weapon long before modern performance enhancers."
