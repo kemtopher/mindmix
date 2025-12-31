@@ -982,11 +982,23 @@
               "pains": "You wear every hat, and by noon your brain is fried from context switching\nDecision fatigue is real, you make hundreds of calls a day and each one gets harder",
               "solutions": "L Theanine plus Green Tea create sustained focus, so you can deep work for hours without burning out\nRhodiola protects against burnout by regulating stress hormones during intense work periods\nLions Mane enhances learning and adaptation, helping you level up faster as you build"
             }
+          },
+          "use_case_t8m3JP": {
+            "type": "use_case",
+            "settings": {
+              "icon": "🎮",
+              "card_title": "Competitive Edge",
+              "modal_title": "Competitive Edge",
+              "modal_subtitle": "For gamers, athletes, and high performers",
+              "pains": "Your reaction time slows when it matters most, and you know you are leaving performance on the table\nMental stamina fades during long sessions, turning wins into losses",
+              "solutions": "L Theanine sharpens focus without jitters, giving you calm precision under pressure\nGreen Tea enhances processing speed and reaction time for split second decisions\nRhodiola sustains mental endurance, so your performance does not drop in the final rounds"
+            }
           }
         },
         "block_order": [
           "use_case_BGm99r",
-          "use_case_rGhB8J"
+          "use_case_rGhB8J",
+          "use_case_t8m3JP"
         ],
         "settings": {
           "title": "How To Use MindMix"
