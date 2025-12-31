@@ -993,12 +993,24 @@
               "pains": "Your reaction time slows when it matters most, and you know you are leaving performance on the table\nMental stamina fades during long sessions, turning wins into losses",
               "solutions": "L Theanine sharpens focus without jitters, giving you calm precision under pressure\nGreen Tea enhances processing speed and reaction time for split second decisions\nRhodiola sustains mental endurance, so your performance does not drop in the final rounds"
             }
+          },
+          "use_case_qMLetb": {
+            "type": "use_case",
+            "settings": {
+              "icon": "🎨",
+              "card_title": "Creative Work",
+              "modal_title": "Creative Work",
+              "modal_subtitle": "For writers, designers, and artists",
+              "pains": "Blank page anxiety is paralyzing, you stare at the screen and nothing comes\nYou hit creative blocks when deadlines loom, and forcing it makes everything worse",
+              "solutions": "L Theanine plus Green Tea unlock flow state, where ideas come effortlessly and distractions fade\nLions Mane enhances creative thinking by building new neural pathways\nRhodiola reduces performance anxiety, letting you create without the mental noise"
+            }
           }
         },
         "block_order": [
           "use_case_BGm99r",
           "use_case_rGhB8J",
-          "use_case_t8m3JP"
+          "use_case_t8m3JP",
+          "use_case_qMLetb"
         ],
         "settings": {
           "title": "How To Use MindMix"
