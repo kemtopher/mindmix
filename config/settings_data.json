@@ -1134,13 +1134,6 @@
       "compare-toggle": {
         "type": "compare-toggle",
         "blocks": {
-          "with_row_Ne4kxy": {
-            "type": "with_row",
-            "settings": {
-              "time": "6:00 PM",
-              "text": "Accomplished. Energized. The sharp version of yourself showed up. And he is here to stay."
-            }
-          },
           "with_row_QPGzED": {
             "type": "with_row",
             "settings": {
@@ -1167,6 +1160,13 @@
             "settings": {
               "time": "3:00 PM",
               "text": "The crash hour is gone. You are hitting your second wind. Peak performance sustained."
+            }
+          },
+          "with_row_Ne4kxy": {
+            "type": "with_row",
+            "settings": {
+              "time": "6:00 PM",
+              "text": "Accomplished. Energized. The sharp version of yourself showed up. And he is here to stay."
             }
           },
           "without_row_ek9x94": {
@@ -1206,11 +1206,11 @@
           }
         },
         "block_order": [
-          "with_row_Ne4kxy",
           "with_row_QPGzED",
           "with_row_6JHnU4",
           "with_row_CVYw4E",
           "with_row_jrxHwe",
+          "with_row_Ne4kxy",
           "without_row_ek9x94",
           "without_row_eYDdzk",
           "without_row_MyGxrp",
