@@ -920,6 +920,55 @@
       "product": {
         "type": "product",
         "settings": {}
+      },
+      "how-it-works": {
+        "type": "how-it-works",
+        "blocks": {
+          "step_kFmibr": {
+            "type": "step",
+            "settings": {
+              "number": "1",
+              "label": "Mix",
+              "text": "Tear open a stick pack and mix with 8–12 oz of water. Stir until dissolved."
+            }
+          },
+          "step_iEAhea": {
+            "type": "step",
+            "settings": {
+              "number": "2",
+              "label": "Wait",
+              "text": "In 30 minutes you will feel the fog lift. Your brain comes online. Sharp and clear."
+            }
+          },
+          "step_HTJqAe": {
+            "type": "step",
+            "settings": {
+              "number": "1",
+              "label": "Mix",
+              "text": "Tear open a stick pack and mix with 8-12 oz of water. Stir until dissolved."
+            }
+          }
+        },
+        "block_order": [
+          "step_kFmibr",
+          "step_iEAhea",
+          "step_HTJqAe"
+        ],
+        "settings": {
+          "title": "HOW IT WORKS"
+        }
+      },
+      "how-to-use": {
+        "type": "how-to-use",
+        "settings": {
+          "title": "How To Use MindMix"
+        }
+      },
+      "the-solution": {
+        "type": "the-solution",
+        "settings": {
+          "heading": "THE SOLUTION"
+        }
       }
     },
     "content_for_index": [],
