@@ -1130,6 +1130,20 @@
           "section_title": ",THE SOLUTION",
           "section_subtitle": ""
         }
+      },
+      "compare-toggle": {
+        "type": "compare-toggle",
+        "settings": {
+          "section_title": "YOUR DAY: ,BEFORE & AFTER",
+          "section_subtitle": "",
+          "aria_label": "Compare a day with and without MindMix",
+          "toggle_aria_label": "Toggle between without and with MindMix",
+          "label_without": "WITHOUT MindMix",
+          "label_with": "WITH MindMix",
+          "title_without": "A Day in Brain Fog",
+          "title_with": "A Day With MindMix",
+          "default_mode": "without"
+        }
       }
     },
     "content_for_index": [],
