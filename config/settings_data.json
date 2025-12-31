@@ -1004,13 +1004,25 @@
               "pains": "Blank page anxiety is paralyzing, you stare at the screen and nothing comes\nYou hit creative blocks when deadlines loom, and forcing it makes everything worse",
               "solutions": "L Theanine plus Green Tea unlock flow state, where ideas come effortlessly and distractions fade\nLions Mane enhances creative thinking by building new neural pathways\nRhodiola reduces performance anxiety, letting you create without the mental noise"
             }
+          },
+          "use_case_ctGLLC": {
+            "type": "use_case",
+            "settings": {
+              "icon": "📚",
+              "card_title": "Learning & Growth",
+              "modal_title": "Learning & Growth",
+              "modal_subtitle": "For students and lifelong learners",
+              "pains": "Information does not stick, you read the same paragraph three times and retain nothing\nExam anxiety makes you freeze, even when you know the material cold",
+              "solutions": "Lions Mane enhances memory formation and recall, so information sticks the first time\nL Theanine reduces test anxiety while keeping you alert and focused\nRhodiola improves cognitive performance under pressure, turning stress into clarity"
+            }
           }
         },
         "block_order": [
           "use_case_BGm99r",
           "use_case_rGhB8J",
           "use_case_t8m3JP",
-          "use_case_qMLetb"
+          "use_case_qMLetb",
+          "use_case_ctGLLC"
         ],
         "settings": {
           "title": "How To Use MindMix"
