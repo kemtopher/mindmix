@@ -1059,6 +1059,17 @@
               "pains": "Home distractions derail your focus every few minutes, turning short tasks into all day struggles\nVideo call fatigue is real, back to back calls leave you mentally drained by lunch",
               "solutions": "L Theanine plus Green Tea create deep focus, making distractions fade into the background\nRhodiola prevents mental fatigue from stacked meetings and context switches\nLions Mane supports sustained cognitive performance throughout long work from home days"
             }
+          },
+          "use_case_7yHGfF": {
+            "type": "use_case",
+            "settings": {
+              "icon": "🌙",
+              "card_title": "Irregular Hours",
+              "modal_title": "Irregular Hours",
+              "modal_subtitle": "For shift workers and non standard schedules",
+              "pains": "Your circadian rhythm is disrupted, leaving you foggy when you need to be sharp\nCognitive decline from irregular sleep is noticeable, and coffee only makes it worse",
+              "solutions": "Rhodiola helps your body adapt to irregular schedules by regulating stress response\nB12 supports energy production when your natural rhythms are off\nL Theanine plus Green Tea provide clean alertness without disrupting what little sleep you get"
+            }
           }
         },
         "block_order": [
@@ -1070,7 +1081,8 @@
           "use_case_BLLhPa",
           "use_case_fc7e9T",
           "use_case_7b7PxW",
-          "use_case_iaMLXR"
+          "use_case_iaMLXR",
+          "use_case_7yHGfF"
         ],
         "settings": {
           "title": "How To Use MindMix"
