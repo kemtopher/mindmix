@@ -1037,6 +1037,17 @@
               "pains": "Your mind gives up before your body does, cutting workouts short\nYou lose focus on form and technique when fatigue sets in, risking injury",
               "solutions": "Rhodiola enhances physical endurance by reducing perceived exertion\nL Theanine improves mind muscle connection, keeping you locked in on form\nB12 supports energy production at the cellular level, powering through tough sessions"
             }
+          },
+          "use_case_7b7PxW": {
+            "type": "use_case",
+            "settings": {
+              "icon": "👨‍👩‍👧",
+              "card_title": "Parenting & Caregiving",
+              "modal_title": "Parenting & Caregiving",
+              "modal_subtitle": "For parents and caregivers",
+              "pains": "Sleep deprivation leaves you in a constant fog, making simple tasks feel overwhelming\nYou lose patience when you need it most, and the guilt compounds the stress",
+              "solutions": "Rhodiola combats fatigue and helps you stay calm under the chaos of daily life\nB12 fights brain fog from sleep deprivation, restoring mental clarity\nL Theanine promotes calm presence, helping you stay patient and engaged with your family"
+            }
           }
         },
         "block_order": [
@@ -1046,7 +1057,8 @@
           "use_case_qMLetb",
           "use_case_ctGLLC",
           "use_case_BLLhPa",
-          "use_case_fc7e9T"
+          "use_case_fc7e9T",
+          "use_case_7b7PxW"
         ],
         "settings": {
           "title": "How To Use MindMix"
