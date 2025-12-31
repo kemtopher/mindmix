@@ -1134,6 +1134,20 @@
       "compare-toggle": {
         "type": "compare-toggle",
         "blocks": {
+          "with_row_QPGzED": {
+            "type": "with_row",
+            "settings": {
+              "time": "6:00 AM",
+              "text": "Wake up sharp. No snooze. Mix MindMix. The day is yours."
+            }
+          },
+          "with_row_6JHnU4": {
+            "type": "with_row",
+            "settings": {
+              "time": "8:30 AM",
+              "text": "Deep work mode activated. Ideas flowing. You are crushing it. This is what clarity feels like."
+            }
+          },
           "without_row_ek9x94": {
             "type": "without_row",
             "settings": {
@@ -1171,6 +1185,8 @@
           }
         },
         "block_order": [
+          "with_row_QPGzED",
+          "with_row_6JHnU4",
           "without_row_ek9x94",
           "without_row_eYDdzk",
           "without_row_MyGxrp",
