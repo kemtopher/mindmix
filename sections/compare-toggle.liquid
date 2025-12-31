@@ -10,6 +10,7 @@
   data-mmc3
   id='mmc3-{{ section.id }}'
 >
+  {% render 'section-title' %}
   <!-- Toggle -->
   <div
     class='mmc3-toggle mmc3-state-without'
@@ -273,6 +274,19 @@
 {
   "name": "MM Compare Toggle",
   "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section title",
+      "default": "CHOOSE YOUR, COGNITIVE CATALYST"
+    },
+    {
+      "type": "text",
+      "id": "section_subtitle",
+      "label": "Section subtitle",
+      "default": "Science-backed formula designed for cognitive enhancement",
+      "info": "Separate title with comma to split white & green text/new line"
+    },
     {
       "type": "text",
       "id": "aria_label",
