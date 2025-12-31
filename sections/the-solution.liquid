@@ -1,0 +1,127 @@
+{{ 'the-solution.css' | asset_url | stylesheet_tag }}
+
+<section
+  id="mm-solution-{{ section.id }}"
+  class="w-full max-w-[1100px] mx-auto pt-12 px-5 text-white font-sans"
+>
+  {% if section.settings.heading != blank %}
+    <h2 class="text-center tracking-[0.16em] text-[24px] font-semibold m-0 mm-solution-heading">
+      {{ section.settings.heading }}
+    </h2>
+  {% endif %}
+
+  <div class="mt-8 flex gap-7 flex-col md:flex-col lg:flex-row">
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'card' %}
+          {%- assign is_guarantee = block.settings.is_guarantee -%}
+
+          <article
+            class="mm-solution-card {% if is_guarantee %}mm-solution-card-guarantee{% endif %}"
+            {{ block.shopify_attributes }}
+          >
+            {% if block.settings.number != blank %}
+              <div class="mm-solution-number">
+                {{ block.settings.number }}
+              </div>
+            {% endif %}
+
+            {% if block.settings.label != blank %}
+              <div class="mm-solution-label">
+                {{ block.settings.label }}
+              </div>
+            {% endif %}
+
+            {% if block.settings.copy != blank %}
+              <p class="mm-solution-copy">
+                {{ block.settings.copy }}
+              </p>
+            {% endif %}
+          </article %}
+      {% endcase %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MindMix — The Solution",
+  "tag": "section",
+  "class": "section-mm-solution",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "THE SOLUTION"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Solution card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "30"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Minutes"
+        },
+        {
+          "type": "textarea",
+          "id": "copy",
+          "label": "Copy",
+          "default": "Feel the fog lift. Your brain comes online. Sharp, clear, ready."
+        },
+        {
+          "type": "checkbox",
+          "id": "is_guarantee",
+          "label": "Highlight card (stronger hover / border)",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "MindMix — The Solution",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "number": "30",
+            "label": "Minutes",
+            "copy": "Feel the fog lift. Your brain comes online. Sharp, clear, ready.",
+            "is_guarantee": false
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "number": "6",
+            "label": "Hours",
+            "copy": "Sustained focus without the crash. No jitters. Just clean, calm energy.",
+            "is_guarantee": false
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "number": "90",
+            "label": "Days",
+            "copy": "Try it risk-free. If it doesn't work, we refund every penny. No questions asked.",
+            "is_guarantee": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
