@@ -1161,13 +1161,21 @@
               "time": "2:00 PM",
               "text": "The crash hits. Brain completely fried. You are just going through the motions now."
             }
+          },
+          "without_row_aKMNnb": {
+            "type": "without_row",
+            "settings": {
+              "time": "5:00 PM",
+              "text": "Another day wasted. You know you are capable of more. But the fog won again."
+            }
           }
         },
         "block_order": [
           "without_row_ek9x94",
           "without_row_eYDdzk",
           "without_row_MyGxrp",
-          "without_row_NfpLqp"
+          "without_row_NfpLqp",
+          "without_row_aKMNnb"
         ],
         "settings": {
           "section_title": "YOUR DAY: ,BEFORE & AFTER",
