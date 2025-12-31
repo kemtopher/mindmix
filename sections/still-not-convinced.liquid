@@ -1,0 +1,755 @@
+{% comment %}
+  MindMix — Assessment Quiz (non-editable)
+  - Self-contained section: markup + styles + JS
+  - JS is scoped to this section instance using section.id so IDs won't collide
+{% endcomment %}
+
+<section id='mm-assessment-{{ section.id }}' class='mm-assessment'>
+  <div class='mm-assessment-container'>
+    <!-- Header -->
+    <div class='mm-section-header'>
+      <h1 class='mm-section-title'>Still Not Convinced?</h1>
+      <p class='mm-section-subtitle'>Take this 5-question assessment to see what brain fog is actually costing you.</p>
+      <div class='mm-section-badge'>Based on Stanford & Harvard Research</div>
+    </div>
+
+    <!-- Progress -->
+    <div class='mm-progress-container'>
+      <div class='mm-progress-bar'>
+        <div class='mm-progress-fill' data-progress-fill></div>
+      </div>
+      <div class='mm-progress-text'>Question <span data-current-question>1</span> of 5</div>
+    </div>
+
+    <!-- Quiz Card -->
+    <div class='mm-quiz-card' data-quiz-card>
+      <!-- Q1 -->
+      <div class='mm-question' data-question='1'>
+        <div class='mm-question-number'>Question 1 of 5</div>
+        <div class='mm-question-text'>Which best describes your work pattern?</div>
+
+        <div class='mm-answer' data-answer data-q='1' data-key='intense' data-value='1.3'>
+          I work long, intense days with little downtime
+        </div>
+        <div class='mm-answer' data-answer data-q='1' data-key='juggle' data-value='1.2'>
+          I juggle multiple roles and responsibilities
+        </div>
+        <div class='mm-answer' data-answer data-q='1' data-key='irregular' data-value='1.4'>
+          I work irregular hours or shifts
+        </div>
+        <div class='mm-answer' data-answer data-q='1' data-key='student' data-value='1.1'>
+          I'm in school or learning full-time
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class='mm-question' data-question='2'>
+        <div class='mm-question-number'>Question 2 of 5</div>
+        <div class='mm-question-text'>How would you describe your mental state?</div>
+
+        <div class='mm-answer' data-answer data-q='2' data-key='sharp' data-value='0.3'>
+          I feel sharp and focused most of the time
+        </div>
+        <div class='mm-answer' data-answer data-q='2' data-key='mixed' data-value='0.6'>
+          I have good days and bad days
+        </div>
+        <div class='mm-answer' data-answer data-q='2' data-key='struggle' data-value='0.9'>
+          I struggle to concentrate more often than not
+        </div>
+        <div class='mm-answer' data-answer data-q='2' data-key='fog' data-value='1.2'>
+          Brain fog is my default state
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class='mm-question' data-question='3'>
+        <div class='mm-question-number'>Question 3 of 5</div>
+        <div class='mm-question-text'>How often do you experience mental fatigue?</div>
+
+        <div class='mm-answer' data-answer data-q='3' data-key='daily' data-value='1.0'>Every single day</div>
+        <div class='mm-answer' data-answer data-q='3' data-key='frequent' data-value='0.7'>3–4 times per week</div>
+        <div class='mm-answer' data-answer data-q='3' data-key='occasional' data-value='0.4'>Once or twice a week</div>
+        <div class='mm-answer' data-answer data-q='3' data-key='rare' data-value='0.2'>
+          Rarely, but when it does, it's bad
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class='mm-question' data-question='4'>
+        <div class='mm-question-number'>Question 4 of 5</div>
+        <div class='mm-question-text'>What's the impact on your life?</div>
+
+        <div class='mm-answer' data-answer data-q='4' data-key='opportunities' data-value='1.3'>
+          It's costing me opportunities and advancement
+        </div>
+        <div class='mm-answer' data-answer data-q='4' data-key='catchup' data-value='1.1'>
+          I'm constantly playing catch-up
+        </div>
+        <div class='mm-answer' data-answer data-q='4' data-key='notbest' data-value='0.8'>
+          I get through the day, but I'm not at my best
+        </div>
+        <div class='mm-answer' data-answer data-q='4' data-key='manageable' data-value='0.5'>
+          It's manageable, but I know I could be sharper
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class='mm-question' data-question='5'>
+        <div class='mm-question-number'>Question 5 of 5</div>
+        <div class='mm-question-text'>What's at stake? (Annual income)</div>
+
+        <div class='mm-answer' data-answer data-q='5' data-key='37500' data-value='37500'>$25k – $50k annually</div>
+        <div class='mm-answer' data-answer data-q='5' data-key='62500' data-value='62500'>$50k – $75k annually</div>
+        <div class='mm-answer' data-answer data-q='5' data-key='87500' data-value='87500'>$75k – $100k annually</div>
+        <div class='mm-answer' data-answer data-q='5' data-key='125000' data-value='125000'>$100k – $150k annually</div>
+        <div class='mm-answer' data-answer data-q='5' data-key='175000' data-value='175000'>$150k – $200k annually</div>
+        <div class='mm-answer' data-answer data-q='5' data-key='250000' data-value='250000'>$200k+ annually</div>
+        <div class='mm-answer' data-answer data-q='5' data-key='student' data-value='student'>
+          I'm a student (time is my currency)
+        </div>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div class='mm-results-card' data-results>
+      <div class='mm-results-label'>Based on Your Assessment</div>
+      <div class='mm-results-amount' data-cost-amount>$0</div>
+      <div class='mm-results-description' data-cost-description></div>
+
+      <div class='mm-results-breakdown'>
+        <div class='mm-breakdown-title'>Your Profile:</div>
+        <div class='mm-breakdown-item' data-profile-1></div>
+        <div class='mm-breakdown-item' data-profile-2></div>
+        <div class='mm-breakdown-item' data-profile-3></div>
+        <div class='mm-breakdown-item' data-profile-4></div>
+      </div>
+
+      <div class='mm-methodology-toggle'>
+        <button class='mm-methodology-btn' type='button' data-methodology-toggle>How is this calculated?</button>
+      </div>
+
+      <div class='mm-methodology' data-methodology>
+        <div class='mm-methodology-inner'>
+          <p class='mm-methodology-text'>
+            <strong>The Research:</strong> This assessment is based on peer-reviewed studies from Harvard Medical School
+            and Stanford's Behavioral Science Lab. Researchers found that cognitive impairment costs knowledge workers
+            an average of 2.1 hours of productive time per day—but the actual cost varies by work pattern, mental state,
+            frequency, and impact.
+          </p>
+
+          <p class='mm-methodology-text'>
+            <strong>Your Calculation:</strong> We combined your answers across five dimensions to generate a
+            conservative estimate of your annual cost of brain fog.
+          </p>
+
+          <p class='mm-methodology-text'>
+            <strong>Why This Matters:</strong> This isn't just about money—it's about the impact you're not making
+            because your brain is running below its potential.
+          </p>
+        </div>
+      </div>
+
+      <div class='mm-timeline-cta'>
+        <button class='mm-timeline-btn' type='button' data-show-timeline>See Your 30-Day Transformation →</button>
+      </div>
+    </div>
+
+    <!-- Timeline + FINAL CTA -->
+    <div class='mm-timeline' data-timeline>
+      <div class='mm-timeline-header'>
+        <h2 class='mm-timeline-title'>Your 30-Day Transformation</h2>
+        <p class='mm-timeline-subtitle'>Science-backed milestones. Real results.</p>
+      </div>
+
+      <div class='mm-timeline-item'>
+        <div class='mm-timeline-day'>Day 1</div>
+        <div class='mm-timeline-benefit'>First Dose – Immediate Effects</div>
+        <div class='mm-timeline-text'>
+          Within 30–45 minutes, the fog starts to lift. You feel calmer, clearer, and more focused without jitters.
+        </div>
+      </div>
+
+      <div class='mm-timeline-item'>
+        <div class='mm-timeline-day'>Days 3–7</div>
+        <div class='mm-timeline-benefit'>Adaptogenic Effects Build</div>
+        <div class='mm-timeline-text'>
+          Stress feels easier to handle. Energy lasts longer into the afternoon. Mental fatigue takes longer to set in.
+        </div>
+      </div>
+
+      <div class='mm-timeline-item'>
+        <div class='mm-timeline-day'>Day 14</div>
+        <div class='mm-timeline-benefit'>Neuroplasticity Activation</div>
+        <div class='mm-timeline-text'>
+          Learning feels smoother. Recall improves. Your brain starts to feel "switched on" more often than not.
+        </div>
+      </div>
+
+      <div class='mm-timeline-item'>
+        <div class='mm-timeline-day'>Day 30</div>
+        <div class='mm-timeline-benefit'>Your New Cognitive Baseline</div>
+        <div class='mm-timeline-text'>Sharp. Focused. Resilient. This is your new normal—not a rare good day.</div>
+      </div>
+
+      <div class='mm-final-cta'>
+        <div class='mm-final-cta-text'>
+          Stop losing. Start winning.<br>
+          Begin your transformation today.
+        </div>
+        <a
+          class='mm-final-cta-btn'
+          href='/products/free-trial-pack'
+        >
+          Try MindMix Free - Just Pay Shipping
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* Scoped to this section instance to avoid collisions */
+    #mm-assessment-{{ section.id }} * { box-sizing: border-box; }
+
+    #mm-assessment-{{ section.id }}.mm-assessment {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: #fff;
+      background: transparent;
+      padding: 60px 20px;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-assessment-container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-section-title {
+      font-family: "Oswald", sans-serif;
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #ff6b35 0%, #ffd23f 50%, #00ff94 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-section-subtitle {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    #mm-assessment-{{ section.id }} .mm-section-badge {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #ffd23f;
+      border: 1px solid rgba(255, 215, 63, 0.3);
+      background: rgba(255, 215, 63, 0.15);
+    }
+
+    #mm-assessment-{{ section.id }} .mm-progress-container { margin-bottom: 28px; }
+
+    #mm-assessment-{{ section.id }} .mm-progress-bar {
+      width: 100%;
+      height: 6px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-progress-fill {
+      height: 100%;
+      width: 20%;
+      background: linear-gradient(90deg, #ffd23f, #00ff94);
+      transition: width 0.3s ease;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-progress-text {
+      text-align: center;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 8px;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-quiz-card {
+      background: linear-gradient(135deg, #101010, #222);
+      border-radius: 16px;
+      border: 2px solid rgba(255, 107, 53, 0.35);
+      padding: 30px 24px;
+      margin-bottom: 26px;
+      box-shadow: 0 12px 40px rgba(255, 107, 53, 0.22);
+    }
+
+    #mm-assessment-{{ section.id }} .mm-question {
+      display: none;
+      animation: mm-fade-in 0.35s ease;
+    }
+    #mm-assessment-{{ section.id }} .mm-question[data-question="1"] { display: block; }
+
+    #mm-assessment-{{ section.id }} .mm-question-number {
+      font-size: 13px;
+      font-weight: 600;
+      color: #ffd23f;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-question-text {
+      font-family: "Oswald", sans-serif;
+      font-size: 24px;
+      margin-bottom: 22px;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-answer {
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.08);
+      padding: 16px 18px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      font-size: 15px;
+      line-height: 1.5;
+      transition: all 0.25s ease;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-answer:hover {
+      border-color: #00ff94;
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateX(4px);
+    }
+
+    #mm-assessment-{{ section.id }} .mm-answer.mm-selected {
+      border-color: #00ff94;
+      background: rgba(0, 255, 148, 0.12);
+      color: #00ff94;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-results-card {
+      display: none;
+      background: linear-gradient(135deg, rgba(255, 107, 53, 0.18), rgba(255, 215, 63, 0.18));
+      border-radius: 16px;
+      border: 3px solid #ff6b35;
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: 0 16px 50px rgba(255, 107, 53, 0.32);
+    }
+
+    #mm-assessment-{{ section.id }} .mm-results-card.mm-active {
+      display: block;
+      animation: mm-slide-up 0.35s ease;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-results-label {
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 8px;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-results-amount {
+      font-family: "Oswald", sans-serif;
+      font-size: 54px;
+      margin-bottom: 14px;
+      color: #ff6b35;
+      text-shadow: 0 0 28px rgba(255, 107, 53, 0.6);
+    }
+
+    #mm-assessment-{{ section.id }} .mm-results-description {
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 22px;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-results-breakdown {
+      text-align: left;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 20px;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-breakdown-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffd23f;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-breakdown-item {
+      font-size: 14px;
+      margin-bottom: 8px;
+      padding-left: 18px;
+      position: relative;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    #mm-assessment-{{ section.id }} .mm-breakdown-item::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: #00ff94;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-methodology-toggle { margin-bottom: 18px; }
+
+    #mm-assessment-{{ section.id }} .mm-methodology-btn {
+      background: transparent;
+      border-radius: 8px;
+      border: 2px solid rgba(255, 215, 63, 0.3);
+      color: #ffd23f;
+      padding: 8px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-methodology-btn:hover {
+      background: rgba(255, 215, 63, 0.12);
+      border-color: #ffd23f;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-methodology {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-methodology.mm-open { max-height: 600px; }
+
+    #mm-assessment-{{ section.id }} .mm-methodology-inner {
+      margin-top: 14px;
+      background: rgba(0, 0, 0, 0.45);
+      border-radius: 10px;
+      padding: 16px 18px;
+      text-align: left;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-methodology-text {
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 12px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    #mm-assessment-{{ section.id }} .mm-timeline-btn {
+      background: linear-gradient(135deg, #ffd23f, #00ff94);
+      border: none;
+      border-radius: 10px;
+      padding: 14px 32px;
+      font-family: "Oswald", sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: #000;
+      cursor: pointer;
+      box-shadow: 0 6px 22px rgba(0, 255, 148, 0.45);
+      transition: all 0.25s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-timeline-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 255, 148, 0.6);
+    }
+
+    #mm-assessment-{{ section.id }} .mm-timeline {
+      display: none;
+      margin-top: 36px;
+      animation: mm-fade-in 0.35s ease;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-timeline.mm-active { display: block; }
+
+    #mm-assessment-{{ section.id }} .mm-timeline-header {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-timeline-title {
+      font-family: "Oswald", sans-serif;
+      font-size: 32px;
+      background: linear-gradient(135deg, #ffd23f, #00ff94);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-timeline-subtitle {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    #mm-assessment-{{ section.id }} .mm-timeline-item {
+      background: linear-gradient(135deg, #101010, #222);
+      border-radius: 10px;
+      border-left: 4px solid #00ff94;
+      padding: 18px 18px 18px 20px;
+      margin-bottom: 16px;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-timeline-day {
+      font-family: "Oswald", sans-serif;
+      font-size: 20px;
+      color: #00ff94;
+      margin-bottom: 6px;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-timeline-benefit {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-timeline-text {
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    #mm-assessment-{{ section.id }} .mm-final-cta {
+      margin-top: 26px;
+      padding: 24px 20px;
+      border-radius: 16px;
+      text-align: center;
+      border: 2px solid #00ff94;
+      background: linear-gradient(135deg, rgba(0, 255, 148, 0.12), rgba(255, 215, 63, 0.12));
+    }
+
+    #mm-assessment-{{ section.id }} .mm-final-cta-text {
+      font-family: "Oswald", sans-serif;
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-final-cta-btn {
+      display: inline-block;
+      padding: 18px 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #ffd23f, #00ff94);
+      color: #000;
+      font-family: "Oswald", sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 8px 30px rgba(0, 255, 148, 0.5);
+      transition: all 0.25s ease;
+    }
+
+    #mm-assessment-{{ section.id }} .mm-final-cta-btn:hover {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 10px 38px rgba(0, 255, 148, 0.7);
+    }
+
+    @keyframes mm-fade-in {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes mm-slide-up {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      #mm-assessment-{{ section.id }}.mm-assessment { padding: 40px 16px; }
+      #mm-assessment-{{ section.id }} .mm-section-title { font-size: 34px; }
+      #mm-assessment-{{ section.id }} .mm-quiz-card { padding: 24px 18px; }
+      #mm-assessment-{{ section.id }} .mm-question-text { font-size: 20px; }
+      #mm-assessment-{{ section.id }} .mm-results-amount { font-size: 46px; }
+      #mm-assessment-{{ section.id }} .mm-final-cta-btn {
+        width: 100%;
+        padding: 16px 24px;
+        font-size: 18px;
+      }
+    }
+  </style>
+
+  <script>
+    (function () {
+      var root = document.getElementById('mm-assessment-{{ section.id }}');
+      if (!root) return;
+
+      var mmCurrentQuestion = 1;
+      var mmAnswers = {};
+
+      var questionCopy = {
+        1: {
+          intense: 'You work long, intense days with little downtime.',
+          juggle: 'You juggle multiple roles and responsibilities.',
+          irregular: 'You work irregular hours or shifts.',
+          student: "You're in school or learning full-time.",
+        },
+        2: {
+          sharp: 'You feel sharp and focused most of the time.',
+          mixed: 'You have good days and bad days.',
+          struggle: 'You struggle to concentrate more often than not.',
+          fog: 'Brain fog is your default state.',
+        },
+        3: {
+          daily: 'You experience mental fatigue every single day.',
+          frequent: 'You experience mental fatigue 3–4 times per week.',
+          occasional: 'You experience mental fatigue once or twice a week.',
+          rare: "You rarely experience mental fatigue, but when it hits, it's bad.",
+        },
+        4: {
+          opportunities: "It's costing you opportunities and advancement.",
+          catchup: "You're constantly playing catch-up.",
+          notbest: "You get through the day, but you're not at your best.",
+          manageable: "It's manageable, but you know you could be operating much sharper.",
+        },
+      };
+
+      var progressFill = root.querySelector('[data-progress-fill]');
+      var currentQuestionEl = root.querySelector('[data-current-question]');
+      var quizCard = root.querySelector('[data-quiz-card]');
+      var progressContainer = root.querySelector('.mm-progress-container');
+
+      var results = root.querySelector('[data-results]');
+      var costAmount = root.querySelector('[data-cost-amount]');
+      var costDescription = root.querySelector('[data-cost-description]');
+      var p1 = root.querySelector('[data-profile-1]');
+      var p2 = root.querySelector('[data-profile-2]');
+      var p3 = root.querySelector('[data-profile-3]');
+      var p4 = root.querySelector('[data-profile-4]');
+
+      var methodology = root.querySelector('[data-methodology]');
+      var methodologyToggle = root.querySelector('[data-methodology-toggle]');
+      var timeline = root.querySelector('[data-timeline]');
+      var showTimelineBtn = root.querySelector('[data-show-timeline]');
+
+      function showQuestion(n) {
+        root.querySelectorAll('.mm-question').forEach(function (q) {
+          q.style.display = q.getAttribute('data-question') === String(n) ? 'block' : 'none';
+        });
+      }
+
+      function updateProgress() {
+        var pct = (mmCurrentQuestion / 5) * 100;
+        if (progressFill) progressFill.style.width = pct + '%';
+        if (currentQuestionEl) currentQuestionEl.textContent = mmCurrentQuestion;
+      }
+
+      function markSelected(qNum, clickedEl) {
+        var container = root.querySelector('.mm-question[data-question="' + qNum + '"]');
+        if (!container) return;
+        container.querySelectorAll('.mm-answer').forEach(function (a) {
+          a.classList.remove('mm-selected');
+        });
+        clickedEl.classList.add('mm-selected');
+      }
+
+      function goNext() {
+        mmCurrentQuestion += 1;
+        showQuestion(mmCurrentQuestion);
+        updateProgress();
+      }
+
+      function showResults() {
+        var workMult = mmAnswers[1].value;
+        var mentalMult = mmAnswers[2].value;
+        var freqMult = mmAnswers[3].value;
+        var impactMult = mmAnswers[4].value;
+        var income = mmAnswers[5].value;
+
+        var baseLoss = 2.1;
+        var totalMult = workMult * mentalMult * freqMult * impactMult;
+        var hoursLost = baseLoss * totalMult;
+
+        var amountText = '';
+        var descText = '';
+
+        if (income === 'student') {
+          var totalHours = Math.round(hoursLost * 260);
+          amountText = '~' + totalHours + ' hours';
+          descText =
+            'wasted per year fighting brain fog, rereading the same lines, and studying longer than you should have to.';
+        } else {
+          var hourlyRate = income / 2080;
+          var dailyCost = hourlyRate * hoursLost;
+          var annualCost = Math.round(dailyCost * 260 * 0.65);
+          amountText = '~$' + Number(annualCost).toLocaleString();
+          descText =
+            'lost per year in productivity, missed opportunities, and unrealized potential—even using conservative assumptions.';
+        }
+
+        costAmount.textContent = amountText;
+        costDescription.textContent = descText;
+
+        p1.textContent = questionCopy[1][mmAnswers[1].key];
+        p2.textContent = questionCopy[2][mmAnswers[2].key];
+        p3.textContent = questionCopy[3][mmAnswers[3].key];
+        p4.textContent = questionCopy[4][mmAnswers[4].key];
+
+        if (quizCard) quizCard.style.display = 'none';
+        if (progressContainer) progressContainer.style.display = 'none';
+
+        results.classList.add('mm-active');
+      }
+
+      // Delegated click handler
+      root.addEventListener('click', function (e) {
+        var ans = e.target.closest('[data-answer]');
+        if (ans && root.contains(ans)) {
+          var qNum = Number(ans.getAttribute('data-q'));
+          var key = ans.getAttribute('data-key');
+          var rawVal = ans.getAttribute('data-value');
+          var value = rawVal === 'student' ? 'student' : Number(rawVal);
+
+          mmAnswers[qNum] = { key: key, value: value };
+          markSelected(qNum, ans);
+
+          window.setTimeout(function () {
+            if (qNum < 5) goNext();
+            else showResults();
+          }, 220);
+
+          return;
+        }
+
+        if (e.target.closest('[data-methodology-toggle]')) {
+          if (methodology) methodology.classList.toggle('mm-open');
+          return;
+        }
+
+        if (e.target.closest('[data-show-timeline]')) {
+          if (timeline) {
+            timeline.classList.add('mm-active');
+            timeline.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+          return;
+        }
+      });
+
+      // Init
+      showQuestion(1);
+      updateProgress();
+    })();
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "MindMix — Assessment Quiz",
+  "tag": "section",
+  "class": "section-mm-assessment-quiz",
+  "settings": [],
+  "presets": [
+    {
+      "name": "MindMix — Assessment Quiz"
+    }
+  ]
+}
+{% endschema %}
