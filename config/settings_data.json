@@ -1134,6 +1134,13 @@
       "compare-toggle": {
         "type": "compare-toggle",
         "blocks": {
+          "with_row_Ne4kxy": {
+            "type": "with_row",
+            "settings": {
+              "time": "6:00 PM",
+              "text": "Accomplished. Energized. The sharp version of yourself showed up. And he is here to stay."
+            }
+          },
           "with_row_QPGzED": {
             "type": "with_row",
             "settings": {
@@ -1199,6 +1206,7 @@
           }
         },
         "block_order": [
+          "with_row_Ne4kxy",
           "with_row_QPGzED",
           "with_row_6JHnU4",
           "with_row_CVYw4E",
