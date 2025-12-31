@@ -4,11 +4,14 @@
   id='mm-how-it-works-{{ section.id }}'
   class='w-full py-[60px] px-5 text-center text-white bg-transparent font-sans'
 >
-  {% if section.settings.title != blank %}
-    <h2 class='mm-howworks-title mb-10 uppercase tracking-[0.08em]'>
-      {{ section.settings.title }}
-    </h2>
-  {% endif %}
+  <!--
+    {% if section.settings.title != blank %}
+      <h2 class='mm-howworks-title mb-10 uppercase tracking-[0.08em]'>
+        {{ section.settings.title }}
+      </h2>
+    {% endif %}
+  -->
+  {% render 'section-title' %}
 
   <div class='flex flex-wrap justify-center gap-[60px] max-w-[960px] mx-auto md:gap-[60px] gap-y-10'>
     {% for block in section.blocks %}
