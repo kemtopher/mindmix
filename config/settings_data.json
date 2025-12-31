@@ -1155,6 +1155,13 @@
               "text": "Still focused. No crash. No jitters. Just sustained, calm energy."
             }
           },
+          "with_row_jrxHwe": {
+            "type": "with_row",
+            "settings": {
+              "time": "3:00 PM",
+              "text": "The crash hour is gone. You are hitting your second wind. Peak performance sustained."
+            }
+          },
           "without_row_ek9x94": {
             "type": "without_row",
             "settings": {
@@ -1195,6 +1202,7 @@
           "with_row_QPGzED",
           "with_row_6JHnU4",
           "with_row_CVYw4E",
+          "with_row_jrxHwe",
           "without_row_ek9x94",
           "without_row_eYDdzk",
           "without_row_MyGxrp",
