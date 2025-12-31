@@ -960,6 +960,34 @@
       },
       "how-to-use": {
         "type": "how-to-use",
+        "blocks": {
+          "use_case_BGm99r": {
+            "type": "use_case",
+            "settings": {
+              "icon": "💼",
+              "card_title": "Long Days & High Stakes",
+              "modal_title": "Long Days & High Stakes",
+              "modal_subtitle": "For anyone in demanding roles",
+              "pains": "Mental fatigue hits hard by mid afternoon, making critical decisions feel impossible\nYou second guess yourself when you cannot afford to, because your brain is running on fumes",
+              "solutions": "Rhodiola keeps you sharp under pressure, preventing stress induced cognitive decline\nLions Mane builds mental resilience over time, so high stakes situations become easier to handle\nB12 plus Green Tea provide sustained energy without the crash, keeping you clear headed all day"
+            }
+          },
+          "use_case_rGhB8J": {
+            "type": "use_case",
+            "settings": {
+              "icon": "🚀",
+              "card_title": "Building Something",
+              "modal_title": "Building Something",
+              "modal_subtitle": "For entrepreneurs, creators, and founders",
+              "pains": "You wear every hat, and by noon your brain is fried from context switching\nDecision fatigue is real, you make hundreds of calls a day and each one gets harder",
+              "solutions": "L Theanine plus Green Tea create sustained focus, so you can deep work for hours without burning out\nRhodiola protects against burnout by regulating stress hormones during intense work periods\nLions Mane enhances learning and adaptation, helping you level up faster as you build"
+            }
+          }
+        },
+        "block_order": [
+          "use_case_BGm99r",
+          "use_case_rGhB8J"
+        ],
         "settings": {
           "title": "How To Use MindMix"
         }
