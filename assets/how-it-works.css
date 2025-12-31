@@ -1,0 +1,74 @@
+/* HOW IT WORKS SECTION */
+
+/* #mm-how-it-works-{{ section.id }} * {
+  box-sizing: border-box;
+} */
+
+/* Title gradient text */
+.mm-howworks-title {
+  font-family: Oswald, system-ui, sans-serif;
+  font-size: 40px;
+  letter-spacing: 0.08em;
+  margin: 0;
+  background: linear-gradient(180deg, #ffe66b 0%, #ffd23f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Circle with animated glow */
+.mm-howworks-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle at 30% 20%,
+    #ffd23f 0%,
+    #ff9a3b 40%,
+    #00ff94 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 0 20px rgba(0, 255, 148, 0.45),
+    0 0 60px rgba(0, 255, 148, 0.35);
+  animation: mm-howworks-glow 3.5s ease-in-out infinite alternate;
+}
+
+.mm-howworks-number {
+  font-family: Oswald, system-ui, sans-serif;
+  font-size: 60px;
+  font-weight: 700;
+  color: #000;
+}
+
+@keyframes mm-howworks-glow {
+  0% {
+    transform: scale(1);
+    box-shadow:
+      0 0 16px rgba(0, 255, 148, 0.35),
+      0 0 40px rgba(0, 255, 148, 0.25);
+  }
+  100% {
+    transform: scale(1.05);
+    box-shadow:
+      0 0 28px rgba(0, 255, 148, 0.6),
+      0 0 80px rgba(0, 255, 148, 0.45);
+  }
+}
+
+@media (max-width: 768px) {
+  .mm-howworks-title {
+    font-size: 32px;
+  }
+
+  .mm-howworks-circle {
+    width: 120px;
+    height: 120px;
+  }
+
+  .mm-howworks-number {
+    font-size: 48px;
+  }
+}

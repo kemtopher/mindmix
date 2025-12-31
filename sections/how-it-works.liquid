@@ -1,0 +1,117 @@
+{{ 'how-it-works.css' | asset_url | stylesheet_tag }}
+
+<section
+  id='mm-how-it-works-{{ section.id }}'
+  class='w-full py-[60px] px-5 text-center text-white bg-transparent font-sans'
+>
+  {% if section.settings.title != blank %}
+    <h2 class='mm-howworks-title mb-10 uppercase tracking-[0.08em]'>
+      {{ section.settings.title }}
+    </h2>
+  {% endif %}
+
+  <div class='flex flex-wrap justify-center gap-[60px] max-w-[960px] mx-auto md:gap-[60px] gap-y-10'>
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'step' %}
+          <div class='max-w-[260px]' {{ block.shopify_attributes }}>
+            <div class='mm-howworks-circle mb-[18px] mx-auto'>
+              <span class='mm-howworks-number'>
+                {% if block.settings.number != blank %}
+                  {{ block.settings.number }}
+                {% else %}
+                  {{ forloop.index }}
+                {% endif %}
+              </span>
+            </div>
+
+            {% if block.settings.label != blank %}
+              <div class='font-[Oswald] text-[22px] font-bold mb-[10px]'>
+                {{ block.settings.label }}
+              </div>
+            {% endif %}
+
+            {% if block.settings.text != blank %}
+              <p class='text-[14px] leading-[1.7] text-white/80 m-0'>
+                {{ block.settings.text }}
+              </p>
+            {% endif %}
+          </div>
+      {% endcase %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MindMix — How it works",
+  "tag": "section",
+  "class": "section-mm-how-it-works",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "HOW IT WORKS"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "1"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Mix"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Tear open a stick pack and mix with 8-12 oz of water. Stir until dissolved."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "MindMix — How it works",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "number": "1",
+            "label": "Mix",
+            "text": "Tear open a stick pack and mix with 8-12 oz of water. Stir until dissolved."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "number": "2",
+            "label": "Wait",
+            "text": "In 30 minutes you will feel the fog lift. Your brain comes online. Sharp and clear."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "number": "3",
+            "label": "Perform",
+            "text": "Enjoy 6+ hours of sustained focus. No crash. No jitters. Just peak performance."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

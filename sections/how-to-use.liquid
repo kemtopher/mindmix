@@ -1,0 +1,289 @@
+{{ 'how-to-use.css' | asset_url | stylesheet_tag }}
+
+<section
+  id='mm-how-{{ section.id }}'
+  class='w-full py-[60px] px-5 text-white font-sans bg-transparent'
+  data-mm-how
+>
+  <div class='max-w-[1200px] mx-auto'>
+    {% if section.settings.title != blank %}
+      <h2 class='mm-how-section-title text-center mb-[50px]'>
+        {{ section.settings.title }}
+      </h2>
+    {% endif %}
+
+    <div class='mm-how-grid'>
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'use_case' %}
+            <button
+              type='button'
+              class='mm-how-card'
+              data-mm-how-open
+              data-case-id='{{ block.id }}'
+              {{ block.shopify_attributes }}
+            >
+              <div class='mm-how-icon' aria-hidden='true'>{{ block.settings.icon }}</div>
+              <div class='mm-how-title'>{{ block.settings.card_title }}</div>
+
+              {%- comment -%}
+                Store modal content in data attributes to keep JS simple + avoid JSON escaping issues.
+              {%- endcomment -%}
+              <span
+                class='hidden'
+                data-mm-how-icon='{{ block.settings.icon | escape }}'
+                data-mm-how-title='{{ block.settings.modal_title | escape }}'
+                data-mm-how-subtitle='{{ block.settings.modal_subtitle | escape }}'
+                data-mm-how-pains='{{ block.settings.pains | escape }}'
+                data-mm-how-solutions='{{ block.settings.solutions | escape }}'
+              ></span>
+            </button>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+
+  {%- comment -%} Modal (scoped) {%- endcomment -%}
+  <div class='mm-how-modal-overlay' data-mm-how-overlay aria-hidden='true'>
+    <div class='mm-how-modal-content' role='dialog' aria-modal='true' aria-label='How to use MindMix details'>
+      <button type='button' class='mm-how-modal-close' data-mm-how-close aria-label='Close modal'>×</button>
+
+      <div class='mm-how-modal-header'>
+        <div class='mm-how-modal-icon' data-mm-how-modal-icon aria-hidden='true'></div>
+        <h3 class='mm-how-modal-title' data-mm-how-modal-title></h3>
+        <p class='mm-how-modal-subtitle' data-mm-how-modal-subtitle></p>
+      </div>
+
+      <div class='mm-how-modal-body'>
+        <div class='mm-how-pain'>
+          <div class='mm-how-section-label'>The Challenge</div>
+          <div data-mm-how-pain-content></div>
+        </div>
+
+        <div class='mm-how-solutions'>
+          <div class='mm-how-section-label mm-how-green'>How MindMix Helps</div>
+          <div data-mm-how-solutions-content></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById('mm-how-{{ section.id }}');
+      if (!root) return;
+
+      var overlay = root.querySelector('[data-mm-how-overlay]');
+      var modal = root.querySelector('.mm-how-modal-content');
+
+      var elIcon = root.querySelector('[data-mm-how-modal-icon]');
+      var elTitle = root.querySelector('[data-mm-how-modal-title]');
+      var elSubtitle = root.querySelector('[data-mm-how-modal-subtitle]');
+      var elPain = root.querySelector('[data-mm-how-pain-content]');
+      var elSolutions = root.querySelector('[data-mm-how-solutions-content]');
+
+      function splitLines(text) {
+        if (!text) return [];
+        // Split on newlines, trim, remove empties
+        return text
+          .split(/\r?\n/)
+          .map(function (s) {
+            return s.trim();
+          })
+          .filter(Boolean);
+      }
+
+      function openModal(fromButton) {
+        var payload = fromButton.querySelector('span.hidden');
+        if (!payload) return;
+
+        var icon = payload.getAttribute('data-mm-how-icon') || '';
+        var title = payload.getAttribute('data-mm-how-title') || '';
+        var subtitle = payload.getAttribute('data-mm-how-subtitle') || '';
+        var painsRaw = payload.getAttribute('data-mm-how-pains') || '';
+        var solutionsRaw = payload.getAttribute('data-mm-how-solutions') || '';
+
+        elIcon.textContent = icon;
+        elTitle.textContent = title;
+        elSubtitle.textContent = subtitle;
+
+        var pains = splitLines(painsRaw);
+        var solutions = splitLines(solutionsRaw);
+
+        elPain.innerHTML = pains
+          .map(function (p) {
+            return '<div class="mm-how-pain-item">' + escapeHtml(p) + '</div>';
+          })
+          .join('');
+
+        elSolutions.innerHTML = solutions
+          .map(function (s) {
+            return '<div class="mm-how-solution-item">' + escapeHtml(s) + '</div>';
+          })
+          .join('');
+
+        overlay.classList.add('mm-how-active');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+
+        // focus close button for accessibility
+        var closeBtn = root.querySelector('[data-mm-how-close]');
+        if (closeBtn) closeBtn.focus();
+      }
+
+      function closeModal() {
+        overlay.classList.remove('mm-how-active');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      root.addEventListener('click', function (e) {
+        var openBtn = e.target.closest('[data-mm-how-open]');
+        if (openBtn && root.contains(openBtn)) {
+          e.preventDefault();
+          openModal(openBtn);
+          return;
+        }
+
+        if (e.target.closest('[data-mm-how-close]')) {
+          e.preventDefault();
+          closeModal();
+          return;
+        }
+
+        // click outside modal content closes
+        if (e.target === overlay && !e.target.closest('.mm-how-modal-content')) {
+          closeModal();
+          return;
+        }
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('mm-how-active')) {
+          closeModal();
+        }
+      });
+    })();
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "How to use",
+  "tag": "section",
+  "class": "section-mm-how-to-use",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "How To Use MindMix"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "use_case",
+      "name": "Use case",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji)",
+          "default": "💼"
+        },
+        {
+          "type": "text",
+          "id": "card_title",
+          "label": "Card title",
+          "default": "Long Days & High Stakes"
+        },
+        {
+          "type": "text",
+          "id": "modal_title",
+          "label": "Modal title",
+          "default": "Long Days & High Stakes"
+        },
+        {
+          "type": "text",
+          "id": "modal_subtitle",
+          "label": "Modal subtitle",
+          "default": "For anyone in demanding roles"
+        },
+        {
+          "type": "textarea",
+          "id": "pains",
+          "label": "The Challenge (one item per line)",
+          "default": "Mental fatigue hits hard by mid afternoon, making critical decisions feel impossible\nYou second guess yourself when you cannot afford to, because your brain is running on fumes"
+        },
+        {
+          "type": "textarea",
+          "id": "solutions",
+          "label": "How MindMix Helps (one item per line)",
+          "default": "Rhodiola keeps you sharp under pressure, preventing stress induced cognitive decline\nLions Mane builds mental resilience over time, so high stakes situations become easier to handle\nB12 plus Green Tea provide sustained energy without the crash, keeping you clear headed all day"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "MindMix — How to use (Modal Grid)",
+      "blocks": [
+        {
+          "type": "use_case",
+          "settings": {
+            "icon": "💼",
+            "card_title": "Long Days & High Stakes",
+            "modal_title": "Long Days & High Stakes",
+            "modal_subtitle": "For anyone in demanding roles",
+            "pains": "Mental fatigue hits hard by mid afternoon, making critical decisions feel impossible\nYou second guess yourself when you cannot afford to, because your brain is running on fumes",
+            "solutions": "Rhodiola keeps you sharp under pressure, preventing stress induced cognitive decline\nLions Mane builds mental resilience over time, so high stakes situations become easier to handle\nB12 plus Green Tea provide sustained energy without the crash, keeping you clear headed all day"
+          }
+        },
+        {
+          "type": "use_case",
+          "settings": {
+            "icon": "🚀",
+            "card_title": "Building Something",
+            "modal_title": "Building Something",
+            "modal_subtitle": "For entrepreneurs, creators, and founders",
+            "pains": "You wear every hat, and by noon your brain is fried from context switching\nDecision fatigue is real, you make hundreds of calls a day and each one gets harder",
+            "solutions": "L Theanine plus Green Tea create sustained focus, so you can deep work for hours without burning out\nRhodiola protects against burnout by regulating stress hormones during intense work periods\nLions Mane enhances learning and adaptation, helping you level up faster as you build"
+          }
+        },
+        {
+          "type": "use_case",
+          "settings": {
+            "icon": "🎮",
+            "card_title": "Competitive Edge",
+            "modal_title": "Competitive Edge",
+            "modal_subtitle": "For gamers, athletes, and high performers",
+            "pains": "Your reaction time slows when it matters most, and you know you are leaving performance on the table\nMental stamina fades during long sessions, turning wins into losses",
+            "solutions": "L Theanine sharpens focus without jitters, giving you calm precision under pressure\nGreen Tea enhances processing speed and reaction time for split second decisions\nRhodiola sustains mental endurance, so your performance does not drop in the final rounds"
+          }
+        },
+        {
+          "type": "use_case",
+          "settings": {
+            "icon": "🎨",
+            "card_title": "Creative Work",
+            "modal_title": "Creative Work",
+            "modal_subtitle": "For writers, designers, and artists",
+            "pains": "Blank page anxiety is paralyzing, you stare at the screen and nothing comes\nYou hit creative blocks when deadlines loom, and forcing it makes everything worse",
+            "solutions": "L Theanine plus Green Tea unlock flow state, where ideas come effortlessly and distractions fade\nLions Mane enhances creative thinking by building new neural pathways\nRhodiola reduces performance anxiety, letting you create without the mental noise"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
