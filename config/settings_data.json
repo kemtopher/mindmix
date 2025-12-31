@@ -1026,6 +1026,17 @@
               "pains": "Decision fatigue clouds your judgment when the stakes are highest\nMental fog makes you hesitate, and hesitation costs you opportunities",
               "solutions": "Rhodiola keeps cortisol in check, preventing stress from sabotaging your decisions\nL Theanine plus Green Tea provide calm clarity, so you think clearly under pressure\nB12 powers cognitive function, ensuring your brain has the fuel it needs for complex analysis"
             }
+          },
+          "use_case_fc7e9T": {
+            "type": "use_case",
+            "settings": {
+              "icon": "🏃",
+              "card_title": "Physical Performance",
+              "modal_title": "Physical Performance",
+              "modal_subtitle": "For athletes and fitness enthusiasts",
+              "pains": "Your mind gives up before your body does, cutting workouts short\nYou lose focus on form and technique when fatigue sets in, risking injury",
+              "solutions": "Rhodiola enhances physical endurance by reducing perceived exertion\nL Theanine improves mind muscle connection, keeping you locked in on form\nB12 supports energy production at the cellular level, powering through tough sessions"
+            }
           }
         },
         "block_order": [
@@ -1034,7 +1045,8 @@
           "use_case_t8m3JP",
           "use_case_qMLetb",
           "use_case_ctGLLC",
-          "use_case_BLLhPa"
+          "use_case_BLLhPa",
+          "use_case_fc7e9T"
         ],
         "settings": {
           "title": "How To Use MindMix"
