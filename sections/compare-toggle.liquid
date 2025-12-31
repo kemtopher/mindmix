@@ -1,0 +1,427 @@
+{% comment %}
+  Section: MindMix Compare Toggle (Content editable only)
+  - Editable: labels, titles, and timeline rows (via blocks)
+  - Not editable: CSS (kept static)
+{% endcomment %}
+
+<section
+  class='mmc3-wrap mmc3-mode-without'
+  aria-label='{{ section.settings.aria_label | escape }}'
+  data-mmc3
+  id='mmc3-{{ section.id }}'
+>
+  <!-- Toggle -->
+  <div
+    class='mmc3-toggle mmc3-state-without'
+    role='switch'
+    aria-checked='false'
+    tabindex='0'
+    aria-label='{{ section.settings.toggle_aria_label | escape }}'
+  >
+    <span class='mmc3-label mmc3-label-left'>{{ section.settings.label_without }}</span>
+    <div class='mmc3-knob' aria-hidden='true'></div>
+    <span class='mmc3-label mmc3-label-right'>{{ section.settings.label_with }}</span>
+  </div>
+
+  <!-- Cards -->
+  <div class='mmc3-cards'>
+    <!-- Without MindMix -->
+    <article class='mmc3-card mmc3-card-without mmc3-card-active' aria-live='polite'>
+      <h3 class='mmc3-title'>{{ section.settings.title_without }}</h3>
+
+      {% assign without_rows = section.blocks | where: 'type', 'without_row' %}
+      {% for block in without_rows %}
+        <div class='mmc3-row' {{ block.shopify_attributes }}>
+          <div class='mmc3-time'>{{ block.settings.time }}</div>
+          <div class='mmc3-text'>{{ block.settings.text }}</div>
+        </div>
+      {% endfor %}
+    </article>
+
+    <!-- With MindMix -->
+    <article class='mmc3-card mmc3-card-with'>
+      <h3 class='mmc3-title'>{{ section.settings.title_with }}</h3>
+
+      {% assign with_rows = section.blocks | where: 'type', 'with_row' %}
+      {% for block in with_rows %}
+        <div class='mmc3-row' {{ block.shopify_attributes }}>
+          <div class='mmc3-time'>{{ block.settings.time }}</div>
+          <div class='mmc3-text'>{{ block.settings.text }}</div>
+        </div>
+      {% endfor %}
+    </article>
+  </div>
+</section>
+
+<style>
+  /* Scoped to this section instance only (static CSS, not editable) */
+  #mmc3-{{ section.id }}.mmc3-wrap {
+    width: 100%;
+    padding: 32px 16px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    background: transparent;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  }
+
+  #mmc3-{{ section.id }}.mmc3-wrap * { box-sizing: border-box; }
+
+  /* TOGGLE */
+  #mmc3-{{ section.id }} .mmc3-toggle {
+    width: min(420px, 100%);
+    height: 56px;
+    border-radius: 999px;
+    padding: 8px 18px;
+    background: #050505;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  #mmc3-{{ section.id }} .mmc3-label {
+    flex: 1;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #606060;
+    padding: 0 6px;
+    z-index: 1;
+  }
+
+  #mmc3-{{ section.id }} .mmc3-label-left { text-align: left; }
+  #mmc3-{{ section.id }} .mmc3-label-right { text-align: right; }
+
+  #mmc3-{{ section.id }} .mmc3-state-without {
+    border: 1.5px solid #ff9a3c;
+    box-shadow: 0 0 22px rgba(255, 154, 60, 0.45);
+  }
+
+  #mmc3-{{ section.id }} .mmc3-state-with {
+    border: 1.5px solid #00ff94;
+    box-shadow: 0 0 22px rgba(0, 255, 148, 0.45);
+  }
+
+  #mmc3-{{ section.id }} .mmc3-state-without .mmc3-label-left { color: #ffffff; }
+  #mmc3-{{ section.id }} .mmc3-state-with .mmc3-label-right { color: #ffffff; }
+
+  /* center knob */
+  #mmc3-{{ section.id }} .mmc3-knob {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 52px;
+    height: 28px;
+    border-radius: 999px;
+    transform: translate(-50%, -50%);
+    background: #303030;
+    box-shadow: inset 0 0 4px rgba(0,0,0,0.6);
+    transition: background 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  #mmc3-{{ section.id }} .mmc3-knob::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.45);
+    transition: transform 0.25s ease;
+  }
+
+  #mmc3-{{ section.id }} .mmc3-state-with .mmc3-knob {
+    background: #00c96f;
+    box-shadow: 0 0 10px rgba(0, 255, 148, 0.8), 0 0 20px rgba(0, 255, 148, 0.5);
+  }
+
+  #mmc3-{{ section.id }} .mmc3-state-with .mmc3-knob::after { transform: translateX(24px); }
+
+  /* CARDS */
+  #mmc3-{{ section.id }} .mmc3-cards { width: min(820px, 100%); }
+
+  #mmc3-{{ section.id }} .mmc3-card {
+    border-radius: 26px;
+    padding: 28px 40px;
+    display: none;
+    background: #050505;
+  }
+
+  #mmc3-{{ section.id }} .mmc3-card-active { display: block; }
+
+  #mmc3-{{ section.id }} .mmc3-title {
+    text-align: center;
+    margin: 0 0 22px;
+    font-size: 22px;
+    font-weight: 800;
+    color: #ffffff;
+  }
+
+  #mmc3-{{ section.id }} .mmc3-row {
+    display: flex;
+    gap: 28px;
+    margin-bottom: 14px;
+  }
+
+  #mmc3-{{ section.id }} .mmc3-time {
+    width: 110px;
+    min-width: 110px;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+  }
+
+  #mmc3-{{ section.id }} .mmc3-text {
+    font-size: 15px;
+    line-height: 1.75;
+    color: #fbe3cf;
+  }
+
+  /* card colors per mode */
+  #mmc3-{{ section.id }}.mmc3-mode-without .mmc3-card-without {
+    border: 2px solid #ff9a3c;
+    box-shadow: 0 0 26px rgba(0, 0, 0, 0.85), 0 0 24px rgba(255, 154, 60, 0.45);
+    background: radial-gradient(circle at top center, rgba(255, 154, 60, 0.12), transparent 60%), #050505;
+  }
+
+  #mmc3-{{ section.id }}.mmc3-mode-without .mmc3-card-without .mmc3-time { color: #ff9a3c; }
+
+  #mmc3-{{ section.id }}.mmc3-mode-with .mmc3-card-with {
+    border: 2px solid #00ff94;
+    box-shadow: 0 0 26px rgba(0, 0, 0, 0.85), 0 0 26px rgba(0, 255, 148, 0.5);
+    background: radial-gradient(circle at top center, rgba(0, 255, 148, 0.12), transparent 60%), #050505;
+  }
+
+  #mmc3-{{ section.id }}.mmc3-mode-with .mmc3-card-with .mmc3-time { color: #00ff94; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    #mmc3-{{ section.id }}.mmc3-wrap { padding-inline: 12px; }
+    #mmc3-{{ section.id }} .mmc3-card { padding: 22px 18px; }
+    #mmc3-{{ section.id }} .mmc3-row { flex-direction: column; gap: 4px; }
+    #mmc3-{{ section.id }} .mmc3-time { width: auto; min-width: 0; }
+    #mmc3-{{ section.id }} .mmc3-title { font-size: 20px; }
+    #mmc3-{{ section.id }} .mmc3-text { font-size: 14px; }
+  }
+
+  @media (max-width: 480px) {
+    #mmc3-{{ section.id }} .mmc3-toggle { padding: 8px 12px; }
+    #mmc3-{{ section.id }} .mmc3-label { font-size: 11px; }
+    #mmc3-{{ section.id }} .mmc3-knob { width: 48px; height: 26px; }
+    #mmc3-{{ section.id }} .mmc3-knob::after { width: 20px; height: 20px; top: 3px; left: 3px; }
+    #mmc3-{{ section.id }} .mmc3-state-with .mmc3-knob::after { transform: translateX(22px); }
+  }
+</style>
+
+<script>
+  (function () {
+    var root = document.querySelector('#mmc3-{{ section.id }}[data-mmc3]');
+    if (!root) return;
+
+    var toggle = root.querySelector('.mmc3-toggle');
+    var cardWithout = root.querySelector('.mmc3-card-without');
+    var cardWith = root.querySelector('.mmc3-card-with');
+
+    function setMode(withMind) {
+      if (!toggle || !cardWithout || !cardWith) return;
+
+      if (withMind) {
+        root.classList.add('mmc3-mode-with');
+        root.classList.remove('mmc3-mode-without');
+        toggle.classList.add('mmc3-state-with');
+        toggle.classList.remove('mmc3-state-without');
+        cardWithout.classList.remove('mmc3-card-active');
+        cardWith.classList.add('mmc3-card-active');
+        toggle.setAttribute('aria-checked', 'true');
+      } else {
+        root.classList.add('mmc3-mode-without');
+        root.classList.remove('mmc3-mode-with');
+        toggle.classList.add('mmc3-state-without');
+        toggle.classList.remove('mmc3-state-with');
+        cardWith.classList.remove('mmc3-card-active');
+        cardWithout.classList.add('mmc3-card-active');
+        toggle.setAttribute('aria-checked', 'false');
+      }
+    }
+
+    function handleToggle() {
+      var isWith = root.classList.contains('mmc3-mode-with');
+      setMode(!isWith);
+    }
+
+    toggle.addEventListener('click', handleToggle, { passive: true });
+    toggle.addEventListener('keydown', function (e) {
+      if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        handleToggle();
+      }
+    });
+    const defaultMode = true;
+    setMode(defaultMode);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "MM Compare Toggle",
+  "settings": [
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "Section aria-label",
+      "default": "Compare a day with and without MindMix"
+    },
+    {
+      "type": "text",
+      "id": "toggle_aria_label",
+      "label": "Toggle aria-label",
+      "default": "Toggle between without and with MindMix"
+    },
+    {
+      "type": "text",
+      "id": "label_without",
+      "label": "Toggle left label",
+      "default": "WITHOUT MindMix"
+    },
+    {
+      "type": "text",
+      "id": "label_with",
+      "label": "Toggle right label",
+      "default": "WITH MindMix"
+    },
+    {
+      "type": "text",
+      "id": "title_without",
+      "label": "Without card title",
+      "default": "A Day in Brain Fog"
+    },
+    {
+      "type": "text",
+      "id": "title_with",
+      "label": "With card title",
+      "default": "A Day With MindMix"
+    },
+    {
+      "type": "select",
+      "id": "default_mode",
+      "label": "Default mode",
+      "default": "without",
+      "options": [
+        { "value": "without", "label": "Without" },
+        { "value": "with", "label": "With" }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "without_row",
+      "name": "Without row",
+      "settings": [
+        { "type": "text", "id": "time", "label": "Time", "default": "6:30 AM" },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Alarm goes off. Hit snooze 3 times. Wake up groggy, already behind."
+        }
+      ]
+    },
+    {
+      "type": "with_row",
+      "name": "With row",
+      "settings": [
+        { "type": "text", "id": "time", "label": "Time", "default": "6:00 AM" },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Wake up sharp. No snooze. Mix MindMix. The day is yours."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MM Compare Toggle",
+      "blocks": [
+        {
+          "type": "without_row",
+          "settings": {
+            "time": "6:30 AM",
+            "text": "Alarm goes off. Hit snooze 3 times. Wake up groggy, already behind."
+          }
+        },
+        {
+          "type": "without_row",
+          "settings": {
+            "time": "9:00 AM",
+            "text": "Staring at your screen. The words blur together. You have read the same sentence 4 times."
+          }
+        },
+        {
+          "type": "without_row",
+          "settings": {
+            "time": "11:00 AM",
+            "text": "Third coffee of the day. Heart racing. Mind still foggy. The jitters are real."
+          }
+        },
+        {
+          "type": "without_row",
+          "settings": {
+            "time": "2:00 PM",
+            "text": "The crash hits. Brain completely fried. You are just going through the motions now."
+          }
+        },
+        {
+          "type": "without_row",
+          "settings": {
+            "time": "5:00 PM",
+            "text": "Another day wasted. You know you are capable of more. But the fog won again."
+          }
+        },
+
+        {
+          "type": "with_row",
+          "settings": { "time": "6:00 AM", "text": "Wake up sharp. No snooze. Mix MindMix. The day is yours." }
+        },
+        {
+          "type": "with_row",
+          "settings": {
+            "time": "8:30 AM",
+            "text": "Deep work mode activated. Ideas flowing. You are crushing it. This is what clarity feels like."
+          }
+        },
+        {
+          "type": "with_row",
+          "settings": {
+            "time": "12:00 PM",
+            "text": "Still focused. No crash. No jitters. Just sustained, calm energy."
+          }
+        },
+        {
+          "type": "with_row",
+          "settings": {
+            "time": "3:00 PM",
+            "text": "The crash hour is gone. You are hitting your second wind. Peak performance sustained."
+          }
+        },
+        {
+          "type": "with_row",
+          "settings": {
+            "time": "6:00 PM",
+            "text": "Accomplished. Energized. The sharp version of yourself showed up. And he is here to stay."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
