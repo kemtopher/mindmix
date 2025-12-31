@@ -988,10 +988,10 @@
           "card_zK8JfD": {
             "type": "card",
             "settings": {
-              "number": "30",
-              "label": "Minutes",
-              "copy": "Feel the fog lift. Your brain comes online. Sharp, clear, ready.",
-              "is_guarantee": false
+              "number": "90",
+              "label": "Days",
+              "copy": "Try it risk-free. If it doesn’t work, we refund every penny. No questions asked.",
+              "is_guarantee": true
             }
           }
         },
