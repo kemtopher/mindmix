@@ -1048,6 +1048,17 @@
               "pains": "Sleep deprivation leaves you in a constant fog, making simple tasks feel overwhelming\nYou lose patience when you need it most, and the guilt compounds the stress",
               "solutions": "Rhodiola combats fatigue and helps you stay calm under the chaos of daily life\nB12 fights brain fog from sleep deprivation, restoring mental clarity\nL Theanine promotes calm presence, helping you stay patient and engaged with your family"
             }
+          },
+          "use_case_iaMLXR": {
+            "type": "use_case",
+            "settings": {
+              "icon": "💻",
+              "card_title": "Focus From Home",
+              "modal_title": "Focus From Home",
+              "modal_subtitle": "For remote workers and freelancers",
+              "pains": "Home distractions derail your focus every few minutes, turning short tasks into all day struggles\nVideo call fatigue is real, back to back calls leave you mentally drained by lunch",
+              "solutions": "L Theanine plus Green Tea create deep focus, making distractions fade into the background\nRhodiola prevents mental fatigue from stacked meetings and context switches\nLions Mane supports sustained cognitive performance throughout long work from home days"
+            }
           }
         },
         "block_order": [
@@ -1058,7 +1069,8 @@
           "use_case_ctGLLC",
           "use_case_BLLhPa",
           "use_case_fc7e9T",
-          "use_case_7b7PxW"
+          "use_case_7b7PxW",
+          "use_case_iaMLXR"
         ],
         "settings": {
           "title": "How To Use MindMix"
