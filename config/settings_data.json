@@ -966,6 +966,40 @@
       },
       "the-solution": {
         "type": "the-solution",
+        "blocks": {
+          "card_W68EU8": {
+            "type": "card",
+            "settings": {
+              "number": "30",
+              "label": "Minutes",
+              "copy": "Feel the fog lift. Your brain comes online. Sharp, clear, ready.",
+              "is_guarantee": false
+            }
+          },
+          "card_hxRUry": {
+            "type": "card",
+            "settings": {
+              "number": "6",
+              "label": "Hours",
+              "copy": "Sustained focus without the crash. No jitters. Just clean, calm energy.",
+              "is_guarantee": false
+            }
+          },
+          "card_zK8JfD": {
+            "type": "card",
+            "settings": {
+              "number": "30",
+              "label": "Minutes",
+              "copy": "Feel the fog lift. Your brain comes online. Sharp, clear, ready.",
+              "is_guarantee": false
+            }
+          }
+        },
+        "block_order": [
+          "card_W68EU8",
+          "card_hxRUry",
+          "card_zK8JfD"
+        ],
         "settings": {
           "heading": "THE SOLUTION"
         }
