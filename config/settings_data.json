@@ -955,7 +955,8 @@
           "step_HTJqAe"
         ],
         "settings": {
-          "title": "HOW IT WORKS"
+          "section_title": ",HOW IT WORKS",
+          "section_subtitle": ""
         }
       },
       "how-to-use": {
@@ -1085,7 +1086,8 @@
           "use_case_7yHGfF"
         ],
         "settings": {
-          "title": "How To Use MindMix"
+          "section_title": ",HOW TO USE MINDMIX",
+          "section_subtitle": ""
         }
       },
       "the-solution": {
@@ -1125,7 +1127,8 @@
           "card_zK8JfD"
         ],
         "settings": {
-          "heading": "THE SOLUTION"
+          "section_title": ",THE SOLUTION",
+          "section_subtitle": ""
         }
       }
     },
