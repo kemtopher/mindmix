@@ -1133,6 +1133,26 @@
       },
       "compare-toggle": {
         "type": "compare-toggle",
+        "blocks": {
+          "without_row_MyGxrp": {
+            "type": "without_row",
+            "settings": {
+              "time": "9:00 AM",
+              "text": "Staring at your screen. The words blur together. You have read the same sentence 4 times."
+            }
+          },
+          "without_row_eYDdzk": {
+            "type": "without_row",
+            "settings": {
+              "time": "6:30 AM",
+              "text": "Alarm goes off. Hit snooze 3 times. Wake up groggy, already behind."
+            }
+          }
+        },
+        "block_order": [
+          "without_row_MyGxrp",
+          "without_row_eYDdzk"
+        ],
         "settings": {
           "section_title": "YOUR DAY: ,BEFORE & AFTER",
           "section_subtitle": "",
