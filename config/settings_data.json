@@ -1134,11 +1134,11 @@
       "compare-toggle": {
         "type": "compare-toggle",
         "blocks": {
-          "without_row_MyGxrp": {
+          "without_row_ek9x94": {
             "type": "without_row",
             "settings": {
-              "time": "9:00 AM",
-              "text": "Staring at your screen. The words blur together. You have read the same sentence 4 times."
+              "time": "11:00 AM",
+              "text": "Third coffee of the day. Heart racing. Mind still foggy. The jitters are real."
             }
           },
           "without_row_eYDdzk": {
@@ -1147,11 +1147,27 @@
               "time": "6:30 AM",
               "text": "Alarm goes off. Hit snooze 3 times. Wake up groggy, already behind."
             }
+          },
+          "without_row_MyGxrp": {
+            "type": "without_row",
+            "settings": {
+              "time": "9:00 AM",
+              "text": "Staring at your screen. The words blur together. You have read the same sentence 4 times."
+            }
+          },
+          "without_row_NfpLqp": {
+            "type": "without_row",
+            "settings": {
+              "time": "2:00 PM",
+              "text": "The crash hits. Brain completely fried. You are just going through the motions now."
+            }
           }
         },
         "block_order": [
+          "without_row_ek9x94",
+          "without_row_eYDdzk",
           "without_row_MyGxrp",
-          "without_row_eYDdzk"
+          "without_row_NfpLqp"
         ],
         "settings": {
           "section_title": "YOUR DAY: ,BEFORE & AFTER",
