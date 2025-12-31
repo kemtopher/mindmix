@@ -920,6 +920,213 @@
       "product": {
         "type": "product",
         "settings": {}
+      },
+      "how-it-works": {
+        "type": "how-it-works",
+        "blocks": {
+          "step_kFmibr": {
+            "type": "step",
+            "settings": {
+              "number": "1",
+              "label": "Mix",
+              "text": "Tear open a stick pack and mix with 8–12 oz of water. Stir until dissolved."
+            }
+          },
+          "step_iEAhea": {
+            "type": "step",
+            "settings": {
+              "number": "2",
+              "label": "Wait",
+              "text": "In 30 minutes you will feel the fog lift. Your brain comes online. Sharp and clear."
+            }
+          },
+          "step_HTJqAe": {
+            "type": "step",
+            "settings": {
+              "number": "3",
+              "label": "Perform",
+              "text": "Enjoy 6+ hours of sustained focus. No crash. No jitters. Just peak performance."
+            }
+          }
+        },
+        "block_order": [
+          "step_kFmibr",
+          "step_iEAhea",
+          "step_HTJqAe"
+        ],
+        "settings": {
+          "title": "HOW IT WORKS"
+        }
+      },
+      "how-to-use": {
+        "type": "how-to-use",
+        "blocks": {
+          "use_case_BGm99r": {
+            "type": "use_case",
+            "settings": {
+              "icon": "💼",
+              "card_title": "Long Days & High Stakes",
+              "modal_title": "Long Days & High Stakes",
+              "modal_subtitle": "For anyone in demanding roles",
+              "pains": "Mental fatigue hits hard by mid afternoon, making critical decisions feel impossible\nYou second guess yourself when you cannot afford to, because your brain is running on fumes",
+              "solutions": "Rhodiola keeps you sharp under pressure, preventing stress induced cognitive decline\nLions Mane builds mental resilience over time, so high stakes situations become easier to handle\nB12 plus Green Tea provide sustained energy without the crash, keeping you clear headed all day"
+            }
+          },
+          "use_case_rGhB8J": {
+            "type": "use_case",
+            "settings": {
+              "icon": "🚀",
+              "card_title": "Building Something",
+              "modal_title": "Building Something",
+              "modal_subtitle": "For entrepreneurs, creators, and founders",
+              "pains": "You wear every hat, and by noon your brain is fried from context switching\nDecision fatigue is real, you make hundreds of calls a day and each one gets harder",
+              "solutions": "L Theanine plus Green Tea create sustained focus, so you can deep work for hours without burning out\nRhodiola protects against burnout by regulating stress hormones during intense work periods\nLions Mane enhances learning and adaptation, helping you level up faster as you build"
+            }
+          },
+          "use_case_t8m3JP": {
+            "type": "use_case",
+            "settings": {
+              "icon": "🎮",
+              "card_title": "Competitive Edge",
+              "modal_title": "Competitive Edge",
+              "modal_subtitle": "For gamers, athletes, and high performers",
+              "pains": "Your reaction time slows when it matters most, and you know you are leaving performance on the table\nMental stamina fades during long sessions, turning wins into losses",
+              "solutions": "L Theanine sharpens focus without jitters, giving you calm precision under pressure\nGreen Tea enhances processing speed and reaction time for split second decisions\nRhodiola sustains mental endurance, so your performance does not drop in the final rounds"
+            }
+          },
+          "use_case_qMLetb": {
+            "type": "use_case",
+            "settings": {
+              "icon": "🎨",
+              "card_title": "Creative Work",
+              "modal_title": "Creative Work",
+              "modal_subtitle": "For writers, designers, and artists",
+              "pains": "Blank page anxiety is paralyzing, you stare at the screen and nothing comes\nYou hit creative blocks when deadlines loom, and forcing it makes everything worse",
+              "solutions": "L Theanine plus Green Tea unlock flow state, where ideas come effortlessly and distractions fade\nLions Mane enhances creative thinking by building new neural pathways\nRhodiola reduces performance anxiety, letting you create without the mental noise"
+            }
+          },
+          "use_case_ctGLLC": {
+            "type": "use_case",
+            "settings": {
+              "icon": "📚",
+              "card_title": "Learning & Growth",
+              "modal_title": "Learning & Growth",
+              "modal_subtitle": "For students and lifelong learners",
+              "pains": "Information does not stick, you read the same paragraph three times and retain nothing\nExam anxiety makes you freeze, even when you know the material cold",
+              "solutions": "Lions Mane enhances memory formation and recall, so information sticks the first time\nL Theanine reduces test anxiety while keeping you alert and focused\nRhodiola improves cognitive performance under pressure, turning stress into clarity"
+            }
+          },
+          "use_case_BLLhPa": {
+            "type": "use_case",
+            "settings": {
+              "icon": "⚖️",
+              "card_title": "High Pressure Decisions",
+              "modal_title": "High Pressure Decisions",
+              "modal_subtitle": "For executives, traders, and leaders",
+              "pains": "Decision fatigue clouds your judgment when the stakes are highest\nMental fog makes you hesitate, and hesitation costs you opportunities",
+              "solutions": "Rhodiola keeps cortisol in check, preventing stress from sabotaging your decisions\nL Theanine plus Green Tea provide calm clarity, so you think clearly under pressure\nB12 powers cognitive function, ensuring your brain has the fuel it needs for complex analysis"
+            }
+          },
+          "use_case_fc7e9T": {
+            "type": "use_case",
+            "settings": {
+              "icon": "🏃",
+              "card_title": "Physical Performance",
+              "modal_title": "Physical Performance",
+              "modal_subtitle": "For athletes and fitness enthusiasts",
+              "pains": "Your mind gives up before your body does, cutting workouts short\nYou lose focus on form and technique when fatigue sets in, risking injury",
+              "solutions": "Rhodiola enhances physical endurance by reducing perceived exertion\nL Theanine improves mind muscle connection, keeping you locked in on form\nB12 supports energy production at the cellular level, powering through tough sessions"
+            }
+          },
+          "use_case_7b7PxW": {
+            "type": "use_case",
+            "settings": {
+              "icon": "👨‍👩‍👧",
+              "card_title": "Parenting & Caregiving",
+              "modal_title": "Parenting & Caregiving",
+              "modal_subtitle": "For parents and caregivers",
+              "pains": "Sleep deprivation leaves you in a constant fog, making simple tasks feel overwhelming\nYou lose patience when you need it most, and the guilt compounds the stress",
+              "solutions": "Rhodiola combats fatigue and helps you stay calm under the chaos of daily life\nB12 fights brain fog from sleep deprivation, restoring mental clarity\nL Theanine promotes calm presence, helping you stay patient and engaged with your family"
+            }
+          },
+          "use_case_iaMLXR": {
+            "type": "use_case",
+            "settings": {
+              "icon": "💻",
+              "card_title": "Focus From Home",
+              "modal_title": "Focus From Home",
+              "modal_subtitle": "For remote workers and freelancers",
+              "pains": "Home distractions derail your focus every few minutes, turning short tasks into all day struggles\nVideo call fatigue is real, back to back calls leave you mentally drained by lunch",
+              "solutions": "L Theanine plus Green Tea create deep focus, making distractions fade into the background\nRhodiola prevents mental fatigue from stacked meetings and context switches\nLions Mane supports sustained cognitive performance throughout long work from home days"
+            }
+          },
+          "use_case_7yHGfF": {
+            "type": "use_case",
+            "settings": {
+              "icon": "🌙",
+              "card_title": "Irregular Hours",
+              "modal_title": "Irregular Hours",
+              "modal_subtitle": "For shift workers and non standard schedules",
+              "pains": "Your circadian rhythm is disrupted, leaving you foggy when you need to be sharp\nCognitive decline from irregular sleep is noticeable, and coffee only makes it worse",
+              "solutions": "Rhodiola helps your body adapt to irregular schedules by regulating stress response\nB12 supports energy production when your natural rhythms are off\nL Theanine plus Green Tea provide clean alertness without disrupting what little sleep you get"
+            }
+          }
+        },
+        "block_order": [
+          "use_case_BGm99r",
+          "use_case_rGhB8J",
+          "use_case_t8m3JP",
+          "use_case_qMLetb",
+          "use_case_ctGLLC",
+          "use_case_BLLhPa",
+          "use_case_fc7e9T",
+          "use_case_7b7PxW",
+          "use_case_iaMLXR",
+          "use_case_7yHGfF"
+        ],
+        "settings": {
+          "title": "How To Use MindMix"
+        }
+      },
+      "the-solution": {
+        "type": "the-solution",
+        "blocks": {
+          "card_W68EU8": {
+            "type": "card",
+            "settings": {
+              "number": "30",
+              "label": "Minutes",
+              "copy": "Feel the fog lift. Your brain comes online. Sharp, clear, ready.",
+              "is_guarantee": false
+            }
+          },
+          "card_hxRUry": {
+            "type": "card",
+            "settings": {
+              "number": "6",
+              "label": "Hours",
+              "copy": "Sustained focus without the crash. No jitters. Just clean, calm energy.",
+              "is_guarantee": false
+            }
+          },
+          "card_zK8JfD": {
+            "type": "card",
+            "settings": {
+              "number": "90",
+              "label": "Days",
+              "copy": "Try it risk-free. If it doesn’t work, we refund every penny. No questions asked.",
+              "is_guarantee": true
+            }
+          }
+        },
+        "block_order": [
+          "card_W68EU8",
+          "card_hxRUry",
+          "card_zK8JfD"
+        ],
+        "settings": {
+          "heading": "THE SOLUTION"
+        }
       }
     },
     "content_for_index": [],
