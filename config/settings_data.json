@@ -1015,6 +1015,17 @@
               "pains": "Information does not stick, you read the same paragraph three times and retain nothing\nExam anxiety makes you freeze, even when you know the material cold",
               "solutions": "Lions Mane enhances memory formation and recall, so information sticks the first time\nL Theanine reduces test anxiety while keeping you alert and focused\nRhodiola improves cognitive performance under pressure, turning stress into clarity"
             }
+          },
+          "use_case_BLLhPa": {
+            "type": "use_case",
+            "settings": {
+              "icon": "⚖️",
+              "card_title": "High Pressure Decisions",
+              "modal_title": "High Pressure Decisions",
+              "modal_subtitle": "For executives, traders, and leaders",
+              "pains": "Decision fatigue clouds your judgment when the stakes are highest\nMental fog makes you hesitate, and hesitation costs you opportunities",
+              "solutions": "Rhodiola keeps cortisol in check, preventing stress from sabotaging your decisions\nL Theanine plus Green Tea provide calm clarity, so you think clearly under pressure\nB12 powers cognitive function, ensuring your brain has the fuel it needs for complex analysis"
+            }
           }
         },
         "block_order": [
@@ -1022,7 +1033,8 @@
           "use_case_rGhB8J",
           "use_case_t8m3JP",
           "use_case_qMLetb",
-          "use_case_ctGLLC"
+          "use_case_ctGLLC",
+          "use_case_BLLhPa"
         ],
         "settings": {
           "title": "How To Use MindMix"
