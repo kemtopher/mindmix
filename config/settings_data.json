@@ -929,7 +929,7 @@
             "settings": {
               "number": "1",
               "label": "Mix",
-              "text": "Tear open a stick pack and mix with 8–12 oz of water. Stir until dissolved."
+              "text": "Tear open a stick pack and mix with 12-16 oz of water. Shake or stir until dissolved."
             }
           },
           "step_iEAhea": {
@@ -1228,6 +1228,10 @@
           "title_with": "A Day With MindMix",
           "default_mode": "without"
         }
+      },
+      "still-not-convinced": {
+        "type": "still-not-convinced",
+        "settings": {}
       }
     },
     "content_for_index": [],
