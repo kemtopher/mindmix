@@ -929,7 +929,7 @@
             "settings": {
               "number": "1",
               "label": "Mix",
-              "text": "Tear open a stick pack and mix with 8–12 oz of water. Stir until dissolved."
+              "text": "Tear open a stick pack and mix with 12-16 oz of water. Shake or stir until dissolved."
             }
           },
           "step_iEAhea": {
@@ -1130,6 +1130,108 @@
           "section_title": ",THE SOLUTION",
           "section_subtitle": ""
         }
+      },
+      "compare-toggle": {
+        "type": "compare-toggle",
+        "blocks": {
+          "with_row_QPGzED": {
+            "type": "with_row",
+            "settings": {
+              "time": "6:00 AM",
+              "text": "Wake up sharp. No snooze. Mix MindMix. The day is yours."
+            }
+          },
+          "with_row_6JHnU4": {
+            "type": "with_row",
+            "settings": {
+              "time": "8:30 AM",
+              "text": "Deep work mode activated. Ideas flowing. You are crushing it. This is what clarity feels like."
+            }
+          },
+          "with_row_CVYw4E": {
+            "type": "with_row",
+            "settings": {
+              "time": "12:00 PM",
+              "text": "Still focused. No crash. No jitters. Just sustained, calm energy."
+            }
+          },
+          "with_row_jrxHwe": {
+            "type": "with_row",
+            "settings": {
+              "time": "3:00 PM",
+              "text": "The crash hour is gone. You are hitting your second wind. Peak performance sustained."
+            }
+          },
+          "with_row_Ne4kxy": {
+            "type": "with_row",
+            "settings": {
+              "time": "6:00 PM",
+              "text": "Accomplished. Energized. The sharp version of yourself showed up. And he is here to stay."
+            }
+          },
+          "without_row_eYDdzk": {
+            "type": "without_row",
+            "settings": {
+              "time": "6:30 AM",
+              "text": "Alarm goes off. Hit snooze 3 times. Wake up groggy, already behind."
+            }
+          },
+          "without_row_MyGxrp": {
+            "type": "without_row",
+            "settings": {
+              "time": "9:00 AM",
+              "text": "Staring at your screen. The words blur together. You have read the same sentence 4 times."
+            }
+          },
+          "without_row_ek9x94": {
+            "type": "without_row",
+            "settings": {
+              "time": "11:00 AM",
+              "text": "Third coffee of the day. Heart racing. Mind still foggy. The jitters are real."
+            }
+          },
+          "without_row_NfpLqp": {
+            "type": "without_row",
+            "settings": {
+              "time": "2:00 PM",
+              "text": "The crash hits. Brain completely fried. You are just going through the motions now."
+            }
+          },
+          "without_row_aKMNnb": {
+            "type": "without_row",
+            "settings": {
+              "time": "5:00 PM",
+              "text": "Another day wasted. You know you are capable of more. But the fog won again."
+            }
+          }
+        },
+        "block_order": [
+          "with_row_QPGzED",
+          "with_row_6JHnU4",
+          "with_row_CVYw4E",
+          "with_row_jrxHwe",
+          "with_row_Ne4kxy",
+          "without_row_eYDdzk",
+          "without_row_MyGxrp",
+          "without_row_ek9x94",
+          "without_row_NfpLqp",
+          "without_row_aKMNnb"
+        ],
+        "settings": {
+          "section_title": "YOUR DAY: ,BEFORE & AFTER",
+          "section_subtitle": "",
+          "aria_label": "Compare a day with and without MindMix",
+          "toggle_aria_label": "Toggle between without and with MindMix",
+          "label_without": "WITHOUT MindMix",
+          "label_with": "WITH MindMix",
+          "title_without": "A Day in Brain Fog",
+          "title_with": "A Day With MindMix",
+          "default_mode": "without"
+        }
+      },
+      "still-not-convinced": {
+        "type": "still-not-convinced",
+        "settings": {}
       }
     },
     "content_for_index": [],
