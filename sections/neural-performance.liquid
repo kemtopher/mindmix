@@ -88,15 +88,17 @@
                   {% endfor %}
                 </ul>
               </div>
-              <div>
-                <a
-                  href='{{ block.settings.science_link}}'
-                  type='submit'
-                  class='w-full mt-6 text-center btn btn-mint px-8 py-4 text-lg font-bold hover:transform hover:scale-105 transition-transform'
-                >
-                  View Science
-                </a>
-              </div>
+              {% if block.settings.science_link != blank %}
+                <div>
+                  <a
+                    href='{{ block.settings.science_link}}'
+                    type='submit'
+                    class='w-full mt-6 text-center btn btn-mint px-8 py-4 text-lg font-bold hover:transform hover:scale-105 transition-transform'
+                  >
+                    View Science
+                  </a>
+                </div>
+              {% endif %}
             </div>
           </div>
         </div>
@@ -243,6 +245,11 @@
           "id": "key_benefits",
           "label": "Key Benefits",
           "info": "Separate each key benefit by a comma"
+        },
+        {
+          "type": "url",
+          "id": "science_link",
+          "label": "Link Science Article"
         }
       ]
     }
