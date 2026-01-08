@@ -88,15 +88,37 @@
                   {% endfor %}
                 </ul>
               </div>
-              {% if block.settings.science_link != blank %}
+              {% if block.settings.science_content != blank %}
                 <div>
-                  <a
+                  <button
                     href='{{ block.settings.science_link}}'
                     type='submit'
-                    class='w-full mt-6 text-center btn btn-mint px-8 py-4 text-lg font-bold hover:transform hover:scale-105 transition-transform'
+                    class='expand-mm-research-inner w-full mt-6 text-center btn btn-mint px-8 py-4 text-lg font-bold hover:transform hover:scale-105 transition-transform'
                   >
                     View Science
-                  </a>
+                  </button>
+                  <div class='mm-research-inner'>
+                    <div class='research-content-well'>
+                      {{ block.settings.science_content }}
+                    </div>
+                    <!--
+                      <p class='mm-research-intro'>
+                        Over 500 peer-reviewed studies document Rhodiola's cognitive and stress-reducing effects.
+                      </p>
+                      <div class='mm-study-item'>
+                        <div class='mm-study-authors'>Anghelescu et al., 2018</div>
+                        <div class='mm-study-finding'>
+                          Rhodiola extract improves mental performance in people with stress-related fatigue.
+                        </div>
+                        <a
+                          href='https://www.tandfonline.com/doi/full/10.1080/13651501.2017.1417442'
+                          target='_blank'
+                          class='mm-study-link'
+                          >View Full Study →</a
+                        >
+                      </div>
+                    -->
+                  </div>
                 </div>
               {% endif %}
             </div>
@@ -107,66 +129,135 @@
   </div>
 </section>
 
+<style>
+  .mm-research-inner {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.35s ease;
+  }
+
+  .mm-research-inner.is-open {
+    /* no height here; JS sets height */
+  }
+</style>
+
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const cards = document.querySelectorAll('.feature-card');
     const modals = document.querySelectorAll('.feature-modal');
 
-    const toggleModal = (data) => {
-      if (!data) return;
-      const modal = document.getElementById(`modal-${data}`);
+    function collapseResearch(modalEl) {
+      if (!modalEl) return;
+      const inner = modalEl.querySelector('.mm-research-inner');
+      if (!inner) return;
 
-      if (modal.classList.contains('hidden')) {
+      inner.classList.remove('is-open');
+      inner.style.height = '0px';
+    }
+
+    function expandResearch(modalEl) {
+      if (!modalEl) return;
+      const inner = modalEl.querySelector('.mm-research-inner');
+      if (!inner) return;
+
+      // Set to its natural content height for a smooth open animation
+      inner.classList.add('is-open');
+      inner.style.height = inner.scrollHeight + 'px';
+    }
+
+    function toggleModal(modalKey) {
+      if (!modalKey) return;
+      const modal = document.getElementById(`modal-${modalKey}`);
+      if (!modal) return;
+
+      const isOpening = modal.classList.contains('hidden');
+
+      if (isOpening) {
         modal.classList.remove('hidden');
         modal.classList.add('flex', 'current-modal');
-      } else if (!modal.classList.contains('hidden')) {
+
+        // Ensure research starts collapsed every time modal opens
+        collapseResearch(modal);
+      } else {
+        // Reset research when closing
+        collapseResearch(modal);
+
         modal.classList.add('hidden');
         modal.classList.remove('flex', 'current-modal');
-      } else {
-        return;
       }
-    };
+    }
 
+    // Open modal from card click
     cards.forEach((card) => {
       card.addEventListener('click', () => {
         const cardKey = (card.dataset.neuralCard || '').trim();
-
-        if (!cardKey) {
-          console.warn(`Card "${cardKey}" is missing ... Check neural-performance.liquid`);
-          return;
-        }
-
+        if (!cardKey) return;
         toggleModal(cardKey);
       });
     });
 
+    // Close modal (click backdrop or X)
     modals.forEach((modal) => {
-      const modalKey = (modal.dataset.neuralCard || '').trim();
-      const closeBtn = modal.closest('#feature-modal-close');
-
       modal.addEventListener('click', (e) => {
-        if (!modalKey) {
-          console.warn(`Card "${modalKey}" is missing ... Check neural-performance.liquid`);
-          return;
-        }
+        const modalKey = (modal.dataset.neuralCard || '').trim();
+        if (!modalKey) return;
 
         if (e.target.closest('#feature-modal-close')) {
           toggleModal(modalKey);
-        } else if (e.target.closest('#feature-modal')) {
           return;
-        } else {
-          toggleModal(modalKey);
         }
+
+        // Clicked inside the modal content → do nothing
+        if (e.target.closest('#feature-modal')) return;
+
+        // Clicked backdrop → close
+        toggleModal(modalKey);
       });
     });
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        const modal = document.querySelector('.feature-modal.current-modal');
-        const modalKey = (modal.dataset.neuralCard || '').trim();
+    // Expand science in the currently open modal
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.expand-mm-research-inner');
+      if (!btn) return;
 
-        toggleModal(modalKey);
+      e.preventDefault();
+
+      const modal = btn.closest('.feature-modal');
+      if (!modal) return;
+
+      const inner = modal.querySelector('.mm-research-inner');
+      if (!inner) return;
+
+      const isOpen = inner.classList.contains('is-open');
+
+      if (isOpen) {
+        // Collapse
+        collapseResearch(modal);
+      } else {
+        // Expand
+        expandResearch(modal);
+
+        // Optional: keep height correct if content loads images and changes size
+        // (runs once shortly after expanding)
+        setTimeout(() => {
+          if (inner.classList.contains('is-open')) {
+            inner.style.height = inner.scrollHeight + 'px';
+          }
+        }, 150);
       }
+    });
+
+    // Escape closes current modal and resets science panel
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+
+      const modal = document.querySelector('.feature-modal.current-modal');
+      if (!modal) return;
+
+      const modalKey = (modal.dataset.neuralCard || '').trim();
+      if (!modalKey) return;
+
+      toggleModal(modalKey);
     });
   });
 </script>
@@ -247,9 +338,9 @@
           "info": "Separate each key benefit by a comma"
         },
         {
-          "type": "url",
-          "id": "science_link",
-          "label": "Link Science Article"
+          "type": "richtext",
+          "id": "science_content",
+          "label": "Content for Science"
         }
       ]
     }
