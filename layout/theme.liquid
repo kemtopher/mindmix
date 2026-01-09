@@ -58,7 +58,7 @@
     {% section 'footer' %}
 
     <script>
-      document.addEventListener('DOMContentLoaded', function () {
+      document.addEventListener('DOMContentLoaded', function ( ) {
         // Initialize animations
         const observer = new IntersectionObserver(
           (entries) => {
@@ -74,94 +74,6 @@
         document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
       });
     </script>
-
-    <!-- MindMix Upsell Redirect Script - FIXED VERSION -->
-    <script>
-    (function() {
-      console.log('[MINDMIX] Cart redirect script loaded (FIXED)');
-      
-      // Configuration
-      const UPSELL_URL = '/pages/upsells';
-      
-      // Don't redirect if we're already on upsell page or checkout
-      if (window.location.pathname.includes('/pages/upsells') || 
-          window.location.pathname.includes('/checkout') ||
-          window.location.pathname.includes('/cart')) {
-        console.log('[MINDMIX] On upsell/checkout/cart page, skipping redirect setup');
-        return;
-      }
-      
-      // Method 1: Intercept Shopify's Cart API calls (AJAX add-to-cart)
-      const originalFetch = window.fetch;
-      window.fetch = function(...args) {
-        const url = args[0];
-        
-        // Check if this is a cart add request
-        if (typeof url === 'string' && url.includes('/cart/add')) {
-          console.log('[MINDMIX] Intercepted cart add request');
-          
-          // Call original fetch
-          return originalFetch.apply(this, args).then(function(response) {
-            // Clone response so we can still return it
-            const clonedResponse = response.clone();
-            
-            // If successful, redirect to upsell page
-            if (response.ok) {
-              console.log('[MINDMIX] Cart add successful, redirecting to upsell page');
-              
-              // Small delay to ensure cart is updated
-              setTimeout(function() {
-                window.location.href = UPSELL_URL;
-              }, 100);
-            }
-            
-            return clonedResponse;
-          });
-        }
-        
-        // Not a cart add request, proceed normally
-        return originalFetch.apply(this, args);
-      };
-      
-      // Method 2: Intercept form submissions (traditional add-to-cart forms)
-      document.addEventListener('submit', function(e) {
-        const form = e.target;
-        
-        // Check if this is an add-to-cart form
-        if (form.action && form.action.includes('/cart/add')) {
-          console.log('[MINDMIX] Intercepted cart form submission');
-          
-          // Prevent default form submission
-          e.preventDefault();
-          
-          // Get form data
-          const formData = new FormData(form);
-          
-          // Submit via AJAX
-          fetch('/cart/add.js', {
-            method: 'POST',
-            body: formData
-          })
-          .then(function(response) {
-            if (response.ok) {
-              console.log('[MINDMIX] Cart add successful, redirecting to upsell page');
-              window.location.href = UPSELL_URL;
-            } else {
-              console.error('[MINDMIX] Cart add failed');
-              alert('Failed to add item to cart. Please try again.');
-            }
-          })
-          .catch(function(error) {
-            console.error('[MINDMIX] Cart add error:', error);
-            alert('Failed to add item to cart. Please try again.');
-          });
-        }
-      });
-      
-      console.log('[MINDMIX] Cart redirect handlers initialized');
-    })();
-    </script>
-    <!-- End MindMix Upsell Redirect Script -->
 
   </body>
 </html>
