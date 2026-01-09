@@ -98,9 +98,14 @@
                     View Science
                   </button>
                   <div class='mm-research-inner'>
-                    <div class='research-content-well'>
-                      {{ block.settings.science_content }}
-                    </div>
+                    {% if block.settings.science_intro != blank %}
+                      <p class='mm-research-intro'>{{ block.settings.science_intro }}</p>
+                    {% endif %}
+                    {% if block.settings.science_content != blank %}
+                      <div class='research-content-well'>
+                        {{ block.settings.science_content }}
+                      </div>
+                    {% endif %}
                     <!--
                       <p class='mm-research-intro'>
                         Over 500 peer-reviewed studies document Rhodiola's cognitive and stress-reducing effects.
@@ -147,7 +152,7 @@
   .mm-research-inner .research-content-well h4,
   .mm-research-inner .research-content-well h5,
   .mm-research-inner .research-content-well h6 {
-    font-size: 1.5rem;
+    /* font-size: 1.5rem; */
     color: #00e5a0;
     font-weight: 600;
     margin-bottom: 1rem;
@@ -362,6 +367,11 @@
           "id": "key_benefits",
           "label": "Key Benefits",
           "info": "Separate each key benefit by a comma"
+        },
+        {
+          "type": "text",
+          "id": "science_intro",
+          "label": "Intro for Science"
         },
         {
           "type": "richtext",
