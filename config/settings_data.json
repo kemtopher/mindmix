@@ -122,8 +122,8 @@
               "modal_secondary_text": "The Science",
               "modal_description": "Vitamin B12 is essential for neural metabolism and DNA synthesis. It supports myelin formation, enhancing signal transmission between neurons and maintaining cognitive function.",
               "key_benefits": "Supports brain energy, Maintains cognitive function, Supports memory, Enhances neural signals, Promotes mental clarity, Optimizes brain health",
-              "science_intro": "",
-              "science_content": ""
+              "science_intro": "B12 deficiency is a widespread cause of cognitive impairment. Adequate levels are essential for optimal brain function.",
+              "science_content": "<ul><li>Jatoi et al., 2020</li><li>Vitamin B12 deficiency is directly linked to impaired cognition and memory.</li><li><a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC7077099/\" target=\"_blank\">View on PMC →</a></li></ul><p></p><ul><li>Zhou et al., 2023</li><li>B12 supplementation may improve frontal lobe function in patients with cognitive decline.</li><li><a href=\"https://pubmed.ncbi.nlm.nih.gov/37334792/\" target=\"_blank\">View on PubMed →</a></li></ul><p></p><ul><li>Mathew et al., 2024</li><li>B12 functions as an anti inflammatory agent and mediates energetic metabolism.</li><li><a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC10778862/\" target=\"_blank\">View on PMC →</a></li></ul>"
             }
           }
         },
