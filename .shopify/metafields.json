@@ -180,6 +180,16 @@
         "name": "single_line_text_field",
         "category": "TEXT"
       }
+    },
+    {
+      "key": "badges",
+      "namespace": "custom",
+      "name": "Badges",
+      "description": "Including a text. string here will add a badge to the product variant's option button on the PDP",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
     }
   ],
   "shop": []
