@@ -72,17 +72,38 @@
                 {% if current_variant and variant.id == current_variant.id and variant.available %}
                   {% assign is_default = true %}
                 {% endif %}
-
                 <div class='variant-option flex flex-col items-start'>
                   <button
-                    class='variant-button p-4 border hover:cursor-pointer hover:border-primary hover:text-primary{% if is_default %} active border-primary{% endif %}{% unless variant.available %} opacity-50{% endunless %}'
+                    class='
+                      variant-button relative p-4 border rounded-xl transition-all
+                      hover:cursor-pointer hover:border-primary hover:text-primary
+                      focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black
+                      {% if is_default %} active border-primary {% else %} border-gray-700 {% endif %}
+                      {% unless variant.available %} opacity-50 cursor-not-allowed {% endunless %}
+                    '
                     data-variant-id='{{ variant.id }}'
                     data-variant-price='{{ variant.price }}'
                     data-available='{{ variant.available }}'
                     data-default='{% if is_default %}true{% else %}false{% endif %}'
                     onclick='handleVariantClick(event, "{{ variant.id }}", "{{ variant.price | json }}")'
+                    {% unless variant.available %}
+                      disabled
+                    {% endunless %}
                   >
-                    <h3>{{ variant.title }}</h3>
+                    {% if variant.metafields.custom.badges != blank %}
+                      <span
+                        class='
+                          pointer-events-none absolute -top-2.5 -right-2.5 z-10 whitespace-nowrap rounded-full
+                          bg-[#D4AF37] px-2 py-1 text-[10px] font-extrabold uppercase tracking-wide text-black
+                          shadow-lg
+                        '
+                      >
+                        {{ variant.metafields.custom.badges }}
+                      </span>
+                    {% endif %}
+
+                    <h3 class='font-semibold leading-tight'>{{ variant.title }}</h3>
+
                     <input
                       type='radio'
                       name='variant'
@@ -91,12 +112,6 @@
                       hidden
                     >
                   </button>
-
-                  <!--
-                    {% unless variant.available %}
-                      <p class='mt-1 text-xs text-red-400'>Out of stock</p>
-                    {% endunless %}
-                  -->
                 </div>
               {% endfor %}
             </div>
