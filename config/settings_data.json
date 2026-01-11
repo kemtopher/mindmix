@@ -28,9 +28,9 @@
           "hero_image": "shopify://shop_images/IMG_4114_1.jpg",
           "tagline": "DAILY NOOTROPIC DRINK MIX",
           "heading": "UNLOCK YOUR MENTAL EDGE",
-          "subheading": "ENGINEERED FOR PEAK PERFORMANCE",
-          "benefits": "Clarity. Energy. Focus.",
-          "description": "Experience cognitive enhancement with our scientifically formulated nootropic drink mix. Optimize your mind.",
+          "subheading": "Clinically-dosed nootropics for a sharper, faster mind. Work smarter.",
+          "benefits": "Focus. Clarity. Performance.",
+          "description": "MindMix isn't a quick fix. It's a daily ritual that compounds. It's about optimizing your mind for the long game. In your first week, you'll feel the difference. By month one,  you'll never go back.",
           "cta_text": "Shop Now",
           "secondary_cta_text": "Try Free Sample",
           "benefit_1": "<p>Focus Kicks In: <strong>30 minutes</strong></p>",
@@ -54,6 +54,7 @@
               "modal_secondary_text": "The Science",
               "modal_description": "Rhodiola Rosea is an adaptogenic herb that has been used in traditional medicine for centuries. Clinical studies show it helps reduce mental fatigue and improves cognitive function during stress-inducing tasks by modulating cortisol levels and enhancing neurotransmitter activity.",
               "key_benefits": "Reduces mental fatigue, Enhances cognitive performance, Supports mood balance,Improves stress resilience, Boosts mental energy, Optimizes brain function",
+              "science_intro": "Over 500 peer-reviewed studies document Rhodiola's cognitive and stress-reducing effects.",
               "science_content": "<ul><li>Darbinyan et al., 2000</li><li>Significant improvement in mental performance and reduced fatigue in physicians during night duty.</li><li><a href=\"https://pubmed.ncbi.nlm.nih.gov/11081987/\" target=\"_blank\">View on PubMed →</a></li></ul><p></p><ul><li>Anghelescu et al., 2018</li><li>Rhodiola extract improves mental performance in people with stress-related fatigue.</li><li><a href=\"https://www.tandfonline.com/doi/full/10.1080/13651501.2017.1417442\" target=\"_blank\" title=\"View Science\">View Full Study →</a></li></ul><p></p><ul><li>Ma et al., 2018</li><li>R. rosea ingestion improves cognitive function and reduces mental fatigue.</li><li><a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC6288277/\" target=\"_blank\">View on PMC →</a></li></ul>"
             }
           },
@@ -70,7 +71,8 @@
               "modal_secondary_text": "The Science",
               "modal_description": "Lion's Mane mushroom contains compounds that stimulate the production of nerve growth factor (NGF), supporting neuroplasticity and cognitive function. Research indicates it can enhance memory formation and protect against cognitive decline.",
               "key_benefits": "Supports nerve growth, Improves focus and clarity, Boosts learning ability, Enhances memory formation, Protects brain cells, Promotes neuroplasticity",
-              "science_content": ""
+              "science_intro": "Emerging research demonstrates Lion's Mane's ability to enhance memory by boosting nerve growth.",
+              "science_content": "<ul><li>Lai et al., 2013</li><li>H. erinaceus significantly stimulates neurite outgrowth and enhances NGF synthesis.</li><li><a href=\"https://pubmed.ncbi.nlm.nih.gov/24266378/\" target=\"_blank\">View on PubMed →</a></li></ul><p></p><ul><li>Docherty et al., 2023</li><li>Improves speed of cognitive performance and reduces subjective stress.</li><li><a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC10675414/\" target=\"_blank\">View on PMC →</a></li></ul><p></p><ul><li>Ratto et al., 2019</li><li>Significantly improved recognition memory and increased hippocampal neurogenesis.</li><li><a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC6521003/\" target=\"_blank\">View on PMC →</a></li></ul>"
             }
           },
           "section_card_6bEDd7": {
@@ -86,7 +88,8 @@
               "modal_secondary_text": "The Science",
               "modal_description": "L-Theanine is an amino acid that promotes alpha brain wave activity, creating a state of relaxed alertness. It works synergistically with caffeine to enhance focus while reducing jitters and anxiety.",
               "key_benefits": "Promotes calm alertness, Enhances focus, Supports cognitive function, Reduces mental stress, Improves sleep quality, Balances mood",
-              "science_content": ""
+              "science_intro": "Over 200 peer-reviewed papers document L-Theanine's ability to promote calm focus.",
+              "science_content": "<ul><li>Baba et al., 2021</li><li>L-theanine improves attention, enhancing working memory and executive functions.</li><li><a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC8080935/\" target=\"_blank\">View on PMC →</a></li></ul><p></p><ul><li>Giesbrecht et al., 2010</li><li>97mg L-theanine plus 40mg caffeine significantly helps focus attention during demanding tasks.</li><li><a href=\"https://pubmed.ncbi.nlm.nih.gov/21040626/\" target=\"_blank\">View on PubMed →</a></li></ul><p></p><ul><li>Hidese et al., 2019</li><li>Four weeks of L-theanine (200mg per day) significantly reduced stress related symptoms.</li><li><a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC6836118/\" target=\"_blank\">View on PMC →</a></li></ul>"
             }
           },
           "section_card_Nr66Ki": {
@@ -102,7 +105,8 @@
               "modal_secondary_text": "The Science",
               "modal_description": "Green tea extract contains EGCG and L-theanine, providing sustained energy and neuroprotective benefits. Studies show it enhances memory and attention while protecting brain cells from oxidative stress.",
               "key_benefits": "Sustained energy, Enhanced memory, Neuroprotective effects, Antioxidant protection, Improved attention, Cellular health support",
-              "science_content": ""
+              "science_intro": "Over 300 peer-reviewed studies support green tea's cognitive and neuroprotective benefits.",
+              "science_content": "<ul><li>Mancini et al., 2017</li><li>Green tea influences cognition (benefits in memory and attention) and enhances brain function.</li><li><a href=\"https://pubmed.ncbi.nlm.nih.gov/28899506/\" target=\"_blank\">View on PubMed →</a></li></ul><p></p><ul><li>Baba et al., 2020</li><li>336.4mg of green tea catechins significantly improved cognitive function.</li><li><a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC7570631/\" target=\"_blank\">View on PMC →</a></li></ul><p></p><ul><li>Haque et al., 2006</li><li>Improvement in spatial cognitive learning ability due to antioxidative activity.</li><li><a href=\"https://www.sciencedirect.com/science/article/pii/S0022316622081949\" target=\"_blank\">View on ScienceDirect →</a></li></ul>"
             }
           },
           "section_card_PeWb7h": {
@@ -118,7 +122,8 @@
               "modal_secondary_text": "The Science",
               "modal_description": "Vitamin B12 is essential for neural metabolism and DNA synthesis. It supports myelin formation, enhancing signal transmission between neurons and maintaining cognitive function.",
               "key_benefits": "Supports brain energy, Maintains cognitive function, Supports memory, Enhances neural signals, Promotes mental clarity, Optimizes brain health",
-              "science_content": ""
+              "science_intro": "B12 deficiency is a widespread cause of cognitive impairment. Adequate levels are essential for optimal brain function.",
+              "science_content": "<ul><li>Jatoi et al., 2020</li><li>Vitamin B12 deficiency is directly linked to impaired cognition and memory.</li><li><a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC7077099/\" target=\"_blank\">View on PMC →</a></li></ul><p></p><ul><li>Zhou et al., 2023</li><li>B12 supplementation may improve frontal lobe function in patients with cognitive decline.</li><li><a href=\"https://pubmed.ncbi.nlm.nih.gov/37334792/\" target=\"_blank\">View on PubMed →</a></li></ul><p></p><ul><li>Mathew et al., 2024</li><li>B12 functions as an anti inflammatory agent and mediates energetic metabolism.</li><li><a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC10778862/\" target=\"_blank\">View on PMC →</a></li></ul>"
             }
           }
         },
