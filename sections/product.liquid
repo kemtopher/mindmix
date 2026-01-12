@@ -80,6 +80,8 @@
                     '
                     data-variant-id='{{ variant.id }}'
                     data-variant-price='{{ variant.price }}'
+                    data-variant-unit-price='{{ variant.unit_price }}'
+                    data-variant-unit-quantity='{{ variant.unit_price_measurement.quantity_value }}'
                     data-available='{{ variant.available }}'
                     data-default='{% if is_default %}true{% else %}false{% endif %}'
                     onclick='handleVariantClick(event, "{{ variant.id }}", "{{ variant.price | json }}")'
@@ -241,7 +243,10 @@
               </div>
 
               <div class='mt-2 text-sm text-gray-400'>
-                <span id='onetime-per-stick'>$0.00 / stick</span>
+                <span id='onetime-per-stick'>
+                  {{- current_variant.unit_price | money }}
+                </span>
+                <span>/ stick</span>
               </div>
             </div>
 
@@ -320,6 +325,8 @@
     const variantButtons = document.querySelectorAll('.variant-button');
     const priceField = document.getElementById('variant-price');
     const oneTimePriceField = document.getElementById('oneTime-price');
+    const oneTimeUnitPriceField = document.getElementById('onetime-per-stick');
+    const oneTimeUnitQuantity = document.getElementById('onetime-pack-size');
     const hiddenInput = document.getElementById('selected-variant-id');
     const addToCartBtn = document.getElementById('add-to-cart-btn');
     const addToCartOriginalText = addToCartBtn ? addToCartBtn.textContent.trim() : 'Add to Cart';
@@ -359,15 +366,27 @@
         hiddenInput.value = variantId;
       }
 
-      // Update price display
+      // Catch variant info from buton data attr
       const variantPrice = button.dataset.variantPrice;
+      const variantUnitPrice = button.dataset.variantUnitPrice;
+      const variantUnitQuantity = button.dataset.variantUnitQuantity;
+
+      // Update price displays
       if (priceField && variantPrice) {
         const formatted = (variantPrice / 100).toLocaleString('en-US', {
           style: 'currency',
           currency: 'USD',
         });
+        const formattedUnitPrice = (variantUnitPrice / 100).toLocaleString('en-US', {
+          style: 'currency',
+          currency: 'USD',
+        });
+        const formattedUnitQuantity = Math.floor(variantUnitQuantity);
+
         priceField.textContent = formatted;
         oneTimePriceField.textContent = formatted;
+        oneTimeUnitPriceField.textContent = formattedUnitPrice;
+        oneTimeUnitQuantity.textContent = formattedUnitQuantity;
       }
 
       const isAvailable = button.dataset.available === 'true';
