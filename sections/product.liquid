@@ -81,6 +81,7 @@
                     data-variant-id='{{ variant.id }}'
                     data-variant-price='{{ variant.price }}'
                     data-variant-unit-price='{{ variant.unit_price }}'
+                    data-variant-unit-quantity='{{ variant.unit_price_measurement.quantity_value }}'
                     data-available='{{ variant.available }}'
                     data-default='{% if is_default %}true{% else %}false{% endif %}'
                     onclick='handleVariantClick(event, "{{ variant.id }}", "{{ variant.price | json }}")'
@@ -244,8 +245,8 @@
               <div class='mt-2 text-sm text-gray-400'>
                 <span id='onetime-per-stick'>
                   {{- current_variant.unit_price | money }}
-                  <span>/ stick</span></span
-                >
+                </span>
+                <span>/ stick</span>
               </div>
             </div>
 
