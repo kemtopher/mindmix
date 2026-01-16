@@ -4,10 +4,6 @@
 >
   <div class='container flex flex-col lg:flex-row justify-between gap-8'>
     <div class='product-gallery w-full h-full lg:max-h-[500px] flex flex-col lg:flex-row gap-4 lg:gap-8 justify-start'>
-      <!--
-        {%- assign image_media = product.media | where: 'media_type', 'image' -%}
-        {% if image_media.size > 0 %}
-      -->
       <div class='product-images scrollbar-hide overflow-x-scroll overflow-y-hidden w-full lg:max-w-[72px] flex flex-row lg:flex-col gap-4 order-2 lg:order-1 justify-start'>
         {% for media in product.media %}
           {% if media.media_type == 'image' %}
@@ -22,7 +18,6 @@
           {% endif %}
         {% endfor %}
       </div>
-      <!-- {% endif %} -->
 
       <div class='order-1 lg:order-2 text-center overflow-hidden'>
         <img
@@ -36,7 +31,6 @@
     </div>
 
     <div class='product-details w-full'>
-      <!-- product info block -->
       <div class='product-info pb-8'>
         <h1 class='text-2xl lg:text-4xl font-bold text-primary mb-4'>{{ product.title | upcase }}</h1>
         <div class='text-sm text-white h-max mb-4 font-light'>{{ product.description }}</div>
@@ -66,9 +60,16 @@
             <div class='variant-well flex py-4 gap-4 group flex-wrap'>
               {% for variant in product.variants %}
                 {% assign is_default = false %}
+                {% assign first_alloc = variant.selling_plan_allocations | first %}
+                {% assign first_selling_plan_id = '' %}
+                {% if first_alloc %}
+                  {% assign first_selling_plan_id = first_alloc.selling_plan.id %}
+                {% endif %}
+
                 {% if current_variant and variant.id == current_variant.id and variant.available %}
                   {% assign is_default = true %}
                 {% endif %}
+
                 <div class='variant-option flex flex-col items-start'>
                   <button
                     class='
@@ -84,7 +85,7 @@
                     data-variant-unit-quantity='{{ variant.unit_price_measurement.quantity_value }}'
                     data-available='{{ variant.available }}'
                     data-default='{% if is_default %}true{% else %}false{% endif %}'
-                    onclick='handleVariantClick(event, "{{ variant.id }}", "{{ variant.price | json }}")'
+                    data-selling-plan-id='{{ first_selling_plan_id }}'
                     {% unless variant.available %}
                       disabled
                     {% endunless %}
@@ -93,7 +94,7 @@
                       <span
                         class='
                           pointer-events-none absolute -top-2.5 -right-2.5 z-10 whitespace-nowrap rounded-full
-                          bg-[#D4AF37] px-2 py-1 text-[10px] font-extrabold uppercase tracking-wide text-black
+                          bg-citrus px-2 py-1 text-[10px] font-extrabold uppercase tracking-wide text-black
                           shadow-lg
                         '
                       >
@@ -120,57 +121,46 @@
 
       {% render 'da-restock' %}
 
-      <!-- Subscription code for Shopify Subscriptions -->
-      <!--
-        <div
-          id='subscription-wrapper'
-          class='mt-4 {% unless current_variant.available %}hidden{% endunless %}'
-        >
-          <div class='subscriptions_app_embed_block mt-4'></div>
-        </div>
-      -->
-
       <div class='mt-12'>
         <p class='mb-5 text-sm font-semibold uppercase tracking-wider text-gray-400'>Choose Your Option:</p>
 
         <div class='grid grid-cols-1 gap-5 md:grid-cols-2'>
-          <!-- ================= SUBSCRIBE & SAVE ================= -->
           <div
             id='subscribe-option'
             role='button'
             tabindex='0'
             data-purchase-type='subscribe'
             class='
-              relative cursor-pointer rounded-2xl border-2 border-[#D4AF37]
-              bg-gradient-to-br from-[#D4AF37]/20 to-[#D4AF37]/5
-              p-6 shadow-xl shadow-[#D4AF37]/30
-              transition-all hover:-translate-y-1 hover:shadow-[#D4AF37]/50
-              focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]/60
+              relative cursor-pointer rounded-2xl border-2 border-citrus
+              bg-gradient-to-br from-citrus/20 to-citrus/5
+              p-6 shadow-xl shadow-citrus/30
+              transition-all hover:-translate-y-1 hover:shadow-citrus/50
+              focus:outline-none focus-visible:ring-2 focus-visible:ring-citrus/60
             '
           >
-            <!-- Badge -->
             <span
               class='
                 pointer-events-none absolute -top-4 -right-2.5 -translate-x-1/2
-                rounded-full bg-[#D4AF37] px-4 py-1
+                rounded-full bg-citrus px-4 py-1
                 text-[10px] font-extrabold uppercase tracking-wider text-black shadow-lg
               '
             >
               Most Popular
             </span>
 
-            <!-- Header -->
             <div class='mb-4 flex items-start gap-3'>
-              <div class='relative mt-1 h-5 w-5 rounded-full border-2 border-[#D4AF37]'>
-                <div class='absolute inset-0.5 rounded-full bg-[#D4AF37]'></div>
+              <div
+                id='subscribe-selector-radio'
+                class='relative mt-1 h-5 w-5 rounded-full border-2 border-citrus'
+              >
+                <!-- <div class='absolute inset-0.5 rounded-full bg-citrus'></div> -->
               </div>
               <div>
-                <h3 class='text-xl font-black text-[#D4AF37]'>Subscribe &amp; Save</h3>
-                <p class='mt-1 text-xs font-semibold text-[#D4AF37]'>Lock in founders pricing</p>
+                <h3 class='text-xl font-black text-citrus'>Subscribe &amp; Save</h3>
+                <p class='mt-1 text-xs font-semibold text-citrus'>Lock in founders pricing</p>
               </div>
             </div>
 
-            <!-- Pricing -->
             <div class='mb-4'>
               <div class='flex items-baseline gap-2'>
                 <div id='subscribe-price' class='text-4xl font-black text-white'>$0.00</div>
@@ -180,7 +170,7 @@
               <div class='mt-2 flex flex-wrap items-center gap-2'>
                 <span
                   class='
-                    rounded-md bg-[#D4AF37] px-3 py-1.5
+                    rounded-md bg-citrus px-3 py-1.5
                     text-xs font-extrabold uppercase tracking-wide text-black shadow
                   '
                 >
@@ -190,33 +180,30 @@
               </div>
             </div>
 
-            <!-- Features -->
             <ul class='space-y-2 text-sm'>
               <li class='flex items-start gap-2 text-white'>
-                <span class='mt-1 text-[#D4AF37]'>✓</span>
-                <strong class='text-[#D4AF37]'>Save 20%</strong> on every order
+                <span class='mt-1 text-citrus'>✓</span>
+                <strong class='text-citrus'>Save 20%</strong> on every order
               </li>
               <li class='flex items-start gap-2 text-white'>
-                <span class='mt-1 text-[#D4AF37]'>✓</span>
+                <span class='mt-1 text-citrus'>✓</span>
                 Free shipping on all subscriptions
               </li>
               <li class='flex items-start gap-2 text-white'>
-                <span class='mt-1 text-[#D4AF37]'>✓</span>
+                <span class='mt-1 text-citrus'>✓</span>
                 Early access to new flavors
               </li>
               <li class='flex items-start gap-2 text-white'>
-                <span class='mt-1 text-[#D4AF37]'>✓</span>
+                <span class='mt-1 text-citrus'>✓</span>
                 Cancel anytime
               </li>
             </ul>
 
-            <!-- Bottom Callout -->
-            <div class='mt-4 border-t border-[#D4AF37]/30 pt-4 text-center'>
-              <span class='text-base font-black text-[#D4AF37]'> Save $0 / year </span>
+            <div class='mt-4 border-t border-citrus/30 pt-4 text-center'>
+              <span class='text-base font-black text-citrus'> Save $0 / year </span>
             </div>
           </div>
 
-          <!-- ================= ONE TIME PURCHASE ================= -->
           <div
             id='onetime-option'
             role='button'
@@ -228,16 +215,14 @@
               focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60
             '
           >
-            <!-- Header -->
             <div class='mb-4 flex items-start gap-3'>
-              <div class='mt-1 h-5 w-5 rounded-full border-2 border-gray-500'></div>
+              <div id='onetime-selector-radio' class='mt-1 h-5 w-5 rounded-full border-2 border-primary'></div>
               <div>
                 <h3 class='text-xl font-bold text-white'>One-Time Purchase</h3>
                 <p class='mt-1 text-xs text-gray-500'>No subscription</p>
               </div>
             </div>
 
-            <!-- Pricing -->
             <div class='mb-4'>
               <div class='flex items-baseline gap-2'>
                 <div id='oneTime-price' class='text-4xl font-black text-white'>{{ current_variant.price | money }}</div>
@@ -251,7 +236,6 @@
               </div>
             </div>
 
-            <!-- Features -->
             <ul class='space-y-2 text-sm text-gray-400'>
               <li class='flex items-start gap-2'>
                 <span class='mt-1'>✓</span>
@@ -275,12 +259,6 @@
       </div>
 
       {% render 'add-to-cart-btn' %}
-
-      <!--
-        {% unless product.handle == 'free-trial-pack' %}
-          {% render 'free-trial-btn' %}
-        {% endunless %}
-      -->
     </div>
   </div>
 </section>
@@ -308,18 +286,11 @@
         }, 200);
 
         thumbs.forEach((t) => {
-          // t.classList.remove('border-2', 'border-primary')
           const p = t.closest('.product-image');
-
-          if (p) {
-            p.classList.remove('border-2', 'border-primary');
-          }
+          if (p) p.classList.remove('border-2', 'border-primary');
         });
 
-        // thumb.classList.add('border-2', 'border-primary');
-        if (parent) {
-          parent.classList.add('border-2', 'border-primary');
-        }
+        if (parent) parent.classList.add('border-2', 'border-primary');
       });
     });
 
@@ -330,16 +301,23 @@
     const oneTimeUnitQuantity = document.getElementById('onetime-pack-size');
     const hiddenInput = document.getElementById('selected-variant-id');
     const addToCartBtn = document.getElementById('add-to-cart-btn');
-    const addToCartOriginalText = addToCartBtn ? addToCartBtn.textContent.trim() : 'Add to Cart';
 
-    // 🔹 NEW: Subscription wrapper reference
+    // 🔹 Subscription wrapper reference (if you re-enable the embed later)
     const subscriptionWrapper = document.getElementById('subscription-wrapper');
+
+    // Default purchase type UI (recommended): One-time selected by default
+    const subscribeOptionElInit = document.getElementById('subscribe-option');
+    const subscribeOptionRadio = subscribeOptionElInit?.querySelector('#subscribe-selector-radio div');
+    const onetimeOptionElInit = document.getElementById('onetime-option');
+    const onetimeOptionRadio = onetimeOptionElInit?.querySelector('#onetime-selector-radio');
+    onetimeOptionElInit?.classList.add('ring-2', 'ring-primary');
+    onetimeOptionRadio?.classList.add('bg-primary');
+    subscribeOptionElInit?.classList.remove('ring-2');
+    subscribeOptionRadio?.classList.remove('bg-citrus');
 
     // Preselect default variant (first available)
     const defaultButton = document.querySelector('.variant-button[data-default="true"]');
-    if (defaultButton) {
-      selectVariant(defaultButton);
-    }
+    if (defaultButton) selectVariant(defaultButton);
 
     variantButtons.forEach((button) => {
       button.addEventListener('click', () => {
@@ -363,14 +341,34 @@
 
       // Update hidden input for form
       const variantId = button.dataset.variantId;
-      if (hiddenInput && variantId) {
-        hiddenInput.value = variantId;
-      }
+      if (hiddenInput && variantId) hiddenInput.value = variantId;
 
-      // Catch variant info from buton data attr
+      // Catch variant info from button data attrs
       const variantPrice = button.dataset.variantPrice;
       const variantUnitPrice = button.dataset.variantUnitPrice;
       const variantUnitQuantity = button.dataset.variantUnitQuantity;
+
+      // ---- SUBSCRIPTION: keep active selling plan in sync with selected variant ----
+      const sellingPlanIdForVariant = (button.dataset.sellingPlanId || '').trim();
+      window.__ACTIVE_SELLING_PLAN_ID__ = sellingPlanIdForVariant;
+
+      const sellingPlanInput = document.getElementById('selected-selling-plan');
+      const subscribeOptionEl = document.getElementById('subscribe-option');
+      const onetimeOptionEl = document.getElementById('onetime-option');
+
+      const subscribeIsSelected = subscribeOptionEl?.classList.contains('ring-2');
+
+      // If user already selected Subscribe, update the hidden selling_plan input immediately
+      if (sellingPlanInput && subscribeIsSelected) {
+        sellingPlanInput.value = sellingPlanIdForVariant ? String(sellingPlanIdForVariant) : '';
+      }
+
+      // If Subscribe is selected but this variant has no selling plan, force One-time selection
+      if (subscribeIsSelected && !sellingPlanIdForVariant) {
+        subscribeOptionEl?.classList.remove('ring-2');
+        onetimeOptionEl?.classList.add('ring-2', 'ring-primary');
+        if (sellingPlanInput) sellingPlanInput.value = '';
+      }
 
       // Update price displays
       if (priceField && variantPrice) {
@@ -378,36 +376,32 @@
           style: 'currency',
           currency: 'USD',
         });
+
         const formattedUnitPrice = (variantUnitPrice / 100).toLocaleString('en-US', {
           style: 'currency',
           currency: 'USD',
         });
-        const formattedUnitQuantity = Math.floor(variantUnitQuantity);
+
+        const formattedUnitQuantity = Math.floor(Number(variantUnitQuantity || 0));
 
         priceField.textContent = formatted;
-        oneTimePriceField.textContent = formatted;
-        oneTimeUnitPriceField.textContent = formattedUnitPrice;
-        oneTimeUnitQuantity.textContent = formattedUnitQuantity;
+        if (oneTimePriceField) oneTimePriceField.textContent = formatted;
+        if (oneTimeUnitPriceField) oneTimeUnitPriceField.textContent = formattedUnitPrice;
+        if (oneTimeUnitQuantity) oneTimeUnitQuantity.textContent = formattedUnitQuantity;
       }
 
       const isAvailable = button.dataset.available === 'true';
 
       // Toggle price out-of-stock styling
       if (priceField) {
-        if (isAvailable) {
-          priceField.classList.remove('out-of-stock');
-        } else {
-          priceField.classList.add('out-of-stock');
-        }
+        if (isAvailable) priceField.classList.remove('out-of-stock');
+        else priceField.classList.add('out-of-stock');
       }
 
-      // ⭐️ NEW: Toggle subscription widget visibility
+      // Toggle subscription widget visibility (if you re-enable it later)
       if (subscriptionWrapper) {
-        if (isAvailable) {
-          subscriptionWrapper.classList.remove('hidden');
-        } else {
-          subscriptionWrapper.classList.add('hidden');
-        }
+        if (isAvailable) subscriptionWrapper.classList.remove('hidden');
+        else subscriptionWrapper.classList.add('hidden');
       }
 
       // Toggle Add to Cart button state & styles
