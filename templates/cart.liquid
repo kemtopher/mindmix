@@ -1,4 +1,4 @@
-{% comment %}Cart template (subscription-aware){% endcomment %}
+{% comment %}Cart template (subscription-aware) - stacked flex items{% endcomment %}
 
 <div class='container-custom py-24'>
   <div class='max-w-[900px] m-auto'>
@@ -6,101 +6,85 @@
 
     {% if cart.item_count > 0 %}
       <form action='/cart' method='post' novalidate>
-        <table class='w-full'>
-          <thead>
-            <tr class='border-b border-gray-800'>
-              <th class='text-left py-4'>Product</th>
-              <th class='text-center py-4'>Qty</th>
-              <!-- <th class='text-right py-4'>Unit Price</th> -->
-              <th class='text-right py-4'>Total</th>
-            </tr>
-          </thead>
+        <!-- Optional header (you can remove this if you want) -->
+        <div class='w-full border-b border-gray-800 pb-4'>
+          <div class='text-light/70 text-sm'>Review your items</div>
+        </div>
 
-          <tbody>
-            {% for item in cart.items %}
-              {% assign has_selling_plan = false %}
-              {% if item.selling_plan_allocation %}
-                {% assign has_selling_plan = true %}
-              {% endif %}
+        <!-- Line items -->
+        <div class='w-full'>
+          {% for item in cart.items %}
+            {% assign has_selling_plan = false %}
+            {% if item.selling_plan_allocation %}
+              {% assign has_selling_plan = true %}
+            {% endif %}
 
-              <tr class='border-b border-gray-800 align-top'>
-                <!-- Product column -->
-                <td class='py-6 pr-4'>
-                  <div class='flex items-start gap-4'>
-                    <a href='{{ item.url }}' class='shrink-0'>
-                      <img
-                        src='{{ item.image | img_url: '120x' }}'
-                        alt='{{ item.title | escape }}'
-                        class='object-cover w-20 h-20 rounded-lg border border-gray-800'
-                      >
-                    </a>
+            <div class='flex flex-col md:flex-row justify-between border-b border-gray-800 py-6 gap-8'>
+              <!-- Row 1: Product (full width) -->
+              <div class='flex gap-4 w-full md:w-1/2'>
+                <a href='{{ item.url }}' class='shrink-0'>
+                  <img
+                    src='{{ item.image | img_url: '120x' }}'
+                    alt='{{ item.title | escape }}'
+                    class='object-cover w-20 h-20 rounded-lg border border-gray-800'
+                  >
+                </a>
 
-                    <div class='w-full'>
-                      <a href='{{ item.url }}' class='block'>
-                        <h3 class='font-semibold text-white leading-tight'>
-                          {{ item.product.title }}
-                        </h3>
+                <div class='flex-1 min-w-0'>
+                  <a href='{{ item.url }}' class='block'>
+                    <h3 class='font-semibold text-white text-xl leading-tight'>
+                      {{ item.product.title }}
+                    </h3>
 
-                        {%- assign variant_size = item.product.variants -%}
-                        {% if variant_size.size > 1 %}
-                          <p class='text-sm text-light/70 mt-1'>
-                            {{ item.variant.title }}
-                          </p>
-                        {% endif %}
-                      </a>
+                    {%- assign variant_size = item.product.variants -%}
+                    {% if variant_size.size > 1 %}
+                      <p class='text-sm text-light/70 mt-1'>
+                        {{ item.variant.title }}
+                      </p>
+                    {% endif %}
+                  </a>
 
-                      <!-- Purchase type: Subscription vs One-time -->
-                      <div class='mt-2'>
-                        {% if has_selling_plan %}
-                          <span class='inline-flex items-center rounded-full bg-citrus/20 text-citrus px-3 py-1 text-xs font-extrabold uppercase tracking-wide border border-citrus/30'>
-                            Subscription
-                          </span>
-                          <p class='text-sm text-light/80 mt-2'>
-                            Plan:
-                            <span class='font-semibold text-white'>
-                              {{ item.selling_plan_allocation.selling_plan.name }}
-                            </span>
-                          </p>
-                        {% else %}
-                          <span class='inline-flex items-center rounded-full bg-gray-800 text-light px-3 py-1 text-xs font-bold uppercase tracking-wide border border-gray-700'>
-                            One-time purchase
-                          </span>
-                        {% endif %}
-                      </div>
-
-                      <!-- Line item properties (if any) -->
-                      {% if item.properties.size > 0 %}
-                        <div class='mt-3 text-sm text-light/70 space-y-1'>
-                          {% for p in item.properties %}
-                            {% assign key = p.first %}
-                            {% assign val = p.last %}
-                            {% if val != blank and key != '_bundle' %}
-                              <div>
-                                <span class='text-light/50'>{{ key }}:</span>
-                                <span class='text-light/80'>
-                                  {{ val }}
-                                </span>
-                              </div>
-                            {% endif %}
-                          {% endfor %}
-                        </div>
-                      {% endif %}
-
-                      <!-- Remove -->
-                      <div class='mt-4'>
-                        <a
-                          href='/cart/change?line={{ forloop.index }}&quantity=0'
-                          class='text-sm text-light/60 hover:text-primary underline'
-                        >
-                          Remove
-                        </a>
-                      </div>
-                    </div>
+                  <!-- Purchase type: Subscription vs One-time -->
+                  <div class='mt-2'>
+                    {% if has_selling_plan %}
+                      <span class='inline-flex items-center rounded-full bg-citrus/20 text-citrus px-3 py-1 text-xs font-extrabold uppercase tracking-wide border border-citrus/30'>
+                        Subscription
+                      </span>
+                      <p class='text-sm text-light/80 mt-2'>
+                        Plan:
+                        <span class='font-semibold text-white'>
+                          {{ item.selling_plan_allocation.selling_plan.name }}
+                        </span>
+                      </p>
+                    {% else %}
+                      <span class='inline-flex items-center rounded-full bg-gray-800 text-light px-3 py-1 text-xs font-bold uppercase tracking-wide border border-gray-700'>
+                        One-time purchase
+                      </span>
+                    {% endif %}
                   </div>
-                </td>
 
-                <!-- Qty column -->
-                <td class='py-6 text-center'>
+                  <!-- Line item properties (if any) -->
+                  {% if item.properties.size > 0 %}
+                    <div class='mt-3 text-sm text-light/70 space-y-1'>
+                      {% for p in item.properties %}
+                        {% assign key = p.first %}
+                        {% assign val = p.last %}
+                        {% if val != blank and key != '_bundle' %}
+                          <div class='truncate'>
+                            <span class='text-light/50'>{{ key }}:</span>
+                            <span class='text-light/80'>{{ val }}</span>
+                          </div>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+
+              <!-- Row 2: Qty + Total/Remove (stacked under product row) -->
+              <div class='flex w-full md:w-1/4 items-start justify-between gap-4'>
+                <div class='flex flex-col items-center gap-3'>
+                  <span class='w-full text-left text-sm text-light/60'>Qty</span>
                   <input
                     type='number'
                     name='updates[]'
@@ -109,37 +93,29 @@
                     class='w-20 bg-darker border border-gray-800 rounded text-center py-2'
                     aria-label='Update quantity for {{ item.product.title }}'
                   >
-                </td>
+                </div>
 
-                <!-- Unit price column -->
-                <!--
-                  <td class='py-6 text-right whitespace-nowrap'>
-                    {% if item.original_price > item.final_price %}
-                      <div class='text-light/50 line-through text-sm'>
-                        {{ item.original_price | money }}
-                      </div>
-                      <div class='text-white font-semibold'>
-                        {{ item.final_price | money }}
-                      </div>
-                    {% else %}
-                      <div class='text-white font-semibold'>
-                        {{ item.final_price | money }}
-                      </div>
-                    {% endif %}
-                  </td>
-                -->
+                <div class='text-right'>
+                  <div class='text-sm text-light/60'>Total</div>
+                  <div class='text-primary text-xl font-semibold whitespace-nowrap'>
+                    {{ item.final_line_price | money }}
+                  </div>
 
-                <!-- Line total column -->
-                <td class='py-6 text-right whitespace-nowrap font-semibold text-white'>
-                  {{ item.final_line_price | money }}
-                </td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+                  <a
+                    href='/cart/change?line={{ forloop.index }}&quantity=0'
+                    class='mt-2 inline-block text-white font-medium hover:text-primary'
+                  >
+                    Remove
+                  </a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
 
+        <!-- Footer -->
         <div class='flex flex-col md:flex-row md:justify-between md:items-center gap-6 mt-10'>
-          <button type='submit' name='update' class='text-white hover:text-primary underline'>Update Cart</button>
+          <button type='submit' name='update' class='text-primary'>Update Cart</button>
 
           <div class='text-right'>
             <div class='text-sm text-light/60'>Subtotal</div>
