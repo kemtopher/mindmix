@@ -77,10 +77,9 @@
                   <button
                     class='
                       variant-button relative p-4 border rounded-xl transition-all
-                      hover:cursor-pointer hover:border-primary hover:text-primary
-                      focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black
+                      hover:cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black border-gray-700
                       {% if is_default %} active border-primary {% else %} border-gray-700 {% endif %}
-                      {% unless variant.available %} opacity-50 cursor-not-allowed {% endunless %}
+                      {% unless variant.available %} opacity-50 cursor-not-allowed {% endunless %}{% if variant.metafields.custom.badges != blank %} best-value hover:border-citrus hover:text-citrus {% else %} hover:border-primary hover:text-primary {% endif %}
                     '
                     data-variant-id='{{ variant.id }}'
                     data-variant-price='{{ variant.price }}'
