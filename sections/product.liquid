@@ -62,8 +62,11 @@
                 {% assign is_default = false %}
                 {% assign first_alloc = variant.selling_plan_allocations | first %}
                 {% assign first_selling_plan_id = '' %}
+                {% assign first_subscribe_price = '' %}
+
                 {% if first_alloc %}
                   {% assign first_selling_plan_id = first_alloc.selling_plan.id %}
+                  {% assign first_subscribe_price = first_alloc.price %}
                 {% endif %}
 
                 {% if current_variant and variant.id == current_variant.id and variant.available %}
@@ -86,6 +89,8 @@
                     data-available='{{ variant.available }}'
                     data-default='{% if is_default %}true{% else %}false{% endif %}'
                     data-selling-plan-id='{{ first_selling_plan_id }}'
+                    data-subscribe-price='{{ first_subscribe_price }}'
+                    data-sticks-per-pack='{% if variant.unit_price_measurement.quantity_value %}{{ variant.unit_price_measurement.quantity_value }}{% else %}30{% endif %}'
                     {% unless variant.available %}
                       disabled
                     {% endunless %}
@@ -295,6 +300,8 @@
     });
 
     const variantButtons = document.querySelectorAll('.variant-button');
+    const subscribePriceField = document.getElementById('subscribe-price');
+    const subscribePerStickField = document.getElementById('subscribe-per-stick');
     const priceField = document.getElementById('variant-price');
     const oneTimePriceField = document.getElementById('oneTime-price');
     const oneTimeUnitPriceField = document.getElementById('onetime-per-stick');
@@ -326,6 +333,12 @@
       });
     });
 
+    // cents to money helper
+    function formatMoneyFromCents(cents) {
+      const n = Number(cents || 0) / 100;
+      return n.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    }
+
     function selectVariant(button) {
       // Clear active on all variant buttons
       variantButtons.forEach((btn) => {
@@ -347,6 +360,9 @@
       const variantPrice = button.dataset.variantPrice;
       const variantUnitPrice = button.dataset.variantUnitPrice;
       const variantUnitQuantity = button.dataset.variantUnitQuantity;
+
+      const subscribePrice = button.dataset.subscribePrice; // cents (string) or ''
+      const sticksPerPack = Number(button.dataset.sticksPerPack || variantUnitQuantity || 0);
 
       // ---- SUBSCRIPTION: keep active selling plan in sync with selected variant ----
       const sellingPlanIdForVariant = (button.dataset.sellingPlanId || '').trim();
@@ -370,7 +386,7 @@
         if (sellingPlanInput) sellingPlanInput.value = '';
       }
 
-      // Update price displays
+      // Update price displays one time
       if (priceField && variantPrice) {
         const formatted = (variantPrice / 100).toLocaleString('en-US', {
           style: 'currency',
@@ -388,6 +404,32 @@
         if (oneTimePriceField) oneTimePriceField.textContent = formatted;
         if (oneTimeUnitPriceField) oneTimeUnitPriceField.textContent = formattedUnitPrice;
         if (oneTimeUnitQuantity) oneTimeUnitQuantity.textContent = formattedUnitQuantity;
+      }
+
+      // hide subscription plan if not available
+      if (subscribeOptionEl) {
+        if (!sellingPlanIdForVariant) {
+          subscribeOptionEl.classList.add('opacity-50', 'pointer-events-none');
+        } else {
+          subscribeOptionEl.classList.remove('opacity-50', 'pointer-events-none');
+        }
+      }
+
+      // Update price displays subscription
+      if (subscribePriceField && subscribePerStickField) {
+        if (subscribePrice) {
+          // main subscribe price
+          subscribePriceField.textContent = formatMoneyFromCents(subscribePrice);
+
+          // per-stick price
+          const sticks = sticksPerPack > 0 ? sticksPerPack : 1;
+          const perStickCents = Math.round(Number(subscribePrice) / sticks);
+          subscribePerStickField.textContent = `${formatMoneyFromCents(perStickCents)} / stick`;
+        } else {
+          // variant has no subscription allocation
+          subscribePriceField.textContent = '—';
+          subscribePerStickField.textContent = '—';
+        }
       }
 
       const isAvailable = button.dataset.available === 'true';
