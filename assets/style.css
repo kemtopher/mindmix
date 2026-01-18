@@ -3543,6 +3543,11 @@ textarea:disabled {
     font-size: 1.25rem;
     line-height: 1.75rem;
   }
+
+  .md\:text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -3641,5 +3646,10 @@ textarea:disabled {
 @media (min-width: 1280px) {
   .xl\:max-w-\[50vw\] {
     max-width: 50vw;
+  }
+
+  .xl\:text-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
   }
 }
