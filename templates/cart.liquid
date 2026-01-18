@@ -1,4 +1,4 @@
-{% comment %}Cart template{% endcomment %}
+{% comment %}Cart template (subscription-aware){% endcomment %}
 
 <div class='container-custom py-24'>
   <div class='max-w-[900px] m-auto'>
@@ -10,53 +10,145 @@
           <thead>
             <tr class='border-b border-gray-800'>
               <th class='text-left py-4'>Product</th>
-              <th class='text-center'>Quantity</th>
-              <th class='text-right'>Total</th>
+              <th class='text-center py-4'>Qty</th>
+              <!-- <th class='text-right py-4'>Unit Price</th> -->
+              <th class='text-right py-4'>Total</th>
             </tr>
           </thead>
+
           <tbody>
             {% for item in cart.items %}
-              <tr class='border-b border-gray-800'>
-                <td class='py-4'>
-                  <div class='flex items-center'>
-                    <a href='{{ item.product.url }}' class='w-20 h-20 overflow-hidden flex flex-row items-center'>
+              {% assign has_selling_plan = false %}
+              {% if item.selling_plan_allocation %}
+                {% assign has_selling_plan = true %}
+              {% endif %}
+
+              <tr class='border-b border-gray-800 align-top'>
+                <!-- Product column -->
+                <td class='py-6 pr-4'>
+                  <div class='flex items-start gap-4'>
+                    <a href='{{ item.url }}' class='shrink-0'>
                       <img
                         src='{{ item.image | img_url: '120x' }}'
-                        alt='{{ item.title }}'
-                        class='object-cover mr-4'
+                        alt='{{ item.title | escape }}'
+                        class='object-cover w-20 h-20 rounded-lg border border-gray-800'
                       >
-                      <div>
-                        <h3 class='font-medium'>{{ item.product.title }}</h3>
+                    </a>
+
+                    <div class='w-full'>
+                      <a href='{{ item.url }}' class='block'>
+                        <h3 class='font-semibold text-white leading-tight'>
+                          {{ item.product.title }}
+                        </h3>
+
                         {%- assign variant_size = item.product.variants -%}
                         {% if variant_size.size > 1 %}
-                          <p class='text-light/70'>{{ item.variant.title }}</p>
+                          <p class='text-sm text-light/70 mt-1'>
+                            {{ item.variant.title }}
+                          </p>
+                        {% endif %}
+                      </a>
+
+                      <!-- Purchase type: Subscription vs One-time -->
+                      <div class='mt-2'>
+                        {% if has_selling_plan %}
+                          <span class='inline-flex items-center rounded-full bg-citrus/20 text-citrus px-3 py-1 text-xs font-extrabold uppercase tracking-wide border border-citrus/30'>
+                            Subscription
+                          </span>
+                          <p class='text-sm text-light/80 mt-2'>
+                            Plan:
+                            <span class='font-semibold text-white'>
+                              {{ item.selling_plan_allocation.selling_plan.name }}
+                            </span>
+                          </p>
+                        {% else %}
+                          <span class='inline-flex items-center rounded-full bg-gray-800 text-light px-3 py-1 text-xs font-bold uppercase tracking-wide border border-gray-700'>
+                            One-time purchase
+                          </span>
                         {% endif %}
                       </div>
-                    </a>
+
+                      <!-- Line item properties (if any) -->
+                      {% if item.properties.size > 0 %}
+                        <div class='mt-3 text-sm text-light/70 space-y-1'>
+                          {% for p in item.properties %}
+                            {% assign key = p.first %}
+                            {% assign val = p.last %}
+                            {% if val != blank and key != '_bundle' %}
+                              <div>
+                                <span class='text-light/50'>{{ key }}:</span>
+                                <span class='text-light/80'>
+                                  {{ val }}
+                                </span>
+                              </div>
+                            {% endif %}
+                          {% endfor %}
+                        </div>
+                      {% endif %}
+
+                      <!-- Remove -->
+                      <div class='mt-4'>
+                        <a
+                          href='/cart/change?line={{ forloop.index }}&quantity=0'
+                          class='text-sm text-light/60 hover:text-primary underline'
+                        >
+                          Remove
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </td>
-                <td class='text-center'>
+
+                <!-- Qty column -->
+                <td class='py-6 text-center'>
                   <input
                     type='number'
                     name='updates[]'
                     value='{{ item.quantity }}'
                     min='0'
-                    class='w-20 bg-darker border border-gray-800 rounded text-center'
+                    class='w-20 bg-darker border border-gray-800 rounded text-center py-2'
+                    aria-label='Update quantity for {{ item.product.title }}'
                   >
                 </td>
-                <td class='text-right'>{{ item.line_price | money }}</td>
+
+                <!-- Unit price column -->
+                <!--
+                  <td class='py-6 text-right whitespace-nowrap'>
+                    {% if item.original_price > item.final_price %}
+                      <div class='text-light/50 line-through text-sm'>
+                        {{ item.original_price | money }}
+                      </div>
+                      <div class='text-white font-semibold'>
+                        {{ item.final_price | money }}
+                      </div>
+                    {% else %}
+                      <div class='text-white font-semibold'>
+                        {{ item.final_price | money }}
+                      </div>
+                    {% endif %}
+                  </td>
+                -->
+
+                <!-- Line total column -->
+                <td class='py-6 text-right whitespace-nowrap font-semibold text-white'>
+                  {{ item.final_line_price | money }}
+                </td>
               </tr>
             {% endfor %}
           </tbody>
         </table>
 
-        <div class='flex justify-between items-center mt-8'>
-          <button type='submit' name='update' class='text-white hover:text-primary'>Update Cart</button>
-          <div class='text-2xl font-bold text-primary'>Total: {{ cart.total_price | money }}</div>
+        <div class='flex flex-col md:flex-row md:justify-between md:items-center gap-6 mt-10'>
+          <button type='submit' name='update' class='text-white hover:text-primary underline'>Update Cart</button>
+
+          <div class='text-right'>
+            <div class='text-sm text-light/60'>Subtotal</div>
+            <div class='text-2xl font-bold text-primary'>{{ cart.total_price | money }}</div>
+          </div>
         </div>
 
         <div class='mt-8'>
-          <button type='submit' name='checkout' class='btn btn-primary w-full btn btn-mint'>Checkout</button>
+          <button type='submit' name='checkout' class='btn btn-mint w-full'>Checkout</button>
         </div>
       </form>
     {% else %}
