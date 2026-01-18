@@ -324,6 +324,11 @@ html {
   color: var(--color-primary);
 }
 
+.variant-button.best-value.active:not(:disabled) {
+  color: var(--color-citrus);
+  border-color: var(--color-citrus);
+}
+
 button:disabled.variant-button {
   border-color: #cccccc;
   color: #666666;

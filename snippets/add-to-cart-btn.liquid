@@ -2,13 +2,20 @@
 
 <div class='add-to-cart'>
   <form method='post' action='/cart/add' id='add-to-cart-form' class='mt-8'>
+    <!-- Onetime purchase option -->
     <input
       type='hidden'
       id='selected-variant-id'
       name='id'
       value='{{ current_variant.id }}'
     >
-    <!-- removed from button:  hover:transform hover:scale-105 transition-transform -->
+    <!-- Subscribe option -->
+    <input
+      type='hidden'
+      id='selected-selling-plan'
+      name='selling_plan'
+      value=''
+    >
     <button
       type='button'
       id='add-to-cart-btn'
@@ -42,14 +49,21 @@
     const messageEl = document.getElementById('custom-cart-message');
     if (!form || !btn || !messageEl) return;
 
-    // const variantId = form.querySelector('input[name="id"]').value;
+    // Subscribe/One time option select (MUST be declared before click handler uses them)
+    const subscribeOption = document.getElementById('subscribe-option');
+    const onetimeOption = document.getElementById('onetime-option');
+    const sellingPlanInput = document.getElementById('selected-selling-plan');
 
-    // Change this if you want to allow more than 1
-    const MAX_QTY_PER_VARIANT = 1;
+    const subscribeRadio = document.getElementById('subscribe-selector-radio');
+    const onetimeRadio = document.getElementById('onetime-selector-radio');
 
     function setMessage(text, type = 'info') {
       messageEl.textContent = text;
       messageEl.className = 'cart-message mt-4 text-primary cart-message--' + type;
+    }
+
+    function getActiveSellingPlanId() {
+      return (window.__ACTIVE_SELLING_PLAN_ID__ || '').trim();
     }
 
     async function getCart() {
@@ -63,7 +77,10 @@
       return cart.items.find((item) => item.variant_id === idInt);
     }
 
+    // Add to cart POST
     async function addToCart(variantId, quantity = 1) {
+      const sellingPlan = sellingPlanInput?.value?.trim();
+
       const res = await fetch('/cart/add.js', {
         method: 'POST',
         headers: {
@@ -71,7 +88,11 @@
           Accept: 'application/json',
         },
         credentials: 'same-origin',
-        body: JSON.stringify({ id: variantId, quantity }),
+        body: JSON.stringify({
+          id: variantId,
+          quantity,
+          ...(sellingPlan ? { selling_plan: sellingPlan } : {}),
+        }),
       });
 
       if (!res.ok) {
@@ -97,6 +118,14 @@
       // Read current variant at click time
       const variantId = form.querySelector('input[name="id"]').value;
 
+      // If user selected subscribe but selling_plan is empty, block add
+      const subscribeSelected = subscribeOption?.classList.contains('ring-2');
+      const sellingPlan = sellingPlanInput?.value?.trim();
+      if (subscribeSelected && !sellingPlan) {
+        setMessage('Please select a subscription option that supports subscriptions.', 'error');
+        return;
+      }
+
       setMessage('');
       btn.disabled = true;
 
@@ -112,15 +141,11 @@
           btn.disabled = false;
           return;
         }
-        // if (MAX_QTY_PER_VARIANT && existingItem && existingItem.quantity >= MAX_QTY_PER_VARIANT) {
-        //   setMessage('Only one trial pack allowed per order', 'warning');
-        //   btn.disabled = false;
-        //   return;
-        // }
 
         await addToCart(variantId, 1);
         const updatedCart = await getCart();
-        document.getElementById('cart-count').innerHTML = updatedCart.item_count;
+        const cartCountEl = document.getElementById('cart-count');
+        if (cartCountEl) cartCountEl.innerHTML = updatedCart.item_count;
         setMessage('Added to cart ✅', 'success');
       } catch (err) {
         setMessage(err.message || 'Sorry, this item is out of stock.', 'error');
@@ -128,5 +153,41 @@
         btn.disabled = false;
       }
     });
+
+    function selectPurchaseType(type) {
+      const activePlanId = getActiveSellingPlanId();
+
+      if (type === 'subscribe') {
+        // UI card state
+        subscribeOption?.classList.add('ring-2');
+        onetimeOption?.classList.remove('ring-2', 'ring-primary');
+
+        // radio btn
+        subscribeRadio?.classList.add('bg-citrus');
+        onetimeRadio?.classList.remove('bg-primary');
+
+        // Guard: no selling plan
+        if (!activePlanId) {
+          setMessage('Subscription is not available for this option.', 'error');
+          if (sellingPlanInput) sellingPlanInput.value = '';
+          return;
+        }
+
+        if (sellingPlanInput) sellingPlanInput.value = String(activePlanId);
+      } else {
+        // UI card state
+        onetimeOption?.classList.add('ring-2', 'ring-primary');
+        subscribeOption?.classList.remove('ring-2');
+
+        // radio btn
+        onetimeRadio?.classList.add('bg-primary');
+        subscribeRadio?.classList.remove('bg-citrus');
+
+        if (sellingPlanInput) sellingPlanInput.value = '';
+      }
+    }
+
+    subscribeOption?.addEventListener('click', () => selectPurchaseType('subscribe'));
+    onetimeOption?.addEventListener('click', () => selectPurchaseType('onetime'));
   });
 </script>
