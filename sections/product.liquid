@@ -204,7 +204,7 @@
             </ul>
 
             <div class='mt-4 border-t border-citrus/30 pt-4 text-center'>
-              <span class='text-base font-black text-citrus'> Save $0 / year </span>
+              <span id='subscribe-save-year' class='text-base font-black text-citrus'> Save $0 / year </span>
             </div>
           </div>
 
@@ -370,6 +370,7 @@
       const sellingPlanInput = document.getElementById('selected-selling-plan');
       const subscribeOptionEl = document.getElementById('subscribe-option');
       const onetimeOptionEl = document.getElementById('onetime-option');
+      const subscribeSaveYearEl = document.getElementById('subscribe-save-year');
 
       const subscribeIsSelected = subscribeOptionEl?.classList.contains('ring-2');
 
@@ -428,6 +429,19 @@
           // variant has no subscription allocation
           subscribePriceField.textContent = '—';
           subscribePerStickField.textContent = '—';
+        }
+      }
+
+      // Yearly savings on subscribe card
+      if (subscribeSaveYearEl) {
+        // If no subscription for this variant, show 0 (or hide)
+        if (!button.dataset.subscribePrice) {
+          subscribeSaveYearEl.textContent = 'Save $0 / year';
+        } else {
+          const monthlySavings = Math.max(0, variantPrice - subscribePrice);
+          const yearlySavings = monthlySavings * 12;
+
+          subscribeSaveYearEl.textContent = `Save ${formatMoneyFromCents(yearlySavings)} / year`;
         }
       }
 
