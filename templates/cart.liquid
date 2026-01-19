@@ -26,7 +26,7 @@
                   <img
                     src='{{ item.image | img_url: '120x' }}'
                     alt='{{ item.title | escape }}'
-                    class='object-cover w-20 h-20 rounded-lg border border-gray-800'
+                    class='object-cover w-20 rounded-lg border border-gray-800'
                   >
                 </a>
 
@@ -96,7 +96,7 @@
                 </div>
 
                 <div class='text-right'>
-                  <div class='text-sm text-light/60'>Total</div>
+                  <!-- <div class='text-sm text-light/60'>Total</div> -->
                   <div class='text-primary text-xl font-semibold whitespace-nowrap'>
                     {{ item.final_line_price | money }}
                   </div>
