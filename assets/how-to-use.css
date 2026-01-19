@@ -1,7 +1,6 @@
 /* MindMix — How To Use (grid + modal) */
 
 .mm-how-section-title {
-  font-family: Oswald, system-ui, sans-serif;
   font-size: 48px;
   color: #00ff94;
 }
@@ -48,7 +47,6 @@
 }
 
 .mm-how-title {
-  font-family: Oswald, system-ui, sans-serif;
   font-size: 16px;
   font-weight: 600;
   line-height: 1.3;
@@ -151,7 +149,6 @@
 }
 
 .mm-how-modal-title {
-  font-family: Oswald, system-ui, sans-serif;
   font-size: 28px;
   font-weight: 700;
   color: #00ff94;
@@ -172,7 +169,6 @@
 }
 
 .mm-how-section-label {
-  font-family: Oswald, system-ui, sans-serif;
   font-size: 14px;
   font-weight: 600;
   color: #ff6b35;

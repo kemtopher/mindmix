@@ -19,7 +19,7 @@
         {% when 'step' %}
           <div class='max-w-[260px]' {{ block.shopify_attributes }}>
             <div class='mm-howworks-circle mb-[18px] mx-auto'>
-              <span class='mm-howworks-number'>
+              <span class='mm-howworks-number text-primary'>
                 {% if block.settings.number != blank %}
                   {{ block.settings.number }}
                 {% else %}
@@ -29,13 +29,13 @@
             </div>
 
             {% if block.settings.label != blank %}
-              <div class='font-[Oswald] text-[22px] font-bold mb-[10px]'>
+              <div class='text-[22px] font-bold mb-[10px] text-primary'>
                 {{ block.settings.label }}
               </div>
             {% endif %}
 
             {% if block.settings.text != blank %}
-              <p class='text-[14px] leading-[1.7] text-white/80 m-0'>
+              <p class='text-[14px] leading-[1.7] text-white/80 m-0 text-primary'>
                 {{ block.settings.text }}
               </p>
             {% endif %}
