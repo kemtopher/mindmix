@@ -1123,6 +1123,10 @@ video {
   max-height: 1rem;
 }
 
+.max-h-5 {
+  max-height: 1.25rem;
+}
+
 .min-h-\[60vh\] {
   min-height: 60vh;
 }
