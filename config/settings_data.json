@@ -538,8 +538,8 @@
           "column_2_link_Ct39wn": {
             "type": "column_2_link",
             "settings": {
-              "link_label": "All Products",
-              "link_url": "shopify://collections/menu-product"
+              "link_label": "Green Apple Kiwi",
+              "link_url": "shopify://products/green-apple-kiwi"
             }
           },
           "column_2_link_tmFqqy": {
