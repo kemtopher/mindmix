@@ -57,20 +57,18 @@
         <h1 class='text-2xl lg:text-4xl font-bold text-primary mb-4'>{{ product.title | upcase }}</h1>
         <div class='text-sm text-white h-max mb-4 font-light'>{{ product.description }}</div>
 
-        {% assign current_variant = product.selected_or_first_available_variant %}
+        <!-- {% assign current_variant = product.selected_or_first_available_variant %} -->
 
-        <!--
-          <div
-            id='variant-price'
-            class='text-2xl lg:text-3xl text-primary {% unless current_variant.available %}out-of-stock{% endunless %}'
-          >
-            {% if current_variant.price == 0 %}
-              Free - just pay shipping
-            {% else %}
-              {{ current_variant.price | money }}
-            {% endif %}
-          </div>
-        -->
+        <div
+          id='variant-price'
+          class='hidden text-2xl lg:text-3xl text-primary {% unless current_variant.available %}out-of-stock{% endunless %}'
+        >
+          {% if current_variant.price == 0 %}
+            Free - just pay shipping
+          {% else %}
+            {{ current_variant.price | money }}
+          {% endif %}
+        </div>
       </div>
 
       <!-- Product variant information -->
@@ -80,7 +78,15 @@
 
           {% assign variant_size = product.variants %}
           {% if variant_size.size > 0 %}
-            {% assign current_variant = product.selected_or_first_available_variant %}
+            {% assign fallback_variant = product.selected_or_first_available_variant %}
+            {% assign default_variant_id = fallback_variant.id %}
+
+            {%- for v in product.variants -%}
+              {%- if v.available and v.metafields.custom.default_selected_product == true -%}
+                {% assign default_variant_id = v.id %}
+                {% break %}
+              {%- endif -%}
+            {%- endfor -%}
 
             <div class='variant-well flex py-4 gap-4 group flex-wrap'>
               {% for variant in product.variants %}
@@ -94,7 +100,7 @@
                   {% assign first_subscribe_price = first_alloc.price %}
                 {% endif %}
 
-                {% if current_variant and variant.id == current_variant.id and variant.available %}
+                {% if variant.available and variant.id == default_variant_id %}
                   {% assign is_default = true %}
                 {% endif %}
 
@@ -148,9 +154,7 @@
         </div>
       {% endif %}
 
-      {% render 'da-restock' %}
-
-      <div class='mt-12'>
+      <div class='mt-12 hide-if-none'>
         <p class='mb-5 text-sm font-semibold uppercase tracking-wider text-gray-400'>Choose Your Option:</p>
 
         <div class='grid gap-5 grid-cols-2'>
@@ -288,6 +292,8 @@
       </div>
 
       {% render 'add-to-cart-btn' %}
+
+      {% render 'da-restock' %}
     </div>
   </div>
 </section>
@@ -324,6 +330,17 @@
     });
 
     const variantButtons = document.querySelectorAll('.variant-button');
+
+    // Hide .hide-if-none if ALL variants are sold out
+    const hideIfNoneEl = document.querySelector('.hide-if-none');
+
+    if (hideIfNoneEl) {
+      const anyAvailable = Array.from(variantButtons).some((btn) => btn.dataset.available === 'true');
+
+      if (!anyAvailable) hideIfNoneEl.classList.add('hidden');
+      else hideIfNoneEl.classList.remove('hidden');
+    }
+
     const subscribePriceField = document.getElementById('subscribe-price');
     const subscribePerStickField = document.getElementById('subscribe-per-stick');
     const priceField = document.getElementById('variant-price');
