@@ -538,15 +538,22 @@
           "column_2_link_Ct39wn": {
             "type": "column_2_link",
             "settings": {
-              "link_label": "All Products",
-              "link_url": "shopify://collections/menu-product"
+              "link_label": "Green Apple Kiwi",
+              "link_url": "shopify://products/green-apple-kiwi"
             }
           },
           "column_2_link_tmFqqy": {
             "type": "column_2_link",
             "settings": {
-              "link_label": "Try It Free",
-              "link_url": "shopify://products/free-trial-pack"
+              "link_label": "Guava Passion",
+              "link_url": "shopify://products/guava-passion"
+            }
+          },
+          "column_2_link_fd7QCa": {
+            "type": "column_2_link",
+            "settings": {
+              "link_label": "Blueberry Lemon Tea",
+              "link_url": "shopify://products/blueberry-lemon-tea"
             }
           }
         },
@@ -554,7 +561,8 @@
           "column_3_link_JT63M7",
           "column_3_link_zk47LB",
           "column_2_link_Ct39wn",
-          "column_2_link_tmFqqy"
+          "column_2_link_tmFqqy",
+          "column_2_link_fd7QCa"
         ],
         "settings": {
           "logo_variant": "white",
