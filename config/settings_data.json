@@ -552,8 +552,8 @@
           "column_2_link_3BcRqA": {
             "type": "column_2_link",
             "settings": {
-              "link_label": "Example link",
-              "link_url": ""
+              "link_label": "Blueberry Lemon Tea",
+              "link_url": "shopify://products/blueberry-lemon-tea"
             }
           }
         },
