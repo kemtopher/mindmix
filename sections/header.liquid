@@ -150,14 +150,6 @@
           </ul>
         </div>
       {% endif %}
-
-      <!--
-        {% unless customer %}
-          {% unless customer.tags contains 'has_trial' %}
-            {% render 'try-it-free-btn' %}
-          {% endunless %}
-        {% endunless %}
-      -->
     </nav>
 
     <!-- BEGIN MOBILE MENU -->
@@ -200,9 +192,6 @@
   >
     <nav class='flex flex-col space-y-4'>
       <ul>
-        <li class='border-b border-white py-4 text-semibold text-3xl px-4 w-full'>
-          {% render 'try-it-free-btn' %}
-        </li>
         <li class='border-b border-white py-4 px-4'>
           <button
             class='toggle-list-btn w-full h-[42px] flex justify-between items-center group'

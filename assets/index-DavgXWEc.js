@@ -9112,40 +9112,40 @@ const Ae = ({
                 }),
               ],
             }),
-            i.jsxs('div', {
-              className: 'hidden md:block relative group',
-              children: [
-                i.jsxs(Ae, {
-                  variant: 'primary',
-                  href: '#pricing',
-                  className:
-                    'relative overflow-hidden group-hover:scale-105 transform transition-all duration-500',
-                  children: [
-                    i.jsxs('span', {
-                      className: 'relative z-10 text-center',
-                      children: [
-                        i.jsx('span', {
-                          className: 'text-lg font-bold block',
-                          children: 'Try It Free',
-                        }),
-                        i.jsx('span', {
-                          className: 'block text-sm font-normal opacity-90',
-                          children: 'Just Cover Shipping',
-                        }),
-                      ],
-                    }),
-                    i.jsx('div', {
-                      className:
-                        'absolute inset-0 bg-gradient-to-r from-cta via-primary via-blue to-cta bg-[length:300%_100%] animate-shimmer opacity-90',
-                    }),
-                  ],
-                }),
-                i.jsx('div', {
-                  className:
-                    'absolute -inset-[2px] bg-gradient-to-r from-cta via-primary via-blue to-cta opacity-0 blur-md group-hover:opacity-75 transition-opacity duration-700 -z-10',
-                }),
-              ],
-            }),
+            // i.jsxs('div', {
+            //   className: 'hidden md:block relative group',
+            //   children: [
+            //     i.jsxs(Ae, {
+            //       variant: 'primary',
+            //       href: '#pricing',
+            //       className:
+            //         'relative overflow-hidden group-hover:scale-105 transform transition-all duration-500',
+            //       children: [
+            //         i.jsxs('span', {
+            //           className: 'relative z-10 text-center',
+            //           children: [
+            //             i.jsx('span', {
+            //               className: 'text-lg font-bold block',
+            //               children: 'Try It Free',
+            //             }),
+            //             i.jsx('span', {
+            //               className: 'block text-sm font-normal opacity-90',
+            //               children: 'Just Cover Shipping',
+            //             }),
+            //           ],
+            //         }),
+            //         i.jsx('div', {
+            //           className:
+            //             'absolute inset-0 bg-gradient-to-r from-cta via-primary via-blue to-cta bg-[length:300%_100%] animate-shimmer opacity-90',
+            //         }),
+            //       ],
+            //     }),
+            //     i.jsx('div', {
+            //       className:
+            //         'absolute -inset-[2px] bg-gradient-to-r from-cta via-primary via-blue to-cta opacity-0 blur-md group-hover:opacity-75 transition-opacity duration-700 -z-10',
+            //     }),
+            //   ],
+            // }),
             i.jsx('button', {
               className: 'md:hidden text-light hover:text-primary',
               onClick: l,
