@@ -1,6 +1,6 @@
 <section
   id='shopify-section-main-product'
-  class='w-full pt-44 pb-16 flex flex-col md:flex-row items-center justify-center'
+  class='w-full pt-24 pb-16 flex flex-col md:flex-row items-center justify-center'
 >
   <div class='container flex flex-col lg:flex-row justify-between gap-8'>
     <div class='product-gallery w-full h-full lg:max-h-[500px] flex flex-col lg:flex-row gap-4 lg:gap-8 justify-start'>
@@ -19,23 +19,25 @@
         {% endfor %}
       </div>
       <!-- Product info MOBILE -->
-      <div class='product-info pb-8 md:hidden'>
-        <h1 class='text-2xl lg:text-4xl font-bold text-primary mb-4'>{{ product.title | upcase }}</h1>
-        <div class='text-sm text-white h-max mb-4 font-light'>{{ product.description }}</div>
+      <!--
+        <div class='product-info pb-8'>
+          <h1 class='text-2xl lg:text-4xl font-bold text-primary mb-4'>{{ product.title | upcase }}</h1>
+          <div class='text-sm text-white h-max mb-4 font-light'>{{ product.description }}</div>
 
-        {% assign current_variant = product.selected_or_first_available_variant %}
+          {% assign current_variant = product.selected_or_first_available_variant %}
 
-        <div
-          id='variant-price'
-          class='text-2xl lg:text-3xl text-primary {% unless current_variant.available %}out-of-stock{% endunless %}'
-        >
-          {% if current_variant.price == 0 %}
-            Free - just pay shipping
-          {% else %}
-            {{ current_variant.price | money }}
-          {% endif %}
+          <div
+            id='variant-price'
+            class='text-2xl lg:text-3xl text-primary {% unless current_variant.available %}out-of-stock{% endunless %}'
+          >
+            {% if current_variant.price == 0 %}
+              Free - just pay shipping
+            {% else %}
+              {{ current_variant.price | money }}
+            {% endif %}
+          </div>
         </div>
-      </div>
+      -->
 
       <!-- Product images -->
       <div class='order-1 lg:order-2 text-center overflow-hidden'>
@@ -51,7 +53,7 @@
 
     <div class='product-details w-full'>
       <!-- Product info DESKTOP -->
-      <div class='product-info pb-8 hidden md:block'>
+      <div class='product-info pb-8'>
         <h1 class='text-2xl lg:text-4xl font-bold text-primary mb-4'>{{ product.title | upcase }}</h1>
         <div class='text-sm text-white h-max mb-4 font-light'>{{ product.description }}</div>
 

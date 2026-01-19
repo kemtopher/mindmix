@@ -756,10 +756,6 @@ video {
   top: 100%;
 }
 
-.bottom-6 {
-  bottom: 1.5rem;
-}
-
 .-z-10 {
   z-index: -10;
 }
@@ -882,10 +878,6 @@ video {
   margin-right: 0.75rem;
 }
 
-.mr-4 {
-  margin-right: 1rem;
-}
-
 .mt-0\.5 {
   margin-top: 0.125rem;
 }
@@ -936,10 +928,6 @@ video {
 
 .mt-auto {
   margin-top: auto;
-}
-
-.mt-5 {
-  margin-top: 1.25rem;
 }
 
 .block {
@@ -1127,10 +1115,6 @@ video {
   min-height: 100vh;
 }
 
-.min-h-full {
-  min-height: 100%;
-}
-
 .w-0 {
   width: 0px;
 }
@@ -1243,8 +1227,8 @@ video {
   width: 100vw;
 }
 
-.w-28 {
-  width: 7rem;
+.min-w-0 {
+  min-width: 0px;
 }
 
 .min-w-\[220px\] {
@@ -1257,10 +1241,6 @@ video {
 
 .min-w-full {
   min-width: 100%;
-}
-
-.min-w-0 {
-  min-width: 0px;
 }
 
 .max-w-2xl {
@@ -1504,10 +1484,6 @@ video {
   flex-wrap: wrap;
 }
 
-.content-between {
-  align-content: space-between;
-}
-
 .items-start {
   align-items: flex-start;
 }
@@ -1522,10 +1498,6 @@ video {
 
 .items-baseline {
   align-items: baseline;
-}
-
-.items-stretch {
-  align-items: stretch;
 }
 
 .justify-start {
@@ -1625,6 +1597,12 @@ video {
   margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
+.space-y-1 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
+}
+
 .space-y-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
@@ -1641,12 +1619,6 @@ video {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
-}
-
-.space-y-1 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
 }
 
 .justify-self-end {
@@ -1818,6 +1790,10 @@ video {
   background-color: rgb(255 165 0 / var(--tw-bg-opacity, 1));
 }
 
+.bg-citrus\/20 {
+  background-color: rgb(255 165 0 / 0.2);
+}
+
 .bg-dark {
   --tw-bg-opacity: 1;
   background-color: rgb(11 11 11 / var(--tw-bg-opacity, 1));
@@ -1858,6 +1834,11 @@ video {
   background-color: rgb(229 231 235 / var(--tw-bg-opacity, 1));
 }
 
+.bg-gray-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
+}
+
 .bg-light {
   --tw-bg-opacity: 1;
   background-color: rgb(224 224 224 / var(--tw-bg-opacity, 1));
@@ -1896,15 +1877,6 @@ video {
 
 .bg-white\/50 {
   background-color: rgb(255 255 255 / 0.5);
-}
-
-.bg-citrus\/20 {
-  background-color: rgb(255 165 0 / 0.2);
-}
-
-.bg-gray-800 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
 }
 
 .bg-opacity-70 {
@@ -2206,6 +2178,11 @@ video {
   padding-bottom: 1.25rem;
 }
 
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
 .py-\[100px\] {
   padding-top: 100px;
   padding-bottom: 100px;
@@ -2219,11 +2196,6 @@ video {
 .py-\[60px\] {
   padding-top: 60px;
   padding-bottom: 60px;
-}
-
-.py-6 {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
 }
 
 .pb-1 {
@@ -2282,10 +2254,6 @@ video {
   padding-top: 1rem;
 }
 
-.pt-44 {
-  padding-top: 11rem;
-}
-
 .pt-5 {
   padding-top: 1.25rem;
 }
@@ -2302,16 +2270,12 @@ video {
   padding-top: 36px;
 }
 
-.pr-4 {
-  padding-right: 1rem;
+.pt-44 {
+  padding-top: 11rem;
 }
 
-.pr-0 {
-  padding-right: 0px;
-}
-
-.pr-2 {
-  padding-right: 0.5rem;
+.pt-32 {
+  padding-top: 8rem;
 }
 
 .text-left {
@@ -2324,10 +2288,6 @@ video {
 
 .text-right {
   text-align: right;
-}
-
-.align-top {
-  vertical-align: top;
 }
 
 .font-\[Oswald\] {
@@ -2582,10 +2542,6 @@ video {
 .text-yellow-500 {
   --tw-text-opacity: 1;
   color: rgb(234 179 8 / var(--tw-text-opacity, 1));
-}
-
-.underline {
-  text-decoration-line: underline;
 }
 
 .line-through {
@@ -3437,6 +3393,10 @@ textarea:disabled {
     width: 50%;
   }
 
+  .md\:w-1\/4 {
+    width: 25%;
+  }
+
   .md\:w-1\/5 {
     width: 20%;
   }
@@ -3463,14 +3423,6 @@ textarea:disabled {
 
   .md\:w-\[60vw\] {
     width: 60vw;
-  }
-
-  .md\:w-full {
-    width: 100%;
-  }
-
-  .md\:w-1\/4 {
-    width: 25%;
   }
 
   .md\:min-w-\[150px\] {
@@ -3560,6 +3512,10 @@ textarea:disabled {
     padding-top: 2.5rem;
   }
 
+  .md\:pt-44 {
+    padding-top: 11rem;
+  }
+
   .md\:text-left {
     text-align: left;
   }
@@ -3594,9 +3550,9 @@ textarea:disabled {
     line-height: 1.75rem;
   }
 
-  .md\:text-3xl {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
+  .md\:text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
   }
 }
 
