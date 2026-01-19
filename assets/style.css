@@ -768,6 +768,46 @@ video {
   right: 50%;
 }
 
+.right-8 {
+  right: 2rem;
+}
+
+.top-16 {
+  top: 4rem;
+}
+
+.top-32 {
+  top: 8rem;
+}
+
+.top-40 {
+  top: 10rem;
+}
+
+.top-8 {
+  top: 2rem;
+}
+
+.top-\[8rem\] {
+  top: 8rem;
+}
+
+.right-\[9rem\] {
+  right: 9rem;
+}
+
+.top-\[6rem\] {
+  top: 6rem;
+}
+
+.right-1 {
+  right: 0.25rem;
+}
+
+.top-12 {
+  top: 3rem;
+}
+
 .-z-10 {
   z-index: -10;
 }
@@ -3422,6 +3462,10 @@ textarea:disabled {
 }
 
 @media (min-width: 640px) {
+  .sm\:right-\[9rem\] {
+    right: 9rem;
+  }
+
   .sm\:order-1 {
     order: 1;
   }
@@ -3462,6 +3506,14 @@ textarea:disabled {
 @media (min-width: 768px) {
   .md\:right-1\/2 {
     right: 50%;
+  }
+
+  .md\:right-\[9rem\] {
+    right: 9rem;
+  }
+
+  .md\:top-\[6rem\] {
+    top: 6rem;
   }
 
   .md\:col-span-2 {
@@ -3732,6 +3784,10 @@ textarea:disabled {
 }
 
 @media (min-width: 1024px) {
+  .lg\:right-\[9rem\] {
+    right: 9rem;
+  }
+
   .lg\:order-1 {
     order: 1;
   }
@@ -3867,6 +3923,14 @@ textarea:disabled {
 }
 
 @media (min-width: 1280px) {
+  .xl\:right-\[9rem\] {
+    right: 9rem;
+  }
+
+  .xl\:top-\[6rem\] {
+    top: 6rem;
+  }
+
   .xl\:block {
     display: block;
   }
@@ -3878,5 +3942,11 @@ textarea:disabled {
   .xl\:text-4xl {
     font-size: 2.25rem;
     line-height: 2.5rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .\32xl\:top-\[6rem\] {
+    top: 6rem;
   }
 }
