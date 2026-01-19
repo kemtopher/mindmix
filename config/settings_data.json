@@ -548,13 +548,21 @@
               "link_label": "Guava Passion",
               "link_url": "shopify://products/guava-passion"
             }
+          },
+          "column_2_link_Rm4c7g": {
+            "type": "column_2_link",
+            "settings": {
+              "link_label": "Blueberry Lemon Tea",
+              "link_url": "shopify://products/blueberry-lemon-tea"
+            }
           }
         },
         "block_order": [
           "column_3_link_JT63M7",
           "column_3_link_zk47LB",
           "column_2_link_Ct39wn",
-          "column_2_link_tmFqqy"
+          "column_2_link_tmFqqy",
+          "column_2_link_Rm4c7g"
         ],
         "settings": {
           "logo_variant": "white",
