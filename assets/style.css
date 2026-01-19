@@ -942,6 +942,10 @@ video {
   margin-top: auto;
 }
 
+.mt-0 {
+  margin-top: 0px;
+}
+
 .block {
   display: block;
 }
@@ -1317,6 +1321,10 @@ video {
 
 .max-w-xl {
   max-width: 36rem;
+}
+
+.max-w-5 {
+  max-width: 1.25rem;
 }
 
 .flex-1 {
@@ -3445,6 +3453,10 @@ textarea:disabled {
   .sm\:overflow-hidden {
     overflow: hidden;
   }
+
+  .sm\:p-4 {
+    padding: 1rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -3462,6 +3474,10 @@ textarea:disabled {
 
   .md\:mb-16 {
     margin-bottom: 4rem;
+  }
+
+  .md\:mt-1 {
+    margin-top: 0.25rem;
   }
 
   .md\:block {
@@ -3606,6 +3622,14 @@ textarea:disabled {
     padding: 2rem;
   }
 
+  .md\:p-6 {
+    padding: 1.5rem;
+  }
+
+  .md\:p-4 {
+    padding: 1rem;
+  }
+
   .md\:py-24 {
     padding-top: 6rem;
     padding-bottom: 6rem;
@@ -3700,6 +3724,11 @@ textarea:disabled {
     font-size: 0.75rem;
     line-height: 1rem;
   }
+
+  .md\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -3709,6 +3738,10 @@ textarea:disabled {
 
   .lg\:order-2 {
     order: 2;
+  }
+
+  .lg\:block {
+    display: block;
   }
 
   .lg\:inline-block {
@@ -3783,6 +3816,10 @@ textarea:disabled {
     gap: 2rem;
   }
 
+  .lg\:p-6 {
+    padding: 1.5rem;
+  }
+
   .lg\:\!px-44 {
     padding-left: 11rem !important;
     padding-right: 11rem !important;
@@ -3830,6 +3867,10 @@ textarea:disabled {
 }
 
 @media (min-width: 1280px) {
+  .xl\:block {
+    display: block;
+  }
+
   .xl\:max-w-\[50vw\] {
     max-width: 50vw;
   }

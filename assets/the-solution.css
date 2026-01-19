@@ -41,7 +41,7 @@
 
 /* Number / text */
 .mm-solution-number {
-  font-family: 'Oswald', system-ui, sans-serif;
+  /* font-family: 'Oswald', system-ui, sans-serif; */
   font-weight: 700;
   font-size: clamp(44px, 7vw, 72px);
   line-height: 1;
@@ -52,7 +52,7 @@
 }
 
 .mm-solution-label {
-  font-family: 'Oswald', system-ui, sans-serif;
+  /* font-family: 'Oswald', system-ui, sans-serif; */
   font-size: 16px;
   text-transform: uppercase;
   letter-spacing: 0.12em;

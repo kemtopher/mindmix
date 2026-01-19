@@ -18,26 +18,6 @@
           {% endif %}
         {% endfor %}
       </div>
-      <!-- Product info MOBILE -->
-      <!--
-        <div class='product-info pb-8'>
-          <h1 class='text-2xl lg:text-4xl font-bold text-primary mb-4'>{{ product.title | upcase }}</h1>
-          <div class='text-sm text-white h-max mb-4 font-light'>{{ product.description }}</div>
-
-          {% assign current_variant = product.selected_or_first_available_variant %}
-
-          <div
-            id='variant-price'
-            class='text-2xl lg:text-3xl text-primary {% unless current_variant.available %}out-of-stock{% endunless %}'
-          >
-            {% if current_variant.price == 0 %}
-              Free - just pay shipping
-            {% else %}
-              {{ current_variant.price | money }}
-            {% endif %}
-          </div>
-        </div>
-      -->
 
       <!-- Product images -->
       <div class='order-1 lg:order-2 text-center overflow-hidden'>
@@ -166,7 +146,7 @@
             class='
               relative cursor-pointer rounded-2xl border-2 border-citrus
               bg-gradient-to-br from-citrus/20 to-citrus/5
-              p-6 shadow-xl shadow-citrus/30
+              pt-4 p-4 md:p-6 shadow-xl shadow-citrus/30
               transition-all hover:-translate-y-1 hover:shadow-citrus/50
               focus:outline-none focus-visible:ring-2 focus-visible:ring-citrus/60
             '
@@ -184,7 +164,7 @@
             <div class='mb-4 flex items-start gap-3'>
               <div
                 id='subscribe-selector-radio'
-                class='relative mt-1 h-5 w-5 max-h-5 rounded-full border-2 border-citrus'
+                class='relative mt-1 h-5 w-5 max-h-5 rounded-full border-2 border-citrus hidden md:block'
               >
                 <!-- <div class='absolute inset-0.5 rounded-full bg-citrus'></div> -->
               </div>
@@ -196,7 +176,9 @@
 
             <div class='mb-4'>
               <div class='flex items-baseline gap-2'>
-                <div id='subscribe-price' class='text-4xl lg:text-3xl xl:text-4xl font-black text-white'>$0.00</div>
+                <div id='subscribe-price' class='text-2xl md:text-4xl lg:text-3xl xl:text-4xl font-black text-white'>
+                  $0.00
+                </div>
                 <span class='text-base font-semibold text-gray-300'>/mo</span>
               </div>
 
@@ -214,26 +196,26 @@
             </div>
 
             <ul class='space-y-2 text-sm'>
-              <li class='flex items-start gap-2 text-white'>
+              <li class='text-xs md:text-base flex items-start gap-2 text-white'>
                 <span class='mt-1 text-citrus'>✓</span>
                 <p><strong class='text-citrus'>Save 20%</strong> on every order</p>
               </li>
-              <li class='flex items-start gap-2 text-white'>
+              <li class='text-xs md:text-base flex items-start gap-2 text-white'>
                 <span class='mt-1 text-citrus'>✓</span>
                 Free shipping on all subscriptions
               </li>
-              <li class='flex items-start gap-2 text-white'>
+              <li class='text-xs md:text-base flex items-start gap-2 text-white'>
                 <span class='mt-1 text-citrus'>✓</span>
                 Early access to new flavors
               </li>
-              <li class='flex items-start gap-2 text-white'>
+              <li class='text-xs md:text-base flex items-start gap-2 text-white'>
                 <span class='mt-1 text-citrus'>✓</span>
                 Cancel anytime
               </li>
             </ul>
 
             <div class='mt-4 border-t border-citrus/30 pt-4 text-center'>
-              <span id='subscribe-save-year' class='text-base font-black text-citrus'> Save $0 / year </span>
+              <span id='subscribe-save-year' class='text-sm md:text-base font-black text-citrus'> Save $0 / year </span>
             </div>
           </div>
 
@@ -244,12 +226,15 @@
             data-purchase-type='onetime'
             class='
               relative cursor-pointer rounded-2xl border-2 border-gray-700
-              p-6 transition-all hover:-translate-y-1 hover:border-primary hover:shadow-lg
+              pt-4 p-4 md:p-6 transition-all hover:-translate-y-1 hover:border-primary hover:shadow-lg
               focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60
             '
           >
             <div class='mb-4 flex items-start gap-3'>
-              <div id='onetime-selector-radio' class='mt-1 h-5 w-5 max-h-5 rounded-full border-2 border-primary'></div>
+              <div
+                id='onetime-selector-radio'
+                class='mt-1 h-5 w-5 max-h-5 rounded-full border-2 border-primary hidden md:block'
+              ></div>
               <div>
                 <h3 class='text-xl font-bold text-white'>One-Time Purchase</h3>
                 <p class='mt-1 text-xs text-gray-500'>No subscription</p>
@@ -258,7 +243,9 @@
 
             <div class='mb-4'>
               <div class='flex items-baseline gap-2'>
-                <div id='oneTime-price' class='text-4xl font-black text-white'>{{ current_variant.price | money }}</div>
+                <div id='oneTime-price' class='text-2xl md:text-4xl lg:text-3xl xl:text-4xl font-black text-white'>
+                  {{ current_variant.price | money }}
+                </div>
               </div>
 
               <div class='mt-2 text-sm text-gray-400'>
@@ -270,19 +257,19 @@
             </div>
 
             <ul class='space-y-2 text-sm text-gray-400'>
-              <li class='flex items-start gap-2'>
+              <li class='text-xs md:text-base flex items-start gap-2'>
                 <span class='mt-1'>✓</span>
                 <p>Full supply (<span id='onetime-pack-size'>30</span> sticks)</p>
               </li>
-              <li class='flex items-start gap-2'>
+              <li class='text-xs md:text-base flex items-start gap-2'>
                 <span class='mt-1'>✓</span>
                 Shipping calculated at checkout
               </li>
-              <li class='flex items-start gap-2'>
+              <li class='text-xs md:text-base flex items-start gap-2'>
                 <span class='mt-1'>✓</span>
                 30-day money-back guarantee
               </li>
-              <li class='flex items-start gap-2'>
+              <li class='text-xs md:text-base flex items-start gap-2'>
                 <span class='mt-1'>✓</span>
                 No commitment
               </li>
