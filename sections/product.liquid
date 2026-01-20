@@ -7,9 +7,9 @@
       <div class='product-images scrollbar-hide overflow-x-scroll overflow-y-hidden w-full lg:max-w-[72px] flex flex-row lg:flex-col gap-4 order-2 lg:order-1 justify-start'>
         {% for media in product.media %}
           {% if media.media_type == 'image' %}
-            <div class='product-image relative aspect-square w-[72px] h-[72px] sm:overflow-hidden'>
+            <div class='product-image relative aspect-square w-[72px] h-[72px]'>
               <img
-                src='{{ media | img_url: '72x72' }}'
+                src='{{ media | image_url: width: 144, height: 144, crop: 'center' }}'
                 data-full='{{ media | img_url: '960x960' }}'
                 alt='{{ media.alt | escape | default: product.title }}'
                 class='thumb cursor-pointer w-full object-cover hover:opacity-80'
@@ -287,37 +287,51 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // product variant image resetting
+    // Product Image and Thumbnail Container
     const mainImage = document.getElementById('main-product-image');
     const thumbs = document.querySelectorAll('.thumb');
+    let activeThumb = null;
+
+    // Preload full-size images
+    thumbs.forEach((thumb) => {
+      const fullSrc = thumb.dataset.full;
+      if (!fullSrc) return;
+      const img = new Image();
+      img.decoding = 'async';
+      img.src = fullSrc;
+    });
 
     thumbs.forEach((thumb) => {
-      thumb.addEventListener('click', () => {
-        const newSrc = thumb.getAttribute('data-full');
-        const newAlt = thumb.getAttribute('alt');
-        const parent = thumb.closest('.product-image');
+      thumb.addEventListener('click', async () => {
+        if (thumb === activeThumb) return;
 
-        mainImage.classList.add('opacity-0');
+        const newSrc = thumb.dataset.full;
+        const newAlt = thumb.alt;
 
-        setTimeout(() => {
-          mainImage.onload = () => mainImage.classList.remove('opacity-0');
-          mainImage.src = newSrc;
-          mainImage.alt = newAlt;
+        if (!newSrc) return;
 
-          if (mainImage.complete) mainImage.classList.remove('opacity-0');
-        }, 200);
+        // Mark active thumbnail
+        if (activeThumb) {
+          activeThumb.classList.remove('active');
+        }
+        thumb.classList.add('active');
+        activeThumb = thumb;
 
-        thumbs.forEach((t) => {
-          const p = t.closest('.product-image');
-          if (p) p.classList.remove('border-2', 'border-primary');
-        });
+        // Swap image
+        mainImage.src = newSrc;
+        mainImage.alt = newAlt;
 
-        if (parent) parent.classList.add('border-2', 'border-primary');
+        try {
+          // Prevents “blank / pop-in” jank
+          await mainImage.decode();
+        } catch (e) {
+          // decode() can fail silently on edge cases
+        }
       });
     });
 
+    // Variant & Subscription Container
     const variantButtons = document.querySelectorAll('.variant-button');
-
     // Hide .hide-if-none if ALL variants are sold out
     const hideIfNoneEl = document.querySelector('.hide-if-none');
 
@@ -337,7 +351,7 @@
     const hiddenInput = document.getElementById('selected-variant-id');
     const addToCartBtn = document.getElementById('add-to-cart-btn');
 
-    // 🔹 Subscription wrapper reference (if you re-enable the embed later)
+    // Subscription wrapper reference (if you re-enable the embed later)
     const subscriptionWrapper = document.getElementById('subscription-wrapper');
 
     // Default purchase type UI (recommended): One-time selected by default
