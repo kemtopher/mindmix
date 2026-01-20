@@ -6,11 +6,6 @@
 
     {% if cart.item_count > 0 %}
       <form action='/cart' method='post' novalidate>
-        <!-- Optional header (you can remove this if you want) -->
-        <div class='w-full border-b border-gray-800 pb-4'>
-          <div class='text-light/70 text-sm'>Review your items</div>
-        </div>
-
         <!-- Line items -->
         <div class='w-full'>
           {% for item in cart.items %}
@@ -130,7 +125,11 @@
     {% else %}
       <p class='text-center text-light/70'>Your cart is empty</p>
       <div class='text-center mt-8'>
-        <a href='/collections/all' class='btn btn-primary'>Continue Shopping</a>
+        <a
+          href='/products/green-apple-kiwi'
+          class='btn btn-mint px-8 py-4 text-lg font-bold hover:transform hover:scale-105 transition-transform'
+          >Continue Shopping</a
+        >
       </div>
     {% endif %}
   </div>
