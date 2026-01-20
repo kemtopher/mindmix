@@ -9,7 +9,7 @@
           {% if media.media_type == 'image' %}
             <div class='product-image relative aspect-square w-[72px] h-[72px] sm:overflow-hidden'>
               <img
-                src='{{ media | img_url: '72x72' }}'
+                src='{{ media | img_url: '144x144' }}'
                 data-full='{{ media | img_url: '960x960' }}'
                 alt='{{ media.alt | escape | default: product.title }}'
                 class='thumb cursor-pointer w-full object-cover hover:opacity-80'
