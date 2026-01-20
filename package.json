@@ -4,7 +4,7 @@
   "scripts": {
     "watch:tailwind": "tailwindcss -i ./assets/theme.css -o ./assets/style.css --watch",
     "shopify": "shopify theme dev",
-    "settings": "shopify theme pull --theme dev-kemeza --path=config/settings_data.json --force",
+    "settings": "shopify theme pull --theme main --path=config/settings_data.json --force",
     "dev": "npm run watch:tailwind & shopify theme dev",
     "prettier": "prettier --write \"{layout,sections,snippets,assets,templates}/**/*.{js,css,liquid}\""
   },
