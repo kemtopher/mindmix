@@ -1235,6 +1235,10 @@ video {
   width: 100vw;
 }
 
+.w-\[36px\] {
+  width: 36px;
+}
+
 .min-w-0 {
   min-width: 0px;
 }
@@ -3026,6 +3030,10 @@ html {
   transition: transform 0.3s;
 }
 
+.product-image .thumb.active {
+  border: 2px solid var(--color-primary);
+}
+
 .variant-button.active:not(:disabled) {
   color: var(--color-primary);
 }
@@ -3342,6 +3350,14 @@ textarea:disabled {
 }
 
 @media (min-width: 768px) {
+  .md\:order-1 {
+    order: 1;
+  }
+
+  .md\:order-2 {
+    order: 2;
+  }
+
   .md\:col-span-2 {
     grid-column: span 2 / span 2;
   }
@@ -3426,6 +3442,14 @@ textarea:disabled {
     width: 60vw;
   }
 
+  .md\:w-\[72px\] {
+    width: 72px;
+  }
+
+  .md\:w-\[36px\] {
+    width: 36px;
+  }
+
   .md\:min-w-\[150px\] {
     min-width: 150px;
   }
@@ -3436,6 +3460,14 @@ textarea:disabled {
 
   .md\:max-w-md {
     max-width: 28rem;
+  }
+
+  .md\:max-w-\[72px\] {
+    max-width: 72px;
+  }
+
+  .md\:max-w-\[36px\] {
+    max-width: 36px;
   }
 
   .md\:grid-cols-2 {
@@ -3590,6 +3622,10 @@ textarea:disabled {
     width: 55vw;
   }
 
+  .lg\:w-\[72px\] {
+    width: 72px;
+  }
+
   .lg\:max-w-\[72px\] {
     max-width: 72px;
   }
@@ -3636,6 +3672,10 @@ textarea:disabled {
 
   .lg\:gap-8 {
     gap: 2rem;
+  }
+
+  .lg\:overflow-y-hidden {
+    overflow-y: hidden;
   }
 
   .lg\:px-40 {
