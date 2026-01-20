@@ -190,6 +190,16 @@
         "name": "single_line_text_field",
         "category": "TEXT"
       }
+    },
+    {
+      "key": "default_selected_product",
+      "namespace": "custom",
+      "name": "Default Selected Product",
+      "description": "",
+      "type": {
+        "name": "boolean",
+        "category": "TRUE_FALSE"
+      }
     }
   ],
   "shop": []
