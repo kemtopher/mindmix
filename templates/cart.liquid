@@ -25,7 +25,7 @@
 
                 <div class='flex-1 min-w-0'>
                   <a href='{{ item.url }}' class='block'>
-                    <h3 class='font-semibold text-white text-xl leading-tight'>
+                    <h3 class='font-semibold text-primary text-xl leading-tight'>
                       {{ item.product.title }}
                     </h3>
 
@@ -38,19 +38,18 @@
                   </a>
 
                   <!-- Purchase type: Subscription vs One-time -->
-                  <div class='mt-2'>
+                  <div class='mt-4'>
                     {% if has_selling_plan %}
-                      <span class='inline-flex items-center rounded-full bg-citrus/20 text-citrus px-3 py-1 text-xs font-extrabold uppercase tracking-wide border border-citrus/30'>
+                      <span class='inline-flex items-center text-black px-3 py-1 text-xs font-extrabold uppercase tracking-wide bg-citrus'>
                         Subscription
                       </span>
-                      <p class='text-sm text-light/80 mt-2'>
-                        Plan:
-                        <span class='font-semibold text-white'>
+                      <p class='text-sm text-citrus mt-2'>
+                        <span class='text-sm text-citrus'>
                           {{ item.selling_plan_allocation.selling_plan.name }}
                         </span>
                       </p>
                     {% else %}
-                      <span class='inline-flex items-center rounded-full bg-gray-800 text-light px-3 py-1 text-xs font-bold uppercase tracking-wide border border-gray-700'>
+                      <span class='inline-flex items-center bg-primary text-black px-3 py-1 text-xs font-bold uppercase tracking-wide border border-primary'>
                         One-time purchase
                       </span>
                     {% endif %}
@@ -96,7 +95,7 @@
 
                   <a
                     href='/cart/change?line={{ forloop.index }}&quantity=0'
-                    class='mt-2 inline-block text-white font-medium hover:text-primary'
+                    class='mt-2 inline-block text-light/70 font-medium hover:text-primary'
                   >
                     Remove
                   </a>
@@ -111,7 +110,7 @@
           <button type='submit' name='update' class='text-primary'>Update Cart</button>
 
           <div class='text-right'>
-            <div class='text-sm text-light/60'>Subtotal</div>
+            <div class='text-sm text-light/70'>Subtotal</div>
             <div class='text-2xl font-bold text-primary'>{{ cart.total_price | money }}</div>
           </div>
         </div>
