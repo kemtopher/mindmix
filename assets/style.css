@@ -3574,10 +3574,6 @@ textarea:disabled {
     height: 100%;
   }
 
-  .lg\:max-h-\[500px\] {
-    max-height: 500px;
-  }
-
   .lg\:w-\[40vw\] {
     width: 40vw;
   }
