@@ -3,7 +3,7 @@
   class='w-full pt-24 pb-16 flex flex-col md:flex-row items-center justify-center'
 >
   <div class='container flex flex-col lg:flex-row justify-between gap-8'>
-    <div class='product-gallery w-full h-full lg:max-h-[500px] flex flex-col lg:flex-row gap-4 lg:gap-8 justify-start'>
+    <div class='product-gallery w-full h-full flex flex-col lg:flex-row gap-4 lg:gap-8 justify-start'>
       <div class='product-images scrollbar-hide overflow-x-scroll overflow-y-hidden w-full lg:max-w-[72px] flex flex-row lg:flex-col gap-4 order-2 lg:order-1 justify-start'>
         {% for media in product.media %}
           {% if media.media_type == 'image' %}
@@ -20,7 +20,7 @@
       </div>
 
       <!-- Product images -->
-      <div class='order-1 lg:order-2 text-center overflow-hidden'>
+      <div class='order-1 lg:order-2 text-center'>
         <img
           id='main-product-image'
           src='{{ product.featured_image | img_url: '960x960' }}'
