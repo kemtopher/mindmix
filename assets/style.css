@@ -2254,6 +2254,10 @@ video {
   padding-top: 6rem;
 }
 
+.pt-32 {
+  padding-top: 8rem;
+}
+
 .pt-4 {
   padding-top: 1rem;
 }
@@ -3511,6 +3515,14 @@ textarea:disabled {
 
   .md\:pt-10 {
     padding-top: 2.5rem;
+  }
+
+  .md\:pt-32 {
+    padding-top: 8rem;
+  }
+
+  .md\:pt-24 {
+    padding-top: 6rem;
   }
 
   .md\:text-left {
