@@ -45,7 +45,10 @@
       </div>
 
       <div id='menu-item-learn' class='menu-item h-full items-center flex gap-2 group relative'>
-        <a href='#' class='text-light group-hover:text-primary transition-colors h-full flex items-center'
+        <a
+          href='#'
+          class='text-light group-hover:text-primary transition-colors h-full flex items-center'
+          aria-label='Learn more about MindMix'
           >Learn More</a
         >
         <a href='#' class='h-[24px] w-[24px] h-full flex items-center'>
@@ -108,7 +111,13 @@
 
       {% if customer %}
         <div class='menu-item h-full flex items-center relative'>
-          <a id='customer-menu-btn' href='{{ routes.account_url }}' class='account-icon logged-in'>
+          <a
+            id='customer-menu-btn'
+            role='button'
+            aria-label='Sign in to see your account info'
+            href='{{ routes.account_url }}'
+            class='account-icon logged-in'
+          >
             {% render 'icon-account' %}
           </a>
 

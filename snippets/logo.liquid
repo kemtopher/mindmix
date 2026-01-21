@@ -16,9 +16,9 @@
     {%- assign logo_image = settings.logo_white -%}
 {%- endcase -%}
 
-<a href='{{ routes.root_url }}' class='group z-[99] w-[127px] h-[36px] flex items-center'>
+<a href='{{ routes.root_url }}' role='button' class='group z-[99] w-[127px] h-[36px] flex items-center'>
   {% if logo_image != blank %}
-    {{ logo_image | image_url: width: 127 | image_tag: alt: shop.name, class: 'h-8 w-auto' }}
+    {{ logo_image | image_url: width: 127 | image_tag: alt: 'MindMix Logo', class: 'h-8 w-auto' }}
     <span class='sr-only'>{{ shop.name }}</span>
   {% else %}
     <span class='text-3xl font-bold text-white transition-colors duration-300'>
