@@ -22,18 +22,37 @@
         </div>
 
         <div class='fade-in relative' style='transition-delay: 0.3s'>
+          {% assign hero = section.settings.hero_image %}
+
           <div class='relative flex justify-center items-center h-[500px]'>
-            {% if section.settings.hero_image != blank %}
+            {% if hero != blank %}
               <img
                 class='object-cover w-full h-full'
                 alt='Photo of MindMix Guava Passion package'
-                src='{{ section.settings.hero_image | image_url }}'
+                width='{{ hero.width }}'
+                height='{{ hero.height }}'
+                loading='eager'
+                fetchpriority='high'
+                decoding='async'
+                src='{{ hero | image_url: width: 900 }}'
+                srcset='
+                  {{ hero | image_url: width: 480 }} 480w,
+                  {{ hero | image_url: width: 640 }} 640w,
+                  {{ hero | image_url: width: 750 }} 750w,
+                  {{ hero | image_url: width: 900 }} 900w,
+                  {{ hero | image_url: width: 1100 }} 1100w,
+                  {{ hero | image_url: width: 1400 }} 1400w
+                '
+                sizes='(min-width: 1024px) 50vw, 100vw'
               >
             {% else %}
               <img
                 class='object-cover w-full h-full max-w-[200px]'
                 alt='Photo of MindMix Guava Passion package'
-                src='{{ mindmix_green_apple_kiwi.png | asset_url }}'
+                loading='eager'
+                fetchpriority='high'
+                decoding='async'
+                src='{{ 'mindmix_green_apple_kiwi.png' | asset_url }}'
               >
             {% endif %}
           </div>

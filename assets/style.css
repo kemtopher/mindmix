@@ -2772,6 +2772,10 @@ html {
   color: rgb(11 11 11 / var(--tw-text-opacity, 1));
 }
 
+header {
+  z-index: 99999999999;
+}
+
 .card {
   overflow: hidden;
   border-radius: 0.5rem;
@@ -3515,10 +3519,6 @@ textarea:disabled {
 
   .md\:pt-10 {
     padding-top: 2.5rem;
-  }
-
-  .md\:pt-32 {
-    padding-top: 8rem;
   }
 
   .md\:pt-24 {
