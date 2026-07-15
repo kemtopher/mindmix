@@ -1139,6 +1139,7 @@
           </p>
           {%- form 'product', s.product -%}
             <input type="hidden" name="id" value="{{ mm_variant.id }}">
+            {%- assign mm_has_sub = false -%}
             {%- if mm_group -%}
             <fieldset class="mm-why-offer__plans">
               <legend class="mm-why-vh">Purchase options</legend>
@@ -1148,6 +1149,7 @@
                   {%- if a.selling_plan.id == plan.id -%}{%- assign mm_alloc = a -%}{%- endif -%}
                 {%- endfor -%}
                 {%- if mm_alloc -%}
+                {%- assign mm_has_sub = true -%}
                 {%- assign mm_save = mm_variant.price | minus: mm_alloc.price | times: 100 | divided_by: mm_variant.price -%}
                 <label class="mm-why-offer__plan">
                   <input type="radio" name="selling_plan" value="{{ plan.id }}" {% if forloop.first %}checked{% endif %}
@@ -1162,7 +1164,7 @@
                 {%- endif -%}
               {%- endfor -%}
               <label class="mm-why-offer__plan">
-                <input type="radio" name="selling_plan" value=""
+                <input type="radio" name="selling_plan" value="" {% unless mm_has_sub %}checked{% endunless %}
                   data-mm-plan data-mm-plan-kind="one_time" data-mm-cta="{{ s.offer_cta_once | escape }}"
                   data-mm-price="{{ mm_variant.price | money }}" data-mm-compare="">
                 <span>
@@ -1173,7 +1175,7 @@
             </fieldset>
             {%- endif -%}
             <button type="submit" class="mm-why-btn mm-why-btn--primary" data-mm-atc {% unless mm_variant.available %}disabled{% endunless %}>
-              {%- if mm_variant.available -%}{%- if mm_group -%}{{ s.offer_cta_sub | escape }}{%- else -%}{{ s.offer_cta_once | escape }}{%- endif -%}{%- else -%}Sold out{%- endif -%}
+              {%- if mm_variant.available -%}{%- if mm_has_sub -%}{{ s.offer_cta_sub | escape }}{%- else -%}{{ s.offer_cta_once | escape }}{%- endif -%}{%- else -%}Sold out{%- endif -%}
             </button>
           {%- endform -%}
         {%- elsif mm_product_url != blank -%}
