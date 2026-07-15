@@ -1110,6 +1110,14 @@
         {%- if s.product != blank -%}
           {%- liquid
             assign mm_variant = s.product.selected_or_first_available_variant
+            if s.offer_variant_match != blank
+              for v in s.product.variants
+                if v.title contains s.offer_variant_match
+                  assign mm_variant = v
+                  break
+                endif
+              endfor
+            endif
             assign mm_group = s.product.selling_plan_groups | first
             assign mm_first_alloc = nil
             if mm_group
@@ -2123,6 +2131,7 @@
     { "type": "text", "id": "cta_final", "label": "Final CTA (default label)", "default": "Start With MindMix" },
     { "type": "header", "content": "Offer module" },
     { "type": "text", "id": "offer_kicker", "label": "Offer kicker", "default": "Green Apple Kiwi" },
+    { "type": "text", "id": "offer_variant_match", "label": "Variant to sell (title contains)", "default": "15", "info": "Picks the first variant whose title contains this text, e.g. 15 for the 15 Pack. Leave blank for the product's default variant." },
     { "type": "text", "id": "offer_title", "label": "Offer title", "default": "Start with 15 sticks." },
     { "type": "text", "id": "offer_line1", "label": "Offer line 1", "default": "15 single-serve MindMix sticks" },
     { "type": "text", "id": "offer_line2", "label": "Offer line 2", "default": "The complete five-ingredient formula" },
