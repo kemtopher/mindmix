@@ -1,0 +1,24 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "mindmix-why-exists",
+      "settings": {
+        "product": "green-apple-kiwi",
+        "product_url": "/products/green-apple-kiwi",
+        "dieline_gak": "shopify://shop_images/mindmix-dieline-green-apple-kiwi.png",
+        "testing_certificate_image": "shopify://shop_images/mindmix-coa-preview-lot2512023.png",
+        "testing_certificate_url": "https://cdn.shopify.com/s/files/1/0668/0117/2654/files/mindmix-coa-green-apple-kiwi-lot2512023.pdf?v=1784154290"
+      }
+    }
+  },
+  "order": ["main"]
+}
