@@ -1,0 +1,2187 @@
+{%- comment -%}
+  MindMix: Why It Exists (final production pass)
+  Single-instance narrative pre-sales section. The root carries the stable
+  anchor id="why-mindmix-exists" for future homepage hero links, so this
+  section is designed for ONE instance per page.
+
+  DEVELOPER PLACEHOLDERS (not customer-facing):
+  - Shipping terms: not yet approved. Add to the offer card when supplied.
+  - Return terms: not yet approved. Add to the offer card when supplied.
+  - Promise-form backend: see MM_PROMISE_ENDPOINT in the script block.
+{%- endcomment -%}
+
+{%- liquid
+  assign s = section.settings
+  if s.product != blank
+    assign mm_product_url = s.product.url
+  elsif s.product_url != blank
+    assign mm_product_url = s.product_url
+  else
+    assign mm_product_url = blank
+  endif
+  if s.product != blank
+    assign mm_buy_href = '#mm-why-offer-' | append: section.id
+    assign mm_buy_scroll = true
+  elsif mm_product_url != blank
+    assign mm_buy_href = mm_product_url
+    assign mm_buy_scroll = false
+  else
+    assign mm_buy_href = '#mm-why-offer-' | append: section.id
+    assign mm_buy_scroll = true
+  endif
+-%}
+
+{% style %}
+  #why-mindmix-exists {
+    --mm-why-bg: {{ s.color_bg }};
+    --mm-why-bg-void: {{ s.color_bg }};
+    --mm-why-bg-wound: {{ s.color_bg | color_darken: 1 }};
+    --mm-why-bg-warm: {{ s.color_deep | color_mix: s.color_bg, 18 }};
+    --mm-why-bg-product: {{ s.color_deep | color_mix: s.color_bg, 28 }};
+    --mm-why-bg-still: {{ s.color_deep | color_mix: s.color_bg, 10 }};
+    --mm-why-bg-offer: {{ s.color_deep | color_mix: s.color_bg, 14 }};
+    --mm-why-bg-clear: {{ s.color_deep | color_mix: s.color_bg, 32 | color_lighten: 2 }};
+    --mm-why-surface: {{ s.color_surface }};
+    --mm-why-text: {{ s.color_text }};
+    --mm-why-muted: {{ s.color_muted }};
+    --mm-why-accent: {{ s.color_accent }};
+    --mm-why-deep: {{ s.color_deep }};
+    --mm-why-border: {{ s.color_text | color_modify: 'alpha', 0.12 }};
+    --mm-why-hi: {{ s.color_accent | color_modify: 'alpha', 0.16 }};
+    --mm-why-accent-soft: {{ s.color_accent | color_modify: 'alpha', 0.38 }};
+    --mm-why-accent-faint: {{ s.color_accent | color_modify: 'alpha', 0.07 }};
+    --mm-why-deep-glow: {{ s.color_deep | color_modify: 'alpha', 0.55 }};
+    --mm-why-rail-gray: {{ s.color_text | color_modify: 'alpha', 0.35 }};
+    --mm-why-railcol: var(--mm-why-rail-gray);
+    {%- if s.font_heading != blank %}
+    --mm-why-font-h: {{ s.font_heading }};
+    {%- else %}
+    --mm-why-font-h: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    {%- endif %}
+    {%- if s.font_body != blank %}
+    --mm-why-font-b: {{ s.font_body }};
+    {%- else %}
+    --mm-why-font-b: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    {%- endif %}
+  }
+{% endstyle %}
+
+<style>
+  /* ================= MindMix: Why It Exists v7 (scoped, self-contained) ================= */
+  .mm-why {
+    position: relative;
+    overflow: clip;
+    background-color: var(--mm-why-bg);
+    color: var(--mm-why-text);
+    font-family: var(--mm-why-font-b);
+    transition: background-color 1.4s ease;
+  }
+  .mm-why[data-mm-active-mood="void"]    { background-color: var(--mm-why-bg-void); }
+  .mm-why[data-mm-active-mood="wound"]   { background-color: var(--mm-why-bg-wound); }
+  .mm-why[data-mm-active-mood="warm"]    { background-color: var(--mm-why-bg-warm); }
+  .mm-why[data-mm-active-mood="product"] { background-color: var(--mm-why-bg-product); }
+  .mm-why[data-mm-active-mood="still"]   { background-color: var(--mm-why-bg-still); }
+  .mm-why[data-mm-active-mood="offer"]   { background-color: var(--mm-why-bg-offer); }
+  .mm-why[data-mm-active-mood="clear"]   { background-color: var(--mm-why-bg-clear); }
+
+  .mm-why *, .mm-why *::before, .mm-why *::after { box-sizing: border-box; }
+  .mm-why :where(p) { margin: 0 0 1.15em; font-size: clamp(1.05rem, 1.05rem + 0.3vw, 1.2rem); line-height: 1.68; color: var(--mm-why-text); opacity: 0.92; max-width: 34em; }
+  .mm-why h1, .mm-why h2, .mm-why h3 { font-family: var(--mm-why-font-h); font-weight: 800; letter-spacing: -0.025em; margin: 0 0 0.6em; color: var(--mm-why-text); }
+  .mm-why h1, .mm-why h2 { text-wrap: balance; }
+
+  .mm-why-vh { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+  /* ---------- Atmosphere ---------- */
+  .mm-why-atmos { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .mm-why-atmos__stick { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+  .mm-why-fog { position: absolute; border-radius: 50%; will-change: transform; opacity: var(--mm-why-fog-o, 0.5); transition: opacity 1.6s ease; }
+  .mm-why-fog--a { width: 90vmax; height: 90vmax; left: -30vmax; top: -25vmax;
+    background: radial-gradient(circle at 50% 50%, var(--mm-why-deep-glow), transparent 62%);
+    animation: mm-why-drift-a 74s ease-in-out infinite alternate; }
+  .mm-why-fog--b { width: 70vmax; height: 70vmax; right: -28vmax; bottom: -20vmax;
+    background: radial-gradient(circle at 50% 50%, var(--mm-why-accent-faint), transparent 58%);
+    animation: mm-why-drift-b 96s ease-in-out infinite alternate; }
+  .mm-why-fog--c { width: 55vmax; height: 55vmax; left: 30vw; top: 30vh;
+    background: radial-gradient(circle at 50% 50%, var(--mm-why-deep-glow), transparent 65%);
+    opacity: calc(var(--mm-why-fog-o, 0.5) * 0.6);
+    animation: mm-why-drift-c 58s ease-in-out infinite alternate; }
+  @keyframes mm-why-drift-a { from { transform: translate3d(0, 0, 0) scale(1); } to { transform: translate3d(9vw, 6vh, 0) scale(1.12); } }
+  @keyframes mm-why-drift-b { from { transform: translate3d(0, 0, 0) scale(1.08); } to { transform: translate3d(-8vw, -7vh, 0) scale(0.96); } }
+  @keyframes mm-why-drift-c { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-6vw, 8vh, 0); } }
+  .mm-why-aurora { position: absolute; width: 58vw; height: 130vh; top: -15vh; left: 0; border-radius: 50%;
+    background: radial-gradient(closest-side, var(--mm-why-accent-faint), transparent 70%);
+    transform: translate3d(calc(var(--mm-p, 0) * 46vw - 8vw), calc(var(--mm-p, 0) * -22vh + 8vh), 0);
+    opacity: calc(var(--mm-why-fog-o, 0.5) * 0.9); }
+  .mm-why[data-mm-active-mood="void"]    .mm-why-atmos__stick { --mm-why-fog-o: 0.35; }
+  .mm-why[data-mm-active-mood="wound"]   .mm-why-atmos__stick { --mm-why-fog-o: 0.26; }
+  .mm-why[data-mm-active-mood="warm"]    .mm-why-atmos__stick { --mm-why-fog-o: 0.52; }
+  .mm-why[data-mm-active-mood="product"] .mm-why-atmos__stick { --mm-why-fog-o: 0.72; }
+  .mm-why[data-mm-active-mood="still"]   .mm-why-atmos__stick { --mm-why-fog-o: 0.14; }
+  .mm-why[data-mm-active-mood="offer"]   .mm-why-atmos__stick { --mm-why-fog-o: 0.3; }
+  .mm-why[data-mm-active-mood="clear"]   .mm-why-atmos__stick { --mm-why-fog-o: 0.8; }
+  .mm-why-grain { position: absolute; inset: -50%; width: 200%; height: 200%; opacity: 0.045;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 180px 180px; }
+  .mm-why-texture { position: absolute; inset: 0; }
+  .mm-why-texture img { width: 100%; height: 100%; object-fit: cover; opacity: 0.07; }
+
+  /* ---------- The promise line: broken -> aligned gray -> mint after submission ---------- */
+  .mm-why-rail { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  .mm-why-rail__stick { position: sticky; top: 0; height: 100vh; height: 100svh; display: flex; flex-direction: column; justify-content: center;
+    padding: 9vh 0; width: 2px; margin-left: max(14px, calc(50% - 33rem - 3rem)); }
+  .mm-why-rail__seg { position: relative; flex: 1 1 auto; width: 2px; margin: 5px 0; background: var(--mm-why-border); border-radius: 2px;
+    transform: translateX(var(--mm-why-off, 0px)); transition: transform 1.2s ease; }
+  .mm-why-rail__seg:nth-child(odd)  { --mm-why-off: 2.5px; }
+  .mm-why-rail__seg:nth-child(even) { --mm-why-off: -2px; }
+  .mm-why-rail__seg.is-filled { --mm-why-off: 0px; }
+  .mm-why-rail__fill { position: absolute; inset: 0; background: var(--mm-why-railcol); border-radius: 2px;
+    transform: scaleY(var(--mm-why-fill, 0)); transform-origin: top;
+    transition: transform 0.35s linear, background-color 0.6s ease var(--mm-rd, 0ms); }
+  .mm-why-rail__gap { position: absolute; left: 0; bottom: -5px; width: 2px; height: 5px; background: var(--mm-why-railcol);
+    opacity: 0; transition: opacity 0.9s ease, background-color 0.6s ease var(--mm-rd, 0ms); }
+  .mm-why-rail__seg.is-linked .mm-why-rail__gap { opacity: 1; }
+  .mm-why.is-committed .mm-why-rail__fill,
+  .mm-why.is-committed .mm-why-rail__gap { background: var(--mm-why-accent); }
+  .mm-why-rail__glow { position: absolute; inset: 9vh 0; width: 2px; left: 0; background: var(--mm-why-accent);
+    filter: blur(5px); opacity: 0; transition: opacity 1.6s ease; }
+  .mm-why.is-committed .mm-why-rail__glow { opacity: 0.5; }
+  .mm-why-rail__end { position: absolute; bottom: calc(9vh - 14px); left: -4px; width: 10px; height: 10px; border-radius: 50%;
+    background: var(--mm-why-accent); opacity: 0; transform: scale(0.3); transition: opacity 0.8s ease 0.9s, transform 0.8s cubic-bezier(0.2, 0.9, 0.2, 1.2) 0.9s; }
+  .mm-why.is-committed .mm-why-rail__end { opacity: 1; transform: scale(1); box-shadow: 0 0 18px var(--mm-why-accent-soft); }
+  @media screen and (max-width: 899px) {
+    .mm-why-rail__stick { margin-left: 12px; opacity: 0.65; }
+  }
+
+  /* ---------- Layout ---------- */
+  .mm-why-mv { position: relative; z-index: 2; padding: clamp(5rem, 12vh, 9rem) 1.5rem; scroll-margin-top: 4rem; outline: none; }
+  .mm-why-col { max-width: 42rem; margin: 0 auto; }
+  .mm-why-col--wide { max-width: 54rem; }
+  .mm-why-col--cine { max-width: 62rem; text-align: center; }
+  .mm-why-col--cine p { margin-left: auto; margin-right: auto; }
+  .mm-why-beat { min-height: 74vh; min-height: 74svh; display: flex; align-items: center; }
+  .mm-why-kicker { display: block; font-size: 0.72rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--mm-why-muted); margin-bottom: 1rem; }
+  .mm-why-kicker--accent { color: var(--mm-why-accent); }
+  .mm-why-h1 { font-size: clamp(2.1rem, 1.7rem + 3.4vw, 3.9rem); line-height: 1.06; letter-spacing: -0.03em; max-width: 15em; }
+  .mm-why-h2 { font-size: clamp(1.85rem, 1.5rem + 2.8vw, 3.1rem); line-height: 1.12; max-width: 15em; }
+  .mm-why-h2 + .mm-why-h2sub { margin-top: -0.3em; }
+  .mm-why-h2sub { font-family: var(--mm-why-font-h); font-weight: 800; letter-spacing: -0.025em;
+    font-size: clamp(1.85rem, 1.5rem + 2.8vw, 3.1rem); line-height: 1.12; margin: 0 0 0.6em; opacity: 1; max-width: 15em; color: var(--mm-why-text); }
+  .mm-why-beatline { font-family: var(--mm-why-font-h); font-weight: 700; letter-spacing: -0.02em;
+    font-size: clamp(1.6rem, 1.3rem + 2.4vw, 2.6rem); line-height: 1.2; margin: 1.4em 0 0.8em; color: var(--mm-why-text); opacity: 1; max-width: 18em; }
+  .mm-why-col--cine .mm-why-beatline { max-width: none; font-size: clamp(2rem, 1.5rem + 3.4vw, 3.6rem); }
+  .mm-why-dim { color: var(--mm-why-muted); }
+  .mm-why-dim p, p.mm-why-dim { color: var(--mm-why-muted); }
+  .mm-why-stack p { margin-bottom: 0.35em; }
+  .mm-why-gap { height: 2.2rem; }
+  .mm-why-rule { border: 0; height: 1px; background: var(--mm-why-border); margin: 0 auto; max-width: 42rem; }
+
+  .mm-why-mv--tight .mm-why-h2, .mm-why-mv--tight .mm-why-beatline { letter-spacing: -0.04em; }
+  .mm-why-ledgerline { font-family: var(--mm-why-font-h); font-weight: 700; letter-spacing: -0.03em;
+    font-size: clamp(1.3rem, 1.1rem + 1.8vw, 2.1rem); line-height: 1.3; margin: 0 0 0.9em; max-width: 24em; }
+  .mm-why-ledgerline:nth-of-type(2) { padding-left: clamp(0px, 6vw, 4.5rem); }
+
+  /* ---------- Hero: split headline + the self-rewriting promise ---------- */
+  .mm-why-hero-grid { display: grid; gap: 3.5rem; align-items: center; max-width: 66rem; margin: 0 auto; }
+  @media screen and (min-width: 900px) { .mm-why-hero-grid { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); } }
+  .mm-why-vow { position: relative; min-height: 15rem; display: flex; flex-direction: column; justify-content: flex-end;
+    user-select: none; font-family: var(--mm-why-font-h); }
+  .mm-why-vow__history { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.1rem; }
+  .mm-why-vow__ghost { font-weight: 600; font-size: clamp(1rem, 0.9rem + 0.8vw, 1.3rem); letter-spacing: -0.015em;
+    color: var(--mm-why-muted); text-decoration: line-through;
+    text-decoration-color: {{ s.color_muted | color_modify: 'alpha', 0.7 }}; text-decoration-thickness: 1.5px;
+    transition: opacity 0.7s ease, transform 0.7s ease; transform: translateY(6px); }
+  .mm-why-vow__ghost.is-in { transform: none; }
+  .mm-why-vow__line { font-weight: 700; font-size: clamp(1.5rem, 1.2rem + 1.8vw, 2.3rem); line-height: 1.25;
+    letter-spacing: -0.025em; color: var(--mm-why-text); margin: 0; max-width: none; }
+  .mm-why-vow__when { color: var(--mm-why-accent); position: relative; white-space: nowrap;
+    transition: opacity 0.3s ease, transform 0.3s ease; display: inline-block; }
+  .mm-why-vow__when::after { content: ""; position: absolute; left: -2%; right: -2%; top: 54%; height: 2px;
+    background: var(--mm-why-muted); transform: scaleX(0); transform-origin: left;
+    transition: transform 0.45s cubic-bezier(0.6, 0, 0.2, 1); }
+  .mm-why-vow__when.is-struck { color: var(--mm-why-muted); }
+  .mm-why-vow__when.is-struck::after { transform: scaleX(1); }
+  .mm-why-vow__when.is-out { opacity: 0; transform: translateY(-7px); }
+  .mm-why-vow__caret { display: inline-block; width: 2px; height: 0.95em; background: var(--mm-why-accent);
+    margin-left: 7px; vertical-align: -0.12em; animation: mm-why-caret 1.1s steps(1) infinite; }
+  @keyframes mm-why-caret { 50% { opacity: 0; } }
+
+  /* ---------- Avoidance pile: one contained composition, preparation covering the work ---------- */
+  .mm-why-pile { width: min(440px, 100%); margin: 0.5rem auto 2.4rem; position: relative; }
+  .mm-why-pile__stack { position: relative; z-index: 1; }
+  .mm-why-pile__card { position: relative; width: 100%; background: var(--mm-why-surface);
+    border: 1px solid var(--mm-why-border); border-radius: 10px; padding: 0.85rem 1.15rem;
+    font-family: var(--mm-why-font-h); font-weight: 600; font-size: 0.98rem; line-height: 1.35;
+    color: var(--mm-why-muted); max-width: none; margin: 0 0 -0.8rem;
+    box-shadow: 0 12px 26px -16px rgba(0, 0, 0, 0.65);
+    transition: opacity 0.9s ease; }
+  .mm-why-pile__card:nth-of-type(odd)  { transform: rotate(-0.5deg); }
+  .mm-why-pile__card:nth-of-type(even) { transform: rotate(0.4deg); }
+  .mm-why .mm-why-pile.is-cleared .mm-why-pile__card,
+  .mm-why--js .mm-why-pile.is-cleared .mm-why-pile__card[data-mm-reveal].is-in { opacity: 0.18; }
+  .mm-why-pile__base { position: relative; z-index: 0; margin-top: -2.4rem;
+    background: {{ s.color_surface | color_modify: 'alpha', 0.55 }};
+    border: 1px solid var(--mm-why-border); border-radius: 12px; padding: 3rem 1.15rem 1rem;
+    display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    transition: border-color 0.9s ease; }
+  .mm-why-pile.is-cleared .mm-why-pile__base { border-color: var(--mm-why-accent-soft); }
+  .mm-why-pile__base-label { font-family: var(--mm-why-font-h); font-weight: 700; font-size: 0.78rem;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--mm-why-text); }
+  .mm-why-pile__status { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 0.68rem;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--mm-why-muted);
+    border: 1px solid var(--mm-why-border); border-radius: 999px; padding: 0.3rem 0.7rem; white-space: nowrap; }
+
+  /* ---------- Reveals ---------- */
+  .mm-why--js [data-mm-reveal] { opacity: 0; transform: translateY(26px); }
+  .mm-why--js [data-mm-reveal].is-in { opacity: 1; transform: none;
+    transition: opacity 0.9s cubic-bezier(0.2, 0.65, 0.25, 1), transform 0.9s cubic-bezier(0.2, 0.65, 0.25, 1), filter 1.1s ease;
+    transition-delay: var(--mm-d, 0s); }
+  .mm-why--js [data-mm-reveal="strike"] { transform: translateY(34px); filter: blur(7px); }
+  .mm-why--js [data-mm-reveal="strike"].is-in { filter: blur(0); transition-duration: 1.25s, 1.25s, 1.25s; }
+  .mm-why--js [data-mm-reveal="calm"] { transform: none; }
+  .mm-why--js [data-mm-reveal="rise-long"] { transform: translateY(64px); }
+  .mm-why--js [data-mm-reveal="rise-long"].is-in { transition-duration: 1.35s, 1.35s, 1.35s; }
+  .mm-why--js .mm-why-pile__card[data-mm-reveal] { transform: translateY(26px); }
+  .mm-why--js .mm-why-pile__card[data-mm-reveal].is-in { transform: none; }
+  .mm-why--js .mm-why-pile__card:nth-of-type(1)[data-mm-reveal].is-in { transform: translateX(0); }
+
+  /* ---------- Calendar strike device ---------- */
+  .mm-why-cal { margin: 1.4rem 0 0.6rem; }
+  .mm-why-cal__row { font-family: var(--mm-why-font-h); font-weight: 700; letter-spacing: -0.02em;
+    font-size: clamp(1.4rem, 1.15rem + 2vw, 2.3rem); line-height: 1.35; margin: 0 0 0.55em; max-width: none; }
+  .mm-why-cal__row:nth-of-type(2) { padding-left: clamp(0px, 5vw, 3.5rem); }
+  .mm-why-cal__from { position: relative; white-space: nowrap; }
+  .mm-why-cal__from::after { content: ""; position: absolute; left: -2%; right: -2%; top: 54%; height: 2px;
+    background: var(--mm-why-muted); transform: scaleX(0); transform-origin: left; transition: transform 0.8s cubic-bezier(0.6, 0, 0.2, 1) 0.45s; }
+  .mm-why--js .is-in .mm-why-cal__from::after, .mm-why--nojs .mm-why-cal__from::after { transform: scaleX(1); }
+  .mm-why-cal__to { color: var(--mm-why-muted); }
+
+  /* ---------- Hiding chapter: pinned headline ---------- */
+  .mm-why-hide-grid { max-width: 66rem; margin: 0 auto; display: grid; gap: 3rem; }
+  @media screen and (min-width: 900px) {
+    .mm-why-hide-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 5rem; }
+    .mm-why-hide-grid__pin { position: sticky; top: 16vh; align-self: start; }
+  }
+
+  /* ---------- Buttons, links, focus ---------- */
+  .mm-why-cta-row { display: flex; flex-wrap: wrap; gap: 1.4rem; align-items: center; margin-top: 2.2rem; }
+  .mm-why-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 44px;
+    padding: 1rem 1.9rem; border-radius: 999px; font-size: 1rem; font-weight: 600; letter-spacing: 0.01em;
+    text-decoration: none; cursor: pointer; border: 1px solid transparent;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease; }
+  .mm-why-btn--primary { background: var(--mm-why-accent); color: var(--mm-why-bg); box-shadow: 0 0 0 1px var(--mm-why-accent-soft), 0 8px 28px -14px var(--mm-why-accent-soft); }
+  .mm-why-btn--primary:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px var(--mm-why-accent-soft), 0 14px 34px -12px var(--mm-why-accent-soft); }
+  .mm-why-btn--primary[disabled] { opacity: 0.55; cursor: not-allowed; transform: none; }
+  .mm-why-btn--ghost { background: transparent; color: var(--mm-why-text); border-color: var(--mm-why-border); }
+  .mm-why-btn--ghost:hover { border-color: var(--mm-why-accent-soft); transform: translateY(-2px); }
+  .mm-why-textlink { color: var(--mm-why-accent); text-decoration: underline; text-underline-offset: 0.3em; text-decoration-thickness: 1px; font-size: 1rem; }
+  .mm-why-textlink:hover { text-decoration-thickness: 2px; }
+  .mm-why-textlink--dim { color: var(--mm-why-muted); }
+  .mm-why-textlink--dim:hover { color: var(--mm-why-text); }
+  .mm-why a:focus-visible, .mm-why button:focus-visible, .mm-why input:focus-visible, .mm-why summary:focus-visible {
+    outline: 2px solid var(--mm-why-accent); outline-offset: 3px; border-radius: 6px; }
+  .mm-why-btn:focus-visible { border-radius: 999px; }
+
+  /* ---------- Founder: full-bleed, desaturated, asymmetric ---------- */
+  .mm-why-founder-grid { max-width: 66rem; margin: 0 auto; display: grid; gap: 3rem; align-items: center; }
+  @media screen and (min-width: 900px) { .mm-why-founder-grid { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 4rem; } }
+  .mm-why-founder-media { position: relative; min-height: 320px; }
+  @media screen and (min-width: 900px) { .mm-why-founder-media { margin-right: calc(50% - 50vw); min-height: 560px; } }
+  .mm-why-founder-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 68% 22%;
+    filter: grayscale(0.4) contrast(1.03); display: block; }
+  .mm-why-founder-media svg { position: absolute; inset: 0; width: 100%; height: 100%; background: var(--mm-why-surface); fill: var(--mm-why-border); padding: 18%; }
+  .mm-why-founder-media::after { content: ""; position: absolute; inset: 0;
+    background: linear-gradient(90deg, var(--mm-why-bg-warm) 0%, transparent 22%); pointer-events: none; }
+  .mm-why-founder-caption { position: absolute; left: 1.2rem; bottom: 1.1rem; z-index: 1;
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 0.78rem; letter-spacing: 0.04em;
+    color: var(--mm-why-text); opacity: 0.75; background: {{ s.color_bg | color_modify: 'alpha', 0.55 }};
+    padding: 0.35rem 0.6rem; border-radius: 6px; }
+  .mm-why-founder-scene { border-left: 2px solid var(--mm-why-accent-soft); padding: 0.4rem 0 0.4rem 1.4rem; margin: 1.8rem 0; }
+  .mm-why-founder-scene p { color: var(--mm-why-muted); font-size: 1.02rem; }
+  .mm-why-founder-meta { margin-top: 1.4rem; font-size: 0.85rem; letter-spacing: 0.06em; color: var(--mm-why-muted); }
+
+  /* ---------- Product: ritual + 3D ---------- */
+  .mm-why-prod-grid { max-width: 60rem; margin: 0 auto; display: grid; gap: 3rem; align-items: start; }
+  @media screen and (min-width: 900px) { .mm-why-prod-grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, 22rem); gap: 4rem; } }
+  .mm-why-ritual { list-style: none; margin: 1.6rem 0 0.4rem; padding: 0; counter-reset: mmstep; }
+  .mm-why-ritual li { counter-increment: mmstep; position: relative; border-left: 2px solid var(--mm-why-border);
+    padding: 0.15rem 0 1.15rem 1.55rem; margin: 0; transition: border-color 0.8s ease;
+    font-family: var(--mm-why-font-h); font-weight: 700; letter-spacing: -0.02em;
+    font-size: clamp(1.45rem, 1.2rem + 2vw, 2.3rem); line-height: 1.25; color: var(--mm-why-text); }
+  .mm-why-ritual li::before { content: "0" counter(mmstep); position: absolute; left: -1.05rem; top: 0.35em;
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-weight: 500;
+    font-size: 0.66rem; letter-spacing: 0.08em; color: var(--mm-why-muted);
+    background: var(--mm-why-bg-product); padding: 2px 3px; transition: color 0.8s ease; }
+  .mm-why-ritual li.is-in { border-color: var(--mm-why-accent-soft); }
+  .mm-why-ritual li.is-in::before { color: var(--mm-why-accent); }
+  .mm-why-ritual li:last-child { padding-bottom: 0.3rem; }
+  .mm-why-cutout-wrap { position: relative; display: flex; justify-content: center; }
+  @media screen and (min-width: 900px) { .mm-why-cutout-wrap { margin-right: calc(50% - 50vw + 6vw); justify-content: flex-end; } }
+  .mm-why-cutout-wrap::before { content: ""; position: absolute; width: 130%; height: 130%; top: -15%; left: -15%;
+    background: radial-gradient(closest-side, var(--mm-why-hi), transparent 72%); pointer-events: none; }
+  .mm-why-cutout { position: relative; width: min(330px, 74vw); height: auto; display: block;
+    transform: rotate(var(--mm-rot, -6deg)) translateY(var(--mm-par, 0px));
+    transition: transform 0.7s cubic-bezier(0.2, 0.65, 0.25, 1);
+    filter: drop-shadow(0 34px 50px rgba(0, 0, 0, 0.55)) drop-shadow(-6px 0 22px var(--mm-why-hi)); }
+  .mm-why.is-settled .mm-why-cutout { --mm-rot: 0deg; --mm-par: 0px; }
+  .mm-why-media { position: relative; border-radius: 20px; overflow: hidden; background: var(--mm-why-surface);
+    border: 1px solid var(--mm-why-border); aspect-ratio: 4 / 5; }
+  .mm-why-media img, .mm-why-media svg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .mm-why-media svg { background: var(--mm-why-surface); fill: var(--mm-why-border); padding: 18%; }
+  .mm-why-media--drink { max-width: 19rem; aspect-ratio: 4 / 5; margin-top: 2.6rem; }
+  .mm-why-light { position: absolute; inset: 0; opacity: 0; transition: opacity 0.6s ease; pointer-events: none;
+    background: radial-gradient(340px circle at var(--mm-lx, 50%) var(--mm-ly, 40%), var(--mm-why-hi), transparent 70%); }
+  .mm-why-media.is-lit .mm-why-light, .mm-why-cutout-wrap.is-lit .mm-why-light { opacity: 1; }
+
+  /* ---------- Unified product stage: glow behind, stick above, badge overlapping ---------- */
+  .mm-why-stage { position: relative; width: min(420px, 100%); margin: 0 auto; }
+  .mm-why-stage__frame { position: relative; aspect-ratio: 4 / 4.4; max-height: 460px; overflow: visible; }
+  .mm-why-stage__glow { position: absolute; inset: -6%; pointer-events: none; z-index: 0;
+    background: radial-gradient(closest-side, var(--mm-why-hi), transparent 72%); opacity: 0.55; transition: opacity 1.2s ease; }
+  .mm-why-stage .mm-why-light { z-index: 0; }
+  .mm-why-stage__media { position: absolute; inset: 0; z-index: 1; display: flex; align-items: center; justify-content: center; }
+  .mm-why-3d { position: absolute; inset: 0; z-index: 1; }
+  .mm-why-3d__fallback { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.8s ease; }
+  .mm-why-3d.is-live .mm-why-3d__fallback { opacity: 0; pointer-events: none; }
+  .mm-why-3d__stage { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0;
+    transition: opacity 0.9s ease; touch-action: pan-y; cursor: grab; }
+  .mm-why-3d.is-live .mm-why-3d__stage { opacity: 1; }
+  .mm-why-3d__stage.is-grabbing { cursor: grabbing; }
+  .mm-why-stage__hint { position: absolute; top: 0.4rem; right: 0.2rem; z-index: 2; font-size: 0.66rem;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--mm-why-muted); margin: 0; }
+  .mm-why-stage .mm-why-cutout-wrap { margin-right: 0; justify-content: center; width: 100%; }
+  .mm-why-stage .mm-why-cutout { width: min(280px, 66%); }
+  .mm-why-stage__badge { position: relative; z-index: 3; width: fit-content; max-width: 92%;
+    margin: -28px auto 0; text-align: center; background: var(--mm-why-surface);
+    border: 1px solid var(--mm-why-border); border-radius: 14px; padding: 0.95rem 1.5rem 1.05rem;
+    box-shadow: 0 14px 30px -18px rgba(0, 0, 0, 0.7); }
+  .mm-why-stage__badge::after { content: ""; position: absolute; inset: 0; border-radius: inherit;
+    box-shadow: inset 0 1px 0 var(--mm-why-hi); pointer-events: none; }
+  .mm-why-stage__badge .mm-why-kicker { margin-bottom: 0.25rem; }
+  .mm-why-stage__badge p { font-size: 0.95rem; color: var(--mm-why-muted); margin: 0; max-width: none; }
+  .mm-why-stage__badge img { display: block; width: 100%; height: auto; border-radius: 10px; margin-top: 0.8rem; }
+  .mm-why-stage .mm-why-media { width: 72%; }
+  @media screen and (max-width: 639px) {
+    .mm-why-stage__badge { margin-top: -22px; }
+    [data-mm-product-mv] { padding-bottom: 7.5rem; }
+  }
+
+  /* ---------- Formula section ---------- */
+  .mm-why-formula { display: grid; gap: 1rem; grid-template-columns: 1fr; margin: 2.2rem 0; }
+  @media screen and (min-width: 700px) { .mm-why-formula { grid-template-columns: 1fr 1fr; } }
+  .mm-why-ing { background: {{ s.color_surface | color_modify: 'alpha', 0.55 }}; border: 1px solid var(--mm-why-border);
+    border-radius: 16px; padding: 1.5rem 1.6rem; }
+  .mm-why-ing:last-child { grid-column: 1 / -1; }
+  @media screen and (min-width: 700px) { .mm-why-ing:last-child { max-width: calc(50% - 0.5rem); } }
+  .mm-why-ing__name { font-size: 0.78rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mm-why-text);
+    font-family: var(--mm-why-font-h); font-weight: 700; margin: 0 0 0.3rem; }
+  .mm-why-ing__dose { font-family: var(--mm-why-font-h); font-weight: 800; font-size: 1.55rem; letter-spacing: -0.02em;
+    color: var(--mm-why-accent); margin: 0 0 0.65rem; font-variant-numeric: tabular-nums; }
+  .mm-why-ing__for { font-weight: 700; font-size: 1.02rem; color: var(--mm-why-text); margin: 0 0 0.5rem; }
+  .mm-why-ing p { font-size: 0.96rem; line-height: 1.6; color: var(--mm-why-muted); margin: 0 0 0.5em; max-width: none; }
+  .mm-why-ing p:last-child { margin-bottom: 0; }
+  .mm-why-details { border: 1px solid var(--mm-why-border); border-radius: 14px; margin-top: 1.6rem; }
+  .mm-why-details summary { list-style: none; cursor: pointer; padding: 1.05rem 1.3rem; min-height: 44px;
+    font-family: var(--mm-why-font-h); font-weight: 700; font-size: 0.95rem; color: var(--mm-why-text);
+    display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+  .mm-why-details summary::-webkit-details-marker { display: none; }
+  .mm-why-details summary::after { content: "+"; font-weight: 600; color: var(--mm-why-accent); font-size: 1.2rem; }
+  .mm-why-details[open] summary::after { content: "\2212"; }
+  .mm-why-details__body { padding: 0.2rem 1.3rem 1.4rem; }
+  .mm-why-details__h { font-family: var(--mm-why-font-h); font-weight: 700; font-size: 0.72rem;
+    letter-spacing: 0.24em; text-transform: uppercase; color: var(--mm-why-accent); margin: 0.6rem 0 0.6rem; max-width: none; }
+  .mm-why-details ul { margin: 0 0 0.4rem; padding: 0 0 0 1.15rem; }
+  .mm-why-details li { font-size: 0.92rem; line-height: 1.7; color: var(--mm-why-muted); }
+  .mm-why-details__rule { border: 0; height: 1px; background: var(--mm-why-border); margin: 1.3rem 0 0.8rem; }
+  .mm-why-coa { display: grid; gap: 1.4rem; }
+  @media screen and (min-width: 700px) { .mm-why-coa { grid-template-columns: minmax(0, 300px) minmax(0, 1fr); align-items: start; } }
+  .mm-why-coa__doc { border: 1px solid var(--mm-why-border); border-radius: 10px; overflow: hidden; background: #fff; }
+  .mm-why-coa__doc img { display: block; width: 100%; height: auto; }
+  .mm-why-coa__doc a { display: block; }
+  .mm-why-coa__lead { font-size: 0.98rem; font-weight: 600; color: var(--mm-why-text); margin: 0 0 0.7rem; max-width: none; }
+  .mm-why-coa__small { font-size: 0.84rem; line-height: 1.6; color: var(--mm-why-muted); margin: 0.7rem 0 0; max-width: none; }
+  .mm-why-coa__cta { margin-top: 1.1rem; padding: 0.7rem 1.4rem; font-size: 0.92rem; }
+
+  /* ---------- Commitment module ---------- */
+  .mm-why-promise { position: relative; }
+  .mm-why-promise__form { margin-top: 2rem; max-width: 34rem; }
+  .mm-why-promise__field { display: flex; flex-direction: column; gap: 1.2rem; }
+  @media screen and (min-width: 640px) { .mm-why-promise__field .mm-why-btn { align-self: flex-start; } }
+  .mm-why-label { display: block; font-family: var(--mm-why-font-h); font-weight: 700; font-size: 0.95rem;
+    letter-spacing: 0.01em; color: var(--mm-why-text); margin-bottom: 0.55rem; }
+  .mm-why-field-err { display: none; font-size: 0.88rem; color: #e8a9a0; margin: 0.5rem 0 0; }
+  .mm-why-field-err.is-on { display: block; }
+  .mm-why-input.is-invalid { border-color: #b3564a; }
+  .mm-why-form-status { font-size: 0.95rem; margin: 1rem 0 0; min-height: 1.4em; }
+  .mm-why-form-status.is-error { color: #e8a9a0; }
+  .mm-why-form-status.is-ok { color: var(--mm-why-accent); }
+  .mm-why-form-errors { margin: 0 0 1rem; padding: 0.9rem 1.1rem; border: 1px solid #b3564a; border-radius: 12px; color: #e8a9a0; font-size: 0.95rem; }
+  .mm-why-form-errors a { color: inherit; }
+  .mm-why-form-success { color: var(--mm-why-accent); font-size: 1rem; margin: 0 0 1rem; }
+  .mm-why-consent { font-size: 0.82rem; line-height: 1.55; color: var(--mm-why-muted); max-width: 30em; margin: 1.1rem 0 0; }
+  .mm-why-input { width: 100%; min-width: 0; background: var(--mm-why-surface); border: 1px solid var(--mm-why-border);
+    border-radius: 14px; padding: 1.05rem 1.2rem; min-height: 44px; font-size: 1.05rem; color: var(--mm-why-text); font-family: var(--mm-why-font-b); }
+  .mm-why-input::placeholder { color: var(--mm-why-muted); opacity: 0.85; }
+  .mm-why-input:focus { border-color: var(--mm-why-accent-soft); }
+  .mm-why-card { position: relative; margin-top: 2.4rem; max-width: 34rem; background: var(--mm-why-surface);
+    border: 1px solid var(--mm-why-border); border-radius: 20px; padding: clamp(1.8rem, 4vw, 2.6rem); }
+  .mm-why-card::before { content: ""; position: absolute; inset: -1.5rem; z-index: -1; border-radius: 32px;
+    background: radial-gradient(60% 70% at 50% 40%, var(--mm-why-hi), transparent 75%);
+    opacity: 0; transition: opacity 1.4s ease; }
+  .mm-why.is-committed .mm-why-card::before { opacity: 1; }
+  .mm-why-card::after { content: ""; position: absolute; inset: 0; border-radius: inherit;
+    box-shadow: inset 0 1px 0 var(--mm-why-hi); pointer-events: none; }
+  .mm-why-card__kicker { font-size: 0.72rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--mm-why-accent); margin-bottom: 1.1rem; }
+  .mm-why-card__lead { font-size: 1rem; color: var(--mm-why-muted); margin-bottom: 0.4rem; }
+  .mm-why-card__task { font-family: var(--mm-why-font-h); font-weight: 700; font-size: clamp(1.35rem, 3vw, 1.8rem); line-height: 1.3;
+    color: var(--mm-why-text); margin-bottom: 1.3rem; overflow-wrap: break-word; }
+  .mm-why-card__note { font-size: 0.98rem; color: var(--mm-why-muted); margin-bottom: 0.2em; max-width: none; }
+  .mm-why-card__time { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 0.78rem;
+    color: var(--mm-why-muted); margin: 0 0 1rem; }
+  .mm-why-card__actions { display: flex; align-items: center; gap: 1.4rem; margin-top: 1.4rem; flex-wrap: wrap; }
+  .mm-why-card__edit { background: none; border: 0; padding: 0.6rem 0; min-height: 44px; color: var(--mm-why-accent);
+    font-size: 0.9rem; text-decoration: underline; text-underline-offset: 0.3em; cursor: pointer; font-family: inherit; }
+
+  /* close-chapter echo of the promise */
+  .mm-why-echo { border-left: 2px solid var(--mm-why-accent); padding: 0.5rem 0 0.5rem 1.4rem; margin: 0 0 2.4rem; }
+  .mm-why-echo .mm-why-card__kicker { margin-bottom: 0.5rem; }
+  .mm-why-echo .mm-why-card__task { margin-bottom: 0.5rem; }
+  .mm-why-echo .mm-why-card__note { color: var(--mm-why-text); }
+
+  /* ---------- Offer module ---------- */
+  .mm-why-offer { position: relative; max-width: 34rem; margin-top: 3.5rem; background: {{ s.color_surface | color_modify: 'alpha', 0.6 }};
+    border: 1px solid var(--mm-why-border); border-radius: 20px; padding: clamp(1.8rem, 4vw, 2.6rem); scroll-margin-top: 6rem; }
+  .mm-why-offer::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 1px 0 var(--mm-why-hi); pointer-events: none; }
+  .mm-why-offer__sticks { display: flex; gap: 0.55rem; margin-bottom: 1.6rem; }
+  .mm-why-offer__sticks span { width: 7px; border-radius: 4px; background: var(--mm-why-border); display: block; }
+  .mm-why-offer__sticks span:nth-child(odd)  { height: 46px; }
+  .mm-why-offer__sticks span:nth-child(even) { height: 54px; }
+  .mm-why-offer__sticks span:first-child { background: var(--mm-why-accent); box-shadow: 0 0 12px var(--mm-why-hi); }
+  .mm-why-offer__media { margin: 0 0 1.4rem; border-radius: 14px; overflow: hidden; }
+  .mm-why-offer__media img { display: block; width: 100%; height: auto; }
+  .mm-why-offer__kicker { font-size: 0.72rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--mm-why-accent); margin: 0 0 0.6rem; }
+  .mm-why-offer__title { font-family: var(--mm-why-font-h); font-weight: 800; letter-spacing: -0.02em;
+    font-size: clamp(1.5rem, 3vw, 2rem); margin: 0 0 0.9rem; color: var(--mm-why-text); }
+  .mm-why-offer__line { font-size: 1rem; color: var(--mm-why-muted); margin: 0 0 0.35rem; }
+  .mm-why-offer__price { font-family: var(--mm-why-font-h); font-weight: 800; font-size: 1.6rem; color: var(--mm-why-text); margin: 1.2rem 0 1.4rem; font-variant-numeric: tabular-nums; }
+  .mm-why-offer__compare { color: var(--mm-why-muted); font-weight: 600; font-size: 1.05rem; margin-left: 0.6rem; }
+  .mm-why-offer form { margin: 0; }
+  .mm-why-offer__plans { border: 0; padding: 0; margin: 0 0 1.4rem; display: flex; flex-direction: column; gap: 0.7rem; }
+  .mm-why-offer__plan { display: grid; grid-template-columns: auto 1fr auto; align-items: start; gap: 0.8rem;
+    border: 1px solid var(--mm-why-border); border-radius: 14px; padding: 0.95rem 1.1rem; cursor: pointer;
+    transition: border-color 0.25s ease, background-color 0.25s ease; }
+  .mm-why-offer__plan:has(input:checked) { border-color: var(--mm-why-accent-soft); background: var(--mm-why-accent-faint); }
+  .mm-why-offer__plan input { accent-color: var(--mm-why-accent); width: 1.05rem; height: 1.05rem; margin: 0.2rem 0 0; flex: none; }
+  .mm-why-offer__plan-name { color: var(--mm-why-text); font-size: 0.98rem; font-weight: 600; display: block; }
+  .mm-why-offer__plan-terms { display: block; font-size: 0.85rem; color: var(--mm-why-muted); margin-top: 0.25rem; line-height: 1.5; }
+  .mm-why-offer__save { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--mm-why-bg); background: var(--mm-why-accent); border-radius: 999px; padding: 0.28rem 0.65rem; font-weight: 700; white-space: nowrap; }
+  .mm-why-offer__note { font-size: 0.82rem; color: var(--mm-why-muted); margin: 1rem 0 0; }
+
+  /* ---------- Sticky CTA ---------- */
+  .mm-why-sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 0.8rem 1rem calc(0.8rem + env(safe-area-inset-bottom));
+    transform: translateY(110%); transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+    background: {{ s.color_bg | color_modify: 'alpha', 0.82 }}; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-top: 1px solid var(--mm-why-border); }
+  .mm-why-sticky.is-on { transform: translateY(0); }
+  .mm-why-sticky__inner { max-width: 42rem; margin: 0 auto; display: flex; align-items: center; gap: 1rem; }
+  .mm-why-sticky__brand { font-family: var(--mm-why-font-h); font-weight: 600; letter-spacing: 0.02em; color: var(--mm-why-text); margin-right: auto; }
+  .mm-why-sticky__cta { padding: 0.7rem 1.4rem; font-size: 0.92rem; }
+  .mm-why-sticky__close { background: none; border: 1px solid var(--mm-why-border); border-radius: 50%; width: 2.75rem; height: 2.75rem;
+    flex: 0 0 auto; color: var(--mm-why-muted); cursor: pointer; font-size: 1rem; line-height: 1; display: inline-flex; align-items: center; justify-content: center; }
+  .mm-why-sticky__close:hover { color: var(--mm-why-text); border-color: var(--mm-why-accent-soft); }
+
+  /* ---------- Reader acknowledgment popup ---------- */
+  .mm-why-popup { position: fixed; inset: 0; z-index: 40; display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
+  .mm-why-popup[hidden] { display: none; }
+  .mm-why-popup::before { content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.55); opacity: 0; transition: opacity 0.4s ease; }
+  .mm-why-popup.is-on::before { opacity: 1; }
+  .mm-why-popup__card { position: relative; max-width: 28rem; width: 100%; background: var(--mm-why-surface); border: 1px solid var(--mm-why-border);
+    border-radius: 20px; padding: 2.4rem; opacity: 0; transform: translateY(14px);
+    transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1); max-height: 86vh; overflow-y: auto; }
+  .mm-why-popup.is-on .mm-why-popup__card { opacity: 1; transform: none; }
+  .mm-why-popup__card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 1px 0 var(--mm-why-hi); pointer-events: none; }
+  .mm-why-popup__kicker { font-size: 0.68rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--mm-why-muted); margin: 0 0 1rem; max-width: 24em; }
+  .mm-why-popup__title { font-family: var(--mm-why-font-h); font-weight: 800; letter-spacing: -0.02em; font-size: 1.6rem; margin: 0 0 0.8rem; color: var(--mm-why-text); max-width: 12em; }
+  .mm-why-popup__question { font-family: var(--mm-why-font-h); font-weight: 800; letter-spacing: -0.02em; font-size: 1.3rem; margin: 1rem 0 0.8rem; color: var(--mm-why-accent); }
+  .mm-why-popup__body p { font-size: 0.98rem; line-height: 1.6; color: var(--mm-why-muted); margin: 0 0 0.8em; }
+  .mm-why-popup__actions { display: flex; align-items: center; gap: 1.3rem; margin-top: 1.4rem; flex-wrap: wrap; }
+  .mm-why-popup__close { position: absolute; top: 1rem; right: 1rem; background: none; border: 1px solid var(--mm-why-border); border-radius: 50%;
+    width: 2.75rem; height: 2.75rem; color: var(--mm-why-muted); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+  .mm-why-popup__close:hover { color: var(--mm-why-text); border-color: var(--mm-why-accent-soft); }
+  @media screen and (max-width: 639px) {
+    .mm-why-popup { align-items: flex-end; padding: 0; }
+    .mm-why-popup__card { max-width: none; border-radius: 20px 20px 0 0; transform: translateY(100%);
+      padding-bottom: calc(2.4rem + env(safe-area-inset-bottom)); }
+    .mm-why-popup.is-on .mm-why-popup__card { transform: none; }
+  }
+
+  /* ---------- Legal footer ---------- */
+  .mm-why-disclaimer { padding: 3rem 1.5rem 4.5rem; position: relative; z-index: 2; }
+  .mm-why-disclaimer .mm-why-col p, .mm-why-disclaimer .mm-why-col { font-size: 0.85rem; line-height: 1.65; color: var(--mm-why-muted); }
+
+  /* ---------- Reduced motion ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    .mm-why-fog, .mm-why-vow__caret { animation: none !important; }
+    .mm-why--js [data-mm-reveal] { opacity: 1 !important; filter: none !important; transition: none !important; }
+    .mm-why--js [data-mm-reveal]:not(.mm-why-pile__card) { transform: none !important; }
+    .mm-why-pile__card { transition: none; }
+    .mm-why-rail__seg { --mm-why-off: 0px !important; transition: none; }
+    .mm-why-rail__fill { transform: scaleY(1) !important; transition: background-color 0.3s ease; }
+    .mm-why-rail__gap { opacity: 1; transition: background-color 0.3s ease; }
+    .mm-why-cal__from::after { transform: scaleX(1) !important; transition: none; }
+    .mm-why-cutout { transform: none !important; transition: none; }
+    .mm-why-aurora { transform: none !important; }
+    .mm-why, .mm-why-sticky, .mm-why-light, .mm-why-btn { transition: none !important; }
+    .mm-why-popup::before, .mm-why-popup__card { transition: none !important; transform: none !important; opacity: 1 !important; }
+    .mm-why-hide-grid__pin { position: static !important; }
+  }
+
+  @media screen and (max-width: 639px) {
+    .mm-why-mv { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .mm-why-col { padding-left: 14px; }
+    .mm-why-cta-row .mm-why-btn { width: 100%; }
+    .mm-why-cta-row { gap: 1.1rem; }
+    .mm-why-sticky__brand { display: none; }
+    .mm-why-sticky__inner { gap: 0.7rem; }
+    .mm-why-sticky__cta { flex: 1 1 auto; }
+    .mm-why-vow { min-height: 12rem; opacity: 0.95; }
+    .mm-why-pile { min-height: 26rem; }
+  }
+</style>
+
+<div id="why-mindmix-exists" class="mm-why" data-mm-why data-mm-sid="{{ section.id }}" data-mm-active-mood="void">
+
+  <!-- Atmosphere -->
+  <div class="mm-why-atmos" aria-hidden="true">
+    <div class="mm-why-atmos__stick">
+      {%- if s.image_texture != blank -%}
+        <div class="mm-why-texture">
+          {{ s.image_texture | image_url: width: 1800 | image_tag: widths: '900, 1400, 1800', sizes: '100vw', loading: 'lazy', alt: '' }}
+        </div>
+      {%- endif -%}
+      <div class="mm-why-fog mm-why-fog--a"></div>
+      <div class="mm-why-fog mm-why-fog--b"></div>
+      <div class="mm-why-fog mm-why-fog--c"></div>
+      <div class="mm-why-aurora"></div>
+      {%- if s.enable_grain -%}<div class="mm-why-grain"></div>{%- endif -%}
+    </div>
+  </div>
+
+  <!-- Promise line -->
+  <div class="mm-why-rail" aria-hidden="true">
+    <div class="mm-why-rail__stick" data-mm-rail>
+      <div class="mm-why-rail__glow"></div>
+      {%- for i in (1..13) -%}
+        <div class="mm-why-rail__seg" data-mm-seg style="--mm-rd: {{ forloop.index0 | times: 70 }}ms">
+          <div class="mm-why-rail__fill"></div>
+          {%- unless forloop.last -%}<div class="mm-why-rail__gap"></div>{%- endunless -%}
+        </div>
+      {%- endfor -%}
+      <div class="mm-why-rail__end"></div>
+    </div>
+  </div>
+
+  <!-- Hero: controlled and unresolved -->
+  <section class="mm-why-mv mm-why-beat" data-mm-mv data-mm-mood="void" id="mm-why-hero-{{ section.id }}">
+    <div class="mm-why-hero-grid">
+      <div>
+        <span class="mm-why-kicker mm-why-kicker--accent" data-mm-reveal>Why MindMix Exists</span>
+        <h1 class="mm-why-h1" data-mm-reveal="strike" style="--mm-d:.2s">Why is the work that could change your life always the easiest to postpone?</h1>
+        <div data-mm-reveal style="--mm-d:.45s">
+          <p>When the deadline belongs to someone else, you deliver.</p>
+          <p>When it belongs to your future, you find a reason to start tomorrow.</p>
+        </div>
+        <div class="mm-why-cta-row" data-mm-reveal style="--mm-d:.65s">
+          <a class="mm-why-btn mm-why-btn--primary" href="#mm-why-story-{{ section.id }}" data-mm-scroll>{{ s.cta_hero_primary | escape }}</a>
+          <a class="mm-why-textlink mm-why-textlink--dim" href="#mm-why-product-{{ section.id }}" data-mm-scroll>{{ s.cta_hero_secondary | escape }}</a>
+        </div>
+      </div>
+      <div class="mm-why-vow" aria-hidden="true" data-mm-vow data-mm-reveal="rise-long" style="--mm-d:.5s">
+        <div class="mm-why-vow__history" data-mm-vow-history></div>
+        <p class="mm-why-vow__line"><span>I will start</span> <span class="mm-why-vow__when" data-mm-vow-when>tonight.</span><span class="mm-why-vow__caret"></span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1 · The deal with tomorrow: slipping and shifting -->
+  <section class="mm-why-mv" data-mm-mv data-mm-mood="wound" id="mm-why-story-{{ section.id }}" tabindex="-1">
+    <div class="mm-why-col">
+      <h2 class="mm-why-h2" data-mm-reveal="strike">You had time today.</h2>
+      <div class="mm-why-stack" data-mm-reveal data-mm-stagger>
+        <p>Maybe not the whole day.</p>
+        <p>But enough.</p>
+      </div>
+      <div class="mm-why-gap"></div>
+      <div class="mm-why-stack" data-mm-stagger>
+        <p data-mm-reveal>Enough to study for the test.</p>
+        <p data-mm-reveal>Work on the business.</p>
+        <p data-mm-reveal>Send the email you keep avoiding.</p>
+        <p data-mm-reveal>Start.</p>
+      </div>
+      <div class="mm-why-gap"></div>
+      <div data-mm-reveal>
+        <p>Instead, you waited until beginning felt inconvenient.</p>
+        <p>You checked the clock. Did the math on what you could still get done. Then made yourself a deal.</p>
+      </div>
+      <div class="mm-why-stack" data-mm-stagger>
+        <p class="mm-why-beatline" data-mm-reveal>Tomorrow, you will wake up earlier.</p>
+        <p class="mm-why-beatline" data-mm-reveal>Tomorrow, you will do it properly.</p>
+        <p class="mm-why-beatline" data-mm-reveal>Tomorrow, you will finally lock in.</p>
+      </div>
+      <div data-mm-reveal>
+        <p>The deal gives you just enough relief to stop feeling guilty tonight.</p>
+        <p>And just enough hope to believe yourself again.</p>
+      </div>
+      <div data-mm-reveal="strike">
+        <p class="mm-why-beatline">And somehow, the deal works.</p>
+        <p class="mm-why-beatline">Not on the work.</p>
+        <p class="mm-why-beatline">On the guilt.</p>
+      </div>
+      <p data-mm-reveal="strike">That is how another day disappears without ever feeling like you chose to waste it.</p>
+    </div>
+  </section>
+
+  <!-- 2 · Rescheduling and self-trust: fractured repetition -->
+  <section class="mm-why-mv mm-why-mv--tight" data-mm-mv data-mm-mood="wound">
+    <div class="mm-why-col">
+      <h2 class="mm-why-h2" data-mm-reveal="strike">You do not quit.</h2>
+      <p class="mm-why-h2sub" data-mm-reveal="strike" style="--mm-d:.3s">That would be too honest.</p>
+      <p data-mm-reveal>You reschedule.</p>
+      <div class="mm-why-cal" data-mm-stagger>
+        <p class="mm-why-cal__row" data-mm-reveal><span class="mm-why-cal__from">Monday</span> becomes <span class="mm-why-cal__to">Tuesday</span>.</p>
+        <p class="mm-why-cal__row" data-mm-reveal><span class="mm-why-cal__from">Tuesday</span> becomes <span class="mm-why-cal__to">&ldquo;sometime this week.&rdquo;</span></p>
+      </div>
+      <div class="mm-why-gap"></div>
+      <div data-mm-reveal>
+        <p>You stop mentioning the idea around the person who keeps asking how it is going.</p>
+        <p>You stop opening the document because the date you created it has started to feel embarrassing.</p>
+      </div>
+      <div data-mm-reveal>
+        <p>You swear Sunday night was the final reset.</p>
+        <p>By Monday afternoon, you are negotiating again.</p>
+      </div>
+      <div class="mm-why-gap"></div>
+      <h3 class="mm-why-h2" data-mm-reveal="strike">The unfinished work is not the worst part.</h3>
+      <p data-mm-reveal>The worst part is what the pattern teaches you.</p>
+      <div data-mm-stagger>
+        <p class="mm-why-ledgerline" data-mm-reveal>Every time you say &ldquo;tonight&rdquo; and mean &ldquo;not tonight,&rdquo; your word loses a little value.</p>
+        <p class="mm-why-ledgerline" data-mm-reveal>Every fresh start begins with a little less belief than the one before it.</p>
+      </div>
+      <p data-mm-reveal>You quietly lower your expectations so the disappointment has less distance to fall.</p>
+      <p class="mm-why-beatline" data-mm-reveal="strike">That is how self-trust disappears.</p>
+      <div class="mm-why-stack" data-mm-stagger>
+        <p data-mm-reveal>Not in one catastrophic decision.</p>
+        <p data-mm-reveal>In small promises you taught yourself not to believe.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · Productive-looking avoidance: visual accumulation -->
+  <section class="mm-why-mv" data-mm-mv data-mm-mood="wound">
+    <div class="mm-why-hide-grid">
+      <div class="mm-why-hide-grid__pin">
+        <h2 class="mm-why-h2" data-mm-reveal="strike">The hardest avoidance to catch looks productive.</h2>
+        <div data-mm-reveal>
+          <p>You are not sitting around doing nothing.</p>
+          <p>That would be easy to catch.</p>
+        </div>
+        <div data-mm-reveal="strike">
+          <p>Sometimes preparation is not preparation.</p>
+          <p>Sometimes it is a hiding place.</p>
+        </div>
+      </div>
+      <div class="mm-why-hide-grid__flow">
+        <div class="mm-why-pile" data-mm-pile>
+          <div class="mm-why-pile__stack">
+            <p class="mm-why-pile__card" data-mm-reveal>Researching</p>
+            <p class="mm-why-pile__card" data-mm-reveal>Planning</p>
+            <p class="mm-why-pile__card" data-mm-reveal>Refining</p>
+            <p class="mm-why-pile__card" data-mm-reveal>Comparing tools</p>
+            <p class="mm-why-pile__card" data-mm-reveal>Cleaning the workspace</p>
+            <p class="mm-why-pile__card" data-mm-reveal>Rebuilding the strategy</p>
+          </div>
+          <div class="mm-why-pile__base">
+            <span class="mm-why-pile__base-label">The actual work</span>
+            <span class="mm-why-pile__status">Not started</span>
+          </div>
+        </div>
+        <p data-mm-reveal>Making sure that when you finally begin, you begin correctly.</p>
+        <div class="mm-why-gap"></div>
+        <div class="mm-why-stack" data-mm-stagger data-mm-pile-clear>
+          <p data-mm-reveal>As long as the business stays in your head, it can still become enormous.</p>
+          <p data-mm-reveal>As long as the application remains unfinished, it cannot be rejected.</p>
+          <p data-mm-reveal>As long as the first video stays in drafts, nobody can judge it.</p>
+          <p data-mm-reveal>As long as you are still &ldquo;figuring it out,&rdquo; your potential remains safely untested.</p>
+        </div>
+        <div class="mm-why-gap"></div>
+        <div data-mm-reveal="strike">
+          <p>You are not always avoiding the work.</p>
+          <p>Sometimes you are avoiding the evidence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · Condensed identity turn: wide cinematic frame -->
+  <section class="mm-why-mv mm-why-beat" data-mm-mv data-mm-mood="warm">
+    <div class="mm-why-col mm-why-col--cine">
+      <div class="mm-why-stack" data-mm-stagger>
+        <p data-mm-reveal>People call you smart.</p>
+        <p data-mm-reveal>Ambitious.</p>
+        <p data-mm-reveal>Creative.</p>
+        <p data-mm-reveal>Capable of doing something big.</p>
+      </div>
+      <div class="mm-why-gap"></div>
+      <div data-mm-reveal>
+        <p>Then the compliment follows you home and becomes an accusation.</p>
+        <p>You can show up when someone else is counting on you.</p>
+      </div>
+      <p class="mm-why-beatline" data-mm-reveal="strike">Just apparently not for yourself.</p>
+      <div data-mm-reveal>
+        <p>If you did not care, none of this would hurt.</p>
+        <p>You care.</p>
+      </div>
+      <p class="mm-why-h2sub" style="max-width: none; margin-left: auto; margin-right: auto;" data-mm-reveal="strike">That is why this hurts.</p>
+      <div data-mm-reveal="strike">
+        <p>You do not need a bigger dream.</p>
+        <p>You need a beginning small enough to survive your own negotiation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · Commitment capture: direct and still -->
+  <section class="mm-why-mv" data-mm-mv data-mm-mood="still" id="mm-why-commit-{{ section.id }}" tabindex="-1">
+    <div class="mm-why-col mm-why-promise">
+      <div data-mm-reveal="calm" data-mm-promise-wrap>
+        <span class="mm-why-kicker mm-why-kicker--accent">Before You Keep Reading</span>
+        <h2 class="mm-why-h2">Stop making the promise silently.</h2>
+        <p>Name the one thing you keep pushing into tomorrow.</p>
+        <p>We will send the promise back to you, help you turn it into a first move, and check in over the next seven days.</p>
+        <div class="mm-why-stack">
+          <p>No motivational spam.</p>
+          <p>No pretending that writing it down counts as doing it.</p>
+        </div>
+        <p>Just your own words, returned to you before tomorrow has a chance to rewrite them.</p>
+
+        {%- form 'customer', class: 'mm-why-promise__form' -%}
+          {%- if form.errors -%}
+            <div class="mm-why-form-errors" role="alert">{{ form.errors | default_errors }}</div>
+          {%- endif -%}
+          {%- if form.posted_successfully? -%}
+            <p class="mm-why-form-success">Promise recorded. Watch your inbox.</p>
+          {%- endif -%}
+          <input type="hidden" name="contact[tags]" value="first-promise" data-mm-promise-tags>
+          <input type="hidden" name="return_to" value="{{ request.path }}?mm-committed=1#mm-why-commit-{{ section.id }}">
+          <div class="mm-why-promise__field">
+            <div>
+              <label class="mm-why-label" for="mm-why-task-{{ section.id }}">The thing I am done postponing</label>
+              <input
+                class="mm-why-input"
+                type="text"
+                id="mm-why-task-{{ section.id }}"
+                maxlength="140"
+                autocomplete="off"
+                placeholder="Write it here..."
+                data-mm-promise-input
+                aria-describedby="mm-why-task-err-{{ section.id }}"
+              >
+              <p class="mm-why-field-err" id="mm-why-task-err-{{ section.id }}" data-mm-err="task">Write the thing you keep postponing first.</p>
+            </div>
+            <div>
+              <label class="mm-why-label" for="mm-why-email-{{ section.id }}">Where should we send your commitment?</label>
+              <input
+                class="mm-why-input"
+                type="email"
+                id="mm-why-email-{{ section.id }}"
+                name="contact[email]"
+                autocomplete="email"
+                autocapitalize="off"
+                autocorrect="off"
+                placeholder="you@email.com"
+                data-mm-promise-email
+                aria-describedby="mm-why-email-err-{{ section.id }}"
+              >
+              <p class="mm-why-field-err" id="mm-why-email-err-{{ section.id }}" data-mm-err="email">Enter a valid email address.</p>
+            </div>
+            <button type="submit" class="mm-why-btn mm-why-btn--primary" data-mm-submit-btn>Make It Real</button>
+          </div>
+          <p class="mm-why-form-status" data-mm-form-status role="status" aria-live="assertive"></p>
+          <p class="mm-why-consent">{{ s.consent_text | escape }}</p>
+        {%- endform -%}
+      </div>
+
+      <div aria-live="polite">
+        <div class="mm-why-card" data-mm-promise-card hidden>
+          <p class="mm-why-card__kicker">PROMISE RECORDED</p>
+          <p class="mm-why-card__lead">You said you were going to:</p>
+          <p class="mm-why-card__task" data-mm-promise-task></p>
+          <p class="mm-why-card__time" data-mm-promise-time hidden></p>
+          <p class="mm-why-card__note">Your first check-in arrives tomorrow.</p>
+          <div class="mm-why-card__actions">
+            <a class="mm-why-btn mm-why-btn--primary" href="#mm-why-founder-{{ section.id }}" data-mm-scroll>Continue Reading</a>
+            <button type="button" class="mm-why-card__edit" data-mm-promise-edit>Edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · Founder confession: raw and human -->
+  <section class="mm-why-mv" data-mm-mv data-mm-mood="warm" id="mm-why-founder-{{ section.id }}" tabindex="-1">
+    <div class="mm-why-founder-grid">
+      <div>
+        <h2 class="mm-why-h2" data-mm-reveal="strike">I did not build MindMix because I had focus figured out.</h2>
+        <div data-mm-reveal>
+          <p>I built it because I knew this pattern.</p>
+          <p>I knew how to look capable while privately losing control of my attention, routines, and priorities.</p>
+          <p>I knew how to make plans that sounded convincing.</p>
+          <p>I knew how to chase stimulation and call it progress.</p>
+        </div>
+        <div data-mm-reveal>
+          <p>I could spend hours describing the company I wanted MindMix to become, then let days pass without doing one thing that made it more real.</p>
+          <p>I knew how to keep functioning just well enough that nobody could see how disappointed I had become in myself.</p>
+        </div>
+        {%- if s.founder_scene != blank -%}
+        <div class="mm-why-founder-scene" data-mm-reveal>
+          {{ s.founder_scene }}
+        </div>
+        {%- endif -%}
+        <div data-mm-reveal>
+          <p>MindMix did not rebuild my life.</p>
+          <p>Treatment, recovery, exercise, structure, honesty, better decisions, and people willing to hold me accountable did that work.</p>
+          <p>But while I was rebuilding, I became obsessed with one question:</p>
+        </div>
+      </div>
+      <div class="mm-why-founder-media" data-mm-reveal="rise-long">
+        {%- if s.image_founder != blank -%}
+          {{ s.image_founder | image_url: width: 1400 | image_tag: widths: '600, 900, 1200, 1400', sizes: '(min-width: 900px) 48vw, 92vw', loading: 'lazy', alt: s.image_founder.alt | default: 'The founder of MindMix' }}
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag }}
+        {%- endif -%}
+        {%- if s.founder_caption != blank -%}
+        <span class="mm-why-founder-caption">{{ s.founder_caption | escape }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="mm-why-col" style="margin-top: clamp(3rem, 8vh, 5rem);">
+      <h3 class="mm-why-h2" data-mm-reveal="strike">How do you make the moment of beginning harder to negotiate with?</h3>
+      <div class="mm-why-stack" data-mm-stagger>
+        <p data-mm-reveal>Not the whole transformation.</p>
+        <p data-mm-reveal>Not a perfect day.</p>
+        <p data-mm-reveal>Just the moment where intention becomes something physical or disappears again.</p>
+      </div>
+      <p data-mm-reveal="strike">That question became MindMix.</p>
+      {%- if s.founder_name != blank or s.founder_role != blank -%}
+      <p class="mm-why-founder-meta" data-mm-reveal>
+        {%- if s.founder_name != blank -%}<strong style="display:block;color:var(--mm-why-text);">{{ s.founder_name | escape }}</strong>{%- endif -%}
+        {%- if s.founder_role != blank -%}{{ s.founder_role | escape }}{%- endif -%}
+      </p>
+      {%- endif -%}
+    </div>
+  </section>
+
+  <!-- 7 · Product ritual reveal: tactile and physical -->
+  <section class="mm-why-mv" data-mm-mv data-mm-mood="product" data-mm-sticky-zone id="mm-why-product-{{ section.id }}" tabindex="-1" data-mm-product-mv>
+    <div class="mm-why-prod-grid">
+      <div>
+        <h2 class="mm-why-h2" data-mm-reveal="strike">So I built a line you can cross.</h2>
+        <p data-mm-reveal>MindMix is a Green Apple Kiwi drink mix made for the moment you decide to begin.</p>
+        <ol class="mm-why-ritual">
+          <li data-mm-reveal>Choose one task.</li>
+          <li data-mm-reveal>Tear one stick.</li>
+          <li data-mm-reveal>Mix the drink.</li>
+          <li data-mm-reveal>Put the phone away.</li>
+        </ol>
+        <p data-mm-reveal>Begin before your mind produces another reasonable explanation for waiting.</p>
+        <div class="mm-why-gap"></div>
+        <div data-mm-reveal>
+          <p>Before the ritual, the promise is still abstract.</p>
+          <p>Making the drink turns the decision into something physical.</p>
+        </div>
+        <div class="mm-why-stack" data-mm-stagger>
+          <p class="mm-why-beatline" data-mm-reveal>One task.</p>
+          <p class="mm-why-beatline" data-mm-reveal>One stick.</p>
+          <p class="mm-why-beatline" data-mm-reveal>One protected block of time.</p>
+          <p class="mm-why-beatline" data-mm-reveal>Then keep it.</p>
+        </div>
+        <div data-mm-reveal>
+          <p>Not because one focused session changes your entire life.</p>
+          <p>Because every kept promise gives your word some of its value back.</p>
+          <p>You are not trying to prove that you have completely transformed.</p>
+          <p>You are proving that when you say &ldquo;begin,&rdquo; something actually begins.</p>
+        </div>
+        <div class="mm-why-cta-row" data-mm-reveal>
+          <a class="mm-why-btn mm-why-btn--primary" href="{{ mm_buy_href }}" {% if mm_buy_scroll %}data-mm-scroll{% endif %} data-mm-product-cta>{{ s.cta_purchase | escape }}</a>
+          {%- if mm_product_url != blank -%}
+          <a class="mm-why-textlink" href="{{ mm_product_url }}">{{ s.link_formula | escape }}</a>
+          {%- endif -%}
+        </div>
+      </div>
+      <div data-mm-reveal="rise-long">
+        {%- capture mm_stick_fallback -%}
+        {%- if s.image_stick != blank -%}
+        <div class="mm-why-cutout-wrap">
+          {{ s.image_stick | image_url: width: 1000 | image_tag: widths: '400, 660, 1000', sizes: '(min-width: 900px) 330px, 74vw', loading: 'lazy', class: 'mm-why-cutout', alt: s.image_stick.alt | default: 'MindMix Green Apple Kiwi single-serve pack' }}
+        </div>
+        {%- else -%}
+        <div class="mm-why-media">
+          {{ 'product-1' | placeholder_svg_tag }}
+        </div>
+        {%- endif -%}
+        {%- endcapture -%}
+        <div class="mm-why-stage" data-mm-light>
+          <div class="mm-why-stage__frame">
+            <div class="mm-why-stage__glow" aria-hidden="true"></div>
+            <div class="mm-why-light" aria-hidden="true"></div>
+            {%- if s.enable_3d and s.dieline_gak != blank -%}
+            <div class="mm-why-3d" data-mm-3d
+              data-mm-three="{{ 'three.module.js' | asset_url }}"
+              data-mm-tex-0="{{ s.dieline_gak | image_url: width: 1600 }}">
+              <div class="mm-why-3d__fallback" data-mm-3d-fallback>{{ mm_stick_fallback }}</div>
+              <canvas class="mm-why-3d__stage" data-mm-3d-canvas role="img" tabindex="0" aria-label="MindMix pack in interactive 3D. Drag to spin. Press the left and right arrow keys to rotate."></canvas>
+            </div>
+            {%- else -%}
+            <div class="mm-why-stage__media">{{ mm_stick_fallback }}</div>
+            {%- endif -%}
+            <p class="mm-why-stage__hint" data-mm-3d-hint hidden>Drag to spin</p>
+          </div>
+          <div class="mm-why-stage__badge">
+            <span class="mm-why-kicker mm-why-kicker--accent">Green Apple Kiwi</span>
+            <p>{{ s.flavor_note | escape }}</p>
+            {%- if s.image_sense != blank -%}
+              {{ s.image_sense | image_url: width: 900 | image_tag: widths: '450, 700, 900', sizes: '(min-width: 900px) 352px, 88vw', loading: 'lazy', alt: s.image_sense.alt | default: 'Green apple and kiwi' }}
+            {%- endif -%}
+          </div>
+        </div>
+        {%- if s.image_drink != blank -%}
+        <div class="mm-why-media mm-why-media--drink" data-mm-reveal="rise-long">
+          {{ s.image_drink | image_url: width: 900 | image_tag: widths: '450, 700, 900', sizes: '(min-width: 900px) 304px, 70vw', loading: 'lazy', alt: s.image_drink.alt | default: 'A prepared glass of MindMix' }}
+        </div>
+        {%- endif -%}
+        {%- if s.image_ritual != blank -%}
+        <div class="mm-why-media mm-why-media--drink" data-mm-reveal="rise-long" style="aspect-ratio: 4 / 3;">
+          {{ s.image_ritual | image_url: width: 900 | image_tag: widths: '450, 700, 900', sizes: '(min-width: 900px) 304px, 70vw', loading: 'lazy', alt: s.image_ritual.alt | default: 'Preparing a MindMix drink' }}
+        </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · Ingredients and formula: clear and rational -->
+  <section class="mm-why-mv" data-mm-mv data-mm-mood="offer" data-mm-sticky-zone id="mm-why-formula-{{ section.id }}">
+    <div class="mm-why-col mm-why-col--wide">
+      <h2 class="mm-why-h2" data-mm-reveal="strike">Built for the whole session.</h2>
+      <div class="mm-why-stack" data-mm-stagger>
+        <p data-mm-reveal>Starting takes alertness.</p>
+        <p data-mm-reveal>Staying with the work takes control.</p>
+        <p data-mm-reveal>Finishing takes mental stamina.</p>
+      </div>
+      <p data-mm-reveal>MindMix combines five active ingredients selected to support all three.</p>
+
+      <div class="mm-why-formula">
+        <article class="mm-why-ing" data-mm-reveal>
+          <h3 class="mm-why-ing__name">Lion&rsquo;s Mane Extract</h3>
+          <p class="mm-why-ing__dose">1,000 mg</p>
+          <p class="mm-why-ing__for">For clear thinking.</p>
+          <p>Supports memory, learning, and cognitive function.</p>
+          <p>It is the largest active ingredient in MindMix because clear thinking should be the foundation of the formula, not a label decoration.</p>
+        </article>
+        <article class="mm-why-ing" data-mm-reveal>
+          <h3 class="mm-why-ing__name">L-Theanine</h3>
+          <p class="mm-why-ing__dose">400 mg</p>
+          <p class="mm-why-ing__for">For calm concentration.</p>
+          <p>Supports a calm, focused state so feeling alert does not become feeling scattered.</p>
+          <p>Less mental noise. More attention on the task in front of you.</p>
+        </article>
+        <article class="mm-why-ing" data-mm-reveal>
+          <h3 class="mm-why-ing__name">Green Tea Extract</h3>
+          <p class="mm-why-ing__dose">300 mg</p>
+          <p class="mm-why-ing__for">For alertness.</p>
+          <p>Gives the formula its brighter, ready-to-work side and provides concentrated tea polyphenols.</p>
+          <p>Enough lift to begin without making stimulation the entire identity of the product.</p>
+        </article>
+        <article class="mm-why-ing" data-mm-reveal>
+          <h3 class="mm-why-ing__name">Rhodiola Rosea</h3>
+          <p class="mm-why-ing__dose">250 mg</p>
+          <p class="mm-why-ing__for">For mental stamina.</p>
+          <p>Supports resilience during periods of stress and mental fatigue.</p>
+          <p>It is there for the point where the work stops feeling exciting and continuing becomes the real challenge.</p>
+        </article>
+        <article class="mm-why-ing" data-mm-reveal>
+          <h3 class="mm-why-ing__name">Vitamin B12</h3>
+          <p class="mm-why-ing__dose">100 mcg</p>
+          <p class="mm-why-ing__for">For normal energy metabolism and nervous-system support.</p>
+          <p>B12 supports the systems underneath every working session.</p>
+          <p>Not the flashy part. The essential part.</p>
+        </article>
+      </div>
+
+      <div data-mm-reveal>
+        <p class="mm-why-beatline" style="margin-top: 0.4em;">Five ingredients. One job.</p>
+        <p>Help you feel clear enough to think, calm enough to stay with it, and steady enough to keep going.</p>
+        <div class="mm-why-stack">
+          <p>No proprietary blend.</p>
+          <p>Every active amount is shown on the label.</p>
+        </div>
+      </div>
+
+      <details class="mm-why-details" data-mm-reveal="calm">
+        <summary data-mm-details-summary aria-label="View Formula and Testing Details">View Formula and Testing Details</summary>
+        <div class="mm-why-details__body">
+          <p class="mm-why-details__h">Formula details</p>
+          <ul>
+            <li>Vitamin B12 as methylcobalamin, 100 mcg</li>
+            <li>Lion&rsquo;s Mane extract, 1,000 mg, fruiting body, standardized to 50% polysaccharides</li>
+            <li>L-Theanine, 400 mg</li>
+            <li>Green Tea Leaf Extract, 300 mg, standardized to 98% polyphenols and 50% EGCG</li>
+            <li>Rhodiola rosea root extract, 250 mg, standardized to 3% rosavins and 1% salidroside</li>
+          </ul>
+          {%- if s.testing_certificate_image != blank or s.testing_certificate_url != blank -%}
+          <hr class="mm-why-details__rule">
+          <p class="mm-why-details__h">Batch testing</p>
+          <div class="mm-why-coa">
+            {%- if s.testing_certificate_image != blank -%}
+            <div class="mm-why-coa__doc">
+              {%- if s.testing_certificate_url != blank -%}
+              <a href="{{ s.testing_certificate_url }}" target="_blank" rel="noopener noreferrer" aria-label="View the full certificate of analysis in a new tab">
+                {{ s.testing_certificate_image | image_url: width: 800 | image_tag: widths: '400, 600, 800', sizes: '(min-width: 700px) 300px, 88vw', loading: 'lazy', alt: 'Certificate of analysis for Mind Mix Green Apple Kiwi bulk powder, lot 2512023' }}
+              </a>
+              {%- else -%}
+              {{ s.testing_certificate_image | image_url: width: 800 | image_tag: widths: '400, 600, 800', sizes: '(min-width: 700px) 300px, 88vw', loading: 'lazy', alt: 'Certificate of analysis for Mind Mix Green Apple Kiwi bulk powder, lot 2512023' }}
+              {%- endif -%}
+            </div>
+            {%- endif -%}
+            <div class="mm-why-coa__facts">
+              <p class="mm-why-coa__lead">Testing and quality documentation for bulk powder lot 2512023.</p>
+              <ul>
+                <li>Product: Mind Mix (Green Apple Kiwi), bulk powder</li>
+                <li>Lot: 2512023</li>
+                <li>Manufactured: January 2026</li>
+                <li>Best by: January 2028</li>
+                <li>Microbial analysis: E. coli absent, Salmonella absent, Staphylococcus aureus absent</li>
+              </ul>
+              <p class="mm-why-coa__small">Analytical work conducted by third-party laboratories or determined by the NutraSky quality department through record review. Active ingredient amounts are supported through component testing and batch production record analysis.</p>
+              <p class="mm-why-coa__small">Reviewed and signed by Matthew Rycyk, MS, RAC, PCQI, EVP of Quality and Regulatory.</p>
+              {%- if s.testing_certificate_url != blank -%}
+              <a class="mm-why-btn mm-why-btn--ghost mm-why-coa__cta" href="{{ s.testing_certificate_url }}" target="_blank" rel="noopener noreferrer">View Full Certificate</a>
+              {%- endif -%}
+            </div>
+          </div>
+          {%- endif -%}
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- 9 · Skepticism: stripped-down -->
+  <section class="mm-why-mv" data-mm-mv data-mm-mood="still" data-mm-sticky-zone>
+    <div class="mm-why-col">
+      <h2 class="mm-why-h2" data-mm-reveal="calm">Could you start without MindMix?</h2>
+      <div data-mm-reveal="calm">
+        <p>Of course.</p>
+        <p>You could have started yesterday without it too.</p>
+        <p>MindMix is not built on the idea that you are incapable of working without a supplement.</p>
+      </div>
+      <div data-mm-reveal="calm">
+        <p>It will not do the work for you.</p>
+        <p>It gives the work a clear place to begin.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · Commercial offer: bright, simple, decisive -->
+  <section class="mm-why-mv" data-mm-mv data-mm-mood="clear" data-mm-sticky-zone id="mm-why-buy-{{ section.id }}">
+    <div class="mm-why-col">
+      <div class="mm-why-offer" id="mm-why-offer-{{ section.id }}" data-mm-reveal="calm">
+        {%- if s.image_offer != blank -%}
+        <div class="mm-why-offer__media">
+          {{ s.image_offer | image_url: width: 1000 | image_tag: widths: '500, 750, 1000', sizes: '(min-width: 640px) 34rem, 92vw', loading: 'lazy', alt: s.image_offer.alt | default: 'MindMix Green Apple Kiwi, 15 single-serve sticks' }}
+        </div>
+        {%- endif -%}
+        <div class="mm-why-offer__sticks" aria-hidden="true">
+          {%- for i in (1..s.offer_stick_count) -%}<span></span>{%- endfor -%}
+        </div>
+        <p class="mm-why-offer__kicker">{{ s.offer_kicker | escape }}</p>
+        <p class="mm-why-offer__title">{{ s.offer_title | escape }}</p>
+        {%- if s.offer_line1 != blank -%}<p class="mm-why-offer__line">{{ s.offer_line1 | escape }}</p>{%- endif -%}
+        {%- if s.offer_line2 != blank -%}<p class="mm-why-offer__line">{{ s.offer_line2 | escape }}</p>{%- endif -%}
+        {%- if s.offer_line3 != blank -%}<p class="mm-why-offer__line">{{ s.offer_line3 | escape }}</p>{%- endif -%}
+        {%- if s.product != blank -%}
+          {%- liquid
+            assign mm_variant = s.product.selected_or_first_available_variant
+            assign mm_group = s.product.selling_plan_groups | first
+            assign mm_first_alloc = nil
+            if mm_group
+              assign mm_first_alloc = mm_variant.selling_plan_allocations | first
+            endif
+          -%}
+          <p class="mm-why-offer__price">
+            {%- if mm_first_alloc -%}
+              <span data-mm-price-current>{{ mm_first_alloc.price | money }}</span>
+              {%- if mm_first_alloc.price < mm_variant.price -%}
+                <s class="mm-why-offer__compare" data-mm-price-compare>{{ mm_variant.price | money }}</s>
+              {%- else -%}
+                <s class="mm-why-offer__compare" data-mm-price-compare hidden>{{ mm_variant.price | money }}</s>
+              {%- endif -%}
+            {%- else -%}
+              <span data-mm-price-current>{{ mm_variant.price | money }}</span>
+              <s class="mm-why-offer__compare" data-mm-price-compare hidden>{{ mm_variant.price | money }}</s>
+            {%- endif -%}
+          </p>
+          {%- form 'product', s.product -%}
+            <input type="hidden" name="id" value="{{ mm_variant.id }}">
+            {%- if mm_group -%}
+            <fieldset class="mm-why-offer__plans">
+              <legend class="mm-why-vh">Purchase options</legend>
+              {%- for plan in mm_group.selling_plans -%}
+                {%- assign mm_alloc = nil -%}
+                {%- for a in mm_variant.selling_plan_allocations -%}
+                  {%- if a.selling_plan.id == plan.id -%}{%- assign mm_alloc = a -%}{%- endif -%}
+                {%- endfor -%}
+                {%- if mm_alloc -%}
+                {%- assign mm_save = mm_variant.price | minus: mm_alloc.price | times: 100 | divided_by: mm_variant.price -%}
+                <label class="mm-why-offer__plan">
+                  <input type="radio" name="selling_plan" value="{{ plan.id }}" {% if forloop.first %}checked{% endif %}
+                    data-mm-plan data-mm-plan-kind="subscription" data-mm-cta="{{ s.offer_cta_sub | escape }}"
+                    data-mm-price="{{ mm_alloc.price | money }}" data-mm-compare="{{ mm_variant.price | money }}">
+                  <span>
+                    <span class="mm-why-offer__plan-name">{%- if mm_save > 0 -%}Subscribe and save {{ mm_save }}%{%- else -%}Subscribe{%- endif -%}</span>
+                    <span class="mm-why-offer__plan-terms">{{ mm_alloc.price | money }} &middot; {{ plan.name | escape }}<br>{{ s.offer_sub_note | escape }}</span>
+                  </span>
+                  {%- if mm_save > 0 -%}<span class="mm-why-offer__save">Save {{ mm_save }}%</span>{%- endif -%}
+                </label>
+                {%- endif -%}
+              {%- endfor -%}
+              <label class="mm-why-offer__plan">
+                <input type="radio" name="selling_plan" value=""
+                  data-mm-plan data-mm-plan-kind="one_time" data-mm-cta="{{ s.offer_cta_once | escape }}"
+                  data-mm-price="{{ mm_variant.price | money }}" data-mm-compare="">
+                <span>
+                  <span class="mm-why-offer__plan-name">One-time purchase</span>
+                  <span class="mm-why-offer__plan-terms">{{ mm_variant.price | money }} &middot; {{ s.offer_once_note | escape }}</span>
+                </span>
+              </label>
+            </fieldset>
+            {%- endif -%}
+            <button type="submit" class="mm-why-btn mm-why-btn--primary" data-mm-atc {% unless mm_variant.available %}disabled{% endunless %}>
+              {%- if mm_variant.available -%}{%- if mm_group -%}{{ s.offer_cta_sub | escape }}{%- else -%}{{ s.offer_cta_once | escape }}{%- endif -%}{%- else -%}Sold out{%- endif -%}
+            </button>
+          {%- endform -%}
+        {%- elsif mm_product_url != blank -%}
+          <a class="mm-why-btn mm-why-btn--primary" href="{{ mm_product_url }}" data-mm-atc>{{ s.offer_cta_once | escape }}</a>
+        {%- else -%}
+          <p class="mm-why-offer__note">Select a product in the section settings to activate this offer.</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · Final close: aligned and resolved -->
+  <section class="mm-why-mv mm-why-beat" data-mm-mv data-mm-mood="clear" id="mm-why-close-{{ section.id }}">
+    <div class="mm-why-col">
+      <h2 class="mm-why-h2" data-mm-reveal="strike">Imagine believing yourself again.</h2>
+      <p data-mm-reveal>Not because you read something inspiring.</p>
+      <div class="mm-why-stack" data-mm-stagger>
+        <p data-mm-reveal>Because when you say you will work for forty-five minutes, you do not spend the first twenty negotiating.</p>
+        <p data-mm-reveal>Because someone asks how the project is going and you finally have something new to tell them.</p>
+        <p data-mm-reveal>Because the task stops surviving every list you write.</p>
+      </div>
+      <div class="mm-why-gap"></div>
+      <h3 class="mm-why-h2" data-mm-reveal="strike">Your future does not need another promise.</h3>
+      <p class="mm-why-h2sub" data-mm-reveal="strike" style="--mm-d:.3s">It needs proof.</p>
+      <div class="mm-why-stack" data-mm-stagger>
+        <p data-mm-reveal>Words on the screen.</p>
+        <p data-mm-reveal>The email sent.</p>
+        <p data-mm-reveal>The application submitted.</p>
+        <p data-mm-reveal>The first version finished.</p>
+      </div>
+      <p data-mm-reveal>Evidence that you finally began.</p>
+      <div class="mm-why-echo" data-mm-close-echo hidden>
+        <p class="mm-why-card__kicker">You said you were done postponing:</p>
+        <p class="mm-why-card__task" data-mm-close-task></p>
+        <p class="mm-why-card__note">Give it a beginning.</p>
+      </div>
+      <div class="mm-why-stack" data-mm-stagger>
+        <p class="mm-why-beatline" data-mm-reveal>One task.</p>
+        <p class="mm-why-beatline" data-mm-reveal>One promise.</p>
+        <p class="mm-why-beatline" data-mm-reveal>Keep it.</p>
+      </div>
+      <div class="mm-why-cta-row" data-mm-reveal>
+        <a class="mm-why-btn mm-why-btn--primary" href="{{ mm_buy_href }}" {% if mm_buy_scroll %}data-mm-scroll{% endif %} data-mm-final-cta data-mm-default-label="{{ s.cta_final | escape }}">{{ s.cta_final | escape }}</a>
+      </div>
+      <div class="mm-why-gap"></div>
+      <div class="mm-why-dim" data-mm-reveal>
+        <p>MindMix will not do the work for you.</p>
+        <p>That is why the promise still counts.</p>
+      </div>
+    </div>
+  </section>
+
+  {%- if s.disclaimer != blank -%}
+  <hr class="mm-why-rule">
+  <div class="mm-why-disclaimer">
+    <div class="mm-why-col">{{ s.disclaimer }}</div>
+  </div>
+  {%- endif -%}
+
+  <!-- Sticky CTA -->
+  {%- if s.enable_sticky -%}
+  <div class="mm-why-sticky" data-mm-sticky hidden>
+    <div class="mm-why-sticky__inner">
+      <span class="mm-why-sticky__brand">MindMix</span>
+      <a class="mm-why-btn mm-why-btn--primary mm-why-sticky__cta" href="{{ mm_buy_href }}" {% if mm_buy_scroll %}data-mm-scroll{% endif %}>{{ s.cta_sticky | escape }}</a>
+      <button type="button" class="mm-why-sticky__close" data-mm-sticky-close aria-label="Dismiss">
+        <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M1 1l8 8M9 1L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+  {%- endif -%}
+
+  <!-- Reader acknowledgment popup -->
+  {%- if s.enable_popup -%}
+  <div class="mm-why-popup" data-mm-popup hidden role="dialog" aria-modal="true" aria-labelledby="mm-why-popup-title-{{ section.id }}">
+    <div class="mm-why-popup__card">
+      <button type="button" class="mm-why-popup__close" data-mm-popup-close aria-label="Close">
+        <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M1 1l8 8M9 1L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      {%- if s.popup_kicker != blank -%}<p class="mm-why-popup__kicker">{{ s.popup_kicker | escape }}</p>{%- endif -%}
+      <p class="mm-why-popup__title" id="mm-why-popup-title-{{ section.id }}">{{ s.popup_heading | escape }}</p>
+      <div class="mm-why-popup__body">{{ s.popup_body }}</div>
+      {%- if s.popup_question != blank -%}<p class="mm-why-popup__question">{{ s.popup_question | escape }}</p>{%- endif -%}
+      <div class="mm-why-popup__body">{{ s.popup_body2 }}</div>
+      <div class="mm-why-popup__actions">
+        <button type="button" class="mm-why-btn mm-why-btn--primary" data-mm-popup-write>{{ s.popup_primary | escape }}</button>
+        <button type="button" class="mm-why-textlink mm-why-textlink--dim" style="background:none;border:0;cursor:pointer;font-family:inherit;min-height:44px;" data-mm-popup-close>{{ s.popup_button | escape }}</button>
+      </div>
+    </div>
+  </div>
+  {%- endif -%}
+
+</div>
+
+<script>
+  (function () {
+    'use strict';
+
+    /* ============================================================
+       DEVELOPER NOTE: promise form backend.
+       Leave MM_PROMISE_ENDPOINT null to use the built-in Shopify
+       customer capture (native POST: email + "first-promise" tag +
+       truncated task tag). No credentials required.
+       Set it to an approved HTTPS endpoint to switch to a JSON POST:
+       { task, email, submittedAt } with inline success and error UI.
+       ============================================================ */
+    var MM_PROMISE_ENDPOINT = null;
+
+    function initMmWhy(root) {
+      if (!root || root.dataset.mmWhyInit) return;
+      root.dataset.mmWhyInit = '1';
+      root.classList.add('mm-why--js');
+
+      var cleanup = [];
+      root._mmWhyCleanup = cleanup;
+      function on(target, ev, fn, opts) {
+        target.addEventListener(ev, fn, opts);
+        cleanup.push(function () { target.removeEventListener(ev, fn, opts); });
+      }
+      function every(ms, fn) {
+        var id = window.setInterval(fn, ms);
+        cleanup.push(function () { window.clearInterval(id); });
+        return id;
+      }
+
+      var reduced = false;
+      try { reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+
+      var LS_KEY = 'mm-why-first-promise';
+      var LS_FLAG = 'mm-why-promise-committed';
+      var LS_AT = 'mm-why-promise-at';
+      var LS_POP = 'mm-why-popup-dismissed-at';
+      var SS_KEY = 'mm-why-sticky-dismissed';
+      function lsGet(k) { try { return window.localStorage.getItem(k) || ''; } catch (e) { return ''; } }
+      function lsSet(k, v) { try { window.localStorage.setItem(k, v); } catch (e) {} }
+      function ssGet() { try { return window.sessionStorage.getItem(SS_KEY) === '1'; } catch (e) { return false; } }
+      function ssSet() { try { window.sessionStorage.setItem(SS_KEY, '1'); } catch (e) {} }
+
+      function track(name, data) {
+        try {
+          if (window.dataLayer && window.dataLayer.push) {
+            var payload = { event: 'mm_why_' + name };
+            if (data) for (var k in data) payload[k] = data[k];
+            window.dataLayer.push(payload);
+          }
+          document.dispatchEvent(new CustomEvent('mm-why:' + name, { detail: data || {} }));
+        } catch (e) {}
+      }
+
+      /* ---------- Reveals ---------- */
+      var reveals = root.querySelectorAll('[data-mm-reveal]');
+      root.querySelectorAll('[data-mm-stagger]').forEach(function (group) {
+        var kids = group.querySelectorAll('[data-mm-reveal]');
+        kids.forEach(function (el, i) { el.style.setProperty('--mm-d', Math.min(i * 0.11, 0.9) + 's'); });
+      });
+      if (!reduced && 'IntersectionObserver' in window) {
+        var revealIO = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-in');
+              revealIO.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -7% 0px' });
+        reveals.forEach(function (el) { revealIO.observe(el); });
+      } else {
+        reveals.forEach(function (el) { el.classList.add('is-in'); });
+      }
+
+      /* ---------- Mood + sticky visibility ---------- */
+      var movements = root.querySelectorAll('[data-mm-mv]');
+      var sticky = root.querySelector('[data-mm-sticky]');
+      var stickyDismissed = ssGet();
+      var stickyArmed = false;
+      function setSticky(onState) {
+        if (!sticky || stickyDismissed) return;
+        if (onState && !stickyArmed) { stickyArmed = true; sticky.hidden = false; }
+        requestAnimationFrame(function () { sticky.classList.toggle('is-on', onState && stickyArmed); });
+      }
+      if (sticky) {
+        var closeBtn = sticky.querySelector('[data-mm-sticky-close]');
+        if (closeBtn) closeBtn.addEventListener('click', function () {
+          stickyDismissed = true; ssSet();
+          sticky.classList.remove('is-on');
+          window.setTimeout(function () { sticky.hidden = true; }, 500);
+        });
+      }
+      if ('IntersectionObserver' in window) {
+        var moodIO = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var mood = entry.target.getAttribute('data-mm-mood') || 'void';
+            root.setAttribute('data-mm-active-mood', mood);
+            setSticky(entry.target.hasAttribute('data-mm-sticky-zone'));
+          });
+        }, { rootMargin: '-42% 0px -42% 0px', threshold: 0 });
+        movements.forEach(function (mv) { moodIO.observe(mv); });
+      }
+
+      /* ---------- Promise line + scroll progress + product rotation ---------- */
+      var segs = root.querySelectorAll('[data-mm-seg]');
+      var productMv = root.querySelector('[data-mm-product-mv]');
+      var cutout = root.querySelector('.mm-why-cutout');
+      var maxP = 0;
+      var depthFired = {};
+      var ticking = false;
+      function paintFrame() {
+        ticking = false;
+        var rect = root.getBoundingClientRect();
+        var total = rect.height - window.innerHeight;
+        if (total <= 0) return;
+        var p = Math.min(1, Math.max(0, -rect.top / total));
+        if (p > maxP) maxP = p;
+        [0.25, 0.5, 0.75, 0.98].forEach(function (m) {
+          if (maxP >= m && !depthFired[m]) { depthFired[m] = true; track('scroll_depth', { depth: m }); }
+        });
+        root.style.setProperty('--mm-p', p.toFixed(4));
+        if (!reduced) {
+          var n = segs.length;
+          for (var i = 0; i < n; i++) {
+            var fill = Math.min(1, Math.max(0, p * n - i));
+            segs[i].querySelector('.mm-why-rail__fill').style.setProperty('--mm-why-fill', fill.toFixed(3));
+            segs[i].classList.toggle('is-filled', fill > 0.55);
+            segs[i].classList.toggle('is-linked', p * n >= i + 1);
+          }
+          if (productMv && cutout) {
+            var pr = productMv.getBoundingClientRect();
+            var q = Math.min(1, Math.max(0, (window.innerHeight * 0.75 - pr.top) / pr.height));
+            if (q >= 0.72) {
+              root.classList.add('is-settled');
+            } else {
+              root.classList.remove('is-settled');
+              cutout.style.setProperty('--mm-rot', (-6 + q * 8).toFixed(2) + 'deg');
+              cutout.style.setProperty('--mm-par', ((1 - q) * 26).toFixed(1) + 'px');
+            }
+          }
+        }
+      }
+      function requestFrame() { if (!ticking) { ticking = true; requestAnimationFrame(paintFrame); } }
+      on(window, 'scroll', requestFrame, { passive: true });
+      on(window, 'resize', requestFrame);
+      paintFrame();
+
+      /* ---------- Cursor lighting (desktop only, decorative) ---------- */
+      var lightHosts = root.querySelectorAll('[data-mm-light]');
+      var finePointer = false;
+      try { finePointer = window.matchMedia('(pointer: fine)').matches; } catch (e) {}
+      if (finePointer && !reduced) {
+        lightHosts.forEach(function (host) {
+          var raf = null;
+          host.addEventListener('pointerenter', function () { host.classList.add('is-lit'); });
+          host.addEventListener('pointerleave', function () { host.classList.remove('is-lit'); });
+          host.addEventListener('pointermove', function (e) {
+            if (raf) return;
+            raf = requestAnimationFrame(function () {
+              raf = null;
+              var r = host.getBoundingClientRect();
+              host.style.setProperty('--mm-lx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+              host.style.setProperty('--mm-ly', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+            });
+          });
+        });
+      }
+
+      /* ---------- Smooth scroll ---------- */
+      root.querySelectorAll('[data-mm-scroll]').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          var id = link.getAttribute('href');
+          if (!id || id.charAt(0) !== '#') return;
+          var target = document.getElementById(id.slice(1));
+          if (!target) return;
+          e.preventDefault();
+          target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+          target.focus({ preventScroll: true });
+        });
+      });
+
+      /* ---------- The self-rewriting promise (hero) ---------- */
+      var vow = root.querySelector('[data-mm-vow]');
+      if (vow && !reduced) {
+        var whenEl = vow.querySelector('[data-mm-vow-when]');
+        var vowHist = vow.querySelector('[data-mm-vow-history]');
+        var endings = ['tonight.', 'tomorrow.', 'on Monday.', 'next week.', 'when things calm down.'];
+        var vi = 0;
+        var vowActive = false;
+        var vowStopped = false;
+        cleanup.push(function () { vowStopped = true; });
+        var ghostRefresh = function () {
+          var gs = vowHist.querySelectorAll('.mm-why-vow__ghost');
+          for (var i = 0; i < gs.length; i++) {
+            gs[i].classList.add('is-in');
+            gs[i].style.opacity = Math.max(0.12, 0.42 - (gs.length - 1 - i) * 0.14).toFixed(2);
+          }
+        };
+        var vowStep = function () {
+          if (vowStopped) return;
+          if (!vowActive || document.hidden) { window.setTimeout(vowStep, 1500); return; }
+          whenEl.classList.add('is-struck');
+          window.setTimeout(function () {
+            if (vowStopped) return;
+            var g = document.createElement('div');
+            g.className = 'mm-why-vow__ghost';
+            g.textContent = 'I will start ' + endings[vi];
+            g.style.opacity = '0';
+            vowHist.appendChild(g);
+            while (vowHist.children.length > 3) vowHist.removeChild(vowHist.firstChild);
+            requestAnimationFrame(function () { requestAnimationFrame(ghostRefresh); });
+            vi = (vi + 1) % endings.length;
+            if (vi === 0) vowHist.innerHTML = '';
+            whenEl.classList.add('is-out');
+            window.setTimeout(function () {
+              whenEl.textContent = endings[vi];
+              whenEl.classList.remove('is-struck');
+              whenEl.classList.remove('is-out');
+            }, 300);
+            window.setTimeout(vowStep, 2700);
+          }, 1050);
+        };
+        if ('IntersectionObserver' in window) {
+          new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) { vowActive = entry.isIntersecting; });
+          }, { threshold: 0.2 }).observe(vow);
+        } else { vowActive = true; }
+        window.setTimeout(vowStep, 2300);
+      }
+
+      /* ---------- Avoidance pile: clear to reveal the untouched task ---------- */
+      var pile = root.querySelector('[data-mm-pile]');
+      var pileClear = root.querySelector('[data-mm-pile-clear]');
+      if (pile && pileClear && 'IntersectionObserver' in window) {
+        var pileIO = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) { pile.classList.add('is-cleared'); pileIO.disconnect(); }
+          });
+        }, { threshold: 0.5 });
+        pileIO.observe(pileClear);
+      }
+
+      /* ---------- The first promise: validated, stateful form ---------- */
+      var promiseWrap = root.querySelector('[data-mm-promise-wrap]');
+      var form = promiseWrap ? promiseWrap.querySelector('form') : null;
+      var input = root.querySelector('[data-mm-promise-input]');
+      var emailInput = root.querySelector('[data-mm-promise-email]');
+      var tagsField = root.querySelector('[data-mm-promise-tags]');
+      var submitBtn = root.querySelector('[data-mm-submit-btn]');
+      var statusEl = root.querySelector('[data-mm-form-status]');
+      var errTask = root.querySelector('[data-mm-err="task"]');
+      var errEmail = root.querySelector('[data-mm-err="email"]');
+      var card = root.querySelector('[data-mm-promise-card]');
+      var taskEl = root.querySelector('[data-mm-promise-task]');
+      var timeEl = root.querySelector('[data-mm-promise-time]');
+      var editBtn = root.querySelector('[data-mm-promise-edit]');
+      var finalCta = root.querySelector('[data-mm-final-cta]');
+      var closeEcho = root.querySelector('[data-mm-close-echo]');
+      var closeTask = root.querySelector('[data-mm-close-task]');
+      var committed = false;
+      var submitting = false;
+
+      function shorten(t) {
+        if (t.length <= 26) return t;
+        var cut = t.slice(0, 24);
+        var sp = cut.lastIndexOf(' ');
+        if (sp > 12) cut = cut.slice(0, sp);
+        return cut + '…';
+      }
+      function setStatus(msg, kind) {
+        if (!statusEl) return;
+        statusEl.textContent = msg || '';
+        statusEl.classList.toggle('is-error', kind === 'error');
+        statusEl.classList.toggle('is-ok', kind === 'ok');
+      }
+      function setFieldError(el, errEl, onState) {
+        if (el) el.classList.toggle('is-invalid', onState);
+        if (errEl) errEl.classList.toggle('is-on', onState);
+      }
+      function setLoading(onState) {
+        submitting = onState;
+        if (!submitBtn) return;
+        if (onState) {
+          submitBtn.setAttribute('data-mm-orig', submitBtn.textContent);
+          submitBtn.textContent = 'Sending...';
+          submitBtn.disabled = true;
+        } else {
+          submitBtn.textContent = submitBtn.getAttribute('data-mm-orig') || submitBtn.textContent;
+          submitBtn.disabled = false;
+        }
+      }
+      function applyPromise(task, moveFocus) {
+        if (!card || !taskEl) return;
+        taskEl.textContent = task;
+        var at = lsGet(LS_AT);
+        if (timeEl && at) {
+          try {
+            timeEl.textContent = 'Recorded ' + new Date(at).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' });
+            timeEl.hidden = false;
+          } catch (e) { timeEl.hidden = true; }
+        }
+        card.hidden = false;
+        if (promiseWrap) promiseWrap.hidden = true;
+        if (finalCta) finalCta.textContent = 'Start: ' + shorten(task);
+        if (closeEcho && closeTask) { closeTask.textContent = task; closeEcho.hidden = false; }
+        root.classList.add('is-committed');
+        if (moveFocus && editBtn) editBtn.focus();
+      }
+      function backToEdit() {
+        if (!promiseWrap || !input) return;
+        promiseWrap.hidden = false;
+        if (card) card.hidden = true;
+        if (finalCta) finalCta.textContent = finalCta.getAttribute('data-mm-default-label') || finalCta.textContent;
+        input.value = lsGet(LS_KEY);
+        input.focus();
+      }
+      function validate() {
+        var task = input ? input.value.replace(/\s+/g, ' ').trim() : '';
+        var email = emailInput ? emailInput.value.trim() : '';
+        var okTask = task.length > 0;
+        var okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        setFieldError(input, errTask, !okTask);
+        setFieldError(emailInput, errEmail, !okEmail);
+        if (!okTask) { setStatus('Write the thing you keep postponing first.', 'error'); input.focus(); return null; }
+        if (!okEmail) { setStatus('Enter a valid email address.', 'error'); emailInput.focus(); return null; }
+        setStatus('', '');
+        return { task: task.slice(0, 140), email: email };
+      }
+      if (form && input && emailInput) {
+        form.setAttribute('novalidate', 'novalidate');
+        form.addEventListener('submit', function (e) {
+          if (submitting) { e.preventDefault(); return; }
+          var data = validate();
+          if (!data) { e.preventDefault(); return; }
+          lsSet(LS_KEY, data.task);
+          lsSet(LS_AT, new Date().toISOString());
+          if (tagsField) tagsField.value = 'first-promise,p:' + data.task.replace(/,/g, ' ').slice(0, 36).trim();
+          track('commit_submit');
+          if (MM_PROMISE_ENDPOINT) {
+            e.preventDefault();
+            setLoading(true);
+            setStatus('Sending your promise...', '');
+            fetch(MM_PROMISE_ENDPOINT, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ task: data.task, email: data.email, submittedAt: new Date().toISOString() })
+            }).then(function (r) {
+              if (!r.ok) throw new Error('HTTP ' + r.status);
+              lsSet(LS_FLAG, '1');
+              setLoading(false);
+              setStatus('Promise recorded.', 'ok');
+              track('commit_success');
+              applyPromise(data.task, true);
+            }).catch(function () {
+              setLoading(false);
+              setStatus('Something went wrong sending your promise. Your words are saved on this device. Try again.', 'error');
+            });
+          } else {
+            /* native Shopify POST: leave the page; loading state guards double taps */
+            e.preventDefault();
+            setLoading(true);
+            setStatus('Sending your promise...', '');
+            form.submit();
+          }
+        });
+        input.addEventListener('input', function () { setFieldError(input, errTask, false); });
+        emailInput.addEventListener('input', function () { setFieldError(emailInput, errEmail, false); });
+        if (editBtn) editBtn.addEventListener('click', backToEdit);
+
+        committed = /[?&](customer_posted=true|mm-committed=1)/.test(window.location.search) || lsGet(LS_FLAG) === '1';
+        var saved = lsGet(LS_KEY);
+        if (committed) {
+          lsSet(LS_FLAG, '1');
+          if (/[?&]mm-committed=1/.test(window.location.search)) track('commit_success');
+          if (saved) applyPromise(saved, false);
+          else root.classList.add('is-committed');
+        } else if (saved) {
+          input.value = saved;
+        }
+
+        if ('IntersectionObserver' in window && promiseWrap) {
+          var seenFormIO = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) { track('commit_view'); seenFormIO.disconnect(); }
+            });
+          }, { threshold: 0.4 });
+          seenFormIO.observe(promiseWrap);
+        }
+      }
+
+      /* ---------- Offer: purchase option switch ---------- */
+      var planRadios = root.querySelectorAll('[data-mm-plan]');
+      var priceCur = root.querySelector('[data-mm-price-current]');
+      var priceCmp = root.querySelector('[data-mm-price-compare]');
+      var atcBtn = root.querySelector('[data-mm-atc]');
+      planRadios.forEach(function (r) {
+        r.addEventListener('change', function () {
+          if (!r.checked) return;
+          var price = r.getAttribute('data-mm-price');
+          var cmp = r.getAttribute('data-mm-compare');
+          var ctaLabel = r.getAttribute('data-mm-cta');
+          if (priceCur && price) priceCur.textContent = price;
+          if (priceCmp) {
+            if (cmp && cmp !== price) { priceCmp.textContent = cmp; priceCmp.hidden = false; }
+            else { priceCmp.hidden = true; }
+          }
+          if (atcBtn && ctaLabel && !atcBtn.disabled) atcBtn.textContent = ctaLabel;
+          track('offer_plan_change', { plan: r.getAttribute('data-mm-plan-kind') });
+        });
+      });
+      root.querySelectorAll('[data-mm-product-cta]').forEach(function (el) {
+        el.addEventListener('click', function () { track('product_cta_click'); });
+      });
+      root.querySelectorAll('[data-mm-atc]').forEach(function (el) {
+        var host = el.closest('form');
+        if (host) host.addEventListener('submit', function () { track('add_to_cart'); });
+        else el.addEventListener('click', function () { track('add_to_cart'); });
+      });
+      var details = root.querySelector('.mm-why-details');
+      if (details) details.addEventListener('toggle', function () { if (details.open) track('formula_open'); });
+
+      /* ---------- Editorial interruption: engaged non-submitters only ---------- */
+      var popup = root.querySelector('[data-mm-popup]');
+      if (popup && !reduced) {
+        var startedAt = Date.now();
+        var popShown = false;
+        var prevFocus = null;
+        var dismissedAt = parseInt(lsGet(LS_POP), 10) || 0;
+        var recentlyDismissed = dismissedAt && (Date.now() - dismissedAt) < 7 * 24 * 60 * 60 * 1000;
+        var popupOpen = function () {
+          popShown = true;
+          popup.hidden = false;
+          requestAnimationFrame(function () { popup.classList.add('is-on'); });
+          prevFocus = document.activeElement;
+          var c = popup.querySelector('[data-mm-popup-close]');
+          if (c) c.focus();
+          track('popup_shown');
+        };
+        var popupClose = function (silent) {
+          popup.classList.remove('is-on');
+          window.setTimeout(function () { popup.hidden = true; }, 350);
+          lsSet(LS_POP, String(Date.now()));
+          if (silent !== true) track('popup_dismissed');
+          if (prevFocus && prevFocus.focus) prevFocus.focus();
+        };
+        popup.addEventListener('click', function (e) { if (e.target === popup) popupClose(); });
+        popup.querySelectorAll('[data-mm-popup-close]').forEach(function (b) { b.addEventListener('click', function () { popupClose(); }); });
+        var writeBtn = popup.querySelector('[data-mm-popup-write]');
+        if (writeBtn) writeBtn.addEventListener('click', function () {
+          track('popup_cta');
+          popupClose(true);
+          var commit = root.querySelector('[id^="mm-why-commit-"]');
+          if (commit) {
+            commit.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            window.setTimeout(function () { if (input && promiseWrap && !promiseWrap.hidden) input.focus({ preventScroll: true }); }, 700);
+          }
+        });
+        on(document, 'keydown', function (e) {
+          if (popup.hidden) return;
+          if (e.key === 'Escape') { popupClose(); return; }
+          if (e.key === 'Tab') {
+            var f = popup.querySelectorAll('button, a[href]');
+            if (!f.length) return;
+            var first = f[0], last = f[f.length - 1];
+            if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+            else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+          }
+        });
+        if (!recentlyDismissed && !committed) {
+          var gate = every(2000, function () {
+            if (popShown || committed || root.classList.contains('is-committed')) return;
+            var engagedTime = (Date.now() - startedAt) >= 25000;
+            var engagedDepth = maxP >= 0.5;
+            if (engagedTime && engagedDepth && !document.hidden) {
+              window.clearInterval(gate);
+              popupOpen();
+            }
+          });
+        }
+      }
+
+      /* ---------- 3D stick pack ---------- */
+      initMm3D(root, reduced, track, cleanup, on, every);
+    }
+
+    /* ================= 3D stick pack (ported from the STICKPACK_3D lab) ================= */
+    function initMm3D(root, reduced, track, cleanup, on, every) {
+      var host = root.querySelector('[data-mm-3d]');
+      if (!host || reduced) return;
+      var canvas = host.querySelector('[data-mm-3d-canvas]');
+      var hint = host.querySelector('[data-mm-3d-hint]');
+      var texUrl = host.getAttribute('data-mm-tex-0');
+      var booted = false;
+
+      function boot3D() {
+        if (booted) return; booted = true;
+        if (!canvas || !texUrl) return;
+        try {
+          var probe = document.createElement('canvas');
+          if (!(probe.getContext('webgl2') || probe.getContext('webgl'))) return;
+        } catch (e) { return; }
+        import(host.getAttribute('data-mm-three')).then(init).catch(function () {});
+      }
+
+      function makeRoomEnv(T) {
+        var scene = new T.Scene();
+        var geometry = new T.BoxGeometry(); geometry.deleteAttribute('uv');
+        var roomMat = new T.MeshStandardMaterial({ side: T.BackSide });
+        var boxMat = new T.MeshStandardMaterial();
+        function area(i) { var m = new T.MeshBasicMaterial(); m.color.setScalar(i); return m; }
+        function put(mat, p, r, sc) {
+          var m = new T.Mesh(geometry, mat);
+          m.position.set(p[0], p[1], p[2]);
+          if (r) m.rotation.set(r[0], r[1], r[2]);
+          m.scale.set(sc[0], sc[1], sc[2]);
+          scene.add(m);
+        }
+        var light = new T.PointLight(0xffffff, 900, 28, 2);
+        light.position.set(0.418, 16.199, 0.3); scene.add(light);
+        put(roomMat, [-0.757, 13.219, 0.717], null, [31.713, 28.305, 28.591]);
+        put(boxMat, [-10.906, 2.009, 1.846], [0, -0.195, 0], [2.328, 7.905, 4.651]);
+        put(boxMat, [-5.607, -0.754, -0.758], [0, 0.994, 0], [1.97, 1.534, 3.955]);
+        put(boxMat, [6.167, 0.857, 7.803], [0, 0.561, 0], [3.927, 6.285, 3.687]);
+        put(boxMat, [-2.017, 0.018, 6.124], [0, 0.333, 0], [2.002, 4.566, 2.064]);
+        put(boxMat, [2.291, -0.756, -2.621], [0, -0.286, 0], [1.546, 1.552, 1.496]);
+        put(boxMat, [-2.193, -0.369, -5.547], [0, 0.516, 0], [3.875, 3.487, 2.986]);
+        put(area(50), [-16.116, 14.37, 8.208], null, [0.1, 2.428, 2.739]);
+        put(area(50), [-16.109, 18.021, -8.207], null, [0.1, 2.425, 2.751]);
+        put(area(17), [14.904, 12.198, -1.832], null, [0.15, 4.265, 6.331]);
+        put(area(43), [-0.462, 8.89, 14.52], null, [4.38, 5.441, 0.088]);
+        put(area(20), [3.235, 11.486, -12.541], null, [2.5, 2.0, 0.1]);
+        put(area(100), [0, 20, 0], null, [1, 0.1, 1]);
+        return scene;
+      }
+
+      function init(THREE) {
+        var renderer;
+        try {
+          renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+        } catch (e) { return; }
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.05;
+        renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+        var scene = new THREE.Scene();
+        var pmrem = new THREE.PMREMGenerator(renderer);
+        var envScene = makeRoomEnv(THREE);
+        scene.environment = pmrem.fromScene(envScene, 0.04).texture;
+        envScene.traverse(function (o) { if (o.isMesh) { o.geometry.dispose(); o.material.dispose(); } });
+
+        var camera = new THREE.PerspectiveCamera(28, 1, 0.1, 50);
+        var key = new THREE.DirectionalLight(0xfff4e2, 1.05); key.position.set(3.4, 2.6, 3.4); scene.add(key);
+        var rim = new THREE.DirectionalLight(0x9fffe0, 0.65); rim.position.set(-3.2, -0.6, -3.5); scene.add(rim);
+        var fillL = new THREE.DirectionalLight(0xdfe8ff, 0.22); fillL.position.set(-1.6, -2.6, 2.8); scene.add(fillL);
+
+        var group = new THREE.Group();
+        var swayG = new THREE.Group();
+        swayG.add(group); scene.add(swayG);
+
+        var P = { foldL: 0.2856, foldR: 0.7138, trimL: 0.0712, trimR: 0.9282, puff: 0.82, seal: 0.05, height: 2.9, aspect: 0.5 };
+        var sinc = function (x) { return Math.abs(x) < 1e-6 ? 1 : Math.sin(x) / x; };
+        function solvePhi(k) {
+          if (k >= 1) return 1e-4;
+          var lo = 1e-6, hi = Math.PI - 1e-4;
+          for (var i = 0; i < 48; i++) { var mid = (lo + hi) / 2; if (sinc(mid) > k) lo = mid; else hi = mid; }
+          return (lo + hi) / 2;
+        }
+        var smooth = function (t) { t = Math.min(Math.max(t, 0), 1); return t * t * (3 - 2 * t); };
+        var clamp01 = function (t) { return Math.min(Math.max(t, 0), 1); };
+
+        function buildGeometry() {
+          var H = P.height, W = H * P.aspect;
+          var span = P.trimR - P.trimL;
+          var fL = (P.foldL - P.trimL) / span, fR = (P.foldR - P.trimL) / span;
+          var Lf = (fR - fL) * W, Lb = W - Lf;
+          var NU = 288, NV = 220;
+          var pos = new Float32Array((NU + 1) * (NV + 1) * 3);
+          var uv = new Float32Array((NU + 1) * (NV + 1) * 2);
+          var idx = [];
+          var iv, iu, o;
+          for (iv = 0; iv <= NV; iv++) {
+            var v = iv / NV, y = (v - 0.5) * H;
+            var t = clamp01((v - P.seal) / (1 - 2 * P.seal));
+            var fill = Math.pow(Math.sin(Math.PI * t), 0.5);
+            var phiF = Math.max(P.puff * fill, 1e-4);
+            var rF = Lf / (2 * phiF);
+            var chord = Lf * sinc(phiF);
+            var phiB = Math.max(solvePhi(Math.min(chord / Lb, 1)), 1e-4);
+            var rB = Lb / (2 * phiB);
+            var band = Math.max(smooth(1 - v / (P.seal * 1.15)), smooth(1 - (1 - v) / (P.seal * 1.15)));
+            var ridge = 0.0045 * H * Math.sin(v * 240) * band;
+            for (iu = 0; iu <= NU; iu++) {
+              var x = iu / NU, px, pz, a, f;
+              if (x >= fL && x <= fR) {
+                f = (x - fL) / (fR - fL);
+                a = (f - 0.5) * 2 * phiF;
+                px = rF * Math.sin(a); pz = rF * (Math.cos(a) - Math.cos(phiF));
+              } else if (x < fL) {
+                a = -phiB * (x / fL);
+                px = rB * Math.sin(a); pz = -rB * (Math.cos(a) - Math.cos(phiB));
+              } else {
+                a = phiB * (1 - (x - fR) / (1 - fR));
+                px = rB * Math.sin(a); pz = -rB * (Math.cos(a) - Math.cos(phiB));
+              }
+              o = (iv * (NU + 1) + iu);
+              pos[o * 3] = px; pos[o * 3 + 1] = y; pos[o * 3 + 2] = pz + ridge;
+              uv[o * 2] = P.trimL + x * span; uv[o * 2 + 1] = v;
+            }
+          }
+          for (iv = 0; iv < NV; iv++)
+            for (iu = 0; iu < NU; iu++) {
+              var A = iv * (NU + 1) + iu, B = A + 1, C = A + NU + 1, D = C + 1;
+              idx.push(A, B, C, B, D, C);
+            }
+          var g = new THREE.BufferGeometry();
+          g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+          g.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
+          g.setIndex(idx);
+          g.computeVertexNormals();
+          var nrm = g.attributes.normal.array;
+          var TAU = Math.PI * 2;
+          for (iv = 0; iv <= NV; iv++) {
+            var v2 = iv / NV;
+            var t2 = clamp01((v2 - P.seal) / (1 - 2 * P.seal));
+            var body = Math.pow(Math.sin(Math.PI * t2), 0.5);
+            var nearB = Math.exp(-Math.max(t2, 0) / 0.09);
+            var nearT = Math.exp(-Math.max(1 - t2, 0) / 0.09);
+            for (iu = 0; iu <= NU; iu++) {
+              var u = iu / NU;
+              /* premium tune: the printed face stays taut; texture lives at the seals and the back seam */
+              var onFront = (u >= fL && u <= fR);
+              var faceMask = onFront ? 0.12 : 0.55;
+              var pinch = 0.0011 * P.height * body * (onFront ? 0.3 : 1) *
+                (Math.sin(TAU * (u * 23 + 0.13)) * nearB + Math.sin(TAU * (u * 27 + 0.61)) * nearT);
+              var crinkle = 0.00055 * P.height * faceMask * (0.25 + 0.75 * body) * (
+                Math.sin(TAU * (u * 6 + 0.2)) * Math.sin(TAU * (v2 * 4.3 + 0.7)) +
+                Math.sin(TAU * (u * 11 + 0.55)) * Math.sin(TAU * (v2 * 7.7 + 0.1)) * 0.6);
+              var Dd = pinch + crinkle;
+              o = (iv * (NU + 1) + iu) * 3;
+              pos[o] += nrm[o] * Dd; pos[o + 1] += nrm[o + 1] * Dd; pos[o + 2] += nrm[o + 2] * Dd;
+            }
+          }
+          g.attributes.position.needsUpdate = true;
+          g.computeVertexNormals();
+          return g;
+        }
+
+        function foilNoiseTexture() {
+          var sSize = 256, c = document.createElement('canvas');
+          c.width = c.height = sSize;
+          var g = c.getContext('2d');
+          var id = g.createImageData(sSize, sSize);
+          var seed = 1337;
+          var rnd = function () { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
+          var base = new Float32Array(sSize * sSize);
+          for (var i = 0; i < sSize * sSize; i++) base[i] = rnd();
+          var blur = function (a) {
+            var b = new Float32Array(sSize * sSize);
+            for (var y = 0; y < sSize; y++)
+              for (var x = 0; x < sSize; x++) {
+                var acc = 0;
+                for (var dy = -2; dy <= 2; dy++)
+                  for (var dx = -2; dx <= 2; dx++)
+                    acc += a[((y + dy + sSize) % sSize) * sSize + (x + dx + sSize) % sSize];
+                b[y * sSize + x] = acc / 25;
+              }
+            return b;
+          };
+          var soft = blur(blur(base));
+          for (var j = 0; j < sSize * sSize; j++) {
+            var vv = Math.round(90 + 330 * (soft[j] - 0.5) + 40 * (base[j] - 0.5));
+            var px = Math.max(0, Math.min(255, vv));
+            id.data[j * 4] = id.data[j * 4 + 1] = id.data[j * 4 + 2] = px;
+            id.data[j * 4 + 3] = 255;
+          }
+          g.putImageData(id, 0, 0);
+          var tex = new THREE.CanvasTexture(c);
+          tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+          tex.repeat.set(3, 7);
+          return tex;
+        }
+
+        var foilTex = foilNoiseTexture();
+        var mat = new THREE.MeshPhysicalMaterial({
+          roughness: 0.46, metalness: 0.34,
+          bumpMap: foilTex, bumpScale: 0.0004, roughnessMap: foilTex,
+          clearcoat: 0.6, clearcoatRoughness: 0.2, envMapIntensity: 1.0
+        });
+        var mesh = new THREE.Mesh(buildGeometry(), mat);
+        group.add(mesh);
+        group.rotation.set(0.05, -0.4, 0);
+
+        function rebuild() {
+          var g = buildGeometry();
+          mesh.geometry.dispose();
+          mesh.geometry = g;
+        }
+
+        var live = false;
+        function applyDieline(img) {
+          var tex = new THREE.Texture(img);
+          tex.colorSpace = THREE.SRGBColorSpace;
+          tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+          tex.needsUpdate = true;
+          if (mat.map) mat.map.dispose();
+          mat.map = tex;
+          mat.needsUpdate = true;
+          P.aspect = (P.trimR - P.trimL) * img.width / img.height;
+          rebuild();
+          if (!live) {
+            live = true;
+            host.classList.add('is-live');
+            if (hint) {
+              var fine = false;
+              try { fine = window.matchMedia('(pointer: fine)').matches; } catch (e) {}
+              hint.textContent = fine ? 'Drag to spin' : 'Swipe to spin';
+              hint.hidden = false;
+            }
+            track('3d_ready');
+          }
+        }
+        var img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = function () { applyDieline(img); };
+        img.src = texUrl;
+
+        var rotX = 0.05, rotY = -0.4, tRotX = 0.05, tRotY = -0.4;
+        var velX = 0, velY = 0, dragging = false, lastX = 0, lastY = 0, lastInteract = -1e9;
+        canvas.addEventListener('pointerdown', function (e) {
+          dragging = true; lastX = e.clientX; lastY = e.clientY;
+          velX = velY = 0;
+          try { canvas.setPointerCapture(e.pointerId); } catch (err) {}
+          canvas.classList.add('is-grabbing');
+          lastInteract = performance.now();
+        });
+        canvas.addEventListener('pointermove', function (e) {
+          if (!dragging) return;
+          var dx = e.clientX - lastX, dy = e.clientY - lastY;
+          lastX = e.clientX; lastY = e.clientY;
+          tRotY += dx * 0.011;
+          tRotX = Math.max(-1.15, Math.min(1.15, tRotX + dy * 0.008));
+          velY = dx * 0.011; velX = dy * 0.008;
+          lastInteract = performance.now();
+        });
+        var endDrag = function () { dragging = false; canvas.classList.remove('is-grabbing'); };
+        canvas.addEventListener('pointerup', endDrag);
+        canvas.addEventListener('pointercancel', endDrag);
+        /* keyboard fallback for the product interaction */
+        canvas.addEventListener('keydown', function (e) {
+          if (e.key === 'ArrowLeft') { tRotY -= 0.4; lastInteract = performance.now(); e.preventDefault(); }
+          else if (e.key === 'ArrowRight') { tRotY += 0.4; lastInteract = performance.now(); e.preventDefault(); }
+        });
+
+        function fitDistance() {
+          var vFit = (P.height / 2 * 1.1) / Math.tan(camera.fov * Math.PI / 360);
+          var packW = P.height * P.aspect * 0.5;
+          var hFit = (packW / 2 * 1.42) / (Math.tan(camera.fov * Math.PI / 360) * Math.max(camera.aspect, 0.2));
+          return Math.min(Math.max(vFit, hFit), 11);
+        }
+        function resize() {
+          var w = canvas.clientWidth || 300, hpx = canvas.clientHeight || 375;
+          renderer.setSize(w, hpx, false);
+          camera.aspect = w / hpx;
+          camera.updateProjectionMatrix();
+          camera.position.z = fitDistance();
+        }
+        on(window, 'resize', resize);
+        resize();
+
+        var running = true;
+        var stopped = false;
+        cleanup.push(function () { stopped = true; });
+        if ('IntersectionObserver' in window) {
+          new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) { running = e.isIntersecting; });
+          }, { rootMargin: '20% 0px' }).observe(host);
+        }
+        var prev = performance.now();
+        function tick(now) {
+          if (stopped) return;
+          requestAnimationFrame(tick);
+          if (!running || document.hidden) { prev = now; return; }
+          var dt = Math.min((now - prev) / 1000, 0.05);
+          prev = now;
+          if (!dragging) {
+            tRotY += velY; tRotX = Math.max(-1.15, Math.min(1.15, tRotX + velX));
+            velY *= Math.pow(0.06, dt); velX *= Math.pow(0.06, dt);
+          }
+          rotY += (tRotY - rotY) * Math.min(1, dt * 12);
+          rotX += (tRotX - rotX) * Math.min(1, dt * 12);
+          group.rotation.set(rotX, rotY, 0);
+          var idle = (now - lastInteract) / 1000 - 3.5;
+          var sway = Math.min(Math.max(idle, 0) / 2, 1);
+          swayG.rotation.y = Math.sin(now * 0.00045) * 0.38 * sway;
+          swayG.rotation.x = Math.sin(now * 0.0003) * 0.07 * sway;
+          swayG.position.y = Math.sin(now * 0.0007) * 0.035 * sway;
+          renderer.render(scene, camera);
+        }
+        requestAnimationFrame(tick);
+      }
+
+      if ('IntersectionObserver' in window) {
+        var bootIO = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) { bootIO.disconnect(); boot3D(); } });
+        }, { rootMargin: '120% 0px' });
+        bootIO.observe(host);
+        var lazyCheck = every(800, function () {
+          if (booted) { return; }
+          var r = host.getBoundingClientRect();
+          if (r.top < window.innerHeight * 2.2 && r.bottom > -window.innerHeight) {
+            bootIO.disconnect();
+            boot3D();
+          }
+        });
+      } else {
+        boot3D();
+      }
+    }
+
+    function boot() {
+      document.querySelectorAll('[data-mm-why]').forEach(initMmWhy);
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', boot);
+    } else {
+      boot();
+    }
+    document.addEventListener('shopify:section:load', function (e) {
+      var el = e.target && e.target.querySelector ? e.target.querySelector('[data-mm-why]') : null;
+      if (el) { delete el.dataset.mmWhyInit; initMmWhy(el); }
+    });
+    document.addEventListener('shopify:section:unload', function (e) {
+      var el = e.target && e.target.querySelector ? e.target.querySelector('[data-mm-why]') : null;
+      if (el && el._mmWhyCleanup) {
+        el._mmWhyCleanup.forEach(function (fn) { try { fn(); } catch (err) {} });
+        el._mmWhyCleanup = [];
+        delete el.dataset.mmWhyInit;
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "MindMix Why It Exists",
+  "tag": "section",
+  "class": "mm-why-section",
+  "settings": [
+    { "type": "header", "content": "Product" },
+    { "type": "product", "id": "product", "label": "Product (enables on-page add to cart)" },
+    { "type": "url", "id": "product_url", "label": "Product page URL (fallback and formula link)" },
+    { "type": "header", "content": "CTA labels" },
+    { "type": "text", "id": "cta_hero_primary", "label": "Hero primary CTA", "default": "Read Why It Exists" },
+    { "type": "text", "id": "cta_hero_secondary", "label": "Hero skip link", "default": "Skip to MindMix →" },
+    { "type": "text", "id": "cta_purchase", "label": "Product CTA", "default": "Start With MindMix" },
+    { "type": "text", "id": "link_formula", "label": "Formula text link", "default": "See the Product and Formula" },
+    { "type": "text", "id": "cta_sticky", "label": "Sticky CTA", "default": "Start With MindMix" },
+    { "type": "text", "id": "cta_final", "label": "Final CTA (default label)", "default": "Start With MindMix" },
+    { "type": "header", "content": "Offer module" },
+    { "type": "text", "id": "offer_kicker", "label": "Offer kicker", "default": "Green Apple Kiwi" },
+    { "type": "text", "id": "offer_title", "label": "Offer title", "default": "Start with 15 sticks." },
+    { "type": "text", "id": "offer_line1", "label": "Offer line 1", "default": "15 single-serve MindMix sticks" },
+    { "type": "text", "id": "offer_line2", "label": "Offer line 2", "default": "The complete five-ingredient formula" },
+    { "type": "text", "id": "offer_line3", "label": "Offer line 3", "default": "The First Promise accountability sequence" },
+    { "type": "text", "id": "offer_cta_sub", "label": "Subscription CTA", "default": "Start Today" },
+    { "type": "text", "id": "offer_cta_once", "label": "One-time CTA", "default": "Buy Once" },
+    { "type": "text", "id": "offer_sub_note", "label": "Subscription terms note", "default": "Pause or cancel anytime.", "info": "Shown inside the subscription option only. Must match your subscription app's actual policy." },
+    { "type": "text", "id": "offer_once_note", "label": "One-time terms note", "default": "No recurring delivery." },
+    { "type": "range", "id": "offer_stick_count", "label": "Sticks in the visual", "min": 5, "max": 15, "step": 1, "default": 15, "info": "Match the real pack size of the selected product." },
+    { "type": "header", "content": "3D stick pack" },
+    { "type": "checkbox", "id": "enable_3d", "label": "Interactive 3D stick pack", "default": true, "info": "Requires three.module.js uploaded to the theme's Assets folder and the Green Apple Kiwi dieline below. Falls back to the product stick image if either is missing." },
+    { "type": "image_picker", "id": "dieline_gak", "label": "Dieline (Green Apple Kiwi)", "info": "Upload STICKPACK_3D/dieline.png" },
+    { "type": "header", "content": "Flavor" },
+    { "type": "text", "id": "flavor_note", "label": "Sensory flavor line", "default": "Bright green apple with a tart kiwi finish." },
+    { "type": "header", "content": "Batch testing" },
+    { "type": "image_picker", "id": "testing_certificate_image", "label": "Testing certificate preview image", "info": "Upload a PNG or JPG render of the real certificate of analysis (lot 2512023 supplied in the package assets)." },
+    { "type": "url", "id": "testing_certificate_url", "label": "Testing certificate URL", "info": "Upload the certificate PDF to Content > Files and paste its URL here. Powers the View Full Certificate link. If both settings are empty the Batch testing block is hidden." },
+    { "type": "header", "content": "Images" },
+    { "type": "image_picker", "id": "image_stick", "label": "Product stick (transparent PNG cutout)" },
+    { "type": "image_picker", "id": "image_drink", "label": "Prepared drink" },
+    { "type": "image_picker", "id": "image_founder", "label": "Founder photo (candid, not staged)" },
+    { "type": "image_picker", "id": "image_texture", "label": "Background texture (optional)" },
+    { "type": "image_picker", "id": "image_sense", "label": "Green Apple Kiwi sensory image (optional)" },
+    { "type": "image_picker", "id": "image_ritual", "label": "Ritual sequence image (optional)" },
+    { "type": "image_picker", "id": "image_offer", "label": "Offer composition image (optional)" },
+    { "type": "header", "content": "Founder" },
+    { "type": "text", "id": "founder_name", "label": "Founder name (optional)" },
+    { "type": "text", "id": "founder_role", "label": "Founder role (optional)" },
+    { "type": "text", "id": "founder_caption", "label": "Photo caption (timestamp-style, optional)", "info": "e.g. a real time and place. Must be true." },
+    { "type": "richtext", "id": "founder_scene", "label": "One honest scene (optional)", "info": "A real moment: time, place, the unfinished artifact, what you did instead. Written by the founder, not generated." },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "color_bg", "label": "Background", "default": "#090B0A" },
+    { "type": "color", "id": "color_surface", "label": "Raised surface", "default": "#111512" },
+    { "type": "color", "id": "color_text", "label": "Primary text", "default": "#F3F0E8" },
+    { "type": "color", "id": "color_muted", "label": "Muted text", "default": "#A5ADA7" },
+    { "type": "color", "id": "color_accent", "label": "Mint accent", "default": "#0CE4A0" },
+    { "type": "color", "id": "color_deep", "label": "Deep green", "default": "#183D2A" },
+    { "type": "header", "content": "Typography" },
+    { "type": "text", "id": "font_heading", "label": "Custom heading font-family (optional)", "info": "CSS font-family value. Leave blank for the heavy system grotesque." },
+    { "type": "text", "id": "font_body", "label": "Custom body font-family (optional)", "info": "CSS font-family value. Leave blank for the system stack." },
+    { "type": "header", "content": "Commitment module" },
+    { "type": "text", "id": "consent_text", "label": "Consent line under the form", "default": "By continuing, you agree to receive your commitment, accountability check-ins, and occasional MindMix updates. Unsubscribe at any time." },
+    { "type": "header", "content": "Reader acknowledgment popup" },
+    { "type": "checkbox", "id": "enable_popup", "label": "Show the editorial interruption", "default": true },
+    { "type": "text", "id": "popup_kicker", "label": "Popup kicker", "default": "This is not the part where we offer you 10% off." },
+    { "type": "text", "id": "popup_heading", "label": "Popup heading", "default": "You are still here." },
+    { "type": "richtext", "id": "popup_body", "label": "Popup body", "default": "<p>Something on this page was probably a little too familiar.</p><p>We are not going to interrupt that with a fake countdown, invented urgency, or a coupon you could get by opening the site in another browser.</p><p>We only want to ask you one honest question:</p>" },
+    { "type": "text", "id": "popup_question", "label": "Popup question", "default": "What are you done postponing?" },
+    { "type": "richtext", "id": "popup_body2", "label": "Popup body 2", "default": "<p>Reading this page is not progress.</p><p>But naming the thing you keep avoiding can be where progress starts.</p>" },
+    { "type": "text", "id": "popup_primary", "label": "Popup primary button", "default": "Write It Down" },
+    { "type": "text", "id": "popup_button", "label": "Popup dismiss label", "default": "Keep reading" },
+    { "type": "header", "content": "Atmosphere" },
+    { "type": "checkbox", "id": "enable_grain", "label": "Film grain overlay", "default": true },
+    { "type": "checkbox", "id": "enable_sticky", "label": "Sticky CTA in the commercial zone", "default": true },
+    { "type": "header", "content": "Legal" },
+    { "type": "richtext", "id": "disclaimer", "label": "Site disclaimer and warnings", "info": "Standard FDA disclaimer and supplement warnings are preloaded. Confirm against your approved label language before launch.", "default": "<p>*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</p><p>MindMix is a dietary supplement for healthy adults 18 and older. Contains caffeine from green tea extract. Do not use if you are pregnant or nursing. Consult your physician before use if you take medication or have a medical condition. Do not exceed the recommended serving. Keep out of reach of children.</p><p>MindMix does not replace sleep, nutrition, structure, treatment, or professional medical advice.</p>" }
+  ],
+  "presets": [
+    { "name": "MindMix Why It Exists" }
+  ]
+}
+{% endschema %}
