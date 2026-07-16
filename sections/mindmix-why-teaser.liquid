@@ -1,0 +1,223 @@
+{%- comment -%}
+  MindMix: Why It Exists teaser band.
+  Placed on the homepage above existing content. The entire band is one link
+  to the Why MindMix Exists page. Self-contained: scoped CSS + vanilla JS.
+{%- endcomment -%}
+
+{%- liquid
+  assign t = section.settings
+  assign tease_url = t.link_url | default: '/pages/why-mindmix-exists'
+-%}
+
+{% style %}
+  #mm-tease-{{ section.id }} {
+    --mm-tease-bg: {{ t.color_bg }};
+    --mm-tease-text: {{ t.color_text }};
+    --mm-tease-muted: {{ t.color_muted }};
+    --mm-tease-accent: {{ t.color_accent }};
+    --mm-tease-border: {{ t.color_text | color_modify: 'alpha', 0.14 }};
+    --mm-tease-hi: {{ t.color_accent | color_modify: 'alpha', 0.16 }};
+    --mm-tease-glow: {{ t.color_deep | color_modify: 'alpha', 0.55 }};
+    --mm-tease-accent-soft: {{ t.color_accent | color_modify: 'alpha', 0.38 }};
+  }
+{% endstyle %}
+
+<style>
+  .mm-tease { position: relative; overflow: clip; background: var(--mm-tease-bg); }
+  .mm-tease *, .mm-tease *::before, .mm-tease *::after { box-sizing: border-box; }
+  .mm-tease__atmos { position: absolute; inset: 0; pointer-events: none; }
+  .mm-tease__fog { position: absolute; border-radius: 50%; will-change: transform; }
+  .mm-tease__fog--a { width: 70vmax; height: 70vmax; left: -25vmax; top: -30vmax; opacity: 0.5;
+    background: radial-gradient(circle at 50% 50%, var(--mm-tease-glow), transparent 62%);
+    animation: mm-tease-drift-a 70s ease-in-out infinite alternate; }
+  .mm-tease__fog--b { width: 55vmax; height: 55vmax; right: -20vmax; bottom: -25vmax; opacity: 0.6;
+    background: radial-gradient(circle at 50% 50%, var(--mm-tease-hi), transparent 58%);
+    animation: mm-tease-drift-b 90s ease-in-out infinite alternate; }
+  @keyframes mm-tease-drift-a { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(8vw, 6vh, 0) scale(1.1); } }
+  @keyframes mm-tease-drift-b { from { transform: translate3d(0, 0, 0) scale(1.05); } to { transform: translate3d(-7vw, -6vh, 0); } }
+  .mm-tease__grain { position: absolute; inset: -50%; width: 200%; height: 200%; opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 180px 180px; }
+
+  .mm-tease__wrap { position: relative; z-index: 1; display: block; text-decoration: none; color: inherit;
+    padding: clamp(4.5rem, 10vh, 7.5rem) 1.5rem; }
+  .mm-tease__wrap:focus-visible { outline: 2px solid var(--mm-tease-accent); outline-offset: -6px; }
+  .mm-tease__inner { max-width: 66rem; margin: 0 auto; display: grid; gap: 3rem; align-items: center; }
+  @media screen and (min-width: 900px) { .mm-tease__inner { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); } }
+
+  .mm-tease__ticker { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.68rem; letter-spacing: 0.34em; text-transform: uppercase; color: var(--mm-tease-accent);
+    margin: 0 0 1.3rem; }
+  .mm-tease__h {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 800; letter-spacing: -0.03em; line-height: 1.07; text-wrap: balance;
+    font-size: clamp(1.9rem, 1.5rem + 3vw, 3.4rem); color: var(--mm-tease-text); margin: 0 0 1.6rem; }
+
+  /* the broken line that connects on hover */
+  .mm-tease__line { display: flex; align-items: center; height: 2px; margin: 0 0 1.8rem; max-width: 24rem; }
+  .mm-tease__line span { flex: 1 1 auto; height: 2px; border-radius: 2px; background: var(--mm-tease-border);
+    margin-right: 14px; transition: margin 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), background-color 0.6s ease, transform 0.6s ease; }
+  .mm-tease__line span:nth-child(odd) { transform: translateY(-2px); }
+  .mm-tease__line span:last-child { margin-right: 0; }
+  .mm-tease__wrap:hover .mm-tease__line span,
+  .mm-tease__wrap:focus-visible .mm-tease__line span { margin-right: 0; transform: translateY(0); background: var(--mm-tease-accent); }
+
+  .mm-tease__cta { display: inline-flex; align-items: center; gap: 0.6rem; min-height: 44px;
+    padding: 0.95rem 1.8rem; border-radius: 999px; font-weight: 600; font-size: 1rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: var(--mm-tease-accent); color: var(--mm-tease-bg);
+    box-shadow: 0 0 0 1px var(--mm-tease-accent-soft), 0 8px 28px -14px var(--mm-tease-accent-soft);
+    transition: transform 0.25s ease, box-shadow 0.25s ease; }
+  .mm-tease__cta svg { transition: transform 0.25s ease; }
+  .mm-tease__wrap:hover .mm-tease__cta { transform: translateY(-2px);
+    box-shadow: 0 0 0 1px var(--mm-tease-accent-soft), 0 14px 34px -12px var(--mm-tease-accent-soft); }
+  .mm-tease__wrap:hover .mm-tease__cta svg { transform: translateX(3px); }
+
+  /* the self-rewriting promise */
+  .mm-tease__vow { position: relative; min-height: 12rem; display: flex; flex-direction: column; justify-content: flex-end;
+    user-select: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  .mm-tease__hist { display: flex; flex-direction: column; gap: 0.45rem; margin-bottom: 1rem; }
+  .mm-tease__ghost { font-weight: 600; font-size: clamp(0.95rem, 0.85rem + 0.7vw, 1.2rem); letter-spacing: -0.015em;
+    color: var(--mm-tease-muted); text-decoration: line-through; text-decoration-thickness: 1.5px;
+    transition: opacity 0.7s ease, transform 0.7s ease; transform: translateY(6px); }
+  .mm-tease__ghost.is-in { transform: none; }
+  .mm-tease__vowline { font-weight: 700; font-size: clamp(1.35rem, 1.1rem + 1.5vw, 2rem); line-height: 1.25;
+    letter-spacing: -0.025em; color: var(--mm-tease-text); margin: 0; }
+  .mm-tease__when { color: var(--mm-tease-accent); position: relative; white-space: nowrap;
+    transition: opacity 0.3s ease, transform 0.3s ease; display: inline-block; }
+  .mm-tease__when::after { content: ""; position: absolute; left: -2%; right: -2%; top: 54%; height: 2px;
+    background: var(--mm-tease-muted); transform: scaleX(0); transform-origin: left;
+    transition: transform 0.45s cubic-bezier(0.6, 0, 0.2, 1); }
+  .mm-tease__when.is-struck { color: var(--mm-tease-muted); }
+  .mm-tease__when.is-struck::after { transform: scaleX(1); }
+  .mm-tease__when.is-out { opacity: 0; transform: translateY(-7px); }
+  .mm-tease__caret { display: inline-block; width: 2px; height: 0.95em; background: var(--mm-tease-accent);
+    margin-left: 7px; vertical-align: -0.12em; animation: mm-tease-caret 1.1s steps(1) infinite; }
+  @keyframes mm-tease-caret { 50% { opacity: 0; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mm-tease__fog, .mm-tease__caret { animation: none !important; }
+    .mm-tease__line span { margin-right: 0 !important; transform: none !important; }
+    .mm-tease__cta, .mm-tease__cta svg, .mm-tease__ghost, .mm-tease__when { transition: none !important; }
+  }
+  @media screen and (max-width: 639px) {
+    .mm-tease__vow { min-height: 10rem; }
+    .mm-tease__cta { width: 100%; justify-content: center; }
+  }
+</style>
+
+<div class="mm-tease" id="mm-tease-{{ section.id }}" data-mm-tease>
+  <div class="mm-tease__atmos" aria-hidden="true">
+    <div class="mm-tease__fog mm-tease__fog--a"></div>
+    <div class="mm-tease__fog mm-tease__fog--b"></div>
+    <div class="mm-tease__grain"></div>
+  </div>
+  <a class="mm-tease__wrap" href="{{ tease_url }}">
+    <div class="mm-tease__inner">
+      <div>
+        <p class="mm-tease__ticker">{{ t.ticker | escape }}</p>
+        <h2 class="mm-tease__h">{{ t.heading | escape }}</h2>
+        <div class="mm-tease__line" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <span class="mm-tease__cta">{{ t.cta_label | escape }}
+          <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2 7h9M8 3.5 11.5 7 8 10.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+      <div class="mm-tease__vow" aria-hidden="true" data-mm-tease-vow>
+        <div class="mm-tease__hist" data-mm-tease-hist></div>
+        <p class="mm-tease__vowline"><span>I will start</span> <span class="mm-tease__when" data-mm-tease-when>tonight.</span><span class="mm-tease__caret"></span></p>
+      </div>
+    </div>
+  </a>
+</div>
+
+<script>
+  (function () {
+    'use strict';
+    function initTease(root) {
+      if (!root || root.dataset.mmTeaseInit) return;
+      root.dataset.mmTeaseInit = '1';
+      var reduced = false;
+      try { reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+      var vow = root.querySelector('[data-mm-tease-vow]');
+      if (!vow || reduced) return;
+      var whenEl = vow.querySelector('[data-mm-tease-when]');
+      var hist = vow.querySelector('[data-mm-tease-hist]');
+      var endings = ['tonight.', 'tomorrow.', 'on Monday.', 'next week.', 'when things calm down.'];
+      var vi = 0;
+      var active = false;
+      var stopped = false;
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) { active = entry.isIntersecting; });
+        }, { threshold: 0.2 }).observe(vow);
+      } else { active = true; }
+      function refresh() {
+        var gs = hist.querySelectorAll('.mm-tease__ghost');
+        for (var i = 0; i < gs.length; i++) {
+          gs[i].classList.add('is-in');
+          gs[i].style.opacity = Math.max(0.14, 0.42 - (gs.length - 1 - i) * 0.14).toFixed(2);
+        }
+      }
+      function step() {
+        if (stopped) return;
+        if (!active || document.hidden) { window.setTimeout(step, 1500); return; }
+        whenEl.classList.add('is-struck');
+        window.setTimeout(function () {
+          if (stopped) return;
+          var g = document.createElement('div');
+          g.className = 'mm-tease__ghost';
+          g.textContent = 'I will start ' + endings[vi];
+          g.style.opacity = '0';
+          hist.appendChild(g);
+          while (hist.children.length > 2) hist.removeChild(hist.firstChild);
+          requestAnimationFrame(function () { requestAnimationFrame(refresh); });
+          vi = (vi + 1) % endings.length;
+          if (vi === 0) hist.innerHTML = '';
+          whenEl.classList.add('is-out');
+          window.setTimeout(function () {
+            whenEl.textContent = endings[vi];
+            whenEl.classList.remove('is-struck');
+            whenEl.classList.remove('is-out');
+          }, 300);
+          window.setTimeout(step, 2700);
+        }, 1050);
+      }
+      window.setTimeout(step, 2000);
+      document.addEventListener('shopify:section:unload', function (e) {
+        if (e.target && e.target.contains && e.target.contains(root)) stopped = true;
+      });
+    }
+    function boot() { document.querySelectorAll('[data-mm-tease]').forEach(initTease); }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+    else boot();
+    document.addEventListener('shopify:section:load', function (e) {
+      var el = e.target && e.target.querySelector ? e.target.querySelector('[data-mm-tease]') : null;
+      if (el) { delete el.dataset.mmTeaseInit; initTease(el); }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "MindMix Why Teaser",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "ticker", "label": "Ticker line", "default": "Before You Buy" },
+    { "type": "text", "id": "heading", "label": "Headline", "default": "Why is the work that could change your life always the easiest to postpone?" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Read Why It Exists" },
+    { "type": "url", "id": "link_url", "label": "Destination", "info": "Defaults to /pages/why-mindmix-exists" },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "color_bg", "label": "Background", "default": "#090B0A" },
+    { "type": "color", "id": "color_text", "label": "Text", "default": "#F3F0E8" },
+    { "type": "color", "id": "color_muted", "label": "Muted", "default": "#A5ADA7" },
+    { "type": "color", "id": "color_accent", "label": "Accent", "default": "#0CE4A0" },
+    { "type": "color", "id": "color_deep", "label": "Deep green", "default": "#183D2A" }
+  ],
+  "presets": [
+    { "name": "MindMix Why Teaser" }
+  ]
+}
+{% endschema %}
