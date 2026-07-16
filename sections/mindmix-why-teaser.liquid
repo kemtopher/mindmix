@@ -1,7 +1,7 @@
 {%- comment -%}
-  MindMix: Why It Exists teaser (v2, premium chapter card).
-  A framed, fully clickable editorial object placed between homepage sections.
-  Self-contained: scoped CSS + vanilla JS. Links to the Why MindMix Exists page.
+  MindMix: Why It Exists teaser (v3, thin band).
+  Compact, mobile-first, fully clickable band linking to the Why MindMix Exists page.
+  Self-contained: scoped CSS + vanilla JS.
 {%- endcomment -%}
 
 {%- liquid
@@ -12,148 +12,74 @@
 {% style %}
   #mm-tease-{{ section.id }} {
     --mmt-bg: {{ t.color_bg }};
-    --mmt-surface: {{ t.color_surface }};
     --mmt-text: {{ t.color_text }};
     --mmt-muted: {{ t.color_muted }};
     --mmt-accent: {{ t.color_accent }};
-    --mmt-border: {{ t.color_text | color_modify: 'alpha', 0.13 }};
+    --mmt-border: {{ t.color_text | color_modify: 'alpha', 0.14 }};
     --mmt-hairline: {{ t.color_text | color_modify: 'alpha', 0.07 }};
-    --mmt-hi: {{ t.color_accent | color_modify: 'alpha', 0.16 }};
-    --mmt-glow: {{ t.color_deep | color_modify: 'alpha', 0.6 }};
+    --mmt-hi: {{ t.color_accent | color_modify: 'alpha', 0.14 }};
+    --mmt-glow: {{ t.color_deep | color_modify: 'alpha', 0.5 }};
     --mmt-accent-soft: {{ t.color_accent | color_modify: 'alpha', 0.4 }};
-    --mmt-accent-faint: {{ t.color_accent | color_modify: 'alpha', 0.08 }};
   }
 {% endstyle %}
 
 <style>
-  .mm-tease { position: relative; overflow: clip; padding: clamp(3.5rem, 8vh, 6rem) 1.25rem;
-    background: linear-gradient(180deg, rgba(9, 11, 10, 0) 0%, var(--mmt-bg) 18%, var(--mmt-bg) 82%, rgba(9, 11, 10, 0) 100%); }
+  .mm-tease { position: relative; overflow: clip;
+    background: linear-gradient(180deg, rgba(9, 11, 10, 0) 0%, var(--mmt-bg) 22%, var(--mmt-bg) 78%, rgba(9, 11, 10, 0) 100%); }
   .mm-tease *, .mm-tease *::before, .mm-tease *::after { box-sizing: border-box; }
+  .mm-tease__atmos { position: absolute; inset: 0; pointer-events: none; }
+  .mm-tease__fog { position: absolute; border-radius: 50%; }
+  .mm-tease__fog--a { width: 60vmax; height: 60vmax; left: -20vmax; top: -25vmax; opacity: 0.5;
+    background: radial-gradient(circle at 50% 50%, var(--mmt-glow), transparent 62%); }
+  .mm-tease__fog--b { width: 45vmax; height: 45vmax; right: -15vmax; bottom: -20vmax; opacity: 0.55;
+    background: radial-gradient(circle at 50% 50%, var(--mmt-hi), transparent 58%); }
 
-  /* atmosphere with cursor parallax */
-  .mm-tease__atmos { position: absolute; inset: -6%; pointer-events: none;
-    transform: translate3d(calc(var(--mmt-px, 0) * 16px), calc(var(--mmt-py, 0) * 12px), 0);
-    transition: transform 0.7s cubic-bezier(0.2, 0.65, 0.25, 1); }
-  .mm-tease__fog { position: absolute; border-radius: 50%; will-change: transform; }
-  .mm-tease__fog--a { width: 70vmax; height: 70vmax; left: -22vmax; top: -28vmax; opacity: 0.55;
-    background: radial-gradient(circle at 50% 50%, var(--mmt-glow), transparent 62%);
-    animation: mmt-drift-a 70s ease-in-out infinite alternate; }
-  .mm-tease__fog--b { width: 55vmax; height: 55vmax; right: -18vmax; bottom: -24vmax; opacity: 0.6;
-    background: radial-gradient(circle at 50% 50%, var(--mmt-hi), transparent 58%);
-    animation: mmt-drift-b 90s ease-in-out infinite alternate; }
-  @keyframes mmt-drift-a { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(7vw, 5vh, 0) scale(1.08); } }
-  @keyframes mmt-drift-b { from { transform: translate3d(0, 0, 0) scale(1.05); } to { transform: translate3d(-6vw, -5vh, 0); } }
+  .mm-tease__wrap { position: relative; z-index: 1; display: block; text-decoration: none; color: inherit;
+    padding: clamp(2.6rem, 6vh, 4rem) 1.25rem; }
+  .mm-tease__wrap:focus-visible { outline: 2px solid var(--mmt-accent); outline-offset: -6px; }
+  .mm-tease__inner { max-width: 64rem; margin: 0 auto; display: grid; gap: 1.8rem; align-items: center; }
+  @media screen and (min-width: 820px) { .mm-tease__inner { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 3.5rem; } }
 
-  .mm-tease__frame { position: relative; z-index: 1; max-width: 74rem; margin: 0 auto;
-    perspective: 1400px; }
-
-  /* the chapter card: one clickable object */
-  .mm-tease__card { position: relative; display: block; text-decoration: none; color: inherit;
-    border: 1px solid var(--mmt-border); border-radius: 22px; overflow: hidden;
-    background:
-      radial-gradient(120% 90% at 82% 10%, var(--mmt-accent-faint), transparent 55%),
-      linear-gradient(165deg, {{ t.color_surface | color_modify: 'alpha', 0.92 }}, {{ t.color_bg | color_modify: 'alpha', 0.85 }});
-    box-shadow: 0 30px 70px -40px rgba(0, 0, 0, 0.9);
-    transform: rotateX(var(--mmt-ry, 0deg)) rotateY(var(--mmt-rx, 0deg));
-    transition: transform 0.45s cubic-bezier(0.2, 0.65, 0.25, 1), border-color 0.45s ease, box-shadow 0.45s ease; }
-  .mm-tease__card::before { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
-    box-shadow: inset 0 1px 0 var(--mmt-hi); }
-  .mm-tease__card::after { content: ""; position: absolute; inset: -30%; pointer-events: none; opacity: 0;
-    background: radial-gradient(40% 40% at var(--mmt-lx, 70%) var(--mmt-ly, 30%), var(--mmt-hi), transparent 70%);
-    transition: opacity 0.6s ease; }
-  .mm-tease__card:hover { border-color: var(--mmt-accent-soft);
-    box-shadow: 0 34px 80px -38px rgba(0, 0, 0, 0.95), 0 0 60px -24px var(--mmt-accent-soft); }
-  .mm-tease__card:hover::after { opacity: 1; }
-  .mm-tease__card:focus-visible { outline: 2px solid var(--mmt-accent); outline-offset: 4px; }
-
-  /* film grain inside the card */
-  .mm-tease__grain { position: absolute; inset: 0; pointer-events: none; opacity: 0.05;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 180px 180px; }
-
-  /* marquee strip along the top edge */
-  .mm-tease__marquee { position: relative; overflow: hidden; border-bottom: 1px solid var(--mmt-hairline);
-    padding: 0.7rem 0; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-  .mm-tease__track { display: flex; width: max-content; animation: mmt-marquee 36s linear infinite; }
-  .mm-tease__card:hover .mm-tease__track { animation-play-state: paused; }
-  .mm-tease__track span { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-    font-size: 0.64rem; letter-spacing: 0.34em; text-transform: uppercase; color: var(--mmt-muted);
-    white-space: nowrap; padding-right: 3.5rem; }
-  .mm-tease__track span em { font-style: normal; color: var(--mmt-accent); }
-  @keyframes mmt-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-  .mm-tease__grid { position: relative; display: grid; gap: 2.5rem; align-items: center;
-    padding: clamp(2.2rem, 5vw, 3.8rem); }
-  @media screen and (min-width: 900px) { .mm-tease__grid { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 4rem; } }
-
-  .mm-tease__eyebrow { display: flex; align-items: baseline; gap: 0.9rem;
-    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-    font-size: 0.66rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--mmt-muted); margin: 0 0 1.4rem; }
-  .mm-tease__eyebrow strong { color: var(--mmt-accent); font-weight: 500; }
+  .mm-tease__eyebrow { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.64rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--mmt-accent); margin: 0 0 0.9rem; }
   .mm-tease__h {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 800; letter-spacing: -0.03em; line-height: 1.07; text-wrap: balance;
-    font-size: clamp(1.75rem, 1.35rem + 2.6vw, 3.1rem); color: var(--mmt-text); margin: 0 0 1.5rem; }
+    font-weight: 800; letter-spacing: -0.028em; line-height: 1.1; text-wrap: balance;
+    font-size: clamp(1.45rem, 1.1rem + 2vw, 2.4rem); color: var(--mmt-text); margin: 0 0 1.1rem; }
 
-  /* broken line + traveling pulse */
-  .mm-tease__linewrap { position: relative; max-width: 24rem; margin: 0 0 1.9rem; }
-  .mm-tease__line { display: flex; align-items: center; height: 2px; }
+  .mm-tease__line { display: flex; align-items: center; height: 2px; margin: 0 0 1.4rem; max-width: 19rem; }
   .mm-tease__line span { flex: 1 1 auto; height: 2px; border-radius: 2px; background: var(--mmt-border);
-    margin-right: 14px; transition: margin 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), background-color 0.6s ease, transform 0.6s ease; }
+    margin-right: 12px; transition: margin 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), background-color 0.6s ease, transform 0.6s ease; }
   .mm-tease__line span:nth-child(odd) { transform: translateY(-2px); }
   .mm-tease__line span:last-child { margin-right: 0; }
-  .mm-tease__card:hover .mm-tease__line span,
-  .mm-tease__card:focus-visible .mm-tease__line span { margin-right: 0; transform: translateY(0); background: var(--mmt-accent); }
-  .mm-tease__pulse { position: absolute; top: -3px; left: 0; width: 46px; height: 8px; border-radius: 8px;
-    background: linear-gradient(90deg, transparent, var(--mmt-accent-soft), transparent);
-    animation: mmt-pulse 4.5s ease-in-out infinite; opacity: 0.9; }
-  @keyframes mmt-pulse {
-    0% { transform: translateX(-46px); opacity: 0; }
-    12% { opacity: 0.9; }
-    55% { transform: translateX(24rem); opacity: 0.9; }
-    62%, 100% { transform: translateX(24rem); opacity: 0; }
-  }
+  .mm-tease__wrap:hover .mm-tease__line span,
+  .mm-tease__wrap:focus-visible .mm-tease__line span { margin-right: 0; transform: translateY(0); background: var(--mmt-accent); }
 
-  /* chapter teasers */
-  .mm-tease__chapters { list-style: none; margin: 0 0 2rem; padding: 0; max-width: 26rem; }
-  .mm-tease__chapters li { display: flex; align-items: baseline; gap: 1rem; padding: 0.7rem 0;
-    border-bottom: 1px solid var(--mmt-hairline);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 600; font-size: 0.98rem; letter-spacing: -0.01em; color: var(--mmt-text); }
-  .mm-tease__chapters li:last-child { border-bottom: 0; }
-  .mm-tease__chapters i { font-style: normal; font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-    font-size: 0.66rem; letter-spacing: 0.12em; color: var(--mmt-muted); transition: color 0.4s ease; flex: none; }
-  .mm-tease__card:hover .mm-tease__chapters i { color: var(--mmt-accent); }
-
-  .mm-tease__ctarow { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
-  .mm-tease__cta { display: inline-flex; align-items: center; gap: 0.6rem; min-height: 44px;
-    padding: 0.95rem 1.8rem; border-radius: 999px; font-weight: 600; font-size: 1rem;
+  .mm-tease__ctarow { display: flex; align-items: center; gap: 1.1rem; flex-wrap: wrap; }
+  .mm-tease__cta { display: inline-flex; align-items: center; gap: 0.55rem; min-height: 44px;
+    padding: 0.8rem 1.6rem; border-radius: 999px; font-weight: 600; font-size: 0.95rem;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background: var(--mmt-accent); color: var(--mmt-bg);
-    box-shadow: 0 0 0 1px var(--mmt-accent-soft), 0 8px 28px -14px var(--mmt-accent-soft);
+    box-shadow: 0 0 0 1px var(--mmt-accent-soft), 0 8px 24px -14px var(--mmt-accent-soft);
     transition: transform 0.25s ease, box-shadow 0.25s ease; }
   .mm-tease__cta svg { transition: transform 0.25s ease; }
-  .mm-tease__card:hover .mm-tease__cta { transform: translateY(-2px);
-    box-shadow: 0 0 0 1px var(--mmt-accent-soft), 0 14px 34px -12px var(--mmt-accent-soft); }
-  .mm-tease__card:hover .mm-tease__cta svg { transform: translateX(3px); }
+  .mm-tease__wrap:hover .mm-tease__cta { transform: translateY(-2px);
+    box-shadow: 0 0 0 1px var(--mmt-accent-soft), 0 12px 30px -12px var(--mmt-accent-soft); }
+  .mm-tease__wrap:hover .mm-tease__cta svg { transform: translateX(3px); }
   .mm-tease__sub { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-    font-size: 0.85rem; color: var(--mmt-muted); margin: 0; }
+    font-size: 0.82rem; color: var(--mmt-muted); margin: 0; }
 
-  /* the self-rewriting promise */
-  .mm-tease__vow { position: relative; min-height: 12rem; display: flex; flex-direction: column; justify-content: flex-end;
-    user-select: none; border-left: 1px solid var(--mmt-hairline); padding-left: clamp(1.4rem, 3vw, 2.5rem);
+  /* the self-rewriting promise, compact */
+  .mm-tease__vow { position: relative; min-height: 7.5rem; display: flex; flex-direction: column; justify-content: flex-end;
+    user-select: none;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
-  @media screen and (max-width: 899px) { .mm-tease__vow { border-left: 0; padding-left: 0; min-height: 10rem;
-    border-top: 1px solid var(--mmt-hairline); padding-top: 1.6rem; } }
-  .mm-tease__vowlabel { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-    font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--mmt-muted); margin: 0 0 auto; }
-  .mm-tease__hist { display: flex; flex-direction: column; gap: 0.45rem; margin: 1.2rem 0 1rem; }
-  .mm-tease__ghost { font-weight: 600; font-size: clamp(0.95rem, 0.85rem + 0.7vw, 1.2rem); letter-spacing: -0.015em;
+  @media screen and (min-width: 820px) { .mm-tease__vow { border-left: 1px solid var(--mmt-hairline); padding-left: 2.2rem; min-height: 9rem; } }
+  .mm-tease__hist { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 0.8rem; }
+  .mm-tease__ghost { font-weight: 600; font-size: clamp(0.88rem, 0.8rem + 0.5vw, 1.05rem); letter-spacing: -0.015em;
     color: var(--mmt-muted); text-decoration: line-through; text-decoration-thickness: 1.5px;
-    transition: opacity 0.7s ease, transform 0.7s ease; transform: translateY(6px); }
+    transition: opacity 0.7s ease, transform 0.7s ease; transform: translateY(5px); }
   .mm-tease__ghost.is-in { transform: none; }
-  .mm-tease__vowline { font-weight: 700; font-size: clamp(1.35rem, 1.1rem + 1.5vw, 2rem); line-height: 1.25;
+  .mm-tease__vowline { font-weight: 700; font-size: clamp(1.2rem, 1rem + 1.2vw, 1.7rem); line-height: 1.25;
     letter-spacing: -0.025em; color: var(--mmt-text); margin: 0; }
   .mm-tease__when { color: var(--mmt-accent); position: relative; white-space: nowrap;
     transition: opacity 0.3s ease, transform 0.3s ease; display: inline-block; }
@@ -162,74 +88,52 @@
     transition: transform 0.45s cubic-bezier(0.6, 0, 0.2, 1); }
   .mm-tease__when.is-struck { color: var(--mmt-muted); }
   .mm-tease__when.is-struck::after { transform: scaleX(1); }
-  .mm-tease__when.is-out { opacity: 0; transform: translateY(-7px); }
+  .mm-tease__when.is-out { opacity: 0; transform: translateY(-6px); }
   .mm-tease__caret { display: inline-block; width: 2px; height: 0.95em; background: var(--mmt-accent);
-    margin-left: 7px; vertical-align: -0.12em; animation: mmt-caret 1.1s steps(1) infinite; }
+    margin-left: 6px; vertical-align: -0.12em; animation: mmt-caret 1.1s steps(1) infinite; }
   @keyframes mmt-caret { 50% { opacity: 0; } }
 
-  /* scroll-in reveals */
-  .mm-tease--js [data-mmt-r] { opacity: 0; transform: translateY(22px); }
-  .mm-tease--js [data-mmt-r].is-in { opacity: 1; transform: none;
-    transition: opacity 0.85s cubic-bezier(0.2, 0.65, 0.25, 1), transform 0.85s cubic-bezier(0.2, 0.65, 0.25, 1);
-    transition-delay: var(--mmt-d, 0s); }
-
   @media (prefers-reduced-motion: reduce) {
-    .mm-tease__fog, .mm-tease__caret, .mm-tease__pulse, .mm-tease__track { animation: none !important; }
-    .mm-tease__pulse { display: none; }
-    .mm-tease__atmos, .mm-tease__card { transform: none !important; transition: none !important; }
+    .mm-tease__caret { animation: none !important; }
     .mm-tease__line span { margin-right: 0 !important; transform: none !important; }
-    .mm-tease--js [data-mmt-r] { opacity: 1 !important; transform: none !important; transition: none !important; }
     .mm-tease__cta, .mm-tease__cta svg, .mm-tease__ghost, .mm-tease__when { transition: none !important; }
   }
   @media screen and (max-width: 639px) {
-    .mm-tease { padding-left: 1rem; padding-right: 1rem; }
+    .mm-tease__wrap { padding: 2.4rem 1.25rem; }
+    .mm-tease__inner { gap: 1.4rem; }
     .mm-tease__cta { width: 100%; justify-content: center; }
-    .mm-tease__ctarow { gap: 0.8rem; }
+    .mm-tease__ctarow { gap: 0.7rem; }
+    .mm-tease__vow { min-height: 6.5rem; }
+    .mm-tease__ghost:first-child { display: none; }
   }
 </style>
 
 <div class="mm-tease" id="mm-tease-{{ section.id }}" data-mm-tease>
-  <div class="mm-tease__atmos" aria-hidden="true" data-mmt-atmos>
+  <div class="mm-tease__atmos" aria-hidden="true">
     <div class="mm-tease__fog mm-tease__fog--a"></div>
     <div class="mm-tease__fog mm-tease__fog--b"></div>
   </div>
-  <div class="mm-tease__frame">
-    <a class="mm-tease__card" href="{{ tease_url }}" data-mmt-card>
-      <div class="mm-tease__grain" aria-hidden="true"></div>
-      <div class="mm-tease__marquee" aria-hidden="true">
-        <div class="mm-tease__track">
-          <span>{{ t.ticker | escape }} <em>&#9679;</em> {{ t.ticker_2 | escape }} <em>&#9679;</em></span>
-          <span>{{ t.ticker | escape }} <em>&#9679;</em> {{ t.ticker_2 | escape }} <em>&#9679;</em></span>
+  <a class="mm-tease__wrap" href="{{ tease_url }}">
+    <div class="mm-tease__inner">
+      <div>
+        <p class="mm-tease__eyebrow">{{ t.eyebrow | escape }}</p>
+        <h2 class="mm-tease__h">{{ t.heading | escape }}</h2>
+        <div class="mm-tease__line" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="mm-tease__ctarow">
+          <span class="mm-tease__cta">{{ t.cta_label | escape }}
+            <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2 7h9M8 3.5 11.5 7 8 10.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          {%- if t.cta_sub != blank -%}<p class="mm-tease__sub">{{ t.cta_sub | escape }}</p>{%- endif -%}
         </div>
       </div>
-      <div class="mm-tease__grid">
-        <div>
-          <p class="mm-tease__eyebrow" data-mmt-r><strong>N&deg;01</strong> {{ t.eyebrow | escape }}</p>
-          <h2 class="mm-tease__h" data-mmt-r style="--mmt-d:.1s">{{ t.heading | escape }}</h2>
-          <div class="mm-tease__linewrap" data-mmt-r style="--mmt-d:.2s" aria-hidden="true">
-            <div class="mm-tease__line"><span></span><span></span><span></span><span></span><span></span></div>
-            <div class="mm-tease__pulse"></div>
-          </div>
-          <ol class="mm-tease__chapters">
-            {%- if t.chapter_1 != blank -%}<li data-mmt-r style="--mmt-d:.28s"><i>01</i>{{ t.chapter_1 | escape }}</li>{%- endif -%}
-            {%- if t.chapter_2 != blank -%}<li data-mmt-r style="--mmt-d:.38s"><i>02</i>{{ t.chapter_2 | escape }}</li>{%- endif -%}
-            {%- if t.chapter_3 != blank -%}<li data-mmt-r style="--mmt-d:.48s"><i>03</i>{{ t.chapter_3 | escape }}</li>{%- endif -%}
-          </ol>
-          <div class="mm-tease__ctarow" data-mmt-r style="--mmt-d:.58s">
-            <span class="mm-tease__cta">{{ t.cta_label | escape }}
-              <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2 7h9M8 3.5 11.5 7 8 10.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            {%- if t.cta_sub != blank -%}<p class="mm-tease__sub">{{ t.cta_sub | escape }}</p>{%- endif -%}
-          </div>
-        </div>
-        <div class="mm-tease__vow" aria-hidden="true" data-mm-tease-vow data-mmt-r style="--mmt-d:.3s">
-          <p class="mm-tease__vowlabel">{{ t.vow_label | escape }}</p>
-          <div class="mm-tease__hist" data-mm-tease-hist></div>
-          <p class="mm-tease__vowline"><span>I will start</span> <span class="mm-tease__when" data-mm-tease-when>tonight.</span><span class="mm-tease__caret"></span></p>
-        </div>
+      <div class="mm-tease__vow" aria-hidden="true" data-mm-tease-vow>
+        <div class="mm-tease__hist" data-mm-tease-hist></div>
+        <p class="mm-tease__vowline"><span>I will start</span> <span class="mm-tease__when" data-mm-tease-when>tonight.</span><span class="mm-tease__caret"></span></p>
       </div>
-    </a>
-  </div>
+    </div>
+  </a>
 </div>
 
 <script>
@@ -238,56 +142,8 @@
     function initTease(root) {
       if (!root || root.dataset.mmTeaseInit) return;
       root.dataset.mmTeaseInit = '1';
-      root.classList.add('mm-tease--js');
       var reduced = false;
       try { reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
-      var fine = false;
-      try { fine = window.matchMedia('(pointer: fine)').matches; } catch (e) {}
-
-      /* scroll-in reveals */
-      var reveals = root.querySelectorAll('[data-mmt-r]');
-      if (!reduced && 'IntersectionObserver' in window) {
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) { entry.target.classList.add('is-in'); io.unobserve(entry.target); }
-          });
-        }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
-        reveals.forEach(function (el) { io.observe(el); });
-      } else {
-        reveals.forEach(function (el) { el.classList.add('is-in'); });
-      }
-
-      /* cursor parallax + card tilt + hover light (desktop only) */
-      var card = root.querySelector('[data-mmt-card]');
-      if (fine && !reduced && card) {
-        var raf = null;
-        root.addEventListener('pointermove', function (e) {
-          if (raf) return;
-          raf = requestAnimationFrame(function () {
-            raf = null;
-            var r = root.getBoundingClientRect();
-            var px = (e.clientX - r.left) / r.width * 2 - 1;
-            var py = (e.clientY - r.top) / r.height * 2 - 1;
-            root.style.setProperty('--mmt-px', px.toFixed(3));
-            root.style.setProperty('--mmt-py', py.toFixed(3));
-            var c = card.getBoundingClientRect();
-            var cx = (e.clientX - c.left) / c.width;
-            var cy = (e.clientY - c.top) / c.height;
-            root.style.setProperty('--mmt-rx', ((cx - 0.5) * 1.6).toFixed(2) + 'deg');
-            root.style.setProperty('--mmt-ry', ((0.5 - cy) * 1.2).toFixed(2) + 'deg');
-            card.style.setProperty('--mmt-lx', (cx * 100).toFixed(1) + '%');
-            card.style.setProperty('--mmt-ly', (cy * 100).toFixed(1) + '%');
-          });
-        });
-        root.addEventListener('pointerleave', function () {
-          root.style.setProperty('--mmt-px', '0');
-          root.style.setProperty('--mmt-py', '0');
-          root.style.setProperty('--mmt-rx', '0deg');
-          root.style.setProperty('--mmt-ry', '0deg');
-        });
-      }
-
-      /* the self-rewriting promise */
       var vow = root.querySelector('[data-mm-tease-vow]');
       if (!vow || reduced) return;
       var whenEl = vow.querySelector('[data-mm-tease-when]');
@@ -305,7 +161,7 @@
         var gs = hist.querySelectorAll('.mm-tease__ghost');
         for (var i = 0; i < gs.length; i++) {
           gs[i].classList.add('is-in');
-          gs[i].style.opacity = Math.max(0.14, 0.42 - (gs.length - 1 - i) * 0.14).toFixed(2);
+          gs[i].style.opacity = Math.max(0.14, 0.4 - (gs.length - 1 - i) * 0.14).toFixed(2);
         }
       }
       function step() {
@@ -352,20 +208,13 @@
   "name": "MindMix Why Teaser",
   "tag": "section",
   "settings": [
-    { "type": "text", "id": "ticker", "label": "Marquee text 1", "default": "Why MindMix exists" },
-    { "type": "text", "id": "ticker_2", "label": "Marquee text 2", "default": "Read it before you buy" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Before You Buy" },
     { "type": "text", "id": "heading", "label": "Headline", "default": "Why is the work that could change your life always the easiest to postpone?" },
-    { "type": "text", "id": "chapter_1", "label": "Chapter teaser 1", "default": "The deal you make with tomorrow" },
-    { "type": "text", "id": "chapter_2", "label": "Chapter teaser 2", "default": "How self-trust actually disappears" },
-    { "type": "text", "id": "chapter_3", "label": "Chapter teaser 3", "default": "The line you can cross" },
     { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Read Why It Exists" },
     { "type": "text", "id": "cta_sub", "label": "Line under the CTA", "default": "Read it before you buy anything." },
-    { "type": "text", "id": "vow_label", "label": "Promise device label", "default": "The promise you keep rewriting" },
     { "type": "url", "id": "link_url", "label": "Destination", "info": "Defaults to /pages/why-mindmix-exists" },
     { "type": "header", "content": "Colors" },
     { "type": "color", "id": "color_bg", "label": "Background", "default": "#090B0A" },
-    { "type": "color", "id": "color_surface", "label": "Card surface", "default": "#111512" },
     { "type": "color", "id": "color_text", "label": "Text", "default": "#F3F0E8" },
     { "type": "color", "id": "color_muted", "label": "Muted", "default": "#A5ADA7" },
     { "type": "color", "id": "color_accent", "label": "Accent", "default": "#0CE4A0" },
