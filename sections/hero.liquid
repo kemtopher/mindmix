@@ -82,9 +82,9 @@
     Proof badges: bold two-line claims-safe receipts, sticker-tilted, floating and
     swaying to pull the eye. Setting format: "HEADLINE|supporting line" (pipe splits).
   {%- endcomment -%}
-  {%- assign badge_1 = section.settings.badge_1 | default: 'FULL DOSES. ZERO HIDING.|Every ingredient and amount printed on the label' -%}
-  {%- assign badge_2 = section.settings.badge_2 | default: 'THIRD-PARTY TESTED|Certificate of analysis on request' -%}
-  {%- assign badge_3 = section.settings.badge_3 | default: 'GREEN TEA CAFFEINE|Closer to a green tea than an espresso' -%}
+  {%- assign badge_1 = section.settings.badge_1 | default: 'FULL DOSES. ZERO HIDING.|Every dose printed on the label' -%}
+  {%- assign badge_2 = section.settings.badge_2 | default: 'THIRD-PARTY TESTED|Certificate of analysis available' -%}
+  {%- assign badge_3 = section.settings.badge_3 | default: '30-DAY GUARANTEE|Not for you? Email us within 30 days. We make it right.' -%}
   <div class="mm-hero__badges-wrap">
     <div class="container-custom">
       <ul class="mm-hero__badges" role="list">
@@ -334,7 +334,7 @@
       "type": "text",
       "id": "subheading",
       "label": "Lede",
-      "default": "A daily nootropic drink mix. Full doses, printed on the label."
+      "default": "Full-dose nootropics, built for deep work. Work smarter."
     },
     {
       "type": "text",
@@ -370,19 +370,19 @@
       "type": "text",
       "id": "badge_1",
       "label": "Badge 1",
-      "default": "FULL DOSES. ZERO HIDING.|Every ingredient and amount printed on the label"
+      "default": "FULL DOSES. ZERO HIDING.|Every dose printed on the label"
     },
     {
       "type": "text",
       "id": "badge_2",
       "label": "Badge 2",
-      "default": "THIRD-PARTY TESTED|Certificate of analysis on request"
+      "default": "THIRD-PARTY TESTED|Certificate of analysis available"
     },
     {
       "type": "text",
       "id": "badge_3",
       "label": "Badge 3",
-      "default": "GREEN TEA CAFFEINE|Closer to a green tea than an espresso"
+      "default": "30-DAY GUARANTEE|Not for you? Email us within 30 days. We make it right."
     }
   ]
 }
