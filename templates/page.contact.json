@@ -1,0 +1,25 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "mindmix-contact",
+      "settings": {
+        "eyebrow": "SUPPORT",
+        "heading": "Talk to us",
+        "lede": "Questions about an order, the formula, or anything else. A real person reads every message.",
+        "submit_label": "Send message",
+        "reply_note": "We usually reply within two business days.",
+        "success_text": "We read everything. You will hear back from a real person."
+      }
+    }
+  },
+  "order": ["main"]
+}

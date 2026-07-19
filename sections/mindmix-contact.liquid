@@ -1,0 +1,391 @@
+{% comment %}
+  MindMix contact page (built 2026-07)
+  - Native {% form 'contact' %}: submissions email the store owner; no address published
+  - No placeholder email / phone / live chat / mailing address (none of those exist)
+  - No people imagery; optional approved-photo banner via image picker (default empty)
+  - Scoped CSS (style.css is compiled Tailwind)
+{% endcomment %}
+
+<section class="mm-contact">
+  <div class="container-custom">
+    <header class="mm-contact__head">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="mm-contact__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h1 class="mm-contact__h1">{{ section.settings.heading | default: page.title | escape }}</h1>
+      {%- if section.settings.lede != blank -%}
+        <p class="mm-contact__lede">{{ section.settings.lede | escape }}</p>
+      {%- endif -%}
+    </header>
+
+    {%- if section.settings.banner_image != blank -%}
+      <div class="mm-contact__banner">
+        <img
+          src="{{ section.settings.banner_image | image_url: width: 1600 }}"
+          srcset="
+            {{ section.settings.banner_image | image_url: width: 800 }} 800w,
+            {{ section.settings.banner_image | image_url: width: 1200 }} 1200w,
+            {{ section.settings.banner_image | image_url: width: 1600 }} 1600w
+          "
+          sizes="(min-width: 1024px) 960px, 100vw"
+          alt="{{ section.settings.banner_image.alt | default: 'MindMix' | escape }}"
+          loading="lazy"
+          decoding="async"
+          width="{{ section.settings.banner_image.width }}"
+          height="{{ section.settings.banner_image.height }}"
+        >
+      </div>
+    {%- endif -%}
+
+    <div class="mm-contact__grid">
+      <div class="mm-contact__form-panel">
+        {% form 'contact', class: 'mm-contact__form', id: 'mm-contact-form' %}
+          {%- if form.posted_successfully? -%}
+            <div class="mm-contact__success" role="status">
+              <p class="mm-contact__success-title">Message sent.</p>
+              <p class="mm-contact__success-body">
+                {{ section.settings.success_text | default: 'We read everything. You will hear back from a real person.' | escape }}
+              </p>
+            </div>
+          {%- else -%}
+            {%- if form.errors -%}
+              <p class="mm-contact__error" role="alert">
+                Something in the form needs another look: check your email address and try again.
+              </p>
+            {%- endif -%}
+
+            <div class="mm-contact__row mm-contact__row--split">
+              <div class="mm-contact__field">
+                <label for="mm-c-name">Name</label>
+                <input type="text" id="mm-c-name" name="contact[name]" autocomplete="name" required>
+              </div>
+              <div class="mm-contact__field">
+                <label for="mm-c-email">Email</label>
+                <input type="email" id="mm-c-email" name="contact[email]" autocomplete="email" placeholder="you@email.com" required>
+              </div>
+            </div>
+
+            <div class="mm-contact__row mm-contact__row--split">
+              <div class="mm-contact__field">
+                <label for="mm-c-topic">Topic</label>
+                <select id="mm-c-topic" name="contact[topic]">
+                  <option>Order help</option>
+                  <option>Product question</option>
+                  <option>Wholesale or partnership</option>
+                  <option>Press</option>
+                  <option>Something else</option>
+                </select>
+              </div>
+              <div class="mm-contact__field">
+                <label for="mm-c-order">Order number <span>(optional)</span></label>
+                <input type="text" id="mm-c-order" name="contact[order_number]" autocomplete="off" placeholder="#1234">
+              </div>
+            </div>
+
+            <div class="mm-contact__field">
+              <label for="mm-c-body">Message</label>
+              <textarea id="mm-c-body" name="contact[body]" rows="6" required></textarea>
+            </div>
+
+            <button type="submit" class="mm-contact__submit">
+              {{ section.settings.submit_label | default: 'Send message' | escape }}
+            </button>
+            {%- if section.settings.reply_note != blank -%}
+              <p class="mm-contact__note">{{ section.settings.reply_note | escape }}</p>
+            {%- endif -%}
+          {%- endif -%}
+        {% endform %}
+      </div>
+
+      <aside class="mm-contact__aside">
+        <div class="mm-contact__card">
+          <h2 class="mm-contact__card-title">Quick answers</h2>
+          <p class="mm-contact__card-body">
+            Most questions about ingredients, caffeine, and how to take MindMix are already answered in the FAQ.
+          </p>
+          <a class="mm-contact__card-link" href="/pages/faq">Read the FAQ</a>
+        </div>
+
+        <div class="mm-contact__card">
+          <h2 class="mm-contact__card-title">DM us</h2>
+          <p class="mm-contact__card-body">
+            We are @getmindmix everywhere. DMs are the fastest way to reach us for quick questions.
+          </p>
+          <div class="mm-contact__card-links">
+            <a class="mm-contact__card-link" href="https://www.instagram.com/getmindmix/" target="_blank" rel="noopener">Instagram</a>
+            <a class="mm-contact__card-link" href="https://www.tiktok.com/@getmindmix" target="_blank" rel="noopener">TikTok</a>
+          </div>
+        </div>
+
+        <div class="mm-contact__card">
+          <h2 class="mm-contact__card-title">Wholesale and partnerships</h2>
+          <p class="mm-contact__card-body">
+            Use the form and pick "Wholesale or partnership" as the topic. Include your company and volume.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style>
+  .mm-contact {
+    background: var(--color-dark, #0b0b0b);
+    padding: 140px 0 96px;
+  }
+  .mm-contact__head {
+    max-width: 44rem;
+    margin: 0 0 40px;
+  }
+  .mm-contact__eyebrow {
+    color: var(--color-primary, #00e5a0);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin: 0 0 16px;
+  }
+  .mm-contact__h1 {
+    color: #fff;
+    font-size: clamp(2.25rem, 7vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin: 0 0 16px;
+  }
+  .mm-contact__lede {
+    color: rgba(224, 224, 224, 0.8);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .mm-contact__banner {
+    margin: 0 0 40px;
+  }
+  .mm-contact__banner img {
+    width: 100%;
+    height: auto;
+    max-height: 320px;
+    object-fit: cover;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .mm-contact__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .mm-contact__form-panel {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.015) 100%);
+    padding: 28px 20px;
+  }
+  .mm-contact__row--split {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .mm-contact__field {
+    margin-bottom: 18px;
+  }
+  .mm-contact__field label {
+    display: block;
+    color: rgba(224, 224, 224, 0.85);
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .mm-contact__field label span {
+    color: rgba(224, 224, 224, 0.45);
+    font-weight: 400;
+  }
+  .mm-contact__field input,
+  .mm-contact__field select,
+  .mm-contact__field textarea {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(11, 11, 11, 0.8);
+    color: #fff;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .mm-contact__field textarea {
+    resize: vertical;
+    min-height: 140px;
+  }
+  .mm-contact__field select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2300e5a0' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 38px;
+  }
+  .mm-contact__field input::placeholder,
+  .mm-contact__field textarea::placeholder {
+    color: rgba(224, 224, 224, 0.35);
+  }
+  .mm-contact__field input:focus,
+  .mm-contact__field select:focus,
+  .mm-contact__field textarea:focus {
+    outline: none;
+    border-color: var(--color-primary, #00e5a0);
+    box-shadow: 0 0 0 3px rgba(0, 229, 160, 0.18);
+  }
+  .mm-contact__submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 52px;
+    padding: 14px 34px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: var(--color-primary, #00e5a0);
+    color: #0b0b0b;
+    font-weight: 700;
+    font-size: 1.0625rem;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .mm-contact__submit:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px -6px rgba(0, 229, 160, 0.45);
+  }
+  .mm-contact__submit:focus-visible {
+    outline: 2px solid var(--color-primary, #00e5a0);
+    outline-offset: 3px;
+  }
+  .mm-contact__note {
+    color: rgba(224, 224, 224, 0.5);
+    font-size: 0.8125rem;
+    margin: 14px 0 0;
+    text-align: center;
+  }
+  .mm-contact__success {
+    text-align: center;
+    padding: 32px 8px;
+  }
+  .mm-contact__success-title {
+    color: var(--color-primary, #00e5a0);
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin: 0 0 10px;
+  }
+  .mm-contact__success-body {
+    color: rgba(224, 224, 224, 0.8);
+    margin: 0;
+  }
+  .mm-contact__error {
+    color: #ff6b57;
+    font-size: 0.9375rem;
+    margin: 0 0 18px;
+  }
+  .mm-contact__aside {
+    display: grid;
+    gap: 16px;
+  }
+  .mm-contact__card {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 22px;
+  }
+  .mm-contact__card-title {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 0 8px;
+  }
+  .mm-contact__card-body {
+    color: rgba(224, 224, 224, 0.7);
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    margin: 0 0 12px;
+  }
+  .mm-contact__card-links {
+    display: flex;
+    gap: 18px;
+  }
+  .mm-contact__card-link {
+    color: var(--color-primary, #00e5a0);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .mm-contact__card-link:hover {
+    text-decoration: underline;
+  }
+
+  @media (min-width: 640px) {
+    .mm-contact__form-panel { padding: 36px 32px; }
+    .mm-contact__row--split {
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .mm-contact__grid {
+      grid-template-columns: 7fr 5fr;
+      gap: 32px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mm-contact__submit { transition: none; }
+    .mm-contact__submit:hover { transform: none; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "MindMix Contact",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "SUPPORT"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Talk to us"
+    },
+    {
+      "type": "text",
+      "id": "lede",
+      "label": "Lede",
+      "default": "Questions about an order, the formula, or anything else. A real person reads every message."
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner image (approved photography only; leave empty for none)"
+    },
+    {
+      "type": "text",
+      "id": "submit_label",
+      "label": "Submit button label",
+      "default": "Send message"
+    },
+    {
+      "type": "text",
+      "id": "reply_note",
+      "label": "Note under button",
+      "default": "We usually reply within two business days."
+    },
+    {
+      "type": "text",
+      "id": "success_text",
+      "label": "Success message",
+      "default": "We read everything. You will hear back from a real person."
+    }
+  ]
+}
+{% endschema %}
