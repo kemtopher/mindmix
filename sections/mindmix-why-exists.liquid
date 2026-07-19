@@ -550,6 +550,53 @@
     .mm-why-vow { min-height: 12rem; opacity: 0.95; }
     .mm-why-pile { min-height: 26rem; }
   }
+
+  /* ------ v2 additions: hero cue, breaks, ingredient cards, pack picker ------ */
+  .mm-why-scrollcue { display: flex; align-items: center; gap: 0.9rem; margin-top: 2.6rem; }
+  .mm-why-scrollcue__label { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mm-why-muted); }
+  .mm-why-scrollcue__arrow { width: 1px; height: 44px; background: linear-gradient(180deg, var(--mm-why-accent), transparent); position: relative; }
+  .mm-why-scrollcue__arrow::after { content: ''; position: absolute; left: 50%; top: 0; width: 5px; height: 5px; border-radius: 50%; background: var(--mm-why-accent); transform: translateX(-50%); animation: mm-why-cuedrop 2.2s ease-in-out infinite; box-shadow: 0 0 8px var(--mm-why-accent-soft); }
+  @keyframes mm-why-cuedrop { 0% { top: 0; opacity: 0; } 25% { opacity: 1; } 78% { top: 38px; opacity: 1; } 100% { top: 44px; opacity: 0; } }
+  .mm-why-mv--break { padding-top: clamp(1rem, 4vh, 2.5rem) !important; padding-bottom: clamp(1rem, 4vh, 2.5rem) !important; }
+  .mm-why-break { margin: 0 auto; max-width: min(30rem, 86vw); }
+  .mm-why-break img { width: 100%; height: auto; border-radius: 20px; border: 1px solid var(--mm-why-border); box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.85); display: block; }
+  .mm-why-break--tight { max-width: 100%; }
+  .mm-why-formula { display: grid; grid-template-columns: 1fr; gap: 0.9rem; margin: 2.2rem 0; }
+  .mm-why-ing { position: relative; border: 1px solid var(--mm-why-border); border-radius: 18px; padding: 1.4rem 1.5rem 1.3rem; background: linear-gradient(180deg, var(--mm-why-accent-faint) 0%, rgba(0,0,0,0) 70%); overflow: hidden; }
+  .mm-why-ing::before { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 3px; background: linear-gradient(180deg, var(--mm-why-accent), rgba(0,0,0,0)); opacity: 0.7; }
+  .mm-why-ing .mm-why-ing__dose { font-size: 2rem; font-weight: 800; letter-spacing: -0.01em; line-height: 1; }
+  .mm-why-ing .mm-why-ing__name { margin-bottom: 0.2rem; }
+  .mm-why-ing .mm-why-ing__for { display: inline-block; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mm-why-accent); border: 1px solid var(--mm-why-accent-soft); border-radius: 999px; padding: 0.25rem 0.7rem; margin: 0.5rem 0 0.7rem; }
+  .mm-why-ing > p:last-child { margin-bottom: 0; color: var(--mm-why-muted); }
+  @media (min-width: 760px) {
+    .mm-why-formula { grid-template-columns: repeat(2, 1fr); }
+    .mm-why-formula .mm-why-ing:first-child { grid-column: 1 / -1; }
+  }
+  .mm-why-offer__identity { color: var(--mm-why-muted); font-size: 1rem; margin: 0.4rem 0 1.4rem; }
+  .mm-why-packs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; margin: 0.4rem 0 1rem; }
+  .mm-why-pack { position: relative; display: flex; flex-direction: column; align-items: center; gap: 0.15rem; padding: 1.2rem 0.6rem 1rem; border: 1px solid var(--mm-why-border); border-radius: 16px; cursor: pointer; transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease; text-align: center; }
+  .mm-why-pack input { position: absolute; opacity: 0; pointer-events: none; }
+  .mm-why-pack.is-active { border-color: var(--mm-why-accent); background: var(--mm-why-accent-faint); transform: translateY(-2px); box-shadow: 0 10px 30px -14px var(--mm-why-accent-soft); }
+  .mm-why-pack__flag { position: absolute; top: -0.62rem; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mm-why-bg); background: var(--mm-why-accent); border-radius: 999px; padding: 0.22rem 0.6rem; }
+  .mm-why-pack__flag--gold { background: #d9a441; }
+  .mm-why-pack__qty { font-family: var(--mm-why-font-h); font-size: 1.9rem; font-weight: 800; line-height: 1; color: var(--mm-why-text); }
+  .mm-why-pack__unit { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mm-why-muted); }
+  .mm-why-pack__price { font-weight: 700; color: var(--mm-why-text); margin-top: 0.45rem; font-variant-numeric: tabular-nums; }
+  .mm-why-pack__per { font-size: 0.72rem; color: var(--mm-why-muted); }
+  .mm-why-pack__soldout { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mm-why-muted); }
+  .mm-why-offer__trust { display: flex; flex-wrap: wrap; gap: 0.5rem 1.4rem; justify-content: center; margin-top: 1.1rem; }
+  .mm-why-offer__trust span { font-size: 0.75rem; color: var(--mm-why-muted); letter-spacing: 0.04em; display: inline-flex; align-items: center; gap: 0.4rem; }
+  .mm-why-offer__trust span::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--mm-why-accent); }
+  @media (max-width: 520px) {
+    .mm-why-packs { grid-template-columns: 1fr; gap: 0.9rem; }
+    .mm-why-pack { flex-direction: row; flex-wrap: wrap; justify-content: space-between; align-items: baseline; padding: 0.9rem 1.1rem; text-align: left; }
+    .mm-why-pack__qty { font-size: 1.4rem; }
+    .mm-why-pack__price { margin-top: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mm-why-scrollcue__arrow::after { animation: none; }
+  }
+
 </style>
 
 <div id="why-mindmix-exists" class="mm-why" data-mm-why data-mm-sid="{{ section.id }}" data-mm-active-mood="void">
@@ -586,22 +633,16 @@
 
   <!-- Hero: controlled and unresolved -->
   <section class="mm-why-mv mm-why-beat" data-mm-mv data-mm-mood="void" id="mm-why-hero-{{ section.id }}">
-    <div class="mm-why-hero-grid">
-      <div>
-        <span class="mm-why-kicker mm-why-kicker--accent" data-mm-reveal>Why MindMix Exists</span>
-        <h1 class="mm-why-h1" data-mm-reveal="strike" style="--mm-d:.2s">Why is the work that could change your life always the easiest to postpone?</h1>
-        <div data-mm-reveal style="--mm-d:.45s">
-          <p>When the deadline belongs to someone else, you deliver.</p>
-          <p>When it belongs to your future, you find a reason to start tomorrow.</p>
-        </div>
-        <div class="mm-why-cta-row" data-mm-reveal style="--mm-d:.65s">
-          <a class="mm-why-btn mm-why-btn--primary" href="#mm-why-story-{{ section.id }}" data-mm-scroll>{{ s.cta_hero_primary | escape }}</a>
-          <a class="mm-why-textlink mm-why-textlink--dim" href="#mm-why-product-{{ section.id }}" data-mm-scroll>{{ s.cta_hero_secondary | escape }}</a>
-        </div>
+    <div class="mm-why-col mm-why-hero-solo">
+      <span class="mm-why-kicker mm-why-kicker--accent" data-mm-reveal>Why MindMix Exists</span>
+      <h1 class="mm-why-h1" data-mm-reveal="strike" style="--mm-d:.2s">Why is the work that could change your life always the easiest to postpone?</h1>
+      <div data-mm-reveal style="--mm-d:.45s">
+        <p>When the deadline belongs to someone else, you deliver.</p>
+        <p>When it belongs to your future, you find a reason to start tomorrow.</p>
       </div>
-      <div class="mm-why-vow" aria-hidden="true" data-mm-vow data-mm-reveal="rise-long" style="--mm-d:.5s">
-        <div class="mm-why-vow__history" data-mm-vow-history></div>
-        <p class="mm-why-vow__line"><span>I will start</span> <span class="mm-why-vow__when" data-mm-vow-when>tonight.</span><span class="mm-why-vow__caret"></span></p>
+      <div class="mm-why-scrollcue" data-mm-reveal style="--mm-d:.7s" aria-hidden="true">
+        <span class="mm-why-scrollcue__label">The answer costs nothing to read</span>
+        <span class="mm-why-scrollcue__arrow"></span>
       </div>
     </div>
   </section>
@@ -644,6 +685,13 @@
     </div>
   </section>
 
+  <!-- Visual break: the pour -->
+  <section class="mm-why-mv mm-why-mv--break" data-mm-mv data-mm-mood="wound">
+    <figure class="mm-why-break" data-mm-reveal="rise-long">
+      <img src="https://cdn.shopify.com/s/files/1/0668/0117/2654/files/mm-why-break-pour.jpg?v=1784441882" alt="MindMix poured over ice" loading="lazy" width="900" height="1125">
+    </figure>
+  </section>
+
   <!-- 2 · Rescheduling and self-trust: fractured repetition -->
   <section class="mm-why-mv mm-why-mv--tight" data-mm-mv data-mm-mood="wound">
     <div class="mm-why-col">
@@ -654,28 +702,16 @@
         <p class="mm-why-cal__row" data-mm-reveal><span class="mm-why-cal__from">Monday</span> becomes <span class="mm-why-cal__to">Tuesday</span>.</p>
         <p class="mm-why-cal__row" data-mm-reveal><span class="mm-why-cal__from">Tuesday</span> becomes <span class="mm-why-cal__to">&ldquo;sometime this week.&rdquo;</span></p>
       </div>
-      <div class="mm-why-gap"></div>
-      <div data-mm-reveal>
-        <p>You stop mentioning the idea around the person who keeps asking how it is going.</p>
-        <p>You stop opening the document because the date you created it has started to feel embarrassing.</p>
-      </div>
       <div data-mm-reveal>
         <p>You swear Sunday night was the final reset.</p>
         <p>By Monday afternoon, you are negotiating again.</p>
       </div>
       <div class="mm-why-gap"></div>
-      <h3 class="mm-why-h2" data-mm-reveal="strike">The unfinished work is not the worst part.</h3>
-      <p data-mm-reveal>The worst part is what the pattern teaches you.</p>
       <div data-mm-stagger>
         <p class="mm-why-ledgerline" data-mm-reveal>Every time you say &ldquo;tonight&rdquo; and mean &ldquo;not tonight,&rdquo; your word loses a little value.</p>
         <p class="mm-why-ledgerline" data-mm-reveal>Every fresh start begins with a little less belief than the one before it.</p>
       </div>
-      <p data-mm-reveal>You quietly lower your expectations so the disappointment has less distance to fall.</p>
       <p class="mm-why-beatline" data-mm-reveal="strike">That is how self-trust disappears.</p>
-      <div class="mm-why-stack" data-mm-stagger>
-        <p data-mm-reveal>Not in one catastrophic decision.</p>
-        <p data-mm-reveal>In small promises you taught yourself not to believe.</p>
-      </div>
     </div>
   </section>
 
@@ -708,12 +744,9 @@
             <span class="mm-why-pile__status">Not started</span>
           </div>
         </div>
-        <p data-mm-reveal>Making sure that when you finally begin, you begin correctly.</p>
         <div class="mm-why-gap"></div>
         <div class="mm-why-stack" data-mm-stagger data-mm-pile-clear>
           <p data-mm-reveal>As long as the business stays in your head, it can still become enormous.</p>
-          <p data-mm-reveal>As long as the application remains unfinished, it cannot be rejected.</p>
-          <p data-mm-reveal>As long as the first video stays in drafts, nobody can judge it.</p>
           <p data-mm-reveal>As long as you are still &ldquo;figuring it out,&rdquo; your potential remains safely untested.</p>
         </div>
         <div class="mm-why-gap"></div>
@@ -752,83 +785,6 @@
     </div>
   </section>
 
-  <!-- 5 · Commitment capture: direct and still -->
-  <section class="mm-why-mv" data-mm-mv data-mm-mood="still" id="mm-why-commit-{{ section.id }}" tabindex="-1">
-    <div class="mm-why-col mm-why-promise">
-      <div data-mm-reveal="calm" data-mm-promise-wrap>
-        <span class="mm-why-kicker mm-why-kicker--accent">Before You Keep Reading</span>
-        <h2 class="mm-why-h2">Stop making the promise silently.</h2>
-        <p>Name the one thing you keep pushing into tomorrow.</p>
-        <p>We will send the promise back to you, help you turn it into a first move, and check in over the next seven days.</p>
-        <div class="mm-why-stack">
-          <p>No motivational spam.</p>
-          <p>No pretending that writing it down counts as doing it.</p>
-        </div>
-        <p>Just your own words, returned to you before tomorrow has a chance to rewrite them.</p>
-
-        {%- form 'customer', class: 'mm-why-promise__form' -%}
-          {%- if form.errors -%}
-            <div class="mm-why-form-errors" role="alert">{{ form.errors | default_errors }}</div>
-          {%- endif -%}
-          {%- if form.posted_successfully? -%}
-            <p class="mm-why-form-success">Promise recorded. Watch your inbox.</p>
-          {%- endif -%}
-          <input type="hidden" name="contact[tags]" value="first-promise" data-mm-promise-tags>
-          <input type="hidden" name="return_to" value="{{ request.path }}?mm-committed=1#mm-why-commit-{{ section.id }}">
-          <div class="mm-why-promise__field">
-            <div>
-              <label class="mm-why-label" for="mm-why-task-{{ section.id }}">The thing I am done postponing</label>
-              <input
-                class="mm-why-input"
-                type="text"
-                id="mm-why-task-{{ section.id }}"
-                maxlength="140"
-                autocomplete="off"
-                placeholder="Write it here..."
-                data-mm-promise-input
-                aria-describedby="mm-why-task-err-{{ section.id }}"
-              >
-              <p class="mm-why-field-err" id="mm-why-task-err-{{ section.id }}" data-mm-err="task">Write the thing you keep postponing first.</p>
-            </div>
-            <div>
-              <label class="mm-why-label" for="mm-why-email-{{ section.id }}">Where should we send your commitment?</label>
-              <input
-                class="mm-why-input"
-                type="email"
-                id="mm-why-email-{{ section.id }}"
-                name="contact[email]"
-                autocomplete="email"
-                autocapitalize="off"
-                autocorrect="off"
-                placeholder="you@email.com"
-                data-mm-promise-email
-                aria-describedby="mm-why-email-err-{{ section.id }}"
-              >
-              <p class="mm-why-field-err" id="mm-why-email-err-{{ section.id }}" data-mm-err="email">Enter a valid email address.</p>
-            </div>
-            <button type="submit" class="mm-why-btn mm-why-btn--primary" data-mm-submit-btn>Make It Real</button>
-          </div>
-          <p class="mm-why-form-status" data-mm-form-status role="status" aria-live="assertive"></p>
-          <p class="mm-why-consent">{{ s.consent_text | escape }}</p>
-        {%- endform -%}
-      </div>
-
-      <div aria-live="polite">
-        <div class="mm-why-card" data-mm-promise-card hidden>
-          <p class="mm-why-card__kicker">PROMISE RECORDED</p>
-          <p class="mm-why-card__lead">You said you were going to:</p>
-          <p class="mm-why-card__task" data-mm-promise-task></p>
-          <p class="mm-why-card__time" data-mm-promise-time hidden></p>
-          <p class="mm-why-card__note">Your first check-in arrives tomorrow.</p>
-          <div class="mm-why-card__actions">
-            <a class="mm-why-btn mm-why-btn--primary" href="#mm-why-founder-{{ section.id }}" data-mm-scroll>Continue Reading</a>
-            <button type="button" class="mm-why-card__edit" data-mm-promise-edit>Edit</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- 6 · Founder confession: raw and human -->
   <section class="mm-why-mv" data-mm-mv data-mm-mood="warm" id="mm-why-founder-{{ section.id }}" tabindex="-1">
     <div class="mm-why-founder-grid">
@@ -859,7 +815,9 @@
         {%- if s.image_founder != blank -%}
           {{ s.image_founder | image_url: width: 1400 | image_tag: widths: '600, 900, 1200, 1400', sizes: '(min-width: 900px) 48vw, 92vw', loading: 'lazy', alt: s.image_founder.alt | default: 'The founder of MindMix' }}
         {%- else -%}
-          {{ 'image' | placeholder_svg_tag }}
+          <figure class="mm-why-break mm-why-break--tight">
+            <img src="https://cdn.shopify.com/s/files/1/0668/0117/2654/files/mm-why-break-macro.jpg?v=1784441882" alt="A prepared glass of MindMix with green apple and kiwi" loading="lazy" width="900" height="1125">
+          </figure>
         {%- endif -%}
         {%- if s.founder_caption != blank -%}
         <span class="mm-why-founder-caption">{{ s.founder_caption | escape }}</span>
@@ -988,34 +946,29 @@
           <p class="mm-why-ing__dose">1,000 mg</p>
           <p class="mm-why-ing__for">For clear thinking.</p>
           <p>Supports memory, learning, and cognitive function.</p>
-          <p>It is the largest active ingredient in MindMix because clear thinking should be the foundation of the formula, not a label decoration.</p>
         </article>
         <article class="mm-why-ing" data-mm-reveal>
           <h3 class="mm-why-ing__name">L-Theanine</h3>
           <p class="mm-why-ing__dose">400 mg</p>
           <p class="mm-why-ing__for">For calm concentration.</p>
           <p>Supports a calm, focused state so feeling alert does not become feeling scattered.</p>
-          <p>Less mental noise. More attention on the task in front of you.</p>
         </article>
         <article class="mm-why-ing" data-mm-reveal>
           <h3 class="mm-why-ing__name">Green Tea Extract</h3>
           <p class="mm-why-ing__dose">300 mg</p>
           <p class="mm-why-ing__for">For alertness.</p>
           <p>Gives the formula its brighter, ready-to-work side and provides concentrated tea polyphenols.</p>
-          <p>Enough lift to begin without making stimulation the entire identity of the product.</p>
         </article>
         <article class="mm-why-ing" data-mm-reveal>
           <h3 class="mm-why-ing__name">Rhodiola Rosea</h3>
           <p class="mm-why-ing__dose">250 mg</p>
           <p class="mm-why-ing__for">For mental stamina.</p>
           <p>Supports resilience during periods of stress and mental fatigue.</p>
-          <p>It is there for the point where the work stops feeling exciting and continuing becomes the real challenge.</p>
         </article>
         <article class="mm-why-ing" data-mm-reveal>
           <h3 class="mm-why-ing__name">Vitamin B12</h3>
           <p class="mm-why-ing__dose">100 mcg</p>
           <p class="mm-why-ing__for">For normal energy metabolism and nervous-system support.</p>
-          <p>B12 supports the systems underneath every working session.</p>
           <p>Not the flashy part. The essential part.</p>
         </article>
       </div>
@@ -1093,105 +1046,8 @@
     </div>
   </section>
 
-  <!-- 10 · Commercial offer: bright, simple, decisive -->
-  <section class="mm-why-mv" data-mm-mv data-mm-mood="clear" data-mm-sticky-zone id="mm-why-buy-{{ section.id }}">
-    <div class="mm-why-col">
-      <div class="mm-why-offer" id="mm-why-offer-{{ section.id }}" data-mm-reveal="calm">
-        {%- if s.image_offer != blank -%}
-        <div class="mm-why-offer__media">
-          {{ s.image_offer | image_url: width: 1000 | image_tag: widths: '500, 750, 1000', sizes: '(min-width: 640px) 34rem, 92vw', loading: 'lazy', alt: s.image_offer.alt | default: 'MindMix Green Apple Kiwi, 15 single-serve sticks' }}
-        </div>
-        {%- endif -%}
-        <div class="mm-why-offer__sticks" aria-hidden="true">
-          {%- for i in (1..s.offer_stick_count) -%}<span></span>{%- endfor -%}
-        </div>
-        <p class="mm-why-offer__kicker">{{ s.offer_kicker | escape }}</p>
-        <p class="mm-why-offer__title">{{ s.offer_title | escape }}</p>
-        {%- if s.offer_line1 != blank -%}<p class="mm-why-offer__line">{{ s.offer_line1 | escape }}</p>{%- endif -%}
-        {%- if s.offer_line2 != blank -%}<p class="mm-why-offer__line">{{ s.offer_line2 | escape }}</p>{%- endif -%}
-        {%- if s.offer_line3 != blank -%}<p class="mm-why-offer__line">{{ s.offer_line3 | escape }}</p>{%- endif -%}
-        {%- if s.product != blank -%}
-          {%- liquid
-            assign mm_variant = s.product.selected_or_first_available_variant
-            if s.offer_variant_match != blank
-              for v in s.product.variants
-                if v.title contains s.offer_variant_match
-                  assign mm_variant = v
-                  break
-                endif
-              endfor
-            endif
-            assign mm_group = s.product.selling_plan_groups | first
-            assign mm_first_alloc = nil
-            if mm_group
-              assign mm_first_alloc = mm_variant.selling_plan_allocations | first
-            endif
-          -%}
-          <p class="mm-why-offer__price">
-            {%- if mm_first_alloc -%}
-              <span data-mm-price-current>{{ mm_first_alloc.price | money }}</span>
-              {%- if mm_first_alloc.price < mm_variant.price -%}
-                <s class="mm-why-offer__compare" data-mm-price-compare>{{ mm_variant.price | money }}</s>
-              {%- else -%}
-                <s class="mm-why-offer__compare" data-mm-price-compare hidden>{{ mm_variant.price | money }}</s>
-              {%- endif -%}
-            {%- else -%}
-              <span data-mm-price-current>{{ mm_variant.price | money }}</span>
-              <s class="mm-why-offer__compare" data-mm-price-compare hidden>{{ mm_variant.price | money }}</s>
-            {%- endif -%}
-          </p>
-          {%- form 'product', s.product -%}
-            <input type="hidden" name="id" value="{{ mm_variant.id }}">
-            {%- assign mm_has_sub = false -%}
-            {%- if mm_group -%}
-            <fieldset class="mm-why-offer__plans">
-              <legend class="mm-why-vh">Purchase options</legend>
-              {%- for plan in mm_group.selling_plans -%}
-                {%- assign mm_alloc = nil -%}
-                {%- for a in mm_variant.selling_plan_allocations -%}
-                  {%- if a.selling_plan.id == plan.id -%}{%- assign mm_alloc = a -%}{%- endif -%}
-                {%- endfor -%}
-                {%- if mm_alloc -%}
-                {%- assign mm_has_sub = true -%}
-                {%- assign mm_save = mm_variant.price | minus: mm_alloc.price | times: 100 | divided_by: mm_variant.price -%}
-                <label class="mm-why-offer__plan">
-                  <input type="radio" name="selling_plan" value="{{ plan.id }}" {% if forloop.first %}checked{% endif %}
-                    data-mm-plan data-mm-plan-kind="subscription" data-mm-cta="{{ s.offer_cta_sub | escape }}"
-                    data-mm-price="{{ mm_alloc.price | money }}" data-mm-compare="{{ mm_variant.price | money }}">
-                  <span>
-                    <span class="mm-why-offer__plan-name">{%- if mm_save > 0 -%}Subscribe and save {{ mm_save }}%{%- else -%}Subscribe{%- endif -%}</span>
-                    <span class="mm-why-offer__plan-terms">{{ mm_alloc.price | money }} &middot; {{ plan.name | escape }}<br>{{ s.offer_sub_note | escape }}</span>
-                  </span>
-                  {%- if mm_save > 0 -%}<span class="mm-why-offer__save">Save {{ mm_save }}%</span>{%- endif -%}
-                </label>
-                {%- endif -%}
-              {%- endfor -%}
-              <label class="mm-why-offer__plan">
-                <input type="radio" name="selling_plan" value="" {% unless mm_has_sub %}checked{% endunless %}
-                  data-mm-plan data-mm-plan-kind="one_time" data-mm-cta="{{ s.offer_cta_once | escape }}"
-                  data-mm-price="{{ mm_variant.price | money }}" data-mm-compare="">
-                <span>
-                  <span class="mm-why-offer__plan-name">One-time purchase</span>
-                  <span class="mm-why-offer__plan-terms">{{ mm_variant.price | money }} &middot; {{ s.offer_once_note | escape }}</span>
-                </span>
-              </label>
-            </fieldset>
-            {%- endif -%}
-            <button type="submit" class="mm-why-btn mm-why-btn--primary" data-mm-atc {% unless mm_variant.available %}disabled{% endunless %}>
-              {%- if mm_variant.available -%}{%- if mm_has_sub -%}{{ s.offer_cta_sub | escape }}{%- else -%}{{ s.offer_cta_once | escape }}{%- endif -%}{%- else -%}Sold out{%- endif -%}
-            </button>
-          {%- endform -%}
-        {%- elsif mm_product_url != blank -%}
-          <a class="mm-why-btn mm-why-btn--primary" href="{{ mm_product_url }}" data-mm-atc>{{ s.offer_cta_once | escape }}</a>
-        {%- else -%}
-          <p class="mm-why-offer__note">Select a product in the section settings to activate this offer.</p>
-        {%- endif -%}
-      </div>
-    </div>
-  </section>
-
-  <!-- 11 · Final close: aligned and resolved -->
-  <section class="mm-why-mv mm-why-beat" data-mm-mv data-mm-mood="clear" id="mm-why-close-{{ section.id }}">
+  <!-- 9b · The dream: who you are buying for -->
+  <section class="mm-why-mv" data-mm-mv data-mm-mood="clear">
     <div class="mm-why-col">
       <h2 class="mm-why-h2" data-mm-reveal="strike">Imagine believing yourself again.</h2>
       <p data-mm-reveal>Not because you read something inspiring.</p>
@@ -1210,6 +1066,126 @@
         <p data-mm-reveal>The first version finished.</p>
       </div>
       <p data-mm-reveal>Evidence that you finally began.</p>
+    </div>
+  </section>
+
+  <!-- 10 · Commercial offer: bright, simple, decisive -->
+  <section class="mm-why-mv" data-mm-mv data-mm-mood="clear" data-mm-sticky-zone id="mm-why-buy-{{ section.id }}">
+    <div class="mm-why-col">
+      <div class="mm-why-offer" id="mm-why-offer-{{ section.id }}" data-mm-reveal="calm">
+        {%- if s.image_offer != blank -%}
+        <div class="mm-why-offer__media">
+          {{ s.image_offer | image_url: width: 1000 | image_tag: widths: '500, 750, 1000', sizes: '(min-width: 640px) 34rem, 92vw', loading: 'lazy', alt: s.image_offer.alt | default: 'MindMix Green Apple Kiwi, 15 single-serve sticks' }}
+        </div>
+        {%- endif -%}
+        <div class="mm-why-offer__sticks" aria-hidden="true">
+          {%- for i in (1..s.offer_stick_count) -%}<span></span>{%- endfor -%}
+        </div>
+        <p class="mm-why-offer__kicker">Green Apple Kiwi</p>
+        <p class="mm-why-offer__title">Choose your supply.</p>
+        <p class="mm-why-offer__identity">Every stick is one session. Every session is a vote for the person you are becoming.</p>
+        {%- if s.product != blank -%}
+          {%- liquid
+            assign mm_base_variant = nil
+            for v in s.product.variants
+              if v.title contains '15'
+                assign mm_base_variant = v
+              endif
+            endfor
+            unless mm_base_variant
+              assign mm_base_variant = s.product.variants | first
+            endunless
+            assign mm_base_size = mm_base_variant.title | split: ' ' | first | times: 1
+            assign mm_base_per = mm_base_variant.price | divided_by: mm_base_size
+          -%}
+          {%- form 'product', s.product -%}
+            <input type="hidden" name="id" value="{{ mm_base_variant.id }}" data-mm-variant-id>
+            <div class="mm-why-packs" role="radiogroup" aria-label="Choose your supply">
+              {%- for v in s.product.variants -%}
+                {%- assign vsize = v.title | split: ' ' | first | times: 1 -%}
+                {%- assign vper = v.price | divided_by: vsize -%}
+                {%- assign vpct = vper | times: 100 | divided_by: mm_base_per -%}
+                {%- assign vsave = 100 | minus: vpct -%}
+                {%- assign vsubcount = v.selling_plan_allocations | size -%}
+                <label class="mm-why-pack{% if v.id == mm_base_variant.id %} is-active{% endif %}">
+                  <input type="radio" name="mm-pack" value="{{ v.id }}"
+                    {% if v.id == mm_base_variant.id %}checked{% endif %}
+                    {% unless v.available %}disabled{% endunless %}
+                    data-mm-pack data-mm-vid="{{ v.id }}"
+                    data-mm-price="{{ v.price | money }}"
+                    data-mm-plans-target="mm-plans-{{ v.id }}"
+                    data-mm-pack-size="{{ vsize }}">
+                  {%- if vsize == 30 -%}
+                    <span class="mm-why-pack__flag">Most popular</span>
+                  {%- elsif vsize == 90 -%}
+                    <span class="mm-why-pack__flag mm-why-pack__flag--gold">Best value</span>
+                  {%- endif -%}
+                  <span class="mm-why-pack__qty">{{ vsize }}</span>
+                  <span class="mm-why-pack__unit">sessions</span>
+                  <span class="mm-why-pack__price">{{ v.price | money }}</span>
+                  <span class="mm-why-pack__per">{{ vper | money }} per session{% if vsave > 0 %} &middot; save {{ vsave }}%{% endif %}</span>
+                  {%- unless v.available -%}<span class="mm-why-pack__soldout">Sold out</span>{%- endunless -%}
+                </label>
+              {%- endfor -%}
+            </div>
+
+            <p class="mm-why-offer__price">
+              <span data-mm-price-current>{{ mm_base_variant.price | money }}</span>
+              <s class="mm-why-offer__compare" data-mm-price-compare hidden></s>
+            </p>
+
+            {%- for v in s.product.variants -%}
+              {%- assign vallocs = v.selling_plan_allocations -%}
+              {%- if vallocs.size > 0 -%}
+              <fieldset class="mm-why-offer__plans" data-mm-plans="mm-plans-{{ v.id }}" {% unless v.id == mm_base_variant.id %}hidden disabled{% endunless %}>
+                <legend class="mm-why-vh">Purchase options</legend>
+                {%- for a in vallocs -%}
+                  {%- assign mm_save = v.price | minus: a.price | times: 100 | divided_by: v.price -%}
+                  <label class="mm-why-offer__plan">
+                    <input type="radio" name="selling_plan" value="{{ a.selling_plan.id }}"
+                      data-mm-plan data-mm-plan-kind="subscription" data-mm-cta="{{ s.offer_cta_sub | escape }}"
+                      data-mm-price="{{ a.price | money }}" data-mm-compare="{{ v.price | money }}">
+                    <span>
+                      <span class="mm-why-offer__plan-name">{%- if mm_save > 0 -%}Subscribe and save {{ mm_save }}%{%- else -%}Subscribe{%- endif -%}</span>
+                      <span class="mm-why-offer__plan-terms">{{ a.price | money }} &middot; {{ a.selling_plan.name | escape }}<br>{{ s.offer_sub_note | escape }}</span>
+                    </span>
+                    {%- if mm_save > 0 -%}<span class="mm-why-offer__save">Save {{ mm_save }}%</span>{%- endif -%}
+                  </label>
+                {%- endfor -%}
+                <label class="mm-why-offer__plan">
+                  <input type="radio" name="selling_plan" value="" checked
+                    data-mm-plan data-mm-plan-kind="one_time" data-mm-cta="{{ s.offer_cta_once | escape }}"
+                    data-mm-price="{{ v.price | money }}" data-mm-compare="">
+                  <span>
+                    <span class="mm-why-offer__plan-name">One-time purchase</span>
+                    <span class="mm-why-offer__plan-terms">{{ v.price | money }} &middot; {{ s.offer_once_note | escape }}</span>
+                  </span>
+                </label>
+              </fieldset>
+              {%- endif -%}
+            {%- endfor -%}
+
+            <button type="submit" class="mm-why-btn mm-why-btn--primary" data-mm-atc {% unless mm_base_variant.available %}disabled{% endunless %}>
+              {%- if mm_base_variant.available -%}{{ s.offer_cta_once | escape }}{%- else -%}Sold out{%- endif -%}
+            </button>
+            <div class="mm-why-offer__trust">
+              <span>30-day money-back guarantee</span>
+              <span>Third-party tested, certificate above</span>
+              <span>Full doses on every label</span>
+            </div>
+          {%- endform -%}
+        {%- elsif mm_product_url != blank -%}
+          <a class="mm-why-btn mm-why-btn--primary" href="{{ mm_product_url }}" data-mm-atc>{{ s.offer_cta_once | escape }}</a>
+        {%- else -%}
+          <p class="mm-why-offer__note">Select a product in the section settings to activate this offer.</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · Final close: aligned and resolved -->
+  <section class="mm-why-mv mm-why-beat" data-mm-mv data-mm-mood="clear" id="mm-why-close-{{ section.id }}">
+    <div class="mm-why-col">
       <div class="mm-why-echo" data-mm-close-echo hidden>
         <p class="mm-why-card__kicker">You said you were done postponing:</p>
         <p class="mm-why-card__task" data-mm-close-task></p>
@@ -1230,6 +1206,84 @@
       </div>
     </div>
   </section>
+
+  <!-- 5 · Commitment capture: direct and still -->
+  <section class="mm-why-mv" data-mm-mv data-mm-mood="still" id="mm-why-commit-{{ section.id }}" tabindex="-1">
+    <div class="mm-why-col mm-why-promise">
+      <div data-mm-reveal="calm" data-mm-promise-wrap>
+        <span class="mm-why-kicker mm-why-kicker--accent">Not Ready To Buy?</span>
+        <h2 class="mm-why-h2">Make the promise anyway.</h2>
+        <p>Fair. But stop making the promise silently. Name the one thing you keep pushing into tomorrow.</p>
+        <p>We will send the promise back to you, help you turn it into a first move, and check in over the next seven days.</p>
+        <div class="mm-why-stack">
+          <p>No motivational spam.</p>
+          <p>No pretending that writing it down counts as doing it.</p>
+        </div>
+        <p>Just your own words, returned to you before tomorrow has a chance to rewrite them.</p>
+
+        {%- form 'customer', class: 'mm-why-promise__form' -%}
+          {%- if form.errors -%}
+            <div class="mm-why-form-errors" role="alert">{{ form.errors | default_errors }}</div>
+          {%- endif -%}
+          {%- if form.posted_successfully? -%}
+            <p class="mm-why-form-success">Promise recorded. Watch your inbox.</p>
+          {%- endif -%}
+          <input type="hidden" name="contact[tags]" value="first-promise" data-mm-promise-tags>
+          <input type="hidden" name="return_to" value="{{ request.path }}?mm-committed=1#mm-why-commit-{{ section.id }}">
+          <div class="mm-why-promise__field">
+            <div>
+              <label class="mm-why-label" for="mm-why-task-{{ section.id }}">The thing I am done postponing</label>
+              <input
+                class="mm-why-input"
+                type="text"
+                id="mm-why-task-{{ section.id }}"
+                maxlength="140"
+                autocomplete="off"
+                placeholder="Write it here..."
+                data-mm-promise-input
+                aria-describedby="mm-why-task-err-{{ section.id }}"
+              >
+              <p class="mm-why-field-err" id="mm-why-task-err-{{ section.id }}" data-mm-err="task">Write the thing you keep postponing first.</p>
+            </div>
+            <div>
+              <label class="mm-why-label" for="mm-why-email-{{ section.id }}">Where should we send your commitment?</label>
+              <input
+                class="mm-why-input"
+                type="email"
+                id="mm-why-email-{{ section.id }}"
+                name="contact[email]"
+                autocomplete="email"
+                autocapitalize="off"
+                autocorrect="off"
+                placeholder="you@email.com"
+                data-mm-promise-email
+                aria-describedby="mm-why-email-err-{{ section.id }}"
+              >
+              <p class="mm-why-field-err" id="mm-why-email-err-{{ section.id }}" data-mm-err="email">Enter a valid email address.</p>
+            </div>
+            <button type="submit" class="mm-why-btn mm-why-btn--primary" data-mm-submit-btn>Make It Real</button>
+          </div>
+          <p class="mm-why-form-status" data-mm-form-status role="status" aria-live="assertive"></p>
+          <p class="mm-why-consent">{{ s.consent_text | escape }}</p>
+        {%- endform -%}
+      </div>
+
+      <div aria-live="polite">
+        <div class="mm-why-card" data-mm-promise-card hidden>
+          <p class="mm-why-card__kicker">PROMISE RECORDED</p>
+          <p class="mm-why-card__lead">You said you were going to:</p>
+          <p class="mm-why-card__task" data-mm-promise-task></p>
+          <p class="mm-why-card__time" data-mm-promise-time hidden></p>
+          <p class="mm-why-card__note">Your first check-in arrives tomorrow.</p>
+          <div class="mm-why-card__actions">
+            <a class="mm-why-btn mm-why-btn--primary" href="{{ mm_buy_href }}" {% if mm_buy_scroll %}data-mm-scroll{% endif %}>Start With MindMix</a>
+            <button type="button" class="mm-why-card__edit" data-mm-promise-edit>Edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
   {%- if s.disclaimer != blank -%}
   <hr class="mm-why-rule">
@@ -1665,26 +1719,60 @@
         }
       }
 
-      /* ---------- Offer: purchase option switch ---------- */
-      var planRadios = root.querySelectorAll('[data-mm-plan]');
+      /* ---------- Offer: pack picker + purchase option switch ---------- */
       var priceCur = root.querySelector('[data-mm-price-current]');
       var priceCmp = root.querySelector('[data-mm-price-compare]');
       var atcBtn = root.querySelector('[data-mm-atc]');
-      planRadios.forEach(function (r) {
-        r.addEventListener('change', function () {
-          if (!r.checked) return;
-          var price = r.getAttribute('data-mm-price');
-          var cmp = r.getAttribute('data-mm-compare');
-          var ctaLabel = r.getAttribute('data-mm-cta');
-          if (priceCur && price) priceCur.textContent = price;
-          if (priceCmp) {
-            if (cmp && cmp !== price) { priceCmp.textContent = cmp; priceCmp.hidden = false; }
-            else { priceCmp.hidden = true; }
-          }
-          if (atcBtn && ctaLabel && !atcBtn.disabled) atcBtn.textContent = ctaLabel;
-          track('offer_plan_change', { plan: r.getAttribute('data-mm-plan-kind') });
+      var vidInput = root.querySelector('[data-mm-variant-id]');
+      function mmActivePlans() {
+        var checked = root.querySelector('[data-mm-pack]:checked');
+        if (!checked) return null;
+        return root.querySelector('[data-mm-plans="' + checked.getAttribute('data-mm-plans-target') + '"]');
+      }
+      function mmSyncOffer(source) {
+        var pack = root.querySelector('[data-mm-pack]:checked');
+        if (!pack) return;
+        if (vidInput) vidInput.value = pack.getAttribute('data-mm-vid');
+        root.querySelectorAll('.mm-why-pack').forEach(function (card) {
+          var input = card.querySelector('[data-mm-pack]');
+          card.classList.toggle('is-active', !!(input && input.checked));
         });
+        root.querySelectorAll('[data-mm-plans]').forEach(function (fs) {
+          var active = fs.getAttribute('data-mm-plans') === pack.getAttribute('data-mm-plans-target');
+          fs.hidden = !active;
+          fs.disabled = !active;
+        });
+        var plans = mmActivePlans();
+        var price = pack.getAttribute('data-mm-price');
+        var cmp = '';
+        var ctaLabel = null;
+        if (plans) {
+          var plan = plans.querySelector('[data-mm-plan]:checked') || plans.querySelector('[data-mm-plan]');
+          if (plan) {
+            price = plan.getAttribute('data-mm-price') || price;
+            cmp = plan.getAttribute('data-mm-compare') || '';
+            ctaLabel = plan.getAttribute('data-mm-cta');
+          }
+        }
+        if (priceCur && price) priceCur.textContent = price;
+        if (priceCmp) {
+          if (cmp && cmp !== price) { priceCmp.textContent = cmp; priceCmp.hidden = false; }
+          else { priceCmp.hidden = true; }
+        }
+        if (atcBtn && !atcBtn.disabled && ctaLabel) atcBtn.textContent = ctaLabel;
+        if (source === 'pack') track('offer_pack_change', { pack: pack.getAttribute('data-mm-pack-size') });
+        if (source === 'plan') {
+          var pr = plans && plans.querySelector('[data-mm-plan]:checked');
+          track('offer_plan_change', { plan: pr ? pr.getAttribute('data-mm-plan-kind') : 'one_time' });
+        }
+      }
+      root.querySelectorAll('[data-mm-pack]').forEach(function (r) {
+        r.addEventListener('change', function () { mmSyncOffer('pack'); });
       });
+      root.querySelectorAll('[data-mm-plan]').forEach(function (r) {
+        r.addEventListener('change', function () { mmSyncOffer('plan'); });
+      });
+      mmSyncOffer();
       root.querySelectorAll('[data-mm-product-cta]').forEach(function (el) {
         el.addEventListener('click', function () { track('product_cta_click'); });
       });
