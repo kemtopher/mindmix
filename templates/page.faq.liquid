@@ -1,11 +1,47 @@
-<div class='terms-temp container-custom py-24'>
-  {% section 'legal-hero' %}
-  <main class='w-full sm:max-w-[75vw] xl:max-w-[50vw] mx-[auto]'>
-    <div class='blog-content py-[36px] w-full font-inter text-base'>
-      {{ page.content }}
-    </div>
-    <div>
+{% comment %}
+  FAQ page template (upgraded 2026-07). Replaces the legal-hero photo collage with a
+  clean container; partial-faq renders its own heading and accordion.
+{% endcomment %}
+
+<div class="mm-faq-page">
+  <div class="container-custom">
+    {%- if page.content != blank -%}
+      <div class="mm-faq-page__intro">{{ page.content }}</div>
+    {%- endif -%}
+    <div class="mm-faq-page__list">
       {% section 'partial-faq' %}
     </div>
-  </main>
+    <p class="mm-faq-page__more">
+      Didn't find your answer? <a href="/pages/contact">Contact us</a>.
+    </p>
+  </div>
 </div>
+
+<style>
+  .mm-faq-page {
+    background: var(--color-dark, #0b0b0b);
+    padding: 140px 0 80px;
+  }
+  .mm-faq-page__intro {
+    max-width: 46rem;
+    margin: 0 auto 32px;
+    color: rgba(224, 224, 224, 0.82);
+    line-height: 1.7;
+  }
+  .mm-faq-page__list {
+    max-width: 52rem;
+    margin: 0 auto;
+  }
+  .mm-faq-page__more {
+    max-width: 52rem;
+    margin: 8px auto 0;
+    color: rgba(224, 224, 224, 0.6);
+    font-size: 0.9375rem;
+    text-align: center;
+  }
+  .mm-faq-page__more a {
+    color: var(--color-primary, #00e5a0);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>

@@ -106,6 +106,16 @@
           <a class="mm-contact__card-link" href="/pages/faq">Read the FAQ</a>
         </div>
 
+        {%- if section.settings.support_email != blank -%}
+          <div class="mm-contact__card">
+            <h2 class="mm-contact__card-title">Email us</h2>
+            <p class="mm-contact__card-body">
+              Prefer email? Write to us directly and include your order number if you have one.
+            </p>
+            <a class="mm-contact__card-link" href="mailto:{{ section.settings.support_email }}">{{ section.settings.support_email }}</a>
+          </div>
+        {%- endif -%}
+
         <div class="mm-contact__card">
           <h2 class="mm-contact__card-title">DM us</h2>
           <p class="mm-contact__card-body">
@@ -367,6 +377,12 @@
       "type": "image_picker",
       "id": "banner_image",
       "label": "Banner image (approved photography only; leave empty for none)"
+    },
+    {
+      "type": "text",
+      "id": "support_email",
+      "label": "Support email (shown in the Email us card; empty = hidden)",
+      "default": "Unlockyours@getmindmix.com"
     },
     {
       "type": "text",
