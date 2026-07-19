@@ -1,55 +1,171 @@
-{% assign title = section.settings.heading | default: '' %}
-{% assign parts = title | split: ',' %}
-{% assign main_title = parts[0] | strip %}
+{% comment %}
+  MindMix newsletter signup (upgraded 2026-07)
+  - Native {% form 'customer' %} so form.posted_successfully? / form.errors actually work
+    (the old hand-rolled <form> referenced a form object that never existed)
+  - Dark glass panel, dark input, mint focus ring, honest microcopy
+{% endcomment %}
 
-<section class='newsletter-signup bg-dark text-light py-16'>
-  <div class='container-custom mx-auto text-center max-w-xl px-4'>
-    <h2 class='text-3xl md:text-4xl font-bold mb-4'>
-      {{ main_title }}
-      {% if parts.size > 1 %}
-        <span class='text-primary'>
-          {{ parts[1] | strip }}
-        </span>
-      {% endif %}
-    </h2>
-    <p class='text-light/80 mb-8'>
-      {{ section.settings.subheading }}
-    </p>
+{%- assign title = section.settings.heading | default: '' -%}
+{%- assign parts = title | split: ',' -%}
+{%- assign main_title = parts[0] | strip -%}
 
-    <form
-      method='post'
-      action='/contact#newsletter-signup'
-      id='newsletter-signup'
-      accept-charset='UTF-8'
-      class='flex flex-col sm:flex-row gap-4 justify-center'
-    >
-      <input type='hidden' name='form_type' value='customer'>
-      <input type='hidden' name='utf8' value='✓'>
-      <input type='hidden' name='contact[tags]' value='newsletter'>
+<section class="mm-news">
+  <div class="container-custom">
+    <div class="mm-news__panel">
+      <h2 class="mm-news__heading">
+        {{ main_title }}
+        {%- if parts.size > 1 -%}
+          <span class="mm-news__hl">{{ parts[1] | strip }}</span>
+        {%- endif -%}
+      </h2>
 
-      <input
-        type='email'
-        name='contact[email]'
-        placeholder='Enter your email'
-        class='flex-1 px-4 py-3 rounded text-dark max-w-lg md:max-w-md'
-        required
-      >
-      <button
-        type='submit'
-        class='btn btn-mint px-8 py-4 text-lg font-bold hover:transform hover:scale-105 transition-transform'
-      >
-        {{ section.settings.button_label }}
-      </button>
-    </form>
+      {%- if section.settings.subheading != blank -%}
+        <p class="mm-news__sub">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
 
-    {% if form.posted_successfully? %}
-      <p class='text-green-500 mt-4'>Thanks for subscribing!</p>
-    {% endif %}
-    {% if form.errors %}
-      <p class='text-red-500 mt-4'>There was an error. Please try again.</p>
-    {% endif %}
+      {% form 'customer', class: 'mm-news__form', id: 'mm-newsletter' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+
+        {%- if form.posted_successfully? -%}
+          <p class="mm-news__msg mm-news__msg--ok" role="status">
+            You're in. Watch your inbox.
+          </p>
+        {%- else -%}
+          <div class="mm-news__row">
+            <label for="mm-news-email" class="mm-news__label">Email address</label>
+            <input
+              id="mm-news-email"
+              type="email"
+              name="contact[email]"
+              class="mm-news__input"
+              placeholder="you@email.com"
+              autocomplete="email"
+              required
+            >
+            <button type="submit" class="mm-news__btn">
+              {{ section.settings.button_label | default: 'Sign up' | escape }}
+            </button>
+          </div>
+          {%- if form.errors -%}
+            <p class="mm-news__msg mm-news__msg--err" role="alert">
+              That email didn't go through. Check it and try again.
+            </p>
+          {%- endif -%}
+          {%- if section.settings.microcopy != blank -%}
+            <p class="mm-news__micro">{{ section.settings.microcopy | escape }}</p>
+          {%- endif -%}
+        {%- endif -%}
+      {% endform %}
+    </div>
   </div>
 </section>
+
+<style>
+  .mm-news {
+    background: var(--color-dark, #0b0b0b);
+    padding: 72px 0;
+  }
+  .mm-news__panel {
+    max-width: 42rem;
+    margin: 0 auto;
+    text-align: center;
+    padding: 48px 24px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.015) 100%);
+  }
+  .mm-news__heading {
+    color: #fff;
+    font-size: clamp(1.625rem, 4.5vw, 2.25rem);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.12;
+    margin: 0 0 12px;
+    text-wrap: balance;
+  }
+  .mm-news__hl { color: var(--color-primary, #00e5a0); }
+  .mm-news__sub {
+    color: rgba(224, 224, 224, 0.75);
+    font-size: 1rem;
+    line-height: 1.55;
+    margin: 0 auto 28px;
+    max-width: 30rem;
+  }
+  .mm-news__row {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .mm-news__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .mm-news__input {
+    width: 100%;
+    min-height: 52px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(11, 11, 11, 0.8);
+    color: #fff;
+    font-size: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .mm-news__input::placeholder { color: rgba(224, 224, 224, 0.4); }
+  .mm-news__input:focus {
+    outline: none;
+    border-color: var(--color-primary, #00e5a0);
+    box-shadow: 0 0 0 3px rgba(0, 229, 160, 0.18);
+  }
+  .mm-news__btn {
+    min-height: 52px;
+    padding: 14px 30px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: var(--color-primary, #00e5a0);
+    color: #0b0b0b;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .mm-news__btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px -6px rgba(0, 229, 160, 0.45);
+  }
+  .mm-news__btn:focus-visible {
+    outline: 2px solid var(--color-primary, #00e5a0);
+    outline-offset: 3px;
+  }
+  .mm-news__micro {
+    color: rgba(224, 224, 224, 0.45);
+    font-size: 0.8125rem;
+    margin: 14px 0 0;
+  }
+  .mm-news__msg {
+    font-size: 0.9375rem;
+    margin: 8px 0 0;
+  }
+  .mm-news__msg--ok { color: var(--color-primary, #00e5a0); }
+  .mm-news__msg--err { color: #ff6b57; }
+
+  @media (min-width: 640px) {
+    .mm-news__panel { padding: 56px 48px; }
+    .mm-news__row {
+      flex-direction: row;
+    }
+    .mm-news__input { flex: 1; }
+    .mm-news__btn { flex-shrink: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mm-news__btn { transition: none; }
+    .mm-news__btn:hover { transform: none; }
+  }
+</style>
 
 {% schema %}
 {
@@ -59,7 +175,7 @@
     {
       "type": "text",
       "id": "heading",
-      "label": "Heading",
+      "label": "Heading (text after a comma renders in brand green)",
       "default": "JOIN THE PEAK PERFORMANCE COMMUNITY"
     },
     {
@@ -71,15 +187,18 @@
     {
       "type": "text",
       "id": "button_label",
-      "label": "Button Label",
+      "label": "Button label",
       "default": "Unlock Insider Access"
+    },
+    {
+      "type": "text",
+      "id": "microcopy",
+      "label": "Microcopy under button",
+      "default": "No spam. Unsubscribe anytime."
     }
   ],
   "presets": [
-    {
-      "name": "Newsletter Signup",
-      "category": "Promotional"
-    }
+    { "name": "Newsletter Signup", "category": "Promotional" }
   ]
 }
 {% endschema %}

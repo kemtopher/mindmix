@@ -1,158 +1,267 @@
-<footer class='bg-darker pt-16 pb-8'>
-  <div class='container-custom'>
-    <div class='flex flex-col mb-12'>
-      <div class='flex wrap flex-col md:flex-row md:nowrap justify-between gap-10'>
-        <div class='w-full lg:w-[40vw] max-w-full md:max-w-[400px] text-center md:text-left'>
-          {% render 'logo' %}
+{% comment %}
+  MindMix footer (upgraded 2026-07)
+  - Social links moved to SECTION settings (the old settings.social_* never existed in
+    settings_schema, so icons never rendered)
+  - Bottom bar links the real published pages: Terms, Privacy, FDA Disclaimer
+  - Link blocks gain a coming_soon checkbox: renders a non-link label + "Soon" chip
+    instead of a dead end to a sold-out PDP
+  - Scoped CSS (style.css is compiled Tailwind)
+{% endcomment %}
 
-          {% if section.settings.footer_text != blank %}
-            <p class='text-light mt-4 mb-6 max-w-md'>
-              {{ section.settings.footer_text }}
-            </p>
-          {% endif %}
+<footer class="mm-footer">
+  <div class="container-custom">
+    <div class="mm-footer__grid">
+      <div class="mm-footer__brand">
+        {% render 'logo' %}
 
-          <div class='flex space-x-4'>
-            {% if settings.social_facebook_url != blank %}
-              <a
-                href='{{ settings.social_facebook_url }}'
-                class='text-light hover:text-primary transition-colors'
-                aria-label='Facebook'
-              >
-                {% render 'icon-facebook' %}
-              </a>
-            {% endif %}
+        {%- if section.settings.footer_text != blank -%}
+          <p class="mm-footer__tagline">{{ section.settings.footer_text }}</p>
+        {%- endif -%}
 
-            {% if settings.social_twitter_url != blank %}
-              <a
-                href='{{ settings.social_twitter_url }}'
-                class='text-light hover:text-primary transition-colors'
-                aria-label='Twitter'
-              >
-                {% render 'icon-twitter' %}
-              </a>
-            {% endif %}
-
-            {% if settings.social_instagram_url != blank %}
-              <a
-                href='{{ settings.social_instagram_url }}'
-                class='text-light hover:text-primary transition-colors'
-                aria-label='Instagram'
-              >
+        {%- assign has_social = false -%}
+        {%- if section.settings.instagram_url != blank or section.settings.tiktok_url != blank or section.settings.x_url != blank or section.settings.youtube_url != blank or section.settings.facebook_url != blank -%}
+          {%- assign has_social = true -%}
+        {%- endif -%}
+        {%- if has_social -%}
+          <div class="mm-footer__social">
+            {%- if section.settings.instagram_url != blank -%}
+              <a href="{{ section.settings.instagram_url }}" class="mm-footer__social-link" aria-label="Instagram" target="_blank" rel="noopener">
                 {% render 'icon-instagram' %}
               </a>
-            {% endif %}
-
-            {% if settings.social_youtube_url != blank %}
-              <a
-                href='{{ settings.social_youtube_url }}'
-                class='text-light hover:text-primary transition-colors'
-                aria-label='YouTube'
-              >
+            {%- endif -%}
+            {%- if section.settings.tiktok_url != blank -%}
+              <a href="{{ section.settings.tiktok_url }}" class="mm-footer__social-link" aria-label="TikTok" target="_blank" rel="noopener">
+                {% render 'icon-tiktok' %}
+              </a>
+            {%- endif -%}
+            {%- if section.settings.x_url != blank -%}
+              <a href="{{ section.settings.x_url }}" class="mm-footer__social-link" aria-label="X" target="_blank" rel="noopener">
+                {% render 'icon-twitter' %}
+              </a>
+            {%- endif -%}
+            {%- if section.settings.youtube_url != blank -%}
+              <a href="{{ section.settings.youtube_url }}" class="mm-footer__social-link" aria-label="YouTube" target="_blank" rel="noopener">
                 {% render 'icon-youtube' %}
               </a>
-            {% endif %}
+            {%- endif -%}
+            {%- if section.settings.facebook_url != blank -%}
+              <a href="{{ section.settings.facebook_url }}" class="mm-footer__social-link" aria-label="Facebook" target="_blank" rel="noopener">
+                {% render 'icon-facebook' %}
+              </a>
+            {%- endif -%}
           </div>
-        </div>
-
-        {%- assign col1_blocks = section.blocks | where: 'type', 'column_1_link' -%}
-        {%- assign col2_blocks = section.blocks | where: 'type', 'column_2_link' -%}
-        {%- assign col3_blocks = section.blocks | where: 'type', 'column_3_link' -%}
-
-        <div class='w-full md:w-[60vw] flex flex-col md:flex-row justify-end gap-8'>
-          {%- if section.settings.column_1_heading != blank or col1_blocks.size > 0 -%}
-            <div class='justify-self-end w-full md:w-1/5 min-w-full md:min-w-[150px] pt-5 md:pt-0 pb-2 md:pb-0 border-t md:border-none'>
-              <div class='footer-link-group'>
-                {% if section.settings.column_1_heading != blank %}
-                  <h5 class='text-white font-semibold mb-4'>{{ section.settings.column_1_heading }}</h5>
-                {% endif %}
-                <ul class='space-y-2'>
-                  {% for block in col1_blocks %}
-                    <li>
-                      <a href='{{ block.settings.link_url }}' class='text-light hover:text-primary transition-colors'>
-                        {{ block.settings.link_label }}
-                      </a>
-                    </li>
-                  {% endfor %}
-                </ul>
-              </div>
-            </div>
-          {%- endif -%}
-
-          {%- if section.settings.column_2_heading != blank or col2_blocks.size > 0 -%}
-            <div class='justify-self-end w-full md:w-1/5 min-w-full md:min-w-[150px] pt-5 md:pt-0 pb-2 md:pb-0 border-t md:border-none'>
-              <div class='footer-link-group'>
-                {% if section.settings.column_2_heading != blank %}
-                  <h5 class='text-white font-semibold mb-4'>{{ section.settings.column_2_heading }}</h5>
-                {% endif %}
-                <ul class='space-y-2'>
-                  {% for block in col2_blocks %}
-                    <li>
-                      <a href='{{ block.settings.link_url }}' class='text-light hover:text-primary transition-colors'>
-                        {{ block.settings.link_label }}
-                      </a>
-                    </li>
-                  {% endfor %}
-                </ul>
-              </div>
-            </div>
-          {%- endif -%}
-
-          {%- if section.settings.column_3_heading != blank or col3_blocks.size > 0 -%}
-            <div class='justify-self-end w-full md:w-1/5 min-w-full md:min-w-[150px] pt-5 md:pt-0 pb-2 md:pb-0 border-t md:border-none'>
-              <div class='footer-link-group'>
-                {% if section.settings.column_3_heading != blank %}
-                  <h5 class='text-white font-semibold mb-4'>{{ section.settings.column_3_heading }}</h5>
-                {% endif %}
-                <ul class='space-y-2'>
-                  {% for block in col3_blocks %}
-                    <li>
-                      <a href='{{ block.settings.link_url }}' class='text-light hover:text-primary transition-colors'>
-                        {{ block.settings.link_label }}
-                      </a>
-                    </li>
-                  {% endfor %}
-                </ul>
-              </div>
-            </div>
-          {%- endif -%}
-        </div>
+        {%- endif -%}
       </div>
-      <!-- closes the flex wrap -->
-    </div>
-    <!-- closes the mb-12 block -->
 
-    <div class='border-t border-gray-800 pt-8'>
-      <div class='flex flex-col md:flex-row justify-between items-center'>
-        <p class='text-light/60 text-sm mb-4 md:mb-0'>
-          &copy; {{ 'now' | date: '%Y' }}
-          {{ shop.name }}. All rights reserved.
-        </p>
+      {%- assign col1_blocks = section.blocks | where: 'type', 'column_1_link' -%}
+      {%- assign col2_blocks = section.blocks | where: 'type', 'column_2_link' -%}
+      {%- assign col3_blocks = section.blocks | where: 'type', 'column_3_link' -%}
 
-        <div class='flex space-x-6'>
-          <a href='/pages/terms-and-conditions' class='text-light/60 hover:text-primary text-sm transition-colors'>
-            Terms &amp; Conditions
-          </a>
-          <!--
-            <a href='/pages/privacy' class='text-light/60 hover:text-primary text-sm transition-colors'> Privacy </a>
-            <a href='/pages/fda-disclaimer' class='text-light/60 hover:text-primary text-sm transition-colors'>
-              FDA Disclaimer
-            </a>
-            <a href='/pages/affiliate-program' class='text-light/60 hover:text-primary text-sm transition-colors'>
-              Affiliate Program
-            </a>
-          -->
-        </div>
-      </div>
-      {% if section.settings.legal_text != blank %}
-        <p class='text-light/40 text-xs mt-8 text-center'>
-          {{ section.settings.legal_text }}
-        </p>
-      {% endif %}
+      <nav class="mm-footer__cols" aria-label="Footer">
+        {%- if section.settings.column_1_heading != blank or col1_blocks.size > 0 -%}
+          <div class="mm-footer__col">
+            {%- if section.settings.column_1_heading != blank -%}
+              <h5 class="mm-footer__heading">{{ section.settings.column_1_heading | escape }}</h5>
+            {%- endif -%}
+            <ul class="mm-footer__list" role="list">
+              {%- for block in col1_blocks -%}
+                <li>{% render 'mm-footer-link', block: block %}</li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.column_2_heading != blank or col2_blocks.size > 0 -%}
+          <div class="mm-footer__col">
+            {%- if section.settings.column_2_heading != blank -%}
+              <h5 class="mm-footer__heading">{{ section.settings.column_2_heading | escape }}</h5>
+            {%- endif -%}
+            <ul class="mm-footer__list" role="list">
+              {%- for block in col2_blocks -%}
+                <li>{% render 'mm-footer-link', block: block %}</li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.column_3_heading != blank or col3_blocks.size > 0 -%}
+          <div class="mm-footer__col">
+            {%- if section.settings.column_3_heading != blank -%}
+              <h5 class="mm-footer__heading">{{ section.settings.column_3_heading | escape }}</h5>
+            {%- endif -%}
+            <ul class="mm-footer__list" role="list">
+              {%- for block in col3_blocks -%}
+                <li>{% render 'mm-footer-link', block: block %}</li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      </nav>
     </div>
-    <!-- closes border-t section -->
+
+    <div class="mm-footer__bottom">
+      <p class="mm-footer__copyright">
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.
+      </p>
+      <ul class="mm-footer__legal-links" role="list">
+        <li><a href="/pages/terms-and-conditions">Terms &amp; Conditions</a></li>
+        <li><a href="/pages/privacy">Privacy</a></li>
+        <li><a href="/pages/fda-disclaimer">FDA Disclaimer</a></li>
+      </ul>
+    </div>
+
+    {%- if section.settings.legal_text != blank -%}
+      <p class="mm-footer__fda">{{ section.settings.legal_text }}</p>
+    {%- endif -%}
   </div>
-  <!-- closes container-custom -->
 </footer>
+
+<style>
+  .mm-footer {
+    background: var(--color-darker, #181818);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 64px 0 40px;
+  }
+  .mm-footer__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .mm-footer__brand svg,
+  .mm-footer__brand img {
+    max-width: 150px;
+    height: auto;
+  }
+  .mm-footer__tagline {
+    color: rgba(224, 224, 224, 0.75);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    max-width: 26rem;
+    margin: 16px 0 0;
+  }
+  .mm-footer__social {
+    display: flex;
+    gap: 8px;
+    margin-top: 24px;
+  }
+  .mm-footer__social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(224, 224, 224, 0.8);
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .mm-footer__social-link:hover {
+    color: var(--color-primary, #00e5a0);
+    border-color: rgba(0, 229, 160, 0.4);
+  }
+  .mm-footer__social-link svg {
+    width: 18px;
+    height: 18px;
+  }
+  .mm-footer__cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 24px;
+  }
+  .mm-footer__heading {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 16px;
+  }
+  .mm-footer__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .mm-footer__link {
+    color: rgba(224, 224, 224, 0.85);
+    font-size: 0.9375rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .mm-footer__link:hover { color: var(--color-primary, #00e5a0); }
+  .mm-footer__link--soon {
+    color: rgba(224, 224, 224, 0.45);
+    cursor: default;
+  }
+  .mm-footer__soon-chip {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 229, 160, 0.35);
+    color: var(--color-primary, #00e5a0);
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    vertical-align: middle;
+  }
+  .mm-footer__bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: 48px;
+    padding-top: 28px;
+  }
+  .mm-footer__copyright {
+    color: rgba(224, 224, 224, 0.5);
+    font-size: 0.8125rem;
+    margin: 0;
+  }
+  .mm-footer__legal-links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 24px;
+    margin: 0;
+    padding: 0;
+  }
+  .mm-footer__legal-links a {
+    color: rgba(224, 224, 224, 0.5);
+    font-size: 0.8125rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .mm-footer__legal-links a:hover { color: var(--color-primary, #00e5a0); }
+  .mm-footer__fda {
+    color: rgba(224, 224, 224, 0.38);
+    font-size: 0.75rem;
+    line-height: 1.6;
+    text-align: center;
+    max-width: 46rem;
+    margin: 24px auto 0;
+  }
+
+  @media (min-width: 768px) {
+    .mm-footer__grid {
+      grid-template-columns: 5fr 7fr;
+      gap: 64px;
+    }
+    .mm-footer__cols {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .mm-footer__bottom {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+</style>
 
 {% schema %}
 {
@@ -164,25 +273,16 @@
       "label": "Logo color",
       "default": "white",
       "options": [
-        {
-          "value": "white",
-          "label": "White"
-        },
-        {
-          "value": "black",
-          "label": "Black"
-        },
-        {
-          "value": "brand_color",
-          "label": "Brand color"
-        }
+        { "value": "white", "label": "White" },
+        { "value": "black", "label": "Black" },
+        { "value": "brand_color", "label": "Brand color" }
       ]
     },
     {
       "type": "textarea",
       "id": "footer_text",
       "label": "Footer description",
-      "default": "Unlock Your Mental Edge with our scientifically formulated nootropic drink mix designed for peak cognitive performance."
+      "default": "A daily nootropic drink mix. Full doses, printed on the label."
     },
     {
       "type": "text",
@@ -203,6 +303,35 @@
       "default": "Support"
     },
     {
+      "type": "header",
+      "content": "Social links (icon renders only when a URL is set)"
+    },
+    {
+      "type": "text",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "text",
+      "id": "tiktok_url",
+      "label": "TikTok URL"
+    },
+    {
+      "type": "text",
+      "id": "x_url",
+      "label": "X (Twitter) URL"
+    },
+    {
+      "type": "text",
+      "id": "youtube_url",
+      "label": "YouTube URL"
+    },
+    {
+      "type": "text",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
       "type": "textarea",
       "id": "legal_text",
       "label": "Footer legal description",
@@ -214,60 +343,33 @@
       "type": "column_1_link",
       "name": "Column 1 link",
       "settings": [
-        {
-          "type": "text",
-          "id": "link_label",
-          "label": "Link label",
-          "default": "Example link"
-        },
-        {
-          "type": "url",
-          "id": "link_url",
-          "label": "Link URL"
-        }
+        { "type": "text", "id": "link_label", "label": "Link label" },
+        { "type": "url", "id": "link_url", "label": "Link URL" },
+        { "type": "checkbox", "id": "coming_soon", "label": "Coming soon (renders label + Soon chip, no link)", "default": false }
       ]
     },
     {
       "type": "column_2_link",
       "name": "Column 2 link",
       "settings": [
-        {
-          "type": "text",
-          "id": "link_label",
-          "label": "Link label",
-          "default": "Example link"
-        },
-        {
-          "type": "url",
-          "id": "link_url",
-          "label": "Link URL"
-        }
+        { "type": "text", "id": "link_label", "label": "Link label" },
+        { "type": "url", "id": "link_url", "label": "Link URL" },
+        { "type": "checkbox", "id": "coming_soon", "label": "Coming soon (renders label + Soon chip, no link)", "default": false }
       ]
     },
     {
       "type": "column_3_link",
       "name": "Column 3 link",
       "settings": [
-        {
-          "type": "text",
-          "id": "link_label",
-          "label": "Link label",
-          "default": "Example link"
-        },
-        {
-          "type": "url",
-          "id": "link_url",
-          "label": "Link URL"
-        }
+        { "type": "text", "id": "link_label", "label": "Link label" },
+        { "type": "url", "id": "link_url", "label": "Link URL" },
+        { "type": "checkbox", "id": "coming_soon", "label": "Coming soon (renders label + Soon chip, no link)", "default": false }
       ]
     }
   ],
   "max_blocks": 60,
   "presets": [
-    {
-      "name": "Custom footer",
-      "category": "Footer"
-    }
+    { "name": "Custom footer", "category": "Footer" }
   ]
 }
 {% endschema %}

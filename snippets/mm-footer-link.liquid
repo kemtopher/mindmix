@@ -1,0 +1,14 @@
+{% comment %}
+  Footer link renderer. coming_soon blocks render as a non-link label + Soon chip
+  so sold-out flavors are not dead ends. Accepts: block
+{% endcomment %}
+{%- if block.settings.coming_soon -%}
+  <span class="mm-footer__link mm-footer__link--soon">
+    {{- block.settings.link_label | escape -}}
+    <span class="mm-footer__soon-chip">Soon</span>
+  </span>
+{%- else -%}
+  <a href="{{ block.settings.link_url }}" class="mm-footer__link">
+    {{- block.settings.link_label | escape -}}
+  </a>
+{%- endif -%}

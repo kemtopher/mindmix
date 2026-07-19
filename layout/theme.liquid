@@ -13,6 +13,20 @@
     <title>{{ page_title | escape }}</title>
     <meta name='description' content='{{ page_description | escape }}'>
 
+    {% if template == 'index' and section.settings.hero_image != blank %}
+      <link
+        rel='preload'
+        as='image'
+        href='{{ section.settings.hero_image | image_url: width: 1200 }}'
+        imagesrcset='
+          {{ section.settings.hero_image | image_url: width: 768 }} 768w,
+          {{ section.settings.hero_image | image_url: width: 1200 }} 1200w,
+          {{ section.settings.hero_image | image_url: width: 1600 }} 1600w
+        '
+        imagesizes='100vw'
+      >
+    {% endif %}
+
     <link rel='preconnect' href='https://fonts.googleapis.com'>
     <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
     <link
@@ -58,7 +72,7 @@
     {% section 'footer' %}
 
     <script>
-      document.addEventListener('DOMContentLoaded', function ( ) {
+      document.addEventListener('DOMContentLoaded', function () {
         // Initialize animations
         const observer = new IntersectionObserver(
           (entries) => {
@@ -74,6 +88,5 @@
         document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
       });
     </script>
-
   </body>
 </html>
