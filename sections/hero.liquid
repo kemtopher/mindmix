@@ -78,28 +78,36 @@
     </div>
   </div>
 
-  {%- comment -%} Label facts row: short verifiable statements, styled like label fine print {%- endcomment -%}
-  {%- assign has_facts = false -%}
-  {%- if section.settings.fact_1 != blank or section.settings.fact_2 != blank or section.settings.fact_3 != blank -%}
-    {%- assign has_facts = true -%}
-  {%- endif -%}
-  {%- if has_facts -%}
-    <div class="mm-hero__facts-wrap">
-      <div class="container-custom">
-        <ul class="mm-hero__facts" role="list">
-          {%- if section.settings.fact_1 != blank -%}
-            <li class="mm-hero__fact">{{ section.settings.fact_1 | escape }}</li>
+  {%- comment -%}
+    Proof badges: bold two-line claims-safe receipts, sticker-tilted, floating and
+    swaying to pull the eye. Setting format: "HEADLINE|supporting line" (pipe splits).
+  {%- endcomment -%}
+  {%- assign badge_1 = section.settings.badge_1 | default: 'FULL DOSES. ZERO HIDING.|Every ingredient and amount printed on the label' -%}
+  {%- assign badge_2 = section.settings.badge_2 | default: 'THIRD-PARTY TESTED|Certificate of analysis on request' -%}
+  {%- assign badge_3 = section.settings.badge_3 | default: 'GREEN TEA CAFFEINE|Closer to a green tea than an espresso' -%}
+  <div class="mm-hero__badges-wrap">
+    <div class="container-custom">
+      <ul class="mm-hero__badges" role="list">
+        {%- assign badge_list = '' -%}
+        {%- for i in (1..3) -%}
+          {%- case i -%}
+            {%- when 1 -%}{%- assign b = badge_1 -%}
+            {%- when 2 -%}{%- assign b = badge_2 -%}
+            {%- when 3 -%}{%- assign b = badge_3 -%}
+          {%- endcase -%}
+          {%- if b != blank -%}
+            {%- assign parts = b | split: '|' -%}
+            <li class="mm-hero__badge mm-hero__badge--{{ i }}">
+              <span class="mm-hero__badge-head">{{ parts[0] | strip | escape }}</span>
+              {%- if parts[1] -%}
+                <span class="mm-hero__badge-sub">{{ parts[1] | strip | escape }}</span>
+              {%- endif -%}
+            </li>
           {%- endif -%}
-          {%- if section.settings.fact_2 != blank -%}
-            <li class="mm-hero__fact">{{ section.settings.fact_2 | escape }}</li>
-          {%- endif -%}
-          {%- if section.settings.fact_3 != blank -%}
-            <li class="mm-hero__fact">{{ section.settings.fact_3 | escape }}</li>
-          {%- endif -%}
-        </ul>
-      </div>
+        {%- endfor -%}
+      </ul>
     </div>
-  {%- endif -%}
+  </div>
 </section>
 
 <style>
@@ -210,27 +218,61 @@
     border-radius: 18px;
     box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.8);
   }
-  .mm-hero__facts-wrap {
-    margin-top: 56px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(255, 255, 255, 0.02);
+  .mm-hero__badges-wrap {
+    margin-top: 48px;
+    padding: 8px 0 40px;
   }
-  .mm-hero__facts {
+  .mm-hero__badges {
     list-style: none;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 18px;
     margin: 0;
     padding: 0;
   }
-  .mm-hero__fact {
-    color: rgba(224, 224, 224, 0.82);
-    font-size: 0.9375rem;
-    letter-spacing: 0.04em;
-    padding: 14px 0;
+  .mm-hero__badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
     text-align: center;
+    padding: 16px 26px;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 229, 160, 0.4);
+    background: linear-gradient(180deg, rgba(0, 229, 160, 0.09) 0%, rgba(255, 255, 255, 0.03) 100%);
+    box-shadow: 0 8px 30px -12px rgba(0, 229, 160, 0.35);
+    max-width: 340px;
   }
-  .mm-hero__fact + .mm-hero__fact {
-    border-top: 1px solid rgba(255, 255, 255, 0.07);
+  .mm-hero__badge-head {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .mm-hero__badge-sub {
+    color: rgba(224, 224, 224, 0.72);
+    font-size: 0.8125rem;
+    line-height: 1.4;
+  }
+  .mm-hero__badge--1 { transform: rotate(-1.4deg); animation: mm-badge-sway-a 5.4s ease-in-out infinite alternate; }
+  .mm-hero__badge--2 { transform: rotate(1deg); animation: mm-badge-sway-b 6.3s ease-in-out infinite alternate; animation-delay: 0.6s; }
+  .mm-hero__badge--3 { transform: rotate(-0.7deg); animation: mm-badge-sway-c 7.1s ease-in-out infinite alternate; animation-delay: 1.1s; }
+  @keyframes mm-badge-sway-a {
+    0% { transform: rotate(-1.4deg) translate(-5px, 0); }
+    50% { transform: rotate(-0.4deg) translate(3px, -6px); }
+    100% { transform: rotate(-1.6deg) translate(6px, 2px); }
+  }
+  @keyframes mm-badge-sway-b {
+    0% { transform: rotate(1deg) translate(4px, 2px); }
+    50% { transform: rotate(0.2deg) translate(-4px, -5px); }
+    100% { transform: rotate(1.4deg) translate(-6px, 1px); }
+  }
+  @keyframes mm-badge-sway-c {
+    0% { transform: rotate(-0.7deg) translate(5px, -2px); }
+    50% { transform: rotate(0.3deg) translate(-3px, 4px); }
+    100% { transform: rotate(-1.1deg) translate(-5px, -4px); }
   }
 
   @media (min-width: 480px) and (max-width: 1023px) {
@@ -238,6 +280,7 @@
   }
   @media (max-width: 479px) {
     .mm-hero__cta { width: 100%; }
+    .mm-hero__badge { width: 100%; max-width: none; }
   }
   @media (min-width: 1024px) {
     .mm-hero { padding-top: 132px; }
@@ -245,24 +288,18 @@
       grid-template-columns: 11fr 9fr;
       gap: 56px;
     }
-    .mm-hero__facts {
+    .mm-hero__badges {
       flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
+      justify-content: center;
+      align-items: stretch;
+      gap: 28px;
     }
-    .mm-hero__fact {
-      flex: 1;
-      padding: 18px 24px;
-      text-align: center;
-    }
-    .mm-hero__fact + .mm-hero__fact {
-      border-top: 0;
-      border-left: 1px solid rgba(255, 255, 255, 0.07);
-    }
+    .mm-hero__badge { flex: 1; max-width: 360px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .mm-hero__cta { transition: none; }
     .mm-hero__cta:hover { transform: none; }
+    .mm-hero__badge--1, .mm-hero__badge--2, .mm-hero__badge--3 { animation: none; }
   }
 </style>
 
@@ -327,25 +364,25 @@
     },
     {
       "type": "header",
-      "content": "Label facts row (short, verifiable, claims-safe)"
+      "content": "Proof badges: HEADLINE|support line"
     },
     {
       "type": "text",
-      "id": "fact_1",
-      "label": "Fact 1",
-      "default": "Full doses, printed on the label"
+      "id": "badge_1",
+      "label": "Badge 1",
+      "default": "FULL DOSES. ZERO HIDING.|Every ingredient and amount printed on the label"
     },
     {
       "type": "text",
-      "id": "fact_2",
-      "label": "Fact 2",
-      "default": "Third-party tested"
+      "id": "badge_2",
+      "label": "Badge 2",
+      "default": "THIRD-PARTY TESTED|Certificate of analysis on request"
     },
     {
       "type": "text",
-      "id": "fact_3",
-      "label": "Fact 3",
-      "default": "Caffeine from green tea, not espresso"
+      "id": "badge_3",
+      "label": "Badge 3",
+      "default": "GREEN TEA CAFFEINE|Closer to a green tea than an espresso"
     }
   ]
 }
