@@ -52,22 +52,38 @@
           </div>
         {%- endif -%}
 
-        {%- comment -%} Live stick counter: computed from REAL variant inventory each render {%- endcomment -%}
+        {%- comment -%}
+          Founder's Run counter (Green Apple Kiwi only): starts at counter_start
+          (5,000 minus sticks already sold when the baselines were set) and
+          decrements LIVE as inventory drops below the baselines. If admin
+          inventory is manually adjusted, re-baseline the three numbers in
+          settings to the new inventory quantities.
+        {%- endcomment -%}
         {%- if section.settings.show_stock_counter -%}
           {%- assign mm_handle = section.settings.counter_product_handle | default: 'green-apple-kiwi' -%}
           {%- assign mm_counter_product = all_products[mm_handle] -%}
-          {%- assign mm_sticks = 0 -%}
+          {%- assign mm_start = section.settings.counter_start | default: 4940 -%}
+          {%- assign mm_sold_since = 0 -%}
           {%- for v in mm_counter_product.variants -%}
-            {%- if v.inventory_quantity > 0 -%}
-              {%- assign mm_pack = v.title | split: ' ' | first | times: 1 -%}
-              {%- assign mm_add = v.inventory_quantity | times: mm_pack -%}
-              {%- assign mm_sticks = mm_sticks | plus: mm_add -%}
+            {%- assign mm_pack = v.title | split: ' ' | first | times: 1 -%}
+            {%- case mm_pack -%}
+              {%- when 90 -%}{%- assign mm_base = section.settings.baseline_90 | default: 50 -%}
+              {%- when 30 -%}{%- assign mm_base = section.settings.baseline_30 | default: 159 -%}
+              {%- when 15 -%}{%- assign mm_base = section.settings.baseline_15 | default: 300 -%}
+              {%- else -%}{%- assign mm_base = v.inventory_quantity -%}
+            {%- endcase -%}
+            {%- assign mm_diff = mm_base | minus: v.inventory_quantity -%}
+            {%- if mm_diff > 0 -%}
+              {%- assign mm_sold_sticks = mm_diff | times: mm_pack -%}
+              {%- assign mm_sold_since = mm_sold_since | plus: mm_sold_sticks -%}
             {%- endif -%}
           {%- endfor -%}
+          {%- assign mm_sticks = mm_start | minus: mm_sold_since -%}
+          {%- if mm_sticks < 0 -%}{%- assign mm_sticks = 0 -%}{%- endif -%}
           {%- if mm_sticks > 0 -%}
             <p class="mm-hero__stock">
               <span class="mm-hero__stock-num" data-mm-stock="{{ mm_sticks }}">{{ mm_sticks }}</span>
-              <span class="mm-hero__stock-label">{{ section.settings.counter_label | default: 'sticks left in stock' | escape }}</span>
+              <span class="mm-hero__stock-label">{{ section.settings.counter_label | default: 'of 5,000 sticks left' | escape }}</span>
             </p>
           {%- endif -%}
         {%- endif -%}
@@ -581,7 +597,31 @@
       "type": "text",
       "id": "counter_label",
       "label": "Counter label",
-      "default": "sticks left in stock"
+      "default": "of 5,000 sticks left"
+    },
+    {
+      "type": "number",
+      "id": "counter_start",
+      "label": "Sticks remaining at baseline",
+      "default": 4940
+    },
+    {
+      "type": "number",
+      "id": "baseline_90",
+      "label": "Baseline inventory: 90 Pack",
+      "default": 50
+    },
+    {
+      "type": "number",
+      "id": "baseline_30",
+      "label": "Baseline inventory: 30 Pack",
+      "default": 159
+    },
+    {
+      "type": "number",
+      "id": "baseline_15",
+      "label": "Baseline inventory: 15 Pack",
+      "default": 300
     },
     {
       "type": "text",
