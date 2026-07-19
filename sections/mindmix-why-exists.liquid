@@ -597,6 +597,33 @@
     .mm-why-scrollcue__arrow::after { animation: none; }
   }
 
+
+  /* ------ v2.1: mode toggle, refined pack cards, badge fix ------ */
+  .mm-why-mode { display: inline-flex; border: 1px solid var(--mm-why-border); border-radius: 999px; padding: 4px; gap: 4px; margin: 0.2rem 0 0.5rem; background: rgba(0, 0, 0, 0.25); }
+  .mm-why-mode__btn { border: 0; background: transparent; color: var(--mm-why-muted); font-family: inherit; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.02em; padding: 0.55rem 1.15rem; border-radius: 999px; cursor: pointer; transition: background 0.2s ease, color 0.2s ease; white-space: nowrap; }
+  .mm-why-mode__btn.is-on { background: var(--mm-why-accent); color: var(--mm-why-bg); }
+  .mm-why-mode__note { font-size: 0.78rem; color: var(--mm-why-muted); margin: 0 0 1.2rem; }
+  .mm-why-packs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin: 0.4rem 0 1.4rem; }
+  .mm-why-pack { position: relative; display: flex; flex-direction: column; align-items: center; gap: 0.1rem; padding: 1.5rem 0.6rem 1.15rem; border: 1px solid var(--mm-why-border); border-radius: 18px; cursor: pointer; transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease; text-align: center; background: rgba(0, 0, 0, 0.18); }
+  .mm-why-pack:hover { border-color: var(--mm-why-accent-soft); }
+  .mm-why-pack.is-active { border-color: var(--mm-why-accent); background: var(--mm-why-accent-faint); transform: translateY(-3px); box-shadow: 0 14px 36px -16px var(--mm-why-accent-soft); }
+  .mm-why-pack.is-active::after { content: ''; position: absolute; top: 0.6rem; right: 0.6rem; width: 16px; height: 16px; border-radius: 50%; background: var(--mm-why-accent); box-shadow: 0 0 10px var(--mm-why-accent-soft); -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M6.6 11.6L3.4 8.4l1.1-1.1 2.1 2.1 4.9-4.9 1.1 1.1z'/></svg>") center / contain no-repeat; mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M6.6 11.6L3.4 8.4l1.1-1.1 2.1 2.1 4.9-4.9 1.1 1.1z'/></svg>") center / contain no-repeat; background-color: var(--mm-why-accent); }
+  .mm-why-pack__was { font-size: 0.78rem; color: var(--mm-why-muted); }
+  .mm-why-offer__atc { width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 0.7rem; font-size: 1.05rem; }
+  .mm-why-offer__atc-price { opacity: 0.85; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .mm-why-offer__atc-price::before { content: '\00b7'; margin-right: 0.7rem; opacity: 0.6; }
+  .mm-why-stage__badge p { text-wrap: balance; max-width: 30ch; margin-left: auto; margin-right: auto; }
+  @media (max-width: 560px) {
+    .mm-why-mode { width: 100%; }
+    .mm-why-mode__btn { flex: 1; padding: 0.55rem 0.5rem; font-size: 0.8rem; }
+    .mm-why-packs { grid-template-columns: repeat(3, 1fr); gap: 0.45rem; }
+    .mm-why-pack { padding: 1.3rem 0.35rem 0.9rem; }
+    .mm-why-pack__qty { font-size: 1.6rem; }
+    .mm-why-pack__price { font-size: 0.9rem; }
+    .mm-why-pack__per { font-size: 0.62rem; }
+    .mm-why-pack__flag { font-size: 0.52rem; padding: 0.2rem 0.45rem; }
+  }
+
 </style>
 
 <div id="why-mindmix-exists" class="mm-why" data-mm-why data-mm-sid="{{ section.id }}" data-mm-active-mood="void">
@@ -1098,23 +1125,54 @@
             assign mm_base_size = mm_base_variant.title | split: ' ' | first | times: 1
             assign mm_base_per = mm_base_variant.price | divided_by: mm_base_size
           -%}
+          {%- liquid
+            assign mm_sorted = s.product.variants | sort: 'price'
+            assign mm_default_variant = nil
+            for v in mm_sorted
+              assign vsize0 = v.title | split: ' ' | first | times: 1
+              if vsize0 == 30 and v.available
+                assign mm_default_variant = v
+              endif
+            endfor
+            unless mm_default_variant
+              assign mm_default_variant = mm_base_variant
+            endunless
+            assign mm_default_alloc = mm_default_variant.selling_plan_allocations | first
+          -%}
           {%- form 'product', s.product -%}
-            <input type="hidden" name="id" value="{{ mm_base_variant.id }}" data-mm-variant-id>
+            <input type="hidden" name="id" value="{{ mm_default_variant.id }}" data-mm-variant-id>
+            <input type="hidden" name="selling_plan" value="{% if mm_default_alloc %}{{ mm_default_alloc.selling_plan.id }}{% endif %}" data-mm-plan-input>
+
+            <div class="mm-why-mode" data-mm-mode>
+              <button type="button" class="mm-why-mode__btn is-on" data-mm-mode-btn="sub" aria-pressed="true">Subscribe &amp; Save 20%</button>
+              <button type="button" class="mm-why-mode__btn" data-mm-mode-btn="once" aria-pressed="false">One-time</button>
+            </div>
+            <p class="mm-why-mode__note" data-mm-mode-note>{{ s.offer_sub_note | escape }}</p>
+
             <div class="mm-why-packs" role="radiogroup" aria-label="Choose your supply">
-              {%- for v in s.product.variants -%}
+              {%- for v in mm_sorted -%}
                 {%- assign vsize = v.title | split: ' ' | first | times: 1 -%}
                 {%- assign vper = v.price | divided_by: vsize -%}
                 {%- assign vpct = vper | times: 100 | divided_by: mm_base_per -%}
                 {%- assign vsave = 100 | minus: vpct -%}
-                {%- assign vsubcount = v.selling_plan_allocations | size -%}
-                <label class="mm-why-pack{% if v.id == mm_base_variant.id %} is-active{% endif %}">
+                {%- assign valloc = v.selling_plan_allocations | first -%}
+                {%- assign vper_sub = 0 -%}
+                {%- assign vsave_sub = 0 -%}
+                {%- if valloc -%}
+                  {%- assign vper_sub = valloc.price | divided_by: vsize -%}
+                  {%- assign vpct_sub = vper_sub | times: 100 | divided_by: mm_base_per -%}
+                  {%- assign vsave_sub = 100 | minus: vpct_sub -%}
+                {%- endif -%}
+                <label class="mm-why-pack{% if v.id == mm_default_variant.id %} is-active{% endif %}">
                   <input type="radio" name="mm-pack" value="{{ v.id }}"
-                    {% if v.id == mm_base_variant.id %}checked{% endif %}
+                    {% if v.id == mm_default_variant.id %}checked{% endif %}
                     {% unless v.available %}disabled{% endunless %}
-                    data-mm-pack data-mm-vid="{{ v.id }}"
-                    data-mm-price="{{ v.price | money }}"
-                    data-mm-plans-target="mm-plans-{{ v.id }}"
-                    data-mm-pack-size="{{ vsize }}">
+                    data-mm-pack data-mm-vid="{{ v.id }}" data-mm-pack-size="{{ vsize }}"
+                    data-mm-price-once="{{ v.price | money }}" data-mm-per-once="{{ vper | money }}" data-mm-save-once="{{ vsave }}"
+                    data-mm-plan-id="{% if valloc %}{{ valloc.selling_plan.id }}{% endif %}"
+                    data-mm-price-sub="{% if valloc %}{{ valloc.price | money }}{% endif %}"
+                    data-mm-per-sub="{% if valloc %}{{ vper_sub | money }}{% endif %}"
+                    data-mm-save-sub="{{ vsave_sub }}">
                   {%- if vsize == 30 -%}
                     <span class="mm-why-pack__flag">Most popular</span>
                   {%- elsif vsize == 90 -%}
@@ -1122,51 +1180,17 @@
                   {%- endif -%}
                   <span class="mm-why-pack__qty">{{ vsize }}</span>
                   <span class="mm-why-pack__unit">sessions</span>
-                  <span class="mm-why-pack__price">{{ v.price | money }}</span>
-                  <span class="mm-why-pack__per">{{ vper | money }} per session{% if vsave > 0 %} &middot; save {{ vsave }}%{% endif %}</span>
+                  <span class="mm-why-pack__price" data-mm-card-price>{{ v.price | money }}</span>
+                  <s class="mm-why-pack__was" data-mm-card-was hidden></s>
+                  <span class="mm-why-pack__per" data-mm-card-per>{{ vper | money }} / session</span>
                   {%- unless v.available -%}<span class="mm-why-pack__soldout">Sold out</span>{%- endunless -%}
                 </label>
               {%- endfor -%}
             </div>
 
-            <p class="mm-why-offer__price">
-              <span data-mm-price-current>{{ mm_base_variant.price | money }}</span>
-              <s class="mm-why-offer__compare" data-mm-price-compare hidden></s>
-            </p>
-
-            {%- for v in s.product.variants -%}
-              {%- assign vallocs = v.selling_plan_allocations -%}
-              {%- if vallocs.size > 0 -%}
-              <fieldset class="mm-why-offer__plans" data-mm-plans="mm-plans-{{ v.id }}" {% unless v.id == mm_base_variant.id %}hidden disabled{% endunless %}>
-                <legend class="mm-why-vh">Purchase options</legend>
-                {%- for a in vallocs -%}
-                  {%- assign mm_save = v.price | minus: a.price | times: 100 | divided_by: v.price -%}
-                  <label class="mm-why-offer__plan">
-                    <input type="radio" name="selling_plan" value="{{ a.selling_plan.id }}"
-                      data-mm-plan data-mm-plan-kind="subscription" data-mm-cta="{{ s.offer_cta_sub | escape }}"
-                      data-mm-price="{{ a.price | money }}" data-mm-compare="{{ v.price | money }}">
-                    <span>
-                      <span class="mm-why-offer__plan-name">{%- if mm_save > 0 -%}Subscribe and save {{ mm_save }}%{%- else -%}Subscribe{%- endif -%}</span>
-                      <span class="mm-why-offer__plan-terms">{{ a.price | money }} &middot; {{ a.selling_plan.name | escape }}<br>{{ s.offer_sub_note | escape }}</span>
-                    </span>
-                    {%- if mm_save > 0 -%}<span class="mm-why-offer__save">Save {{ mm_save }}%</span>{%- endif -%}
-                  </label>
-                {%- endfor -%}
-                <label class="mm-why-offer__plan">
-                  <input type="radio" name="selling_plan" value="" checked
-                    data-mm-plan data-mm-plan-kind="one_time" data-mm-cta="{{ s.offer_cta_once | escape }}"
-                    data-mm-price="{{ v.price | money }}" data-mm-compare="">
-                  <span>
-                    <span class="mm-why-offer__plan-name">One-time purchase</span>
-                    <span class="mm-why-offer__plan-terms">{{ v.price | money }} &middot; {{ s.offer_once_note | escape }}</span>
-                  </span>
-                </label>
-              </fieldset>
-              {%- endif -%}
-            {%- endfor -%}
-
-            <button type="submit" class="mm-why-btn mm-why-btn--primary" data-mm-atc {% unless mm_base_variant.available %}disabled{% endunless %}>
-              {%- if mm_base_variant.available -%}{{ s.offer_cta_once | escape }}{%- else -%}Sold out{%- endif -%}
+            <button type="submit" class="mm-why-btn mm-why-btn--primary mm-why-offer__atc" data-mm-atc {% unless mm_default_variant.available %}disabled{% endunless %}>
+              <span data-mm-atc-label>{{ s.offer_cta_sub | escape }}</span>
+              <span class="mm-why-offer__atc-price" data-mm-atc-price></span>
             </button>
             <div class="mm-why-offer__trust">
               <span>30-day money-back guarantee</span>
@@ -1719,64 +1743,65 @@
         }
       }
 
-      /* ---------- Offer: pack picker + purchase option switch ---------- */
-      var priceCur = root.querySelector('[data-mm-price-current]');
-      var priceCmp = root.querySelector('[data-mm-price-compare]');
-      var atcBtn = root.querySelector('[data-mm-atc]');
+      /* ---------- Offer: mode toggle + pack cards ---------- */
       var vidInput = root.querySelector('[data-mm-variant-id]');
-      function mmActivePlans() {
-        var checked = root.querySelector('[data-mm-pack]:checked');
-        if (!checked) return null;
-        return root.querySelector('[data-mm-plans="' + checked.getAttribute('data-mm-plans-target') + '"]');
-      }
-      function mmSyncOffer(source) {
-        var pack = root.querySelector('[data-mm-pack]:checked');
-        if (!pack) return;
-        if (vidInput) vidInput.value = pack.getAttribute('data-mm-vid');
-        root.querySelectorAll('.mm-why-pack').forEach(function (card) {
-          var input = card.querySelector('[data-mm-pack]');
-          card.classList.toggle('is-active', !!(input && input.checked));
-        });
-        root.querySelectorAll('[data-mm-plans]').forEach(function (fs) {
-          var active = fs.getAttribute('data-mm-plans') === pack.getAttribute('data-mm-plans-target');
-          fs.hidden = !active;
-          fs.disabled = !active;
-        });
-        var plans = mmActivePlans();
-        var price = pack.getAttribute('data-mm-price');
-        var cmp = '';
-        var ctaLabel = null;
-        if (plans) {
-          var plan = plans.querySelector('[data-mm-plan]:checked');
-          if (!plan) {
-            plan = plans.querySelector('[data-mm-plan][data-mm-plan-kind="subscription"]') || plans.querySelector('[data-mm-plan]');
-            if (plan) plan.checked = true;
+      var planInput = root.querySelector('[data-mm-plan-input]');
+      var atcBtn = root.querySelector('[data-mm-atc]');
+      var atcLabel = root.querySelector('[data-mm-atc-label]');
+      var atcPrice = root.querySelector('[data-mm-atc-price]');
+      var modeBtns = root.querySelectorAll('[data-mm-mode-btn]');
+      var modeNote = root.querySelector('[data-mm-mode-note]');
+      var mmMode = 'sub';
+      var CTA_SUB = {{ s.offer_cta_sub | json }};
+      var CTA_ONCE = {{ s.offer_cta_once | json }};
+      function mmUpdateOffer(source) {
+        var packs = root.querySelectorAll('[data-mm-pack]');
+        if (!packs.length) return;
+        var selected = root.querySelector('[data-mm-pack]:checked');
+        packs.forEach(function (r) {
+          var card = r.closest('.mm-why-pack');
+          if (!card) return;
+          var hasSub = !!r.getAttribute('data-mm-plan-id');
+          var useSub = mmMode === 'sub' && hasSub;
+          var priceEl = card.querySelector('[data-mm-card-price]');
+          var wasEl = card.querySelector('[data-mm-card-was]');
+          var perEl = card.querySelector('[data-mm-card-per]');
+          var price = useSub ? r.getAttribute('data-mm-price-sub') : r.getAttribute('data-mm-price-once');
+          var per = useSub ? r.getAttribute('data-mm-per-sub') : r.getAttribute('data-mm-per-once');
+          var save = useSub ? r.getAttribute('data-mm-save-sub') : r.getAttribute('data-mm-save-once');
+          if (priceEl) priceEl.textContent = price;
+          if (wasEl) {
+            if (useSub) { wasEl.textContent = r.getAttribute('data-mm-price-once'); wasEl.hidden = false; }
+            else { wasEl.hidden = true; }
           }
-          if (plan) {
-            price = plan.getAttribute('data-mm-price') || price;
-            cmp = plan.getAttribute('data-mm-compare') || '';
-            ctaLabel = plan.getAttribute('data-mm-cta');
-          }
+          if (perEl) perEl.textContent = per + ' / session' + (parseInt(save, 10) > 0 ? ' \u00b7 save ' + save + '%' : '');
+          card.classList.toggle('is-active', r.checked);
+        });
+        if (selected) {
+          var selSub = mmMode === 'sub' && !!selected.getAttribute('data-mm-plan-id');
+          if (vidInput) vidInput.value = selected.getAttribute('data-mm-vid');
+          if (planInput) planInput.value = selSub ? selected.getAttribute('data-mm-plan-id') : '';
+          if (atcLabel) atcLabel.textContent = selSub ? CTA_SUB : CTA_ONCE;
+          if (atcPrice) atcPrice.textContent = selSub ? selected.getAttribute('data-mm-price-sub') : selected.getAttribute('data-mm-price-once');
+          if (modeNote) modeNote.hidden = mmMode !== 'sub';
         }
-        if (priceCur && price) priceCur.textContent = price;
-        if (priceCmp) {
-          if (cmp && cmp !== price) { priceCmp.textContent = cmp; priceCmp.hidden = false; }
-          else { priceCmp.hidden = true; }
-        }
-        if (atcBtn && !atcBtn.disabled && ctaLabel) atcBtn.textContent = ctaLabel;
-        if (source === 'pack') track('offer_pack_change', { pack: pack.getAttribute('data-mm-pack-size') });
-        if (source === 'plan') {
-          var pr = plans && plans.querySelector('[data-mm-plan]:checked');
-          track('offer_plan_change', { plan: pr ? pr.getAttribute('data-mm-plan-kind') : 'one_time' });
-        }
+        if (source) track('offer_' + source + '_change', { mode: mmMode, pack: selected ? selected.getAttribute('data-mm-pack-size') : null });
       }
+      modeBtns.forEach(function (b) {
+        b.addEventListener('click', function () {
+          mmMode = b.getAttribute('data-mm-mode-btn');
+          modeBtns.forEach(function (o) {
+            var on = o === b;
+            o.classList.toggle('is-on', on);
+            o.setAttribute('aria-pressed', String(on));
+          });
+          mmUpdateOffer('mode');
+        });
+      });
       root.querySelectorAll('[data-mm-pack]').forEach(function (r) {
-        r.addEventListener('change', function () { mmSyncOffer('pack'); });
+        r.addEventListener('change', function () { mmUpdateOffer('pack'); });
       });
-      root.querySelectorAll('[data-mm-plan]').forEach(function (r) {
-        r.addEventListener('change', function () { mmSyncOffer('plan'); });
-      });
-      mmSyncOffer();
+      mmUpdateOffer();
       root.querySelectorAll('[data-mm-product-cta]').forEach(function (el) {
         el.addEventListener('click', function () { track('product_cta_click'); });
       });
@@ -2052,9 +2077,9 @@
 
         var foilTex = foilNoiseTexture();
         var mat = new THREE.MeshPhysicalMaterial({
-          roughness: 0.46, metalness: 0.34,
-          bumpMap: foilTex, bumpScale: 0.0004, roughnessMap: foilTex,
-          clearcoat: 0.6, clearcoatRoughness: 0.2, envMapIntensity: 1.0
+          roughness: 0.68, metalness: 0.1,
+          bumpMap: foilTex, bumpScale: 0.0006, roughnessMap: foilTex,
+          clearcoat: 0.12, clearcoatRoughness: 0.55, envMapIntensity: 0.5
         });
         var mesh = new THREE.Mesh(buildGeometry(), mat);
         group.add(mesh);
@@ -2107,9 +2132,14 @@
           if (!dragging) return;
           var dx = e.clientX - lastX, dy = e.clientY - lastY;
           lastX = e.clientX; lastY = e.clientY;
+          var isTouch = e.pointerType === 'touch';
           tRotY += dx * 0.011;
-          tRotX = Math.max(-1.15, Math.min(1.15, tRotX + dy * 0.008));
-          velY = dx * 0.011; velX = dy * 0.008;
+          velY = dx * 0.011;
+          if (!isTouch) {
+            /* vertical tilt is mouse-only: on touch, vertical stays with page scroll */
+            tRotX = Math.max(-1.15, Math.min(1.15, tRotX + dy * 0.008));
+            velX = dy * 0.008;
+          }
           lastInteract = performance.now();
         });
         var endDrag = function () { dragging = false; canvas.classList.remove('is-grabbing'); };
