@@ -14,9 +14,8 @@
 
 <section class="mm-cine" id="mm-cine-{{ section.id | replace: '_', '-' }}" data-mm-cine>
   <div class="mm-cine__stage">
-    <p class="mm-cine__eyebrow">{{ section.settings.eyebrow | default: 'THE RITUAL' | escape }}</p>
-
     <div class="mm-cine__frame">
+      <p class="mm-cine__eyebrow">{{ section.settings.eyebrow | default: 'THE RITUAL' | escape }}</p>
       <video
         class="mm-cine__video"
         data-mm-cine-video
@@ -63,14 +62,19 @@
   }
   .mm-cine__eyebrow {
     position: absolute;
-    top: max(96px, 12vh);
+    top: 16px;
     left: 50%;
     transform: translateX(-50%);
     color: var(--color-primary, #00e5a0);
-    font-size: 0.8125rem;
-    font-weight: 600;
+    background: rgba(11, 11, 11, 0.62);
+    border: 1px solid rgba(0, 229, 160, 0.35);
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-size: 0.75rem;
+    font-weight: 700;
     letter-spacing: 0.22em;
     text-transform: uppercase;
+    white-space: nowrap;
     margin: 0;
     z-index: 3;
   }
