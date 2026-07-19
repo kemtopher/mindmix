@@ -1747,7 +1747,11 @@
         var cmp = '';
         var ctaLabel = null;
         if (plans) {
-          var plan = plans.querySelector('[data-mm-plan]:checked') || plans.querySelector('[data-mm-plan]');
+          var plan = plans.querySelector('[data-mm-plan]:checked');
+          if (!plan) {
+            plan = plans.querySelector('[data-mm-plan][data-mm-plan-kind="subscription"]') || plans.querySelector('[data-mm-plan]');
+            if (plan) plan.checked = true;
+          }
           if (plan) {
             price = plan.getAttribute('data-mm-price') || price;
             cmp = plan.getAttribute('data-mm-compare') || '';
