@@ -29,15 +29,10 @@
           "tagline": "DAILY NOOTROPIC DRINK MIX",
           "heading": "UNLOCK YOUR MENTAL EDGE",
           "heading_highlight": "MENTAL EDGE",
-          "subheading": "A daily nootropic drink mix. Full doses, printed on the label.",
           "cta_text": "Get MindMix",
           "cta_url": "/products/green-apple-kiwi",
-          "cta_note": "15 sticks, one a day. Green Apple Kiwi. $69.95.",
           "secondary_cta_text": "",
-          "secondary_cta_url": "",
-          "fact_1": "Full doses, printed on the label",
-          "fact_2": "Third-party tested",
-          "fact_3": "Caffeine from green tea, not espresso"
+          "secondary_cta_url": ""
         }
       },
       "neural-performance": {
@@ -589,7 +584,6 @@
           "instagram_url": "https://www.instagram.com/getmindmix/",
           "tiktok_url": "https://www.tiktok.com/@getmindmix",
           "x_url": "",
-          "youtube_url": "",
           "facebook_url": "",
           "legal_text": "*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. MindMix is for adults 18 and older. The information on this site is for educational purposes only and is not medical advice. If you are pregnant, nursing, or taking medication, consult your physician before use."
         }
@@ -725,43 +719,43 @@
           "faq_item_8mVJwP": {
             "type": "faq_item",
             "settings": {
-              "question": "What exactly is in MindMix?",
-              "answer": "Every ingredient and its full dose is printed on the label. No proprietary blends, no hidden amounts. Each batch is third-party tested and the certificate of analysis is available on request."
+              "question": "Is it safe to take daily?",
+              "answer": "Yes, MindMix is formulated with natural ingredients that are safe for daily consumption. The adaptogenic herbs and nootropic compounds are specifically selected to support long-term brain health and function without dependency or tolerance buildup."
             }
           },
           "faq_item_9eep86": {
             "type": "faq_item",
             "settings": {
-              "question": "How do I take it?",
-              "answer": "One stick, one glass of cold water, once a day. Most people make it part of the same daily ritual: before the work block that matters most."
+              "question": "How quickly does MindMix work?",
+              "answer": "Most users feel the cognitive benefits within 30-45 minutes after consumption. The formula is designed to provide a steady, sustained boost to mental performance without the crash associated with caffeine or other stimulants."
             }
           },
           "faq_item_XpnpEC": {
             "type": "faq_item",
             "settings": {
-              "question": "Is there caffeine?",
-              "answer": "Yes. MindMix contains caffeine from green tea extract, closer to a green tea than an espresso. If you are sensitive to caffeine, factor it into your total for the day."
+              "question": "Will I crash later?",
+              "answer": "No, MindMix is specifically designed to avoid the crash associated with caffeine and energy drinks. The formula works by optimizing your brain's natural processes rather than artificially stimulating them, resulting in a smooth, gradual decline in effects rather than a sudden crash."
             }
           },
           "faq_item_NpHAYN": {
             "type": "faq_item",
             "settings": {
-              "question": "Can I drink it with coffee?",
-              "answer": "MindMix already contains caffeine from green tea extract, so count it toward your daily caffeine. If you are unsure, start without coffee and see how you feel."
+              "question": "Can I mix with coffee?",
+              "answer": "Yes, but we recommend starting with half doses of each. MindMix complements coffee well, with L-theanine helping to smooth out caffeine's potential jitters while enhancing focus. Many users find they need less coffee when using MindMix."
             }
           },
           "faq_item_QAhNyC": {
             "type": "faq_item",
             "settings": {
               "question": "What if I don't like it?",
-              "answer": "Email us within 30 days of delivery and we will make it right. The details are in our Terms & Conditions."
+              "answer": "We offer a 30-day money-back guarantee. If you're not completely satisfied with MindMix for any reason, simply contact our customer service team for a full refund. We stand behind our product's effectiveness."
             }
           },
           "faq_item_NEP4HA": {
             "type": "faq_item",
             "settings": {
-              "question": "Who should not take MindMix?",
-              "answer": "MindMix is for adults 18 and over. If you are pregnant, nursing, or taking medication, talk to your physician first. Read the full label before use and do not exceed the serving directions."
+              "question": "Is there caffeine?",
+              "answer": "MindMix contains a minimal amount of natural caffeine from green tea extract, equivalent to approximately 1/4 cup of coffee per serving. This is enough to provide synergistic benefits with other ingredients without causing jitters or sleep disruption."
             }
           }
         },
