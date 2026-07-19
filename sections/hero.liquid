@@ -55,7 +55,7 @@
             </a>
           {%- endif -%}
         </div>
-        {%- assign cta_note = section.settings.cta_note | default: 'Get your MindMix today for as low as $69.95.' -%}
+        {%- assign cta_note = section.settings.price_note | default: 'Get your MindMix today for as low as $69.95.' -%}
         {%- if cta_note != blank -%}
           <p class="mm-hero__cta-note">{{ cta_note | escape }}</p>
         {%- endif -%}
@@ -423,7 +423,7 @@
     },
     {
       "type": "text",
-      "id": "cta_note",
+      "id": "price_note",
       "label": "CTA note (small text under buttons)",
       "default": "Get your MindMix today for as low as $69.95."
     },
