@@ -1,14 +1,121 @@
-<div class='terms-temp container-custom py-24'>
-  {% section 'legal-hero' %}
-  <main class='w-full sm:max-w-[75vw] xl:max-w-[50vw] mx-[auto]'>
-    {% if page.handle == 'terms-and-conditions' %}
-      <p class='mt-[2rem]'>
-        Last Updated:
-        {{- page.published_at | date: '%B %d, %Y' -}}
+{% comment %}
+  Legal page template (upgraded 2026-07): Terms, Privacy, FDA Disclaimer, Affiliate.
+  Replaces the legal-hero photo collage with a typographic header and a readable
+  measure for the document body. Scoped CSS (style.css is compiled Tailwind).
+{% endcomment %}
+
+<article class="mm-legal">
+  <div class="container-custom">
+    <header class="mm-legal__head">
+      <p class="mm-legal__eyebrow">Legal</p>
+      <h1 class="mm-legal__h1">{{ page.title }}</h1>
+      <p class="mm-legal__updated">
+        Last updated {{ page.updated_at | default: page.published_at | date: '%B %d, %Y' }}
       </p>
-    {% endif %}
-    <div class='blog-content py-[36px] w-full font-inter text-base'>
+    </header>
+
+    <div class="mm-legal__body">
       {{ page.content }}
     </div>
-  </main>
-</div>
+
+    <footer class="mm-legal__foot">
+      <p>
+        Questions about this document?
+        <a href="/pages/contact">Contact us</a>.
+      </p>
+    </footer>
+  </div>
+</article>
+
+<style>
+  .mm-legal {
+    background: var(--color-dark, #0b0b0b);
+    padding: 140px 0 80px;
+  }
+  .mm-legal__head {
+    max-width: 46rem;
+    margin: 0 auto 12px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .mm-legal__eyebrow {
+    color: var(--color-primary, #00e5a0);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+  }
+  .mm-legal__h1 {
+    color: #fff;
+    font-size: clamp(2rem, 6vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+    margin: 0 0 12px;
+  }
+  .mm-legal__updated {
+    color: rgba(224, 224, 224, 0.5);
+    font-size: 0.875rem;
+    margin: 0;
+  }
+  .mm-legal__body {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding-top: 24px;
+  }
+  .mm-legal__body :where(p, li) {
+    color: rgba(224, 224, 224, 0.82);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+  .mm-legal__body :where(p) { margin: 0 0 18px; }
+  .mm-legal__body :where(h2) {
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 36px 0 12px;
+  }
+  .mm-legal__body :where(h3, h4) {
+    color: #fff;
+    font-size: 1.0625rem;
+    font-weight: 700;
+    margin: 28px 0 10px;
+  }
+  .mm-legal__body :where(ul, ol) {
+    margin: 0 0 18px;
+    padding-left: 1.25rem;
+  }
+  .mm-legal__body :where(li) { margin: 0 0 8px; }
+  .mm-legal__body :where(li)::marker {
+    color: var(--color-primary, #00e5a0);
+  }
+  .mm-legal__body :where(a) {
+    color: var(--color-primary, #00e5a0);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .mm-legal__body :where(strong) { color: #fff; }
+  .mm-legal__body :where(hr) {
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 32px 0;
+  }
+  .mm-legal__foot {
+    max-width: 46rem;
+    margin: 40px auto 0;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .mm-legal__foot p {
+    color: rgba(224, 224, 224, 0.6);
+    font-size: 0.9375rem;
+    margin: 0;
+  }
+  .mm-legal__foot a {
+    color: var(--color-primary, #00e5a0);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>
