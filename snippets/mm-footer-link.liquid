@@ -11,7 +11,7 @@
 {%- elsif block.settings.coming_soon -%}
   <span class="mm-footer__link mm-footer__link--soon">
     {{- block.settings.link_label | escape -}}
-    <span class="mm-footer__soon-chip">Soon</span>
+    {%- unless block.settings.soon_chip == false -%}<span class="mm-footer__soon-chip">Soon</span>{%- endunless -%}
   </span>
 {%- else -%}
   <a href="{{ block.settings.link_url }}" class="mm-footer__link">

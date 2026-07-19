@@ -75,7 +75,7 @@
                             {%- if col1_blocks.size == 0 -%}
                 <li><a href="/products/green-apple-kiwi" class="mm-footer__link">Green Apple Kiwi</a></li>
                 <li><span class="mm-footer__link mm-footer__link--soon">Guava Passion<span class="mm-footer__soon-chip">Soon</span></span></li>
-                <li><span class="mm-footer__link mm-footer__link--soon">Blueberry Lemon Tea<span class="mm-footer__soon-chip">Soon</span></span></li>
+                <li><span class="mm-footer__link mm-footer__link--soon">Blueberry Lemon Tea</span></li>
               {%- endif -%}
               {%- for block in col1_blocks -%}
                 {%- capture mm_link_html -%}{% render 'mm-footer-link', block: block %}{%- endcapture -%}
@@ -308,7 +308,7 @@
       "type": "textarea",
       "id": "footer_text",
       "label": "Footer description",
-      "default": "A daily nootropic drink mix. Full doses, printed on the label."
+      "default": "Unlock Your Mental Edge with our scientifically formulated nootropic drink mix designed for peak cognitive performance."
     },
     {
       "type": "text",
@@ -379,7 +379,8 @@
       "settings": [
         { "type": "text", "id": "link_label", "label": "Link label" },
         { "type": "url", "id": "link_url", "label": "Link URL" },
-        { "type": "checkbox", "id": "coming_soon", "label": "Coming soon (renders label + Soon chip, no link)", "default": false }
+        { "type": "checkbox", "id": "coming_soon", "label": "Coming soon (no link)", "default": false },
+        { "type": "checkbox", "id": "soon_chip", "label": "Show Soon chip", "default": true }
       ]
     },
     {
@@ -388,7 +389,8 @@
       "settings": [
         { "type": "text", "id": "link_label", "label": "Link label" },
         { "type": "url", "id": "link_url", "label": "Link URL" },
-        { "type": "checkbox", "id": "coming_soon", "label": "Coming soon (renders label + Soon chip, no link)", "default": false }
+        { "type": "checkbox", "id": "coming_soon", "label": "Coming soon (no link)", "default": false },
+        { "type": "checkbox", "id": "soon_chip", "label": "Show Soon chip", "default": true }
       ]
     },
     {
@@ -397,7 +399,8 @@
       "settings": [
         { "type": "text", "id": "link_label", "label": "Link label" },
         { "type": "url", "id": "link_url", "label": "Link URL" },
-        { "type": "checkbox", "id": "coming_soon", "label": "Coming soon (renders label + Soon chip, no link)", "default": false }
+        { "type": "checkbox", "id": "coming_soon", "label": "Coming soon (no link)", "default": false },
+        { "type": "checkbox", "id": "soon_chip", "label": "Show Soon chip", "default": true }
       ]
     }
   ],
