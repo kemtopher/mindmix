@@ -231,16 +231,21 @@
     }
 
     var lastSet = -1;
+    var running = false;
+    var FRAME = 1 / 24;
     function tick() {
+      if (!running) return;
       var p = progress();
       if (duration > 0) {
         target = p * (duration - 0.05);
         var diff = target - current;
         // big jumps (fast scroll) snap; small ones ease for smooth decode
         current = Math.abs(diff) > 1.5 ? target : current + diff * 0.22;
-        if (Math.abs(current - lastSet) > 0.02) {
-          try { video.currentTime = current; } catch (err) { /* not seekable yet */ }
-          lastSet = current;
+        // quantize to source frames so we never spam sub-frame seeks
+        var q = Math.round(current / FRAME) * FRAME;
+        if (Math.abs(q - lastSet) >= FRAME) {
+          try { video.currentTime = q; } catch (err) { /* not seekable yet */ }
+          lastSet = q;
         }
       }
       for (var i = 0; i < caps.length; i++) {
@@ -249,7 +254,18 @@
       }
       requestAnimationFrame(tick);
     }
-    requestAnimationFrame(tick);
+    // only run the loop while the section is anywhere near the viewport
+    var runIo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting && !running) {
+          running = true;
+          requestAnimationFrame(tick);
+        } else if (!e.isIntersecting) {
+          running = false;
+        }
+      });
+    }, { rootMargin: '30% 0%' });
+    runIo.observe(root);
   })();
 </script>
 
