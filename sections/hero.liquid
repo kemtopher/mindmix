@@ -37,10 +37,39 @@
         {%- assign chip_1 = section.settings.chip_1 | default: 'Green Apple Kiwi, in stock now' -%}
         {%- assign chip_2 = section.settings.chip_2 | default: '2 new flavors coming soon' -%}
         {%- if chip_1 != blank or chip_2 != blank -%}
-          <div class="mm-hero__chips">
-            {%- if chip_1 != blank -%}<span class="mm-hero__chip mm-hero__chip--live">{{ chip_1 | escape }}</span>{%- endif -%}
-            {%- if chip_2 != blank -%}<span class="mm-hero__chip">{{ chip_2 | escape }}</span>{%- endif -%}
+          <div class="mm-hero__chips" id="mm-hero-chips">
+            {%- if chip_1 != blank -%}
+              <button type="button" class="mm-hero__chip mm-hero__chip--live" data-mm-chips-toggle aria-expanded="false" aria-controls="mm-hero-chip-more">
+                {{ chip_1 | escape }}
+                {%- if chip_2 != blank -%}
+                  <svg class="mm-hero__chip-caret" viewBox="0 0 12 8" fill="none" aria-hidden="true"><path d="M1 1.5l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                {%- endif -%}
+              </button>
+            {%- endif -%}
+            {%- if chip_2 != blank -%}
+              <span class="mm-hero__chip mm-hero__chip--more" id="mm-hero-chip-more" hidden>{{ chip_2 | escape }}</span>
+            {%- endif -%}
           </div>
+        {%- endif -%}
+
+        {%- comment -%} Live stick counter: computed from REAL variant inventory each render {%- endcomment -%}
+        {%- if section.settings.show_stock_counter -%}
+          {%- assign mm_handle = section.settings.counter_product_handle | default: 'green-apple-kiwi' -%}
+          {%- assign mm_counter_product = all_products[mm_handle] -%}
+          {%- assign mm_sticks = 0 -%}
+          {%- for v in mm_counter_product.variants -%}
+            {%- if v.inventory_quantity > 0 -%}
+              {%- assign mm_pack = v.title | split: ' ' | first | times: 1 -%}
+              {%- assign mm_add = v.inventory_quantity | times: mm_pack -%}
+              {%- assign mm_sticks = mm_sticks | plus: mm_add -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if mm_sticks > 0 -%}
+            <p class="mm-hero__stock">
+              <span class="mm-hero__stock-num" data-mm-stock="{{ mm_sticks }}">{{ mm_sticks }}</span>
+              <span class="mm-hero__stock-label">{{ section.settings.counter_label | default: 'sticks left in stock' | escape }}</span>
+            </p>
+          {%- endif -%}
         {%- endif -%}
 
         <div class="mm-hero__ctas">
@@ -242,6 +271,47 @@
     border-color: rgba(0, 229, 160, 0.45);
     color: var(--color-primary, #00e5a0);
   }
+  button.mm-hero__chip {
+    background: transparent;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .mm-hero__chip-caret {
+    width: 11px;
+    height: 8px;
+    transition: transform 0.25s ease;
+  }
+  .mm-hero__chip--live[aria-expanded="true"] .mm-hero__chip-caret {
+    transform: rotate(180deg);
+  }
+  .mm-hero__chip--more {
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .mm-hero__chip--more.is-shown {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .mm-hero__stock {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: -8px 0 24px;
+  }
+  .mm-hero__stock-num {
+    color: var(--color-primary, #00e5a0);
+    font-size: 1.375rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .mm-hero__stock-label {
+    color: rgba(224, 224, 224, 0.6);
+    font-size: 0.8125rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
   .mm-hero__chip--live::before {
     content: '';
     width: 7px;
@@ -381,6 +451,53 @@
   }
 </style>
 
+<script>
+  (function () {
+    var toggle = document.querySelector('[data-mm-chips-toggle]');
+    var more = document.getElementById('mm-hero-chip-more');
+    if (toggle && more) {
+      toggle.addEventListener('click', function () {
+        var open = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!open));
+        if (open) {
+          more.classList.remove('is-shown');
+          setTimeout(function () { more.hidden = true; }, 300);
+        } else {
+          more.hidden = false;
+          requestAnimationFrame(function () { more.classList.add('is-shown'); });
+        }
+      });
+    }
+
+    var num = document.querySelector('[data-mm-stock]');
+    if (num) {
+      var target = parseInt(num.getAttribute('data-mm-stock'), 10) || 0;
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      num.textContent = target.toLocaleString();
+      if (!reduced && 'IntersectionObserver' in window && target > 0) {
+        var done = false;
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (!e.isIntersecting || done) return;
+            done = true; io.disconnect();
+            var start = null;
+            var dur = 1200;
+            function step(ts) {
+              if (!start) start = ts;
+              var p = Math.min(1, (ts - start) / dur);
+              var eased = 1 - Math.pow(1 - p, 3);
+              num.textContent = Math.round(target * eased).toLocaleString();
+              if (p < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+          });
+        }, { threshold: 0.4 });
+        io.observe(num);
+      }
+    }
+  })();
+</script>
+
 {% schema %}
 {
   "name": "Hero Section",
@@ -445,8 +562,26 @@
     {
       "type": "text",
       "id": "chip_2",
-      "label": "Availability chip 2",
+      "label": "Chip 2 (opens via arrow on chip 1)",
       "default": "2 new flavors coming soon"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stock_counter",
+      "label": "Show live stick counter",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "counter_product_handle",
+      "label": "Counter product handle",
+      "default": "green-apple-kiwi"
+    },
+    {
+      "type": "text",
+      "id": "counter_label",
+      "label": "Counter label",
+      "default": "sticks left in stock"
     },
     {
       "type": "text",
