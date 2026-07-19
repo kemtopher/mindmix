@@ -1,0 +1,313 @@
+{% comment %}
+  MindMix cinematic ritual (built 2026-07)
+  Scroll-scrubbed film: powder over ice -> water pour -> garnish -> macro payoff.
+  - The video is scrubbed by scroll position (sticky viewport, ~3.2 screens tall)
+  - Encoded with dense keyframes (g=8) specifically for smooth currentTime scrubbing;
+    if the file is ever replaced, re-encode the same way or scrubbing will stutter
+  - Lazy: the mp4 only loads when the section approaches the viewport
+  - prefers-reduced-motion / no-JS: static poster + copy, no scrub, no tall scroll
+  - No external JS libraries (theme rule)
+{% endcomment %}
+
+{%- assign vid = section.settings.video_url | default: 'https://cdn.shopify.com/s/files/1/0668/0117/2654/files/mindmix-ritual-scrub.mp4?v=1784432848' -%}
+{%- assign poster = section.settings.poster_url | default: 'https://cdn.shopify.com/s/files/1/0668/0117/2654/files/mindmix-ritual-poster.jpg?v=1784432848' -%}
+
+<section class="mm-cine" id="mm-cine-{{ section.id | replace: '_', '-' }}" data-mm-cine>
+  <div class="mm-cine__stage">
+    <p class="mm-cine__eyebrow">{{ section.settings.eyebrow | default: 'THE RITUAL' | escape }}</p>
+
+    <div class="mm-cine__frame">
+      <video
+        class="mm-cine__video"
+        data-mm-cine-video
+        data-src="{{ vid }}"
+        poster="{{ poster }}"
+        muted
+        playsinline
+        preload="none"
+        aria-label="MindMix being prepared: powder over ice, water poured, garnished with green apple and kiwi"
+      ></video>
+      <div class="mm-cine__frame-glow" aria-hidden="true"></div>
+    </div>
+
+    <div class="mm-cine__captions" aria-hidden="false">
+      <p class="mm-cine__cap" data-cap="0">{{ section.settings.caption_1 | default: 'One stick.' | escape }}</p>
+      <p class="mm-cine__cap" data-cap="1">{{ section.settings.caption_2 | default: 'One glass of cold water.' | escape }}</p>
+      <p class="mm-cine__cap" data-cap="2">{{ section.settings.caption_3 | default: 'That is the whole ritual.' | escape }}</p>
+      <p class="mm-cine__cap mm-cine__cap--last" data-cap="3">
+        {{ section.settings.caption_4 | default: 'Green Apple Kiwi.' | escape }}
+        <a class="mm-cine__cta" href="{{ section.settings.cta_url | default: '/products/green-apple-kiwi' }}">
+          {{- section.settings.cta_text | default: 'Get MindMix' | escape -}}
+        </a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .mm-cine {
+    position: relative;
+    height: 320vh;
+    background: var(--color-dark, #0b0b0b);
+  }
+  .mm-cine__stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .mm-cine__eyebrow {
+    position: absolute;
+    top: max(96px, 12vh);
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--color-primary, #00e5a0);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin: 0;
+    z-index: 3;
+  }
+  .mm-cine__frame {
+    position: relative;
+    height: min(74vh, 74svh);
+    aspect-ratio: 9 / 16;
+    max-width: 88vw;
+    z-index: 2;
+  }
+  .mm-cine__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: #0b0b0b;
+    display: block;
+  }
+  .mm-cine__frame-glow {
+    position: absolute;
+    inset: -8%;
+    background: radial-gradient(50% 50% at 50% 60%, rgba(0, 229, 160, 0.14) 0%, rgba(0, 229, 160, 0) 70%);
+    filter: blur(28px);
+    z-index: -1;
+    pointer-events: none;
+  }
+  .mm-cine__captions {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: max(40px, 6vh);
+    text-align: center;
+    z-index: 3;
+    pointer-events: none;
+  }
+  .mm-cine__cap {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%) translateY(10px);
+    width: 100%;
+    padding: 0 24px;
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.25rem, 3.4vw, 1.75rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.65);
+    opacity: 0;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  .mm-cine__cap.is-on {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  .mm-cine__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 14px;
+    padding: 10px 24px;
+    border-radius: 999px;
+    background: var(--color-primary, #00e5a0);
+    color: #0b0b0b;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    pointer-events: auto;
+    vertical-align: middle;
+  }
+  .mm-cine__cta:focus-visible {
+    outline: 2px solid var(--color-primary, #00e5a0);
+    outline-offset: 3px;
+  }
+
+  /* Reduced motion / no-JS: normal-height section, poster visible, all copy readable */
+  .mm-cine.is-static {
+    height: auto;
+    padding: 96px 0;
+  }
+  .mm-cine.is-static .mm-cine__stage {
+    position: relative;
+    height: auto;
+    padding: 48px 0 24px;
+  }
+  .mm-cine.is-static .mm-cine__eyebrow { position: static; transform: none; margin-bottom: 24px; }
+  .mm-cine.is-static .mm-cine__frame { height: 70vh; }
+  .mm-cine.is-static .mm-cine__captions {
+    position: static;
+    margin-top: 28px;
+  }
+  .mm-cine.is-static .mm-cine__cap {
+    position: static;
+    transform: none;
+    opacity: 1;
+    display: none;
+  }
+  .mm-cine.is-static .mm-cine__cap--last { display: block; }
+
+  @media (max-width: 640px) {
+    .mm-cine__frame { height: min(68vh, 68svh); }
+  }
+</style>
+
+<script>
+  (function () {
+    var root = document.getElementById('mm-cine-{{ section.id | replace: '_', '-' }}');
+    if (!root) return;
+    var video = root.querySelector('[data-mm-cine-video]');
+    var caps = root.querySelectorAll('.mm-cine__cap');
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduced || !('requestAnimationFrame' in window)) {
+      root.classList.add('is-static');
+      return;
+    }
+
+    var duration = 0;
+    var target = 0;
+    var current = 0;
+    var loaded = false;
+
+    // Lazy-load the mp4 only when the section approaches
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting && !loaded) {
+          loaded = true;
+          video.preload = 'auto';
+          video.src = video.getAttribute('data-src');
+          video.load();
+          io.disconnect();
+        }
+      });
+    }, { rootMargin: '150% 0%' });
+    io.observe(root);
+
+    video.addEventListener('loadedmetadata', function () {
+      duration = video.duration || 0;
+    });
+
+    // Caption phases as fractions of the film
+    var phases = [
+      [0.0, 0.26],
+      [0.28, 0.52],
+      [0.54, 0.78],
+      [0.82, 1.01]
+    ];
+
+    function progress() {
+      var rect = root.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var total = rect.height - vh;
+      if (total <= 0) return 0;
+      var p = -rect.top / total;
+      return Math.max(0, Math.min(1, p));
+    }
+
+    var lastSet = -1;
+    function tick() {
+      var p = progress();
+      if (duration > 0) {
+        target = p * (duration - 0.05);
+        var diff = target - current;
+        // big jumps (fast scroll) snap; small ones ease for smooth decode
+        current = Math.abs(diff) > 1.5 ? target : current + diff * 0.22;
+        if (Math.abs(current - lastSet) > 0.02) {
+          try { video.currentTime = current; } catch (err) { /* not seekable yet */ }
+          lastSet = current;
+        }
+      }
+      for (var i = 0; i < caps.length; i++) {
+        var on = p >= phases[i][0] && p < phases[i][1];
+        caps[i].classList.toggle('is-on', on);
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "MindMix Cinematic",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "THE RITUAL"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Video URL (scrub-encoded mp4; see section comment before replacing)"
+    },
+    {
+      "type": "text",
+      "id": "poster_url",
+      "label": "Poster image URL"
+    },
+    {
+      "type": "text",
+      "id": "caption_1",
+      "label": "Caption 1 (powder)",
+      "default": "One stick."
+    },
+    {
+      "type": "text",
+      "id": "caption_2",
+      "label": "Caption 2 (water)",
+      "default": "One glass of cold water."
+    },
+    {
+      "type": "text",
+      "id": "caption_3",
+      "label": "Caption 3 (garnish)",
+      "default": "That is the whole ritual."
+    },
+    {
+      "type": "text",
+      "id": "caption_4",
+      "label": "Caption 4 (payoff)",
+      "default": "Green Apple Kiwi."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "Get MindMix"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA link"
+    }
+  ]
+}
+{% endschema %}
