@@ -29,18 +29,35 @@
           <p class="mm-hero__lede">{{ section.settings.lede_text | escape }}</p>
         {%- endif -%}
 
+        {%- assign hero_desc = section.settings.hero_desc | default: "MindMix isn't a quick fix. It's a daily ritual that compounds. It's about optimizing your mind for the long game. In your first week, you'll feel the difference. By month one, you'll never go back." -%}
+        {%- if hero_desc != blank -%}
+          <p class="mm-hero__desc">{{ hero_desc | escape }}</p>
+        {%- endif -%}
+
+        {%- assign chip_1 = section.settings.chip_1 | default: 'Green Apple Kiwi, in stock now' -%}
+        {%- assign chip_2 = section.settings.chip_2 | default: '2 new flavors coming soon' -%}
+        {%- if chip_1 != blank or chip_2 != blank -%}
+          <div class="mm-hero__chips">
+            {%- if chip_1 != blank -%}<span class="mm-hero__chip mm-hero__chip--live">{{ chip_1 | escape }}</span>{%- endif -%}
+            {%- if chip_2 != blank -%}<span class="mm-hero__chip">{{ chip_2 | escape }}</span>{%- endif -%}
+          </div>
+        {%- endif -%}
+
         <div class="mm-hero__ctas">
-          <a class="mm-hero__cta" href="{{ section.settings.cta_url | default: '/products/green-apple-kiwi' }}">
-            {{ section.settings.cta_text | default: 'Get MindMix' | escape }}
+          <a class="mm-hero__cta mm-hero__cta--gradient" href="{{ section.settings.cta_url | default: '/products/green-apple-kiwi' }}">
+            <span class="mm-hero__cta-label">{{ section.settings.cta_text | default: 'Get MindMix' | escape }}</span>
           </a>
-          {%- if section.settings.secondary_cta_text != blank and section.settings.secondary_cta_url != blank -%}
-            <a class="mm-hero__cta mm-hero__cta--ghost" href="{{ section.settings.secondary_cta_url }}">
-              {{ section.settings.secondary_cta_text | escape }}
+          {%- assign sec_text = section.settings.secondary_cta_text | default: 'Watch the ritual' -%}
+          {%- assign sec_url = section.settings.secondary_cta_url | default: '#shopify-section-mindmix-cinematic' -%}
+          {%- if sec_text != blank and sec_url != blank -%}
+            <a class="mm-hero__cta mm-hero__cta--ghost" href="{{ sec_url }}">
+              {{ sec_text | escape }}
             </a>
           {%- endif -%}
         </div>
-        {%- if section.settings.cta_note != blank -%}
-          <p class="mm-hero__cta-note">{{ section.settings.cta_note | escape }}</p>
+        {%- assign cta_note = section.settings.cta_note | default: 'Get your MindMix today for as low as $69.95.' -%}
+        {%- if cta_note != blank -%}
+          <p class="mm-hero__cta-note">{{ cta_note | escape }}</p>
         {%- endif -%}
       </div>
 
@@ -178,6 +195,63 @@
     transform: translateY(-1px);
     box-shadow: 0 8px 30px -6px rgba(0, 229, 160, 0.45);
   }
+  .mm-hero__cta--gradient {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(90deg, #ff4d00, #00e5a0, #009bff, #ff4d00);
+    background-size: 300% 100%;
+    animation: mm-shimmer 8s linear infinite;
+    color: #fff;
+    border: 0;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+  }
+  .mm-hero__cta--gradient:hover {
+    transform: translateY(-1px) scale(1.03);
+    box-shadow: 0 0 15px rgba(0, 229, 160, 0.3), 0 0 32px rgba(255, 77, 0, 0.25);
+  }
+  .mm-hero__cta-label { position: relative; z-index: 1; }
+  @keyframes mm-shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  .mm-hero__desc {
+    color: rgba(224, 224, 224, 0.72);
+    font-size: 0.9688rem;
+    line-height: 1.65;
+    max-width: 32rem;
+    margin: 0 0 22px;
+  }
+  .mm-hero__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 0 24px;
+  }
+  .mm-hero__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: rgba(224, 224, 224, 0.75);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .mm-hero__chip--live {
+    border-color: rgba(0, 229, 160, 0.45);
+    color: var(--color-primary, #00e5a0);
+  }
+  .mm-hero__chip--live::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-primary, #00e5a0);
+    box-shadow: 0 0 8px rgba(0, 229, 160, 0.9);
+  }
   .mm-hero__cta--ghost {
     background: transparent;
     color: #fff;
@@ -297,7 +371,7 @@
     .mm-hero__badge { flex: 1; max-width: 360px; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .mm-hero__cta { transition: none; }
+    .mm-hero__cta { transition: none; animation: none; }
     .mm-hero__cta:hover { transform: none; }
     .mm-hero__badge--1, .mm-hero__badge--2, .mm-hero__badge--3 { animation: none; }
   }
@@ -334,7 +408,7 @@
       "type": "text",
       "id": "lede_text",
       "label": "Lede",
-      "default": "Full-dose nootropics, built for deep work. Work smarter."
+      "default": "Clinically-dosed nootropics for a sharper, faster mind. Work smarter."
     },
     {
       "type": "text",
@@ -350,7 +424,25 @@
     {
       "type": "text",
       "id": "cta_note",
-      "label": "CTA note (small text under buttons)"
+      "label": "CTA note (small text under buttons)",
+      "default": "Get your MindMix today for as low as $69.95."
+    },
+    {
+      "type": "textarea",
+      "id": "hero_desc",
+      "label": "Description paragraph (empty = hidden)"
+    },
+    {
+      "type": "text",
+      "id": "chip_1",
+      "label": "Availability chip 1 (mint dot)",
+      "default": "Green Apple Kiwi, in stock now"
+    },
+    {
+      "type": "text",
+      "id": "chip_2",
+      "label": "Availability chip 2",
+      "default": "2 new flavors coming soon"
     },
     {
       "type": "text",
