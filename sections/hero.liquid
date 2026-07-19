@@ -25,8 +25,8 @@
 
         <h1 class="mm-hero__h1">{{ heading_html }}</h1>
 
-        {%- if section.settings.subheading != blank -%}
-          <p class="mm-hero__lede">{{ section.settings.subheading | escape }}</p>
+        {%- if section.settings.lede_text != blank -%}
+          <p class="mm-hero__lede">{{ section.settings.lede_text | escape }}</p>
         {%- endif -%}
 
         <div class="mm-hero__ctas">
@@ -332,7 +332,7 @@
     },
     {
       "type": "text",
-      "id": "subheading",
+      "id": "lede_text",
       "label": "Lede",
       "default": "Full-dose nootropics, built for deep work. Work smarter."
     },
