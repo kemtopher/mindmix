@@ -2,7 +2,13 @@
   Footer link renderer. coming_soon blocks render as a non-link label + Soon chip
   so sold-out flavors are not dead ends. Accepts: block
 {% endcomment %}
-{%- if block.settings.coming_soon -%}
+{%- comment -%}
+  Guard: the affiliate-program page is currently EMPTY, so any footer block pointing
+  at it renders nothing. Delete this guard once the affiliate page has real content.
+{%- endcomment -%}
+{%- assign mm_link_url_str = block.settings.link_url | append: '' -%}
+{%- if mm_link_url_str contains 'affiliate-program' -%}
+{%- elsif block.settings.coming_soon -%}
   <span class="mm-footer__link mm-footer__link--soon">
     {{- block.settings.link_label | escape -}}
     <span class="mm-footer__soon-chip">Soon</span>

@@ -1,6 +1,10 @@
 {% comment %}
-  FAQ page template (upgraded 2026-07). Replaces the legal-hero photo collage with a
-  clean container; partial-faq renders its own heading and accordion.
+  FAQ page template (upgraded 2026-07).
+  - No legal-hero photo collage.
+  - Renders NO accordion of its own: layout/theme.liquid already injects the global-faq
+    section on every page, so the old partial-faq render put TWO stacked FAQ accordions
+    on this page. The single source of FAQ content is now the global-faq section
+    (edit it once in the theme editor and every page updates).
 {% endcomment %}
 
 <div class="mm-faq-page">
@@ -8,11 +12,9 @@
     {%- if page.content != blank -%}
       <div class="mm-faq-page__intro">{{ page.content }}</div>
     {%- endif -%}
-    <div class="mm-faq-page__list">
-      {% section 'partial-faq' %}
-    </div>
     <p class="mm-faq-page__more">
-      Didn't find your answer? <a href="/pages/contact">Contact us</a>.
+      Answers to the most common questions are below.
+      Didn't find yours? <a href="/pages/contact">Contact us</a>.
     </p>
   </div>
 </div>
@@ -20,21 +22,17 @@
 <style>
   .mm-faq-page {
     background: var(--color-dark, #0b0b0b);
-    padding: 140px 0 80px;
+    padding: 120px 0 0;
   }
   .mm-faq-page__intro {
     max-width: 46rem;
-    margin: 0 auto 32px;
+    margin: 0 auto 16px;
     color: rgba(224, 224, 224, 0.82);
     line-height: 1.7;
   }
-  .mm-faq-page__list {
-    max-width: 52rem;
-    margin: 0 auto;
-  }
   .mm-faq-page__more {
-    max-width: 52rem;
-    margin: 8px auto 0;
+    max-width: 46rem;
+    margin: 0 auto;
     color: rgba(224, 224, 224, 0.6);
     font-size: 0.9375rem;
     text-align: center;

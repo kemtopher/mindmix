@@ -65,7 +65,9 @@
             {%- endif -%}
             <ul class="mm-footer__list" role="list">
               {%- for block in col1_blocks -%}
-                <li>{% render 'mm-footer-link', block: block %}</li>
+                {%- capture mm_link_html -%}{% render 'mm-footer-link', block: block %}{%- endcapture -%}
+                {%- assign mm_link_html = mm_link_html | strip -%}
+                {%- if mm_link_html != '' -%}<li>{{ mm_link_html }}</li>{%- endif -%}
               {%- endfor -%}
             </ul>
           </div>
@@ -78,7 +80,9 @@
             {%- endif -%}
             <ul class="mm-footer__list" role="list">
               {%- for block in col2_blocks -%}
-                <li>{% render 'mm-footer-link', block: block %}</li>
+                {%- capture mm_link_html -%}{% render 'mm-footer-link', block: block %}{%- endcapture -%}
+                {%- assign mm_link_html = mm_link_html | strip -%}
+                {%- if mm_link_html != '' -%}<li>{{ mm_link_html }}</li>{%- endif -%}
               {%- endfor -%}
             </ul>
           </div>
@@ -91,7 +95,9 @@
             {%- endif -%}
             <ul class="mm-footer__list" role="list">
               {%- for block in col3_blocks -%}
-                <li>{% render 'mm-footer-link', block: block %}</li>
+                {%- capture mm_link_html -%}{% render 'mm-footer-link', block: block %}{%- endcapture -%}
+                {%- assign mm_link_html = mm_link_html | strip -%}
+                {%- if mm_link_html != '' -%}<li>{{ mm_link_html }}</li>{%- endif -%}
               {%- endfor -%}
             </ul>
           </div>
