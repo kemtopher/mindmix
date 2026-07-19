@@ -624,6 +624,13 @@
     .mm-why-pack__flag { font-size: 0.52rem; padding: 0.2rem 0.45rem; }
   }
 
+
+  /* ------ v2.2: the free-tool card ------ */
+  .mm-why-tool-card { border: 1px solid var(--mm-why-accent-soft); border-radius: 18px; padding: 1.6rem 1.7rem; margin: 1.6rem 0; background: linear-gradient(180deg, var(--mm-why-accent-faint) 0%, rgba(0,0,0,0.15) 100%); box-shadow: 0 18px 50px -24px var(--mm-why-deep-glow); }
+  .mm-why-tool-card__formula { font-family: var(--mm-why-font-h); font-weight: 800; font-size: clamp(1.15rem, 3.4vw, 1.5rem); color: var(--mm-why-text); margin: 0 0 0.8rem; letter-spacing: -0.01em; }
+  .mm-why-tool-card__formula span { color: var(--mm-why-accent); }
+  .mm-why-tool-card__example { color: var(--mm-why-muted); font-size: 0.95rem; margin: 0; font-style: italic; }
+
 </style>
 
 <div id="why-mindmix-exists" class="mm-why" data-mm-why data-mm-sid="{{ section.id }}" data-mm-active-mood="void">
@@ -805,6 +812,65 @@
         <p>You care.</p>
       </div>
       <p class="mm-why-h2sub" style="max-width: none; margin-left: auto; margin-right: auto;" data-mm-reveal="strike">That is why this hurts.</p>
+    </div>
+  </section>
+
+  <!-- 4b · THE ANSWER: pay off the headline question -->
+  <section class="mm-why-mv" data-mm-mv data-mm-mood="still">
+    <div class="mm-why-col">
+      <span class="mm-why-kicker mm-why-kicker--accent" data-mm-reveal>The Actual Answer</span>
+      <h2 class="mm-why-h2" data-mm-reveal="strike">You are not lazy. You are escaping a feeling.</h2>
+      <p data-mm-reveal>Here is the part almost nobody tells you.</p>
+      <div data-mm-reveal>
+        <p>In 2013, researchers Fuschia Sirois and Timothy Pychyl published a finding that explains this entire page:</p>
+      </div>
+      <p class="mm-why-beatline" data-mm-reveal="strike">Procrastination is not a time problem. It is a mood problem.</p>
+      <div data-mm-reveal>
+        <p>The work that could change your life is also the work that could prove something about you. Starting it feels like risk.</p>
+        <p>Delaying it feels like relief.</p>
+        <p>So your brain makes the trade. It sells tomorrow to feel better for the next ten minutes.</p>
+      </div>
+      <p class="mm-why-beatline" data-mm-reveal="strike">You are not avoiding the work. You are avoiding how starting feels.</p>
+      <div data-mm-reveal>
+        <p>Which is why every plan that begins with &ldquo;I just need more discipline&rdquo; keeps failing.</p>
+        <p>You are bringing willpower to a mood fight.</p>
+      </div>
+      <div class="mm-why-gap"></div>
+      <div data-mm-reveal>
+        <p>It also solves the riddle at the top of this page.</p>
+        <p>A deadline that belongs to someone else comes with a cue and a cost. A start time. A person waiting. A price for skipping.</p>
+        <p>A promise to yourself has neither.</p>
+      </div>
+      <p class="mm-why-beatline" data-mm-reveal="strike">No cue. No cost. So you deliver for everyone but you.</p>
+    </div>
+  </section>
+
+  <!-- 4c · FREE TOOL: implementation intention, given away -->
+  <section class="mm-why-mv" data-mm-mv data-mm-mood="still">
+    <div class="mm-why-col">
+      <span class="mm-why-kicker mm-why-kicker--accent" data-mm-reveal>Steal This. It Is Free.</span>
+      <h2 class="mm-why-h2" data-mm-reveal="strike">The strongest honest trick in behavioral science.</h2>
+      <div data-mm-reveal>
+        <p>In a review of 94 separate studies, psychologists Peter Gollwitzer and Paschal Sheeran found one technique that raised follow-through more than anything else they measured.</p>
+        <p>No app. No supplement. Nothing to buy.</p>
+      </div>
+      <p data-mm-reveal>It is called an implementation intention. It sounds like this:</p>
+      <div class="mm-why-tool-card" data-mm-reveal="calm">
+        <p class="mm-why-tool-card__formula">When <span>[cue]</span>, I will <span>[tiny first action]</span>.</p>
+        <p class="mm-why-tool-card__example">&ldquo;When I sit down after dinner, I will open the doc and write one ugly sentence.&rdquo;</p>
+      </div>
+      <div data-mm-reveal>
+        <p>Why it works: it moves the decision out of the moment of feeling and into a moment of planning.</p>
+        <p>When the cue arrives, there is nothing left to decide.</p>
+        <p>Deciding is where you lose.</p>
+      </div>
+      <p class="mm-why-beatline" data-mm-reveal="strike">Write yours right now. Use it tonight. You do not need us for it.</p>
+      <div class="mm-why-gap"></div>
+      <div data-mm-reveal>
+        <p>But there is a catch, and the research is honest about it.</p>
+        <p>The sentence still needs a cue your brain cannot negotiate away. A time can be pushed. A feeling can be waited out.</p>
+        <p>The strongest cue is physical.</p>
+      </div>
       <div data-mm-reveal="strike">
         <p>You do not need a bigger dream.</p>
         <p>You need a beginning small enough to survive your own negotiation.</p>
@@ -885,6 +951,7 @@
         <div data-mm-reveal>
           <p>Before the ritual, the promise is still abstract.</p>
           <p>Making the drink turns the decision into something physical.</p>
+          <p>It is an implementation intention you can hold.</p>
         </div>
         <div class="mm-why-stack" data-mm-stagger>
           <p class="mm-why-beatline" data-mm-reveal>One task.</p>
