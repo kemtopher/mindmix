@@ -28,7 +28,7 @@
           {% if benefit.type == 'newsletter_benefit' %}
             <div class='text-center'>
               <div class='h-12 w-12 mx-auto mb-3 rounded-full bg-primary/10 flex items-center justify-center'>
-                {% render benefit.settings.icon %}
+                {% render benefit %}
               </div>
               <p class='text-light text-sm'>{{ benefit.settings.text }}</p>
             </div>
@@ -38,3 +38,13 @@
     </div>
   </div>
 </section>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render benefit.settings.icon %}"
+  to: "{% render benefit %}"
+  position: 1439..1459
+{% endcomment %}

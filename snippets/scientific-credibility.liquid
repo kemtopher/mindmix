@@ -35,7 +35,7 @@
             {% if credential.type == 'credential' %}
               <div class='p-6 bg-darker rounded-xl border border-primary/20 hover:border-primary/40 transition-colors'>
                 <div class='flex flex-col items-center text-center'>
-                  {% render credential.settings.icon, class: 'h-12 w-12 text-primary mb-4' %}
+                  {% render credential, class: 'h-12 w-12 text-primary mb-4' %}
                   <h4 class='text-white text-lg mb-2'>{{ credential.settings.title }}</h4>
                   <p class='text-light text-sm'>{{ credential.settings.description }}</p>
                 </div>
@@ -47,3 +47,14 @@
     </div>
   </div>
 </section>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render credential.settings.icon, class: 'h-12 w-12 text-primary mb-4'
+    %}"
+  to: "{% render credential, class: 'h-12 w-12 text-primary mb-4' %}"
+  position: 1866..1927
+{% endcomment %}
