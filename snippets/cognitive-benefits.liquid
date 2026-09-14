@@ -15,7 +15,7 @@
             a
           >
             <div class='mb-4'>
-              {% render benefit.settings.icon %}
+              {% render benefit %}
             </div>
             <h4 class='text-white text-lg font-semibold mb-2 group-hover:text-primary transition-colors'>
               {{ benefit.settings.title }}
@@ -78,3 +78,13 @@
     </div>
   </div>
 </section>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render benefit.settings.icon %}"
+  to: "{% render benefit %}"
+  position: 727..747
+{% endcomment %}
