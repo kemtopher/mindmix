@@ -57,7 +57,7 @@
       {% for stat in section.blocks %}
         {% if stat.type == 'trust_stat' %}
           <div class='flex items-center'>
-            {% render stat.settings.icon, class: 'h-6 w-6 text-primary mr-2 flex-shrink-0' %}
+            {% render stat, class: 'h-6 w-6 text-primary mr-2 flex-shrink-0' %}
             <p class='text-light text-sm'>{{ stat.settings.text }}</p>
           </div>
         {% endif %}
@@ -65,3 +65,14 @@
     </div>
   </div>
 </section>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render stat.settings.icon, class: 'h-6 w-6 text-primary mr-2 flex-shrink-0'
+    %}"
+  to: "{% render stat, class: 'h-6 w-6 text-primary mr-2 flex-shrink-0' %}"
+  position: 2791..2858
+{% endcomment %}

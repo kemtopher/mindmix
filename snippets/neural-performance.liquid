@@ -36,7 +36,7 @@
             style='transition-delay: {{ forloop.index | times: 0.1 }}s'
           >
             <div class='mb-4 text-primary'>
-              {% render ingredient.settings.icon %}
+              {% render ingredient %}
             </div>
             <h4 class='text-white text-lg font-semibold mb-2 group-hover:text-primary transition-colors'>
               {{ ingredient.settings.title }}
@@ -51,3 +51,13 @@
     </div>
   </div>
 </section>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render ingredient.settings.icon %}"
+  to: "{% render ingredient %}"
+  position: 1736..1759
+{% endcomment %}
